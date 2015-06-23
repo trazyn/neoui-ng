@@ -1,0 +1,178 @@
+
+@import (less) "../base/colors.less";
+@import (less) "../base/mixins.less";
+
+.ui.button {
+	#shadow( @rgba: rgba(0, 0, 0, 0.2) ) {
+		box-shadow: 0 10px 20px @rgba;
+	}
+
+	#raised() {
+	
+		&.raised {
+			box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+
+			&:hover {
+				#shadow();
+			}
+		}
+	}
+
+	#flat( @color ) {
+		
+		&.flat {
+			background: transparent;
+			color: @color;
+			&:hover {
+				background-color: #efefef;
+				box-shadow: none;
+			}
+		}
+	}
+
+	#disabled( @bgcolor ) {
+		
+		&:disabled {
+			cursor: default;
+			background-color: lighten( @bgcolor, 10% );
+
+			&:hover {
+				box-shadow: none;
+			}
+		}
+	}
+
+	#outline( @color: @coral ) {
+		
+		border: 1px solid @color;
+		color: @color;
+
+		&:hover {
+			background-color: @color;
+			color: #fff;
+			#shadow();
+		}
+	}
+
+	font-size: .8rem;
+	padding: 8px 30px;
+	border-radius: 1px;
+	color: rgba(0,0,0,.75);
+	cursor: pointer;
+	outline: 0;
+	border: none;
+	position: relative;
+	margin: 10px 1px;
+	text-decoration: none;
+	background: #ddd;
+
+	&.coral {
+		color: rgba(255,255,255,.84);
+		background-color: @coral;
+	}
+
+	&.primary {
+		color: rgba(255,255,255,.84);
+		background-color: @primary;
+
+		#raised();
+		#flat( @primary );
+		
+		&:disabled {
+			background-color: lighten( @primary, 10% );
+			cursor: default;
+			&:hover {
+				background-color: lighten( @primary, 10% );
+				box-shadow: none;
+			}
+		}
+	}
+
+
+	&.success {
+		color: rgba(255,255,255,.84);
+		background-color: @success;
+
+		#raised();
+		#flat( @success );
+		#disabled( @success );
+	}
+
+	&.error {
+		color: rgba(255,255,255,.84);
+		background-color: @error;
+
+		#raised();
+		#flat( @error );
+		#disabled( @error );
+	}
+
+	&.warn {
+		color: rgba(255,255,255,.84);
+		background-color: @warn;
+
+		#raised();
+		#flat( @warn );
+		#disabled( @warn );
+	}
+
+	&.info {
+		color: rgba(255,255,255,.84);
+		background-color: @info;
+
+		#raised();
+		#flat( @info );
+		#disabled( @info );
+	}
+
+	&.outline {
+
+		color: rgba(255,255,255,.84);
+		background: none;
+
+		&.coral {
+			border: 1px solid @coral;
+			color: @coral;
+
+			&:hover {
+				background-color: @coral;
+				color: #fff;
+				#shadow();
+			}
+		}
+
+		&.primary {
+			#outline( @primary );
+		}
+
+		&.success {
+			#outline( @success );
+		}
+
+		&.error {
+			#outline( @error );
+		}
+
+		&.warn {
+			#outline( @warn );
+		}
+
+		&.info {
+			#outline( @info );
+		}
+	}
+
+	/** Some default behavior */
+	&:hover {
+		#shadow();
+	}
+	
+	#raised();
+	#flat( rgba(0,0,0,.75) );
+	&:disabled {
+		cursor: default;
+		&:hover {
+			box-shadow: none;
+		}
+	}
+}

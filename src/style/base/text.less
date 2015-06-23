@@ -1,0 +1,155 @@
+
+@import "../base/colors.less";
+
+.ui {
+
+        &.text {
+        
+                -webkit-appearance: none;
+                background-color: #FFF;
+                font-family: inherit;
+                border: 1px solid #dfdfdf;
+                -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+                color: rgba(0, 0, 0, 0.75);
+                display: block;
+                font-size: 0.875rem;
+                margin: 0 0 1rem 0;
+                padding: 0.5rem;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
+                -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
+                transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+                width: 100%;
+                margin-bottom: 0;
+
+                &:focus {
+                
+                        -webkit-box-shadow: 0 0 5px #1abc9c;
+                        -moz-box-shadow: 0 0 5px #1abc9c;
+                        box-shadow: 0 0 5px #1abc9c;
+                        border-color: #1abc9c;
+                        background: #fcfcfc;
+                        border-color: #1abc9c;
+                        outline: none;
+                }
+
+                &:disabled {
+                        background-color:#dddddd !important;
+                }
+        }
+
+        &.yoursComplete, &.dialog, &.w3user, &.calendar {
+        
+                position: relative;
+                width: 260px;
+
+                input {
+                        padding-right: 25px;
+                        width: 100%;
+                }
+
+                >.hint {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        background: #fff;
+                        color: #ddd;
+                        z-index: -1;
+                }
+
+                >.front {
+                        background: none;
+                }
+
+                >.icon {
+                        position: absolute;
+                        top: 50%;
+                        margin-top: -10.5px;
+                        right: 10px;
+                        cursor: pointer;
+
+                        &.loading:after {
+                                color: #1abc9c;
+                                content: "\e615";
+                                display: inline-block;
+                                -webkit-animation: spinner .5s infinite linear;
+                        }
+
+                        &.success:after {
+                                color: @success;
+                                content: "\e635";
+                        }
+
+                        &.error:after {
+                                color: @error;
+                                content: "\e61e";
+                        }
+                }
+
+                .list {
+                        list-style-type: none;
+                        background: white;
+                        box-shadow: 0 0 3px rgba(0,0,0,.3);
+                        box-sizing: border-box;
+                        opacity: 0;
+                        -webkit-transition: .3s;
+                        -moz-transition: .3s;
+                        -ms-transition: .3s;
+                        transition: .3s;
+                        -webkit-transform: scale(-.8);
+                        -moz-transform: scale(-.8);
+                        -ms-transform: scale(-.8);
+                        transform: scale(-.8);
+                        max-height: 240px;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+
+                        &.show {
+                                opacity: 1;
+                                -webkit-transform: scale(1);
+                                -moz-transform: scale(1);
+                                -ms-transform: scale(1);
+                                transform: scale(1);
+                                z-index: 99;
+                        }
+
+                        ul {
+                                list-style: none;
+                                padding: 0 !important;
+                                margin: 0 !important;
+                        }
+
+                        li {
+                                line-height: 30px;
+                                cursor: pointer;
+                                padding-left: 5px;
+                                margin: 0 !important;
+
+                                &.selected {
+                                        background: #eee;
+                                }
+                        }
+                }
+        }
+
+        /** Customize */
+        &.w3user {
+
+                input {
+                        padding-left: 22px;
+                        padding-right: 0px;
+                }
+
+                &:before {
+                        content: "\e6ad";
+                        position: absolute;
+                        height: 32px;
+                        width: 32px;
+                        top: 6;
+                        left: 6;
+                }
+        }
+}

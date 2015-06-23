@@ -1,0 +1,176 @@
+
+.ui.loading {
+
+	.love {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		color: #de4747;
+		font-size: 18px;
+
+		&:before {
+			content: "\2764";
+		}
+	}
+
+	.love1 {
+		-webkit-animation-name: love1;
+		-webkit-animation-duration: 5s;
+		-webkit-animation-iteration-count: infinite;
+	}
+	.love2 {
+		left: 30px;
+		-webkit-animation-name: love2;
+		-webkit-animation-duration: 6s;
+		-webkit-animation-iteration-count: infinite;
+	}
+	.love3 {
+		left: 60px;
+		-webkit-animation-name: love3;
+		-webkit-animation-duration: 4s;
+		-webkit-animation-iteration-count: infinite;
+	}
+	.love4 {
+		left: 80px;
+		-webkit-animation-name: love4;
+		-webkit-animation-duration: 4s;
+		-webkit-animation-iteration-count: infinite;
+	}
+	.love5 {
+		left: 100px;
+		-webkit-animation-name: love5;
+		-webkit-animation-duration: 5s;
+		-webkit-animation-iteration-count: infinite;
+	}
+	@-webkit-keyframes love1 {
+		0% {
+			top: 140px;
+		}
+		20% {
+			left: 34%;
+		}
+		40% {
+			left: 30%;
+		}
+		60% {
+			left: 31%;
+		}
+		80% {
+			left: 35%;
+		}
+		100% {
+			top: 10px;
+			left: 39%;
+			opacity: 0
+		}
+	}
+	@-webkit-keyframes love2 {
+		0% {
+			top: 100px;
+		}
+		20% {
+			left: 40%;
+		}
+		40% {
+			left: 42%;
+		}
+		60% {
+			left: 39%;
+		}
+		80% {
+			left: 40%;
+		}
+		100% {
+			top: 30px;
+			left: 35%;
+			opacity: 0;
+		}
+	}
+	@-webkit-keyframes love3 {
+		0% {
+			top: 83px;
+		}
+		20% {
+			left: 45%;
+		}
+		40% {
+			left: 40%;
+		}
+		60% {
+			left: 43%;
+		}
+		80% {
+			left: 40%;
+		}
+		100% {
+			top: 60px;
+			left: 45%;
+			opacity: 0;
+		}
+	}
+	@-webkit-keyframes love4 {
+		0% {
+			top: 110px;
+		}
+		20% {
+			left: 55%;
+		}
+		40% {
+			left: 50%;
+		}
+		60% {
+			left: 55%;
+		}
+		80% {
+			left: 51%;
+		}
+		100% {
+			top: 90px;
+			left: 54%;
+			opacity: 0;
+		}
+	}
+	@-webkit-keyframes love5 {
+		0% {
+			top: 130px;
+		}
+		20% {
+			left: 60%;
+		}
+		40% {
+			left: 65%;
+		}
+		60% {
+			left: 59%;
+		}
+		80% {
+			left: 55%;
+		}
+		100% {
+			top: 100px;
+			left: 60%;
+			opacity: 0;
+		}
+	}
+
+        #loader {
+                animation: loader 1.5s linear infinite;
+                clip: rect(0, 80px, 80px, 40px);
+                height: 80px;
+                width: 80px;
+                position: absolute;
+                left: calc(50% - 40px);
+                top: calc(50% - 40px);
+
+                &:after {
+                
+                        animation: loader2 1.5s ease-in-out infinite;
+                        clip: rect(0, 80px, 80px, 40px);
+                        content: '';
+                        border-radius: 50%;
+                        height: 80px;
+                        width: 80px;
+                        position: absolute;
+                }
+        }
+}

@@ -1,0 +1,20 @@
+{
+	"laxcomma": true,
+	"smarttabs": true,
+	"loopfunc": true,
+	"shadow": true,
+
+	/** 1 && callback() */
+	"expr": true,
+
+	/** var a = b = c = "" */
+	"-W120": true,
+
+	"-W099": true,
+	"-W061": true,
+	"-W007": true,
+	"-W064": true,
+	"-W069": true,
+	"-W014": true,
+	"-W018": true
+}
