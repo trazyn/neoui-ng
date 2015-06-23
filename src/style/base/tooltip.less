@@ -1,0 +1,171 @@
+
+.ui.tooltip {
+
+	position: relative;
+	display: inline-block;
+
+	&:before, &:after {
+		position: absolute;
+		opacity: 0;
+		z-index: 1000000;
+		-webkit-transition: 0.3s ease;
+		-moz-transition: 0.3s ease;
+		pointer-events: none;
+		line-height: 18px;
+		text-indent: 0;
+	}
+
+	&:hover {
+		opacity: 1;
+
+		&:after, &:before {
+			opacity: 1;
+		}
+	}
+
+	&:before {
+	
+		content: '';
+		position: absolute;
+		background: transparent;
+		border: 6px solid transparent;
+		position: absolute;
+	}
+
+	&:after {
+	
+		content: attr(data-tooltip);
+		background: rgba(0, 0, 0, 0.8);
+		color: white;
+		padding: 8px 10px;
+		font-size: 12px;
+		white-space: nowrap;
+		box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	&.top {
+	
+		&:before {
+			bottom: 100%;
+			left: 15%;
+			margin: 0 0 -26px 0;
+			border-top-color: rgba(0, 0, 0, 0.8);
+		}
+
+		&:after {
+			bottom: 100%;
+			left: 15%;
+			margin: 0 0 -14px -10px;
+		}
+
+		&:hover {
+			&:before {
+				margin: 0 0 -18px 0;
+			}
+			&:after {
+				margin: 0 0 -6px -10px;
+			}
+		}
+	}
+
+	&.bottom {
+
+		&:before {
+			top: 100%;
+			left: 35%;
+			margin: -22px 0 0 0;
+			border-bottom-color: rgba(0, 0, 0, 0.8);
+		}
+
+		&:after {
+			top: 100%;
+			left: 35%;
+			margin: -10px 0 0 -10px;
+		}
+
+		&:hover {
+			&:before {
+				margin: -16px 0 0 0;
+			}
+			&:after {
+				margin: -4px 0 0 -10px;
+			}
+		}
+	}
+
+	&.right {
+		
+		&:before {
+			left: 110%;
+			bottom: 50%;
+			margin: 0 0 -4px 8px;
+			border-right-color: rgba(0,0,0,0.8);
+		}
+
+		&:after {
+			left: 110%;
+			bottom: 50%;
+			margin: 0 0 -15px 20px;
+		}
+
+		&:hover {
+			&:before {
+				margin: 0 0 -4px -4px;
+			}
+			&:after {
+				margin: 0 0 -15px 8px;
+			}
+		}
+	}
+
+	&.left {
+		&:before {
+			right: 110%;
+			bottom: 50%;
+			margin: 0 -15px -4px 0;
+			border-left-color: rgba(0,0,0,0.8);
+		}
+
+		&:after {
+			right: 110%;
+			bottom: 50%;
+			margin: 0 -3px -13px 0;
+		}
+
+		&:hover {
+			&:before {
+				margin: 0 -23px -4px 0;
+			}
+			&:after {
+				margin: 0 -11px -13px 0;
+			}
+		}
+	}
+
+	&.center {
+		&:before {
+			bottom: 140%;
+			left: -14%;
+			margin: 0 0 -13px 0;
+			border-top-color: rgba(0, 0, 0, 0.8);
+		}
+
+		&:after {
+			bottom: 100%;
+			margin: 0 0 2px 0px;
+			transform: translateX(-50%);
+			-webkit-transform: translateX(-50%);
+			-moz-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+		}
+
+		&:hover {
+			&:before {
+				margin: 0 0 -5px 0;
+			}
+			&:after {
+				margin: 0 0 10px 0px;
+			}
+		}
+	}
+}

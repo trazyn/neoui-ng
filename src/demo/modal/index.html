@@ -9,16 +9,38 @@
 
     <div class="wrap">
         <p>
-            <button name="slide" class="ui raised button transition coral" ng-click="open( 'slide' )">SLIDE</button>
-            <button name="stick" class="ui raised button transition coral" ng-click="open( 'stick' )">STICK</button>
-            <button name="bottom" class="ui raised button transition coral" ng-click="open( 'bottom' )">BOTTOM</button>
+            <button class="ui button raised transition mint" ng-click="open( 'slide' )">SLIDE</button>
+            <button class="ui button raised transition mint" ng-click="open( 'stick' )">STICK</button>
+            <button class="ui button raised transition mint" ng-click="open( 'bottom' )">BOTTOM</button>
+
+            <button class="ui button raised transition mint" ng-click="open( 'flip' )">FLIP</button>
+            <button class="ui button raised transition mint" ng-click="open( 'vertical' )">VERTICAL</button>
+            <button class="ui button raised transition mint" ng-click="open( 'sign' )">SIGN</button>
         </p>
 
         <p>
-            <button name="flip" class="ui raised button transition coral" ng-click="open( 'flip' )">FLIP</button>
-            <button name="vertical" class="ui raised button transition coral" ng-click="open( 'vertical' )">VERTICAL</button>
-            <button name="sign" class="ui raised button transition coral" ng-click="open( 'sign' )">SIGN</button>
+	<button class="ui button transition success" ng-click="showSuccess( 'This is a message telling you that everything is a-okay' )">
+		<i class="icon success"></i>
+	</button>
+
+	<button class="ui button transition error" ng-click="showError( 'This is a notification that something is wrong...' )">
+		<i class="icon error"></i>
+	</button>
+
+
+	<button class="ui button transition info" ng-click="showInfo( 'It warns the users that to expect some changes or limitations.' )">
+		<i class="icon info"></i>
+	</button>
+
+	<button class="ui button transition warn" ng-click="showWarn( 'It warns the users that to expect some changes or limitations.' )">
+		<i class="icon warn"></i>
+	</button>
         </p>
+
+	<p>
+            <button class="ui button transition darkGray" ng-click="showConfirm()">Confirm</button>
+            <button class="ui button transition darkGray">Toast</button>
+	</p>
     </div>
 
     <a class="signal"></a>

@@ -79,30 +79,6 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 	return {
 		open: function( options ) {
 			return Modal( options );
-		},
-
-		success: function() {
-		
-		},
-
-		error: function() {
-		
-		},
-
-		info: function() {
-		
-		},
-
-		warn: function() {
-		
-		},
-
-		confirm: function() {
-		
-		},
-	
-		toast: function() {
-		
 		}
 	};
 } ] );
