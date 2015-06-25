@@ -71,6 +71,8 @@ bs, gulp = require( "gulp" )
 			.pipe( jshint.reporter( "default" ) );
 	} )
 
+	.task( "init", [ "vendor", "css" ] )
+
 	.task( "default", [ "watch", "css", "start" ] );
 
 pkg.dest = pkg.dest || "dist";
