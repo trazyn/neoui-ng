@@ -1,0 +1,217 @@
+<title>Tab - Neoui-ng</title>
+
+<ul id="peek">
+    <li data-anchor="example" class="item active">Example</li>
+    <li class="item">API
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="tab" ng-controller="tabController">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+
+        Index: {{ selected }}
+        <div class="wrap">
+            <ng-tab-set tab-selected="selected">
+            <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}">
+                <div ng-bind-html="tab.content"></div>
+            </ng-tab>
+            </ng-tab-set>
+        </div>
+
+        <input class="ui text" type="text" ng-model="index">
+
+        <button class="ui button transition primary" ng-click="addTab()">Add new tab</button>
+        <button class="ui button transition primary" ng-click="set()">Set selected tab</button>
+
+    </section>
+
+    <br>
+    <br>
+
+    <header>API</header>
+
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+            <div class="ui tab" style="min-height: 300px;">
+                <div class="nav">
+                    <div class="item selected" data-index="github">Github</div>
+                    <div class="item selected" data-index="dribbble">Dribbble</div>
+                    <div class="item selected" data-index="twitter">Twitter</div>
+                </div>
+
+                <div class="content">
+                    <section data-index="github"></section>
+                    <section data-index="dribbble"></section>
+                    <section data-index="twitter"></section>
+                </div>
+            </div>
+            </xmp>
+            <blockquote>
+                <p><code>Ajax</code>页面的加载, 添加<code>data-page="url"</code>属性</p>
+            <blockquote>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).tab( options )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+            <xmp>
+            $( ".ui.tab" ).tab( { duration: 500 } );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>rule</code> - <code>"data-index"</code></p>
+            </blockquote>
+            <p>页签和内容映射</p>
+            <br>
+
+            <blockquote>
+            <p><code>class4loading</code> - <code>"loading"</code></p>
+            </blockquote>
+            <p><code>Ajax</code>加载内容时作用于页签</p>
+            <br>
+
+            <blockquote>
+                <p><code>class4error</code> - <code>"error"</code>
+                </p>
+            </blockquote>
+            <p><code>Ajax</code>加载失败时作用于页签</p>
+            <br>
+
+            <blockquote>
+                <p><code>ripple</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>页签点击大波浪</p>
+            <br>
+
+            <blockquote>
+                <p><code>duration</code> - <code>300</code>
+                </p>
+            </blockquote>
+            <p>动画时间, 单位毫秒</p>
+            <br>
+
+            <blockquote>
+                <p><code>onSelect</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>取值为<code>function</code>时, 页签选择时执行该方法, 取值为<code>Hash</code>对象时, 通过<code>data-index</code>执行对应回调</p>
+            <xmp>
+            $( ".ui.tab" ).tab( {
+                onSelect: {
+
+                    "github": function( tab, settings ) {
+                        console.log( "Github" );
+                    },
+
+                    "dribbble": function( tab, settings ) {
+                        console.log( "Dribbble" );
+                    }
+                }
+            } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <p><code>tab.add( items )</code>
+            </p>
+
+            <blockquote>
+                <p><code>items</code> - Object/Array</p>
+            </blockquote>
+            <p>新增一个或多个<code>tab</code></p>
+            <xmp>
+            {
+                name - 新增页签显示, 取值不限, 可以为 HTML
+                index - 页签索引值
+                render - 内容渲染, 返回内容
+                immediate - 是否立即加载内容, 默认 false
+            }
+            </xmp>
+            <br>
+
+            <p><code>tab.remove( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>移除指定<code>tab</code></p>
+            <br>
+
+            <p><code>tab.getTab( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>获取指定<code>tab</code>的DOM</p>
+            <br>
+
+            <p><code>tab.active( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>选中对应<code>tab</code></p>
+            <br>
+
+            <p><code>tab.isActive( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>判断对应<code>tab</code>是否被选中</p>
+            <br>
+
+            <p><code>tab.disabled( [index] )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String/Array</p>
+            </blockquote>
+            <p>禁用<code>tab</code>, 参数空时禁用所有<code>tab</code></p>
+            <br>
+
+            <p><code>tab.enabled( [index] )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String/Array</p>
+            </blockquote>
+            <p>取消禁用, 参数空时取消所有已禁用<code>tab</code></p>
+        </section>
+    </div>
+</section>

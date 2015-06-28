@@ -2,12 +2,12 @@
 define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 	$.fn.modal = function( options ) {
-		
-		var 
+
+		var
 		modal = $( template ),
-		
+
 		close = function() {
-		
+
 			$( document ).off( "keyup", closeByESC ).off( "click", closeByDocument );
 
 			options.unload instanceof Function && options.unload();
@@ -16,25 +16,25 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			setTimeout( function() { modal.remove(); }, 300 );
 		},
-	
+
 		closeByESC = function( e ) {
-			
+
 			27 === e.keyCode && close();
 		},
-		
+
 		closeByDocument = function( e ) {
-			
+
 			$( e.target ).hasClass( "overlay" ) && close();
 		},
-		
+
 		loading = modal.find( ".ui.loading:first" ).loading( {
-			
+
 			before: function() {
-				
+
 				this.css( "z-index", 10000 );
-			}, 
+			},
 			after: function() {
-				
+
 				this.css( "z-index", -999 );
 			}
 		} ),
@@ -42,9 +42,9 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		progress = modal.find( ".ui.progress:first" ).progress( {
 
 			seed: 0.7,
-			
+
 			render: function( status, icon ) {
-				
+
 				this.css( {
 					"-webkit-transform": "translate3d(-" + status + "%,0px,0px)",
 					"transition": "all 200ms ease",
@@ -52,7 +52,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				} );
 
 				icon.css( {
-					
+
 					"top": 54,
 					"right": 14
 				} );
@@ -63,7 +63,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 		show = function() {
 
-			var 
+			var
 			  head = modal.find( ".title" ),
 			  body = modal.find( ".content" ),
 			  overlay = modal.last();
@@ -85,7 +85,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			/** Set animate */
 			modal.addClass( options.animate );
-			
+
 			/** Show the overlay */
 			overlay.addClass( options.showOverlay ? "show" : "blank" );
 
@@ -104,22 +104,22 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			.fail( function() {
 				typeof options.error === "function" && options.error.call( body, loading, close );
 			} )
-			.always( function() { 
+			.always( function() {
 
 				true === options.fadeIn && setTimeout( function() { body.removeClass( "out" ); } );
 				true === options.showProgress && setTimeout( function() { progress.done(); }, 300 );
 			} );
-			
+
 			/** Close the modal */
 			if ( options.closeByESC || options.closeByDocument ) {
 
 				var trigger = $( document ).add( modal );
-				
-				true === options.closeByDocument 
+
+				true === options.closeByDocument
 					&& modal.off( "click", closeByDocument ).on( "click", closeByDocument );
 
 				if ( "boolean" === typeof options.closeByESC ) {
-				
+
 					trigger.off( "keyup", closeByESC ).on( "keyup", closeByESC );
 				}
 			}
@@ -129,14 +129,14 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			modal.appendTo( document.body );
 
 			setTimeout( function() {
-				
+
 				modal.first().addClass( "show" );
 			}, 77 );
 
 			if ( options.selector4drag ) {
-				
+
 				modal.drag( function( ev, dd ) {
-					
+
 					$( this ).css( {
 						top: dd.offsetY,
 						left: dd.offsetX,
@@ -163,11 +163,11 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		};
 	};
 
-	var 
+	var
 	noop = function() {},
 
 	template = [ "<div class='ui modal animate'>",
-		
+
 				"<div style='height: 100%;'>",
 					"<h3 class='title'></h3><div class='icon close transition rotate'></div>",
 
@@ -177,15 +177,15 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 					"<div class='content'></div>",
 				"</div>",
-				
+
 			"</div>",
 			"<div class='ui overlay'></div>" ].join( "" );
 
 	$.fn.modal.defaults = {
-	
+
 		title 		: "Modal.JS",
 
-		css 		: {}, 
+		css 		: {},
 		attr 		: {},
 
 		showHead 	: true,

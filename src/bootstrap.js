@@ -1,6 +1,6 @@
 
 require.config( {
-	
+
 	baseUrl: "/src",
 
 	paths: {
@@ -10,21 +10,23 @@ require.config( {
 	}
 } );
 
-require( [ "demo/modal/index" ], function() {
+require( [ "demo/modal/index", "demo/tab/index" ], function() {
 
 	"use strict";
-	
+
 	angular
 
-	.module( "neoui", [ "ngRoute", 
-			"modal.controllers" ] )
+	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
-		
+
 		$routeProvider
 			.when( "/modal", {
 				templateUrl: "/src/demo/modal/index.html"
 			} )
+		    .when( "/tab", {
+		        templateUrl: "/src/demo/tab/index.html"
+		    } )
 			.otherwise( {
 				redirectTo: "/modal"
 			} );

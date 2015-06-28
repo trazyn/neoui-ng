@@ -23,7 +23,7 @@ bs, gulp = require( "gulp" )
 				"bower_components/angular-route/angular-route.js",
 				"bower_components/requirejs/require.js" ] )
 
-			.pipe( concat( "vendor.js" ) )
+            .pipe( concat( "vendor.js" ) )
 			.pipe( gulp.dest( pkg.dest ) )
 			.pipe( uglify() )
 			.pipe( rename( "vendor.min.js" ) )
@@ -43,7 +43,7 @@ bs, gulp = require( "gulp" )
 
 	.task( "css", function() {
 
-		var 
+		var
 		dest = pkg.dest,
 		minifyCSS = require( "gulp-minify-css" );
 
@@ -65,7 +65,7 @@ bs, gulp = require( "gulp" )
 	} )
 
 	.task( "jshint", function() {
-		
+
 		return gulp.src( "src/**/*.js" )
 			.pipe( jshint( eval( "(" + fs.readFileSync( "./.jshintrc" ) + ")" ) ) )
 			.pipe( jshint.reporter( "default" ) );
