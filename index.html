@@ -5,8 +5,24 @@
 		<link rel="stylesheet" href="/dist/css.min.css">
 	</head>
 	<body>
-		<div ng-view id="container"></div>
+        <header id="nav">
+            <a class="hamburger">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+            </a>
+            <i class="icon github2"></i>
+        </header>
 
-		<script defer="true" async="true" src="dist/vendor.js" data-main="src/bootstrap.js"></script>
-	</body>
+        <div ng-view id="container" ng-controller="mainCintroller"></div>
+
+		<footer id="footer">
+			<p>
+			Inspiration from <a>Semantic UI</a> and <a>Material UI</a>
+			</p>
+			<a class="icon github3"></a>
+		</footer>
+
+        <script defer="true" async="true" src="dist/vendor.js" data-main="src/bootstrap.js"></script>
+    </body>
 </html>

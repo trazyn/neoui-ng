@@ -155,7 +155,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 					delete instance[ "render" ][ "index" ];
 
-					tab = $( "<section class='item' " + settings.rule + "='" + index + "'>" )
+					tab = $( "<div class='item' " + settings.rule + "='" + index + "'>" )
 						.attr( settings.rule, index )
 						.html( typeof render === "string" ? render : render.call( self, settings ) );
 				}
@@ -184,7 +184,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						.always( callbacks.always )
 						.done( function( responseText ) {
 
-							tab = $( "<section class='item'>" ).attr( settings.rule, index ).html( responseText );
+							tab = $( "<div class='item'>" ).attr( settings.rule, index ).html( responseText );
 
 							self.removeClass( class4loading );
 
@@ -253,7 +253,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 							html = typeof render === "string" ? render : render.call( nav, settings );
 
-							tab = $( "<section class='item' " + settings.rule + "='" + item.index + "'>" ).html( html );
+							tab = $( "<div class='item' " + settings.rule + "='" + item.index + "'>" ).html( html );
 
 							tabs.length
 								? tabs.last().after( tab )
@@ -340,7 +340,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 				if ( index ) {
 					return this.$tabs.filter( "[" + settings.rule + "=" + index + "]" );
 				} else {
-					return this.$tabs.filter( "section.selected" );
+					return this.$tabs.filter( "div.selected" );
 				}
 			} catch ( ex ) {}
 		},

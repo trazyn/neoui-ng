@@ -1,5 +1,5 @@
 
-define( [ "ui/tab/tab-ng" ], function() {
+define( [ "ui/tab/tab-ng", "ui/anchor/anchor" ], function() {
 
     "use strict";
 
@@ -86,6 +86,10 @@ define( [ "ui/tab/tab-ng" ], function() {
             }
 
             tabs[ index ][ "disabled" ] = !tabs[ index ][ "disabled" ];
+        };
+
+        $scope.onSelected = function() {
+            console.log( $scope.selected );
         };
     } );
 } );

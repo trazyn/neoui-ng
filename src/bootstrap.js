@@ -10,13 +10,20 @@ require.config( {
 	}
 } );
 
-require( [ "demo/modal/index", "demo/tab/index" ], function() {
+require( [ "ui/anchor/anchor", "demo/modal/index", "demo/tab/index" ], function() {
 
 	"use strict";
 
 	angular
 
 	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab" ] )
+
+	.controller( "mainCintroller", [ "$scope", function( $scope ) {
+
+	    $scope.$on( "$viewContentLoaded", function() {
+            $( document.body ).anchor( { offset: 200 } );
+	    } );
+	} ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 

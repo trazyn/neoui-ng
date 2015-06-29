@@ -37,19 +37,21 @@ angular.module( "$ui.tab", [] )
 
             var
             instance = $( $element ).tab( {
-                ripple      : $scope.noRipple === undefined,
-                lavalamp    : $scope.noLavalamp === undefined,
-                vertical    : $scope.vertial !== undefined,
-                selected    : $scope.selected || 3,
+                ripple      : !($scope.noRipple === "true"),
+                lavalamp    : !($scope.noLavalamp === "true"),
+                vertical    : $scope.vertial === "true",
+                selected    : $scope.selected || 0,
                 onSelect    : function( tab, settings ) {
 
                     var self = this;
 
                     /** Change bound variable */
                     if ( !$rootScope.$$phase ) {
+
                         $scope.$apply( function( scope ) {
                             selectedAccessor.assign( $scope, self.attr( settings.rule ) );
                         } );
+                        "function" === typeof $scope.onSelected && $scope.onSelected()();
                     }
                 }
             } ),
@@ -68,7 +70,8 @@ angular.module( "$ui.tab", [] )
                 noRipple    : "@tabNoRipple",
                 noLavalamp  : "@tabNoLavalamp",
                 vertical    : "@tabVertical",
-                selected    : "=tabSelected"
+                selected    : "=tabSelected",
+                onSelected  : "&tabOnSelected"
             },
 
             restrict        : "E",

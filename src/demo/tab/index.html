@@ -1,8 +1,16 @@
 <title>Tab - Neoui-ng</title>
 
-<ul id="peek">
-    <li data-anchor="example" class="item active">Example</li>
-    <li class="item">API
+<ul id="anchors">
+    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
+    <li class="item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="item">Markup</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="ngTabSet" class="item">Attributes * ng-tab-set</li>
+            <li data-anchor="ngTab" class="item">Attributes * ng-tab</li>
+        </ul>
+    </li>
+    <li class="item">jQuery
         <ul>
             <li data-anchor="html" class="item">Html</li>
             <li data-anchor="constructor" class="item">Constructor</li>
@@ -12,14 +20,14 @@
     </li>
 </ul>
 
-<section id="tab" ng-controller="tabController">
+<section id="tab">
 
     <header data-anchor="example">Example</header>
 
-    <section>
+    <section ng-controller="tabController">
 
         <div class="wrap">
-            <ng-tab-set tab-selected="selected">
+            <ng-tab-set tab-selected="selected" tab-on-selected="onSelected">
             <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled">
                 <div ng-bind-html="tab.content"></div>
             </ng-tab>
@@ -59,7 +67,130 @@
     <br>
     <br>
 
-    <header>API</header>
+    <header>AngularJS</header>
+
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <xmp>
+            <ng-tab-set tab-selected="selected" tab-on-selected="onSelected">
+                <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="\{\{ tab.title \}\}">
+                <div ng-bind-html="\{\{ tab.content \}\}"></div>
+                </ng-tab>
+            </ng-tab-set>
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+            angular
+            .module( "app", [ "$ui.tab" ] )
+            .controller( "tabController", [ "$scope", function( $scope ) {
+
+                /** Set the default selected */
+                $scope.selected = "1";
+
+                $scope.tabs = [ {
+                    header: "Tab 1",
+                    content: "Content 1",
+                    index: "1",
+                    disabled: true
+                }, {
+
+                    header: "Tab 2",
+                    content: "Content 2",
+                    index: "2"
+                } ];
+
+                $scope.onSelected = function( scope ) {
+                    console.log( "Current selected: " + scope.index );
+                };
+            } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="ngTabSet">
+                <span>Attributes * ng-tab-set</span>
+            </div>
+
+            <blockquote>
+                <p><code>=tab-selected</code> - <code>"0"</code></p>
+            </blockquote>
+            <p>默认选中项</p>
+            <br>
+
+            <blockquote>
+            <p><code>@tab-no-ripple</code> - <code>null</code></p>
+            </blockquote>
+            <p>If present, disable ink ripple effects</p>
+            <br>
+
+            <blockquote>
+                <p><code>@tab-no-lavalamp</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>设置<code>true</code>后取消滑动效果</p>
+            <br>
+
+            <blockquote>
+                <p><code>&tab-on-selected</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中后执行回调</p>
+            <br>
+
+            <blockquote>
+                <p><code>@tab-vertical</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>设置<code>true</code>后垂直显示</p>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="ngTab">
+                <span>Attributes * ng-tab</span>
+            </div>
+
+            <blockquote>
+                <p><code>@tab-index</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>页签索引, 不可为空或重复</p>
+
+            <blockquote>
+                <p><code>=tab-disabled</code> - <code>false</code></p>
+            </blockquote>
+            <p>禁用页签</p>
+            <br>
+
+            <blockquote>
+                <p><code>@tab-header</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <br/>
+
+            <p>页签标题</p>
+            <blockquote>
+            <p><code>@tab-template-url</code> - <code>null</code></p>
+            </blockquote>
+            <p>通过指定URL加载内容</p>
+
+        </section>
+    </div>
+
+    <br>
+    <br>
+
+    <header>jQuery</header>
 
     <div class="markdown">
         <section>
@@ -76,15 +207,15 @@
                 </div>
 
                 <div class="content">
-                    <section data-index="github"></section>
-                    <section data-index="dribbble"></section>
-                    <section data-index="twitter"></section>
+                    <div data-index="github"></div>
+                    <div data-index="dribbble"></div>
+                    <div data-index="twitter"></div>
                 </div>
             </div>
             </xmp>
             <blockquote>
                 <p><code>Ajax</code>页面的加载, 添加<code>data-page="url"</code>属性</p>
-            <blockquote>
+            </blockquote>
         </section>
 
         <section>
@@ -121,35 +252,35 @@
             <blockquote>
             <p><code>class4loading</code> - <code>"loading"</code></p>
             </blockquote>
-            <p><code>Ajax</code>加载内容时作用于页签</p>
+            <p><code>Ajax</code>加载内容时作用于页签样式</p>
             <br>
 
             <blockquote>
                 <p><code>class4error</code> - <code>"error"</code>
                 </p>
             </blockquote>
-            <p><code>Ajax</code>加载失败时作用于页签</p>
+            <p><code>Ajax</code>加载失败时作用于页签样式</p>
             <br>
 
             <blockquote>
                 <p><code>ripple</code> - <code>true</code>
                 </p>
             </blockquote>
-            <p>页签点击大波浪</p>
+            <p>If present, enable ink ripple effects</p>
             <br>
 
             <blockquote>
                 <p><code>duration</code> - <code>300</code>
                 </p>
             </blockquote>
-            <p>动画时间, 单位毫秒</p>
+            <p>设置<code>lavalamp</code>后, 动画时间, 单位毫秒</p>
             <br>
 
             <blockquote>
                 <p><code>onSelect</code> - <code>null</code>
                 </p>
             </blockquote>
-            <p>取值为<code>function</code>时, 页签选择时执行该方法, 取值为<code>Hash</code>对象时, 通过<code>data-index</code>执行对应回调</p>
+            <p>取值为<code>function</code>时, 页签选中后执行该方法, 取值为<code>Hash</code>对象时, 通过<code>data-index</code>执行对应回调</p>
             <xmp>
             $( ".ui.tab" ).tab( {
                 onSelect: {
@@ -183,7 +314,8 @@
                 name - 新增页签显示, 取值不限, 可以为 HTML
                 index - 页签索引值
                 render - 内容渲染, 返回内容
-                immediate - 是否立即加载内容, 默认 false
+                immediate - render不为空时, 是否立即加载内容, 默认 false
+                page - 通过指定URL加载内容
             }
             </xmp>
             <br>
