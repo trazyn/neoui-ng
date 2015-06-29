@@ -15,6 +15,11 @@
             font-size: 18px;
             text-shadow: 0 0 40px #CCC;
             overflow: hidden;
+            &[disabled] {
+                cursor: not-allowed;
+                border-bottom: 3px solid lighten( #ddd, 10% );
+                color: @dribbble;
+            }
         }
 
         .indicator {

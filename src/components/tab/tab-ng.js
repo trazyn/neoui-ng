@@ -98,8 +98,15 @@ angular.module( "$ui.tab", [] )
                 };
             }
 
-            /** Remove the markup */
-            $element.remove();
+            $scope.$watch( "disabled", function( value ) {
+
+                var index = $scope.index;
+                !!value ? $tab.disabled( index ) : $tab.enabled( index );
+            } );
+
+            $scope.$on( "$destroy", function() {
+                $tab.remove( $scope.index );
+            } );
 
             $tab.add( item );
         }
@@ -115,6 +122,8 @@ angular.module( "$ui.tab", [] )
             },
 
             restric         : "E",
+            template        : "",
+            replace         : true,
 
             require         : "^ngTabSet",
             link            : link

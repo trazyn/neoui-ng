@@ -18,19 +18,41 @@
 
     <section>
 
-        Index: {{ selected }}
         <div class="wrap">
             <ng-tab-set tab-selected="selected">
-            <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}">
+            <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled">
                 <div ng-bind-html="tab.content"></div>
             </ng-tab>
             </ng-tab-set>
         </div>
 
-        <input class="ui text" type="text" ng-model="index">
+        <button class="ui button transition primary"
+            ng-disabled="!canAddTab"
+            ng-click="addTab()">Add new tab</button>
 
-        <button class="ui button transition primary" ng-click="addTab()">Add new tab</button>
-        <button class="ui button transition primary" ng-click="set()">Set selected tab</button>
+        <label class="ui select">
+            <select ng-model="selected"
+                ng-options="tab.index as tab.header for tab in tabs">
+            </select>
+        </label>
+
+        <button class="ui button transition success"
+            ng-click="toggleTabState()"
+            ng-show="!!tabs[selected - 1]['disabled']">
+                Enable {{ tabs[ selected - 1 ][ 'header' ] }}
+        </button>
+
+        <button class="ui button transition error"
+            ng-click="toggleTabState()"
+            ng-show="!tabs[selected - 1]['disabled']">
+                Disable {{ tabs[ selected - 1 ][ 'header' ] }}
+        </button>
+
+        <button class="ui button warn"
+                ng-disabled="selected < 4"
+            ng-click="removeTab()">
+            Remove this tab
+        </button>
 
     </section>
 

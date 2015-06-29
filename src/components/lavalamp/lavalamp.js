@@ -11,7 +11,11 @@
 		indicator = $( settings.indicator ).appendTo( target ),
 
 		move = function( ele, animate ) {
-			var
+
+			var position, properties;
+
+			if ( ele.is( "[disabled]" ) ) { return; }
+
 			position = ele.position(),
 			properties = settings.properties( position, ele );
 

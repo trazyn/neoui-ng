@@ -8,7 +8,7 @@
 	}
 
 	#raised() {
-	
+
 		&.raised {
 			box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
 
@@ -19,7 +19,7 @@
 	}
 
 	#flat( @color ) {
-		
+
 		&.flat {
 			background: transparent;
 			color: @color;
@@ -31,7 +31,7 @@
 	}
 
 	#disabled( @bgcolor ) {
-		
+
 		&:disabled {
 			cursor: default;
 			background-color: lighten( @bgcolor, 10% );
@@ -43,7 +43,7 @@
 	}
 
 	#outline( @color: @coral ) {
-		
+
 		border: 1px solid @color;
 		color: @color;
 
@@ -62,7 +62,7 @@
 	outline: 0;
 	border: none;
 	position: relative;
-	margin: 10px 1px;
+	margin: 10px;
 	text-decoration: none;
 	background: #ddd;
 
@@ -137,7 +137,7 @@
 
 		#raised();
 		#flat( @primary );
-		
+
 		&:disabled {
 			background-color: lighten( @primary, 10% );
 			cursor: default;
@@ -226,7 +226,7 @@
 	&:hover {
 		#shadow();
 	}
-	
+
 	#raised();
 	#flat( rgba(0,0,0,.75) );
 	&:disabled {

@@ -111,7 +111,13 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 			tabs = instance.$tabs,
 			class4success = settings.class4success, class4error = settings.class4error, class4loading = settings.class4loading;
 
-            if ( self.is( "[disabled]" ) || self.hasClass( "selected" ) ) { return; }
+            if ( self.is( "[disabled]" ) || self.hasClass( "selected" ) ) {
+
+                e.stopImmediatePropagation();
+                e.preventDefault();
+
+                return;
+            }
 
 			/** Generate index */
 			undefined === index && page && self.attr( settings.rule, index = "tab" + +new Date());
@@ -312,7 +318,14 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 				selector = "[" + settings.rule + "=" + index + "]";
 
 				if ( index ) {
+
 					navs.add( tabs ).filter( selector ).remove();
+
+				    index = navs.index( navs.filter( selector ) );
+
+				    navs.splice( index, 1 );
+				    tabs.splice( index, 1 );
+
 
 					this.callbacks && (delete this.callbacks[ index ]);
 				}

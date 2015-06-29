@@ -28,7 +28,7 @@ require( [ "demo/modal/index", "demo/tab/index" ], function() {
 		        templateUrl: "/src/demo/tab/index.html"
 		    } )
 			.otherwise( {
-				redirectTo: "/modal"
+				redirectTo: "/tab"
 			} );
 	} ] );
 
