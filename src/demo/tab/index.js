@@ -1,5 +1,5 @@
 
-define( [ "ui/tab/tab-ng", "ui/anchor/anchor" ], function() {
+define( [ "ui/tab/tab-ng" ], function() {
 
     "use strict";
 
