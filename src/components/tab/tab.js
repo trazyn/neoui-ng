@@ -394,10 +394,21 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		    settings = this.settings;
 
 		    if ( indexes ) {
+
+                var i, nav;
+
 		        indexes = indexes instanceof Array ? indexes : [ indexes ];
 
 		        while ( indexes.length ) {
-		            navs.filter( "[" + settings.rule + "=" + indexes.pop() + "]" ).removeAttr( "disabled" );
+
+                    i = indexes.pop();
+
+		            nav = navs.filter( "[" + settings.rule + "=" + i + "]" );
+
+		            if ( nav.is( "[disabled]" ) ) {
+		                nav.removeAttr( "disabled" );
+                        this.active( i );
+		            }
 		        }
 		    } else {
 		        navs.removeAttr( "disabled" );

@@ -100,7 +100,16 @@ angular.module( "$ui.tab", [] )
 
             $scope.$watch( "disabled", function( value ) {
 
-                var index = $scope.index;
+                var
+                index = $scope.index,
+                isActive = $tab.isActive( index );
+
+                if ( !!value ) {
+
+                    isActive && $tab.disabled( index );
+                } else {
+                    isActive || $tab.enabled( index );
+                }
                 !!value ? $tab.disabled( index ) : $tab.enabled( index );
             } );
 
