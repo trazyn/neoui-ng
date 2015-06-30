@@ -24,7 +24,7 @@
 				}
 
 				mappings[ name ] = {
-					offsetTop: content.offset().top - content.height(),
+					offsetTop: content.offset().top - content.height() + settings.offset,
 					anchor: self
 				};
 			}
@@ -56,7 +56,7 @@
 
 				args === undefined && $( target ).animate( {
 
-					"scrollTop": item.offsetTop + settings.offset
+					"scrollTop": item.offsetTop
 				}, 400 );
 
 				e.stopPropagation();
