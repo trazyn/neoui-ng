@@ -6,8 +6,8 @@ define( [ "ui/tab/tab" ], function() {
 /**
  * example:
  *
-  <ng-tab-set tab-selected="2">
-      <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="{{ tab.title }}" tab-templateUrl="./tab1.html">
+  <ng-tab-set tab-selected="1">
+      <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="{{ tab.title }}" tab-template="./tab1.html">
           {{ tab.content }}
       </ng-tab>
   </ng-tab-set>
@@ -15,23 +15,6 @@ define( [ "ui/tab/tab" ], function() {
 
 angular.module( "$ui.tab", [] )
     .directive( "ngTabSet", [ "$rootScope", "$parse", function( $rootScope, $parse ) {
-
-        function compile( $element, $attrs ) {
-
-            var
-            markup = $element.html(),
-            style = $element.attr( "style" ),
-            node = $(
-                    '<div class="ui tab" style="min-height: 300px;">' +
-                        '<div class="nav"></div>' +
-                        '<div class="content"></div>' +
-                    '</div>'
-                    ).replaceAll( $element );
-
-            node
-            .attr( "style", style )
-            .append( markup );
-        }
 
         function controller( $scope, $element, $attrs ) {
 
@@ -76,8 +59,14 @@ angular.module( "$ui.tab", [] )
 
             restrict        : "E",
 
-            controller      : controller,
-            compile         : compile
+            transclude      : true,
+            replace         : true,
+            template        : '<div class="ui tab" style="min-height: 300px;">' +
+                                '<div class="nav"></div>' +
+                                '<div class="content" ng-transclude></div>' +
+                              '</div>',
+
+            controller      : controller
         };
     } ] )
     .directive( "ngTab", [ "$parse", function( $compile ) {
@@ -94,6 +83,7 @@ angular.module( "$ui.tab", [] )
 
             /** Load content via ajax request */
             if ( $scope.templateUrl ) {
+                $element.empty();
                 item.page = $scope.templateUrl;
             } else {
                 item.render = function() {
@@ -129,13 +119,15 @@ angular.module( "$ui.tab", [] )
 
                 index       : "@tabIndex",
                 header      : "@tabHeader",
-                templateUrl : "@tabTemplateUrl",
+                templateUrl : "@tabTemplate",
                 disabled    : "=ngDisabled"
             },
 
-            restric         : "E",
-            template        : "",
+            transclude      : true,
+            template        : "<div style='display: none;' ng-transclude></div>",
             replace         : true,
+
+            restric         : "E",
 
             require         : "^ngTabSet",
             link            : link

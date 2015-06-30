@@ -48,6 +48,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
             var options = {
                 selector4item   : ".item",
                 indicator       : "<div class='indicator' />",
+                holdByClick     : false,
                 animation       : settings.duration
             };
 
@@ -106,6 +107,20 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 				}
 			},
 
+			finish = function() {
+
+				if ( tab.length ) {
+
+					tabs.length
+						? tabs.last().after( tab )
+						: target.find( "> div.content" ).append( tab )
+						;
+
+					instance.$tabs = tabs = tabs.add( tab );
+					instance.active( startup );
+				}
+			},
+
 			/** Shortcuts */
 			navs = instance.$navs,
 			tabs = instance.$tabs,
@@ -118,9 +133,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
                 return;
             }
-
-			/** Generate index */
-			undefined === index && page && self.attr( settings.rule, index = "tab" + +new Date());
 
 			if ( !self.hasClass( "selected" ) && index !== undefined ) {
 
@@ -142,6 +154,8 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 					currentTab = tab.addClass( "selected" );
 					dispatch( index, tab, settings );
+
+                    settings.lavalamp && instance.lavalamp && instance.lavalamp.hold( self );
 
 					return;
 				}
@@ -173,43 +187,32 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						delete (instance[ "callbacks" ] || {})[ index ];
 
 						$.ajax( {
-
 							url: page,
-							dataType: "html",
-							beforeSend: function() {
-								startup = index;
-								self.removeClass( class4error + " " + class4success ).addClass( class4loading );
-							}
+							dataType: "html"
 						} )
 						.always( callbacks.always )
 						.done( function( responseText ) {
 
 							tab = $( "<div class='item'>" ).attr( settings.rule, index ).html( responseText );
 
-							self.removeClass( class4loading );
-
 							"function" === typeof callbacks.done && callbacks.done( tab );
 
-							self.addClass( class4success );
+							self.removeClass( class4loading ).addClass( class4success );
+
+                            startup = index;
+                            finish();
 						} )
 						.fail( callbacks.fail, function( xhr ) {
 							self.removeClass( [ class4loading, class4success ].join( " " ) ).addClass( class4error );
 						} );
+
+                        self.removeClass( class4error + " " + class4success ).addClass( class4loading );
 					}
 				} else
 				/** Invalid tab */
 				self.removeClass( [ class4loading, class4success ].join( " " ) ).addClass( class4error );
 
-				if ( tab.length ) {
-
-					tabs.length
-						? tabs.last().after( tab )
-						: target.find( "> div.content" ).append( tab )
-						;
-
-					instance.$tabs = tabs = tabs.add( tab );
-					instance.active( startup );
-				}
+                finish();
 			}
 		} );
     };
@@ -313,36 +316,31 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 			selector;
 
-			try {
+            selector = "[" + settings.rule + "=" + index + "]";
 
-				selector = "[" + settings.rule + "=" + index + "]";
+            if ( index ) {
 
-				if ( index ) {
+                navs.add( tabs ).filter( selector ).remove();
 
-					navs.add( tabs ).filter( selector ).remove();
+                index = navs.index( navs.filter( selector ) );
 
-				    index = navs.index( navs.filter( selector ) );
-
-				    navs.splice( index, 1 );
-				    tabs.splice( index, 1 );
+                navs.splice( index, 1 );
+                tabs.splice( index, 1 );
 
 
-					this.callbacks && (delete this.callbacks[ index ]);
-				}
-			} catch( e ) {}
+                this.callbacks && (delete this.callbacks[ index ]);
+            }
 		},
 
 		getTab: function( index ) {
 
 			var settings = this.settings;
 
-			try {
-				if ( index ) {
-					return this.$tabs.filter( "[" + settings.rule + "=" + index + "]" );
-				} else {
-					return this.$tabs.filter( "div.selected" );
-				}
-			} catch ( ex ) {}
+            if ( index ) {
+                return this.$tabs.filter( "[" + settings.rule + "=" + index + "]" );
+            } else {
+                return this.$tabs.filter( "div.selected" );
+            }
 		},
 
 		active: function( index ) {
@@ -351,22 +349,14 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 			nav,
 			settings = this.settings;
 
-			try {
-				nav = this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).trigger( "click" );
-				settings.lavalamp && this.lavalamp.move( nav );
-			} catch( ex ) {
-				/** Invalid selector */
-			}
+            nav = this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).trigger( "click" );
 			return this;
 		},
 
 		isActive: function( index ) {
 
 			var settings = this.settings;
-
-			try {
-				return this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).is( ".selected" );
-			} catch( ex ) {}
+            return this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).is( ".selected" );
 		},
 
 		disabled: function( indexes ) {
@@ -423,7 +413,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		if ( !instance ) {
 
 			instance = new Tab( this, $.extend( {}, $.fn.tab.defaults, options || {} ) );
-
 			this.data( namespace, instance );
 		}
 		return instance;

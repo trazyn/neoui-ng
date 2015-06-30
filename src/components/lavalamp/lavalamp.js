@@ -8,9 +8,9 @@
 
 		var
 		current = target.find( settings.selector4current ),
-		indicator = $( settings.indicator ).appendTo( target ),
+		indicator = $( settings.indicator ).appendTo( target );
 
-		move = function( ele, animate ) {
+		function move( ele, animate ) {
 
 			var position, properties;
 
@@ -23,7 +23,11 @@
 
 				? indicator.stop( true, false ).animate( properties, settings.speed )
 				: indicator.css( properties );
-		};
+		}
+
+		function hold( ele ) {
+		    current = $( ele );
+		}
 
 		this.$node = target;
 		this.settings = settings;
@@ -45,10 +49,11 @@
 		} )
 		.delegate( settings.selector4item, "click", function( e ) {
 
-			current = $( this );
+			settings.holdByClick && hold( this );
 		} );
 
 		this.move = move;
+		this.hold = hold;
 	};
 
 	$.fn.lavalamp = function( options ) {
@@ -71,13 +76,14 @@
 		selector4item 		: "li:not(.indicator)",
 		indicator 		    : "<li class='indicator'/>",
 		speed 			    : 222,
+		holdByClick         : true,
 		properties: function( position, ele ) {
 
 			return {
-				left 	: position.left + "px",
-				top 	: (ele.innerHeight() + ele[0]["offsetTop"]) + "px",
-				width 	: ele.innerWidth() + "px",
-				height 	: 0
+				left 	    : position.left + "px",
+				top 	    : (ele.innerHeight() + ele[0]["offsetTop"]) + "px",
+				width 	    : ele.innerWidth() + "px",
+				height 	    : 0
 			};
 		}
 	};

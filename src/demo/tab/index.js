@@ -27,6 +27,10 @@ define( [ "ui/tab/tab-ng" ], function() {
             header: "Three",
             index: "3",
             content: $sce.trustAsHtml( "<img src='/images/lorempixel.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+        }, {
+            header: "Four",
+            index: "4",
+            page: "/src/demo/tab/tab4.html"
         } ];
 
         last = $scope.tabs.length;

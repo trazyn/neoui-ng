@@ -28,7 +28,7 @@
 
         <div class="wrap">
             <ng-tab-set tab-selected="selected" tab-on-selected="onSelected">
-            <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled">
+            <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled" tab-template="{{ tab.page }}">
                 <div ng-bind-html="tab.content"></div>
             </ng-tab>
             </ng-tab-set>

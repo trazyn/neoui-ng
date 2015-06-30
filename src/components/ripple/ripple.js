@@ -29,7 +29,7 @@
 
 		    target.on( settings.type, function( e ) {
 
-		        self.show( e );
+                !self.$node.is( "[disabled]" ) && self.show( e );
 		    } );
 		}
 
