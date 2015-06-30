@@ -43,6 +43,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		this.$navs.not( currentNav ).removeClass( "selected" );
 		this.$tabs.not( currentTab ).removeClass( "selected" );
 
+        /** After the tab has rendered */
         setTimeout( function() {
 
             var options = {
@@ -103,7 +104,10 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 				if ( "function" === typeof onSelect
 					|| typeof (onSelect = onSelect[ index ]) === "function" ) {
 
-					onSelect.call( self, tab, settings );
+                    /** Wait angularjs digest(), use setTimeout() reduce the execution priority */
+                    setTimeout( function() {
+                        onSelect.call( self, tab, settings );
+                    } );
 				}
 			},
 
@@ -153,10 +157,8 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					}
 
 					currentTab = tab.addClass( "selected" );
-					dispatch( index, tab, settings );
-
                     settings.lavalamp && instance.lavalamp && instance.lavalamp.hold( self );
-
+					dispatch( index, tab, settings );
 					return;
 				}
 
@@ -193,19 +195,24 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						.always( callbacks.always )
 						.done( function( responseText ) {
 
+                            /** For test */
+                            setTimeout( function() {
 							tab = $( "<div class='item'>" ).attr( settings.rule, index ).html( responseText );
-
-							"function" === typeof callbacks.done && callbacks.done( tab );
-
 							self.removeClass( class4loading ).addClass( class4success );
-
-                            startup = index;
+							"function" === typeof callbacks.done && callbacks.done( tab );
                             finish();
+                            }, 6000 );
 						} )
 						.fail( callbacks.fail, function( xhr ) {
 							self.removeClass( [ class4loading, class4success ].join( " " ) ).addClass( class4error );
+							tab = $( "<div class='item error'>" ).attr( settings.rule, index ).html(
+							        "<h5>Faild to load: </h5>'" + page + "'" +
+							        "<blockquote>" + xhr.statusText + "</blockquote>"
+							        );
+							finish();
 						} );
 
+                        startup = index;
                         self.removeClass( class4error + " " + class4success ).addClass( class4loading );
 					}
 				} else
@@ -238,7 +245,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 				if ( item.index &&
 						/** Duplicate */
-						!navs.filter( "[" + settings.rule + "=" + (item.name || item.index) + "]" ).length ) {
+						!navs.filter( "[" + settings.rule + "=" + item.index + "]" ).length ) {
 
 					var nav = $( [ "<div class='item' ", settings.rule, "='", item.index, "'>",
 							item.name || item.index,
@@ -327,8 +334,8 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
                 navs.splice( index, 1 );
                 tabs.splice( index, 1 );
 
-
                 this.callbacks && (delete this.callbacks[ index ]);
+                this.active( navs.last().attr( settings.rule ) );
             }
 		},
 
@@ -421,7 +428,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 	$.fn.tab.defaults = {
 
 		rule 		    : "data-index",
-		class4loading 	: "loading",
+		class4loading 	: "sync",
 		class4error 	: "error",
 		class4success 	: "success",
 

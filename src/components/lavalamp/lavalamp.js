@@ -26,6 +26,7 @@
 		}
 
 		function hold( ele ) {
+		    move( ele );
 		    current = $( ele );
 		}
 

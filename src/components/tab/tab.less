@@ -15,10 +15,34 @@
             font-size: 18px;
             text-shadow: 0 0 40px #CCC;
             overflow: hidden;
+            position: relative;
             &[disabled] {
                 cursor: not-allowed;
                 border-bottom: 3px solid lighten( #ddd, 10% );
                 color: @dribbble;
+            }
+
+            &.success:after, &.error:after, &.sync:after {
+                font-family: "icomoon";
+                position: absolute;
+                display: block;
+                left: 0;
+                top: 6px;
+            }
+
+            &.success:after {
+                content: "\e636";
+                color: @success;
+            }
+
+            &.error:after {
+                content: "\e61e";
+                color: @error;
+            }
+
+            &.sync:after {
+                content: "\e615";
+                color: @google;
             }
         }
 
@@ -40,6 +64,12 @@
 
         &.selected {
             display: block;
+        }
+
+        &.error blockquote {
+            border-left: 4px solid #ddd;
+            padding: 0 15px;
+            color: #777;
         }
     }
 

@@ -28,27 +28,31 @@ define( [ "ui/tab/tab-ng" ], function() {
             index: "3",
             content: $sce.trustAsHtml( "<img src='/images/lorempixel.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
         }, {
-            header: "Four",
+            header: "Ajax - 1",
             index: "4",
             page: "/src/demo/tab/tab4.html"
+        }, {
+            header: "Ajax - 2",
+            index: "5",
+            page: "/src/demo/tab/error.html"
         } ];
 
         last = $scope.tabs.length;
 
         $scope.addTab = function() {
 
-            var index = +new Date();
+            var index = ++last + "";
 
-            if ( $scope.tabs.length < 6 ) {
+            if ( $scope.tabs.length < 8 ) {
 
                 $scope.tabs.push( {
-                    header: +new Date(),
-                    index: ++last + "",
+                    header: "Tab - " + last,
+                    index: index,
                     content: $sce.trustAsHtml( "Tab: " + index ),
                 } );
             }
 
-            $scope.canAddTab = $scope.tabs.length < 6;
+            $scope.canAddTab = $scope.tabs.length < 8;
         };
 
         $scope.removeTab = function() {
@@ -67,10 +71,9 @@ define( [ "ui/tab/tab-ng" ], function() {
                 }
             }
 
-            $scope.canAddTab = tabs.length < 6;
+            $scope.canAddTab = tabs.length < 8;
 
             tabs.splice( index, 1 );
-            $scope.selected = tabs[ tabs.length - 1 ][ "index" ];
         };
 
         $scope.toggleTabState = function() {
