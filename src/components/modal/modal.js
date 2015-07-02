@@ -183,29 +183,29 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 	$.fn.modal.defaults = {
 
-		title 		: "Modal.JS",
+		title 		    : "Modal.JS",
 
-		css 		: {},
-		attr 		: {},
+		css 		    : {},
+		attr 		    : {},
 
-		showHead 	: true,
+		showHead 	    : true,
 		showOverlay 	: true,
 		showProgress 	: true,
-		autoShow 	: true,
+		autoShow 	    : true,
 
-		fadeIn 		: true,
+		fadeIn 		    : true,
 
-		closeByESC 	: true,
+		closeByESC 	    : true,
 		closeByDocument : true,
 
 		selector4drag	: false,
 
-		animate 	: "slide",
-		render 		: "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
+		animate 	    : "slide",
+		render 		    : "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
 
-		success 	: noop,
-		error 		: noop,
-		unload 		: noop,
+		success 	    : noop,
+		error 		    : noop,
+		unload 		    : noop,
 	};
 
 	/** Export to $ */
