@@ -20,11 +20,11 @@
     </li>
 </ul>
 
-<section id="tab">
+<section id="tab" ng-controller="tabController" ng-init="init()">
 
     <header data-anchor="example">Example</header>
 
-    <section ng-controller="tabController">
+    <section>
 
         <div class="wrap">
             <ng-tab-set tab-selected="selected" tab-on-selected="onSelected">

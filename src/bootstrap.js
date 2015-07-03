@@ -22,13 +22,6 @@ require( [
 
 	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab", "demo.message" ] )
 
-	.controller( "mainCintroller", [ "$scope", function( $scope ) {
-
-	    $scope.$on( "$viewContentLoaded", function() {
-            $( document.body ).anchor( { offset: 200 } );
-	    } );
-	} ] )
-
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
 		$routeProvider

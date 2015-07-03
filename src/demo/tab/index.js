@@ -98,5 +98,9 @@ define( [ "ui/tab/tab-ng" ], function() {
         $scope.onSelected = function() {
             console.log( $scope.selected );
         };
+
+	    $scope.init = function() {
+            $( document.body ).anchor( { offset: 200 } );
+	    };
     } );
 } );

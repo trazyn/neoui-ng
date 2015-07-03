@@ -10,7 +10,7 @@
 	<li data-anchor="bubble" class="item">Bubble</li>
 </ul>
 
-<section id="message">
+<section id="message" ng-controller="messageController" ng-init="init()">
 
 	<header data-anchor="success">Success</header>
 
@@ -27,16 +27,14 @@
 				</div>
 			</div>
 
-			<button class="ui button transition success">
+			<button class="ui button transition success" ng-click="showSuccess()">
 				<i class="icon play"></i>
 			</button>
 		</div>
 
-		<pre>
 		<xmp>
 		$.message.success( content, [delay] );
 		</xmp>
-		</pre>
 	</section>
 
 	<br>
@@ -57,16 +55,14 @@
 				</div>
 			</div>
 
-			<button class="ui button transition info">
+			<button class="ui button transition info" ng-click="showInfo()">
 				<i class="icon play"></i>
 			</button>
 		</div>
 
-		<pre>
 		<xmp>
 		$.message.info( content, [delay] );
 		</xmp>
-		</pre>
 	</section>
 
 	<br>
@@ -87,16 +83,14 @@
 				</div>
 			</div>
 
-			<button class="ui button transition error">
+			<button class="ui button transition error" ng-click="showError()">
 				<i class="icon play"></i>
 			</button>
 		</div>
 
-		<pre>
 		<xmp>
 		$.message.error( content, [delay] );
 		</xmp>
-		</pre>
 	</section>
 
 	<br>
@@ -117,16 +111,14 @@
 				</div>
 			</div>
 
-			<button class="ui button transition warn">
+			<button class="ui button transition warn" ng-click="showWarn()">
 				<i class="icon play"></i>
 			</button>
 		</div>
 
-		<pre>
 		<xmp>
 		$.message.warn( content, [delay] );
 		</xmp>
-		</pre>
 	</section>
 
 	<br>
@@ -135,7 +127,6 @@
 	<header data-anchor="confirm">Confirm</header>
 
 	<section>
-		<pre>
 		<xmp>
 		$.message.confirm( options );
 
@@ -158,9 +149,8 @@
 			}
 		} );
 		</xmp>
-		</pre>
 
-		<button class="ui button transition" name="confirm">
+		<button class="ui button transition" name="confirm" ng-click="showConfirm()">
 			<i class="icon play"></i> Show Confirm
 		</button>
 	</section>
@@ -171,13 +161,11 @@
 	<header data-anchor="bubble">Bubble</header>
 
 	<section>
-		<pre>
 		<xmp>
-			$.message.bubble( message, [delay] );
+        $.message.bubble( message, [delay] );
 		</xmp>
-		</pre>
 
-		<button class="ui button transition coral" name="bubble">
+		<button class="ui button transition coral" name="bubble" ng-click="showBubble()">
 			<i class="icon play"></i> Run The Code
 		</button>
 	</section>
