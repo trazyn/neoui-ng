@@ -10,13 +10,17 @@ require.config( {
 	}
 } );
 
-require( [ "ui/anchor/anchor", "demo/modal/index", "demo/tab/index" ], function() {
+require( [
+        "ui/anchor/anchor",
+        "demo/modal/index",
+        "demo/tab/index",
+        "demo/message/index" ], function() {
 
 	"use strict";
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab" ] )
+	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab", "demo.message" ] )
 
 	.controller( "mainCintroller", [ "$scope", function( $scope ) {
 
@@ -33,6 +37,9 @@ require( [ "ui/anchor/anchor", "demo/modal/index", "demo/tab/index" ], function(
 			} )
 		    .when( "/tab", {
 		        templateUrl: "/src/demo/tab/index.html"
+		    } )
+		    .when( "/message", {
+		        templateUrl: "/src/demo/message/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/tab"

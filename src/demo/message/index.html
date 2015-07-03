@@ -1,0 +1,185 @@
+
+<title>Message - Neoui-ng</title>
+
+<ul id="anchors">
+	<li data-anchor="success" class="item active">Success</li>
+	<li data-anchor="info" class="item">Info</li>
+	<li data-anchor="error" class="item">Error</li>
+	<li data-anchor="warn" class="item">Warn</li>
+	<li data-anchor="confirm" class="item">Confirm</li>
+	<li data-anchor="bubble" class="item">Bubble</li>
+</ul>
+
+<section id="message">
+
+	<header data-anchor="success">Success</header>
+
+	<section>
+		<div class="wrap">
+			<div class="ui message success tooltip top" data-tooltip="Click outside close the message">
+				<div class="flag">
+					<i class="icon"></i>
+				</div>
+				<div class="content">
+					<p>
+					This is a message telling you that everything is a-okay!
+					</p>
+				</div>
+			</div>
+
+			<button class="ui button transition success">
+				<i class="icon play"></i>
+			</button>
+		</div>
+
+		<pre>
+		<xmp>
+		$.message.success( content, [delay] );
+		</xmp>
+		</pre>
+	</section>
+
+	<br>
+	<br>
+
+	<header data-anchor="info">Info</header>
+
+	<section>
+		<div class="wrap">
+			<div class="ui message info tooltip top" data-tooltip="Click outside close the message">
+				<div class="flag">
+					<i class="icon"></i>
+				</div>
+				<div class="content">
+					<p>
+					This is an 'information message' div.
+					</p>
+				</div>
+			</div>
+
+			<button class="ui button transition info">
+				<i class="icon play"></i>
+			</button>
+		</div>
+
+		<pre>
+		<xmp>
+		$.message.info( content, [delay] );
+		</xmp>
+		</pre>
+	</section>
+
+	<br>
+	<br>
+
+	<header data-anchor="error">Error</header>
+
+	<section>
+		<div class="wrap">
+			<div class="ui message error tooltip top" data-tooltip="Click outside close the message">
+				<div class="flag">
+					<i class="icon"></i>
+				</div>
+				<div class="content">
+					<p>
+					This is a notification that something is wrong...
+					</p>
+				</div>
+			</div>
+
+			<button class="ui button transition error">
+				<i class="icon play"></i>
+			</button>
+		</div>
+
+		<pre>
+		<xmp>
+		$.message.error( content, [delay] );
+		</xmp>
+		</pre>
+	</section>
+
+	<br>
+	<br>
+
+	<header data-anchor="warn">Warn</header>
+
+	<section>
+		<div class="wrap">
+			<div class="ui message warn tooltip top" data-tooltip="Click outside close the message">
+				<div class="flag">
+					<i class="icon"></i>
+				</div>
+				<div class="content">
+					<p>
+					It warns the users that to expect some changes or limitations.
+					</p>
+				</div>
+			</div>
+
+			<button class="ui button transition warn">
+				<i class="icon play"></i>
+			</button>
+		</div>
+
+		<pre>
+		<xmp>
+		$.message.warn( content, [delay] );
+		</xmp>
+		</pre>
+	</section>
+
+	<br>
+	<br>
+
+	<header data-anchor="confirm">Confirm</header>
+
+	<section>
+		<pre>
+		<xmp>
+		$.message.confirm( options );
+
+		Options:
+		{
+			title 		: 标题
+			message 	: 消息内容
+			onOk 		: 点击Ok时执行的回调,返回false时候不会关闭对话框
+			onClose 		: 点击Cancle时候执行的回调
+		}
+
+		eg:
+
+		$.message.confirm( {
+
+			title: "Please confirm",
+			message: "Exported successfully. Do you want to open the export query page?",
+			onOk: function() {
+				window.open( "//www.google.com", "_blank" );
+			}
+		} );
+		</xmp>
+		</pre>
+
+		<button class="ui button transition" name="confirm">
+			<i class="icon play"></i> Show Confirm
+		</button>
+	</section>
+
+	<br>
+	<br>
+
+	<header data-anchor="bubble">Bubble</header>
+
+	<section>
+		<pre>
+		<xmp>
+			$.message.bubble( message, [delay] );
+		</xmp>
+		</pre>
+
+		<button class="ui button transition coral" name="bubble">
+			<i class="icon play"></i> Run The Code
+		</button>
+	</section>
+
+</section>

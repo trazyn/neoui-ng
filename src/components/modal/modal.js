@@ -52,7 +52,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				} );
 
 				icon.css( {
-
 					"top": 54,
 					"right": 14
 				} );
@@ -73,10 +72,8 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			/** ~Body~ */
 			if ( options.render instanceof Function ) {
-
 				options.render.call( body, deferred, loading, close );
 			} else {
-
 				body.html( options.render );
 				deferred.resolve();
 			}
@@ -119,17 +116,14 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 					&& modal.off( "click", closeByDocument ).on( "click", closeByDocument );
 
 				if ( "boolean" === typeof options.closeByESC ) {
-
 					trigger.off( "keyup", closeByESC ).on( "keyup", closeByESC );
 				}
 			}
 
 			modal.first().css( options.css ).attr( options.attr );
-
 			modal.appendTo( document.body );
 
 			setTimeout( function() {
-
 				modal.first().addClass( "show" );
 			}, 77 );
 
@@ -170,11 +164,8 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 				"<div style='height: 100%;'>",
 					"<h3 class='title'></h3><div class='icon close transition rotate'></div>",
-
 					"<div class='ui loading'></div>",
-
 					"<div class='ui progress'></div>",
-
 					"<div class='content'></div>",
 				"</div>",
 
