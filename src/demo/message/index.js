@@ -18,7 +18,7 @@ define( [ "ui/message/message-ng" ], function() {
             },
 
             showError: function() {
-                $.message.error( "This is a notification that something is wrong..." );
+                $message.error( "This is a notification that something is wrong..." );
             },
 
             showInfo: function() {

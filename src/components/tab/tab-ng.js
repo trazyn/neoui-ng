@@ -14,7 +14,7 @@ define( [ "ui/tab/tab" ], function() {
  * */
 
 angular.module( "$ui.tab", [] )
-    .directive( "ngTabSet", [ "$rootScope", "$parse", function( $rootScope, $parse ) {
+    .directive( "sTabSet", [ "$rootScope", "$parse", function( $rootScope, $parse ) {
 
         function controller( $scope, $element, $attrs ) {
 
@@ -69,7 +69,7 @@ angular.module( "$ui.tab", [] )
             controller      : controller
         };
     } ] )
-    .directive( "ngTab", [ "$parse", function( $compile ) {
+    .directive( "sTab", [ "$parse", function( $compile ) {
 
         function link( $scope, $element, $attrs, controller ) {
 
@@ -129,7 +129,7 @@ angular.module( "$ui.tab", [] )
 
             restric         : "E",
 
-            require         : "^ngTabSet",
+            require         : "^sTabSet",
             link            : link
         };
     } ] );

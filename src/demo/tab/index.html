@@ -6,8 +6,8 @@
         <ul>
             <li data-anchor="markup" class="item">Markup</li>
             <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="ngTabSet" class="item">Directive * ng-tab-set</li>
-            <li data-anchor="ngTab" class="item">Directive * ng-tab</li>
+            <li data-anchor="sTabSet" class="item">Directive * s-tab-set</li>
+            <li data-anchor="sTab" class="item">Directive * s-tab</li>
         </ul>
     </li>
     <li class="item">jQuery
@@ -27,11 +27,11 @@
     <section>
 
         <div class="wrap">
-            <ng-tab-set tab-selected="selected" tab-on-selected="onSelected">
-            <ng-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled" tab-template="{{ tab.page }}">
+            <s-tab-set tab-selected="selected" tab-on-selected="onSelected">
+            <s-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled" tab-template="{{ tab.page }}">
                 <div ng-bind-html="tab.content"></div>
-            </ng-tab>
-            </ng-tab-set>
+            </s-tab>
+            </s-tab-set>
         </div>
 
         <button class="ui button transition primary"
@@ -76,10 +76,10 @@
             </div>
 
             <xmp>
-            <ng-tab-set tab-selected="selected" tab-on-selected="onSelected">
-                <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="\{\{ tab.title \}\}">
+            <s-tab-set tab-selected="selected" tab-on-selected="onSelected">
+                <s-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="\{\{ tab.title \}\}">
                 <div ng-bind-html="\{\{ tab.content \}\}"></div>
-                </ng-tab>
+                </s-tab>
             </ng-tab-set>
             </xmp>
         </section>
@@ -118,8 +118,8 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="ngTabSet">
-                <span>Directive * ng-tab-set</span>
+            <div class="ui ribbon" data-anchor="sTabSet">
+                <span>Directive * s-tab-set</span>
             </div>
 
             <blockquote>
@@ -156,8 +156,8 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="ngTab">
-                <span>Directive * ng-tab</span>
+            <div class="ui ribbon" data-anchor="sTab">
+                <span>Directive * s-tab</span>
             </div>
 
             <blockquote>
@@ -320,6 +320,7 @@
             }
             </xmp>
             <br>
+            <br>
 
             <p><code>tab.remove( index )</code>
             </p>
@@ -327,6 +328,7 @@
                 <p><code>index</code> - String</p>
             </blockquote>
             <p>移除指定<code>tab</code></p>
+            <br>
             <br>
 
             <p><code>tab.getTab( index )</code>
@@ -336,6 +338,7 @@
             </blockquote>
             <p>获取指定<code>tab</code>的DOM</p>
             <br>
+            <br>
 
             <p><code>tab.active( index )</code>
             </p>
@@ -343,6 +346,7 @@
                 <p><code>index</code> - String</p>
             </blockquote>
             <p>选中对应<code>tab</code></p>
+            <br>
             <br>
 
             <p><code>tab.isActive( index )</code>
@@ -352,6 +356,7 @@
             </blockquote>
             <p>判断对应<code>tab</code>是否被选中</p>
             <br>
+            <br>
 
             <p><code>tab.disabled( [index] )</code>
             </p>
@@ -359,6 +364,7 @@
                 <p><code>index</code> - String/Array</p>
             </blockquote>
             <p>禁用<code>tab</code>, 参数空时禁用所有<code>tab</code></p>
+            <br>
             <br>
 
             <p><code>tab.enabled( [index] )</code>
