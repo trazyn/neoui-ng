@@ -1,10 +1,10 @@
 
 define( [ "ui/modal/modal" ], function() {
-	
+
 	var show = function( options ) {
-	
+
 		var defaults = {
-		
+
 			showHead 	: false,
 			showOverlay 	: true,
 			showProgress 	: false,
@@ -12,27 +12,27 @@ define( [ "ui/modal/modal" ], function() {
 		};
 
 		setTimeout( function() {
-			
+
 			$.modal( $.extend( true, {}, defaults, options ) );
 		}, 250 );
 	};
 
 	$.message = {
-	
+
 		bubble: function( message, delay ) {
-		
+
 			var options = {
 
 				width: 200,
 
 				showOverlay: true,
-			
+
 				render: function( ready, loading, close ) {
-				
+
 					this.css( "padding", 0 )
-					
+
 					.html( "<div class='bubble'> <p>" + message + "</p> </div>" )
-					
+
 					.parent().css( { "background": "none", "overflow": "visible" } );
 
 					loading.show( function() {
@@ -51,7 +51,7 @@ define( [ "ui/modal/modal" ], function() {
 					} );
 
 					if ( delay = +delay, delay > 100 ) {
-						
+
 						setTimeout( close, delay );
 					}
 
@@ -63,11 +63,11 @@ define( [ "ui/modal/modal" ], function() {
 		},
 
 		message: function( type, message, delay ) {
-		
+
 			var options = {
-			
+
 				render: function( ready, loading, close ) {
-				
+
 					var template = [ "<div class='ui message ", type," tooltip top' data-tooltip='Close outside close the message'>",
 								"<div class='flag'><i class='icon'></i></div>",
 								"<div class='content'><p>", message, "</p></div>",
@@ -83,7 +83,7 @@ define( [ "ui/modal/modal" ], function() {
 					} ).html( template.join( "" ) ).parent().css( "background", "none" );
 
 					if ( delay = +delay, delay > 100 ) {
-						
+
 						setTimeout( close, delay );
 					}
 					ready.resolve();
@@ -94,7 +94,7 @@ define( [ "ui/modal/modal" ], function() {
 		},
 
 		error: function( message, delay ) {
-		
+
 			this.message( "error", message, delay );
 		},
 
@@ -104,7 +104,7 @@ define( [ "ui/modal/modal" ], function() {
 		},
 
 		warn: function( message, delay ) {
-		
+
 			this.message( "warn", message, delay );
 		},
 
@@ -114,7 +114,7 @@ define( [ "ui/modal/modal" ], function() {
 		},
 
 		confirm: function( options ) {
-			
+
 			var
 			noop = function() {},
 			settings = $.extend( {}, {
@@ -123,13 +123,13 @@ define( [ "ui/modal/modal" ], function() {
 			}, options || {} );
 
 			show( {
-				
+
 				title: settings.title || "Confirm",
 				showHead: true,
 				showProgress: false,
 
 				render: function( ready, loading, close ) {
-					
+
 					this
 					.html( "<div style='margin-top: 10px'>" +
 							settings.message +
@@ -143,16 +143,16 @@ define( [ "ui/modal/modal" ], function() {
 					this
 
 					.delegate( "button[name=ok]", "click", function( e ) {
-						
+
 						var res = settings.onOk();
 
 						if ( res === undefined || res ) {
 							close();
 						}
 					} )
-					
+
 					.delegate( "button[name=close]", "click", function( e ) {
-						
+
 						settings.onClose();
 						close();
 					} );
