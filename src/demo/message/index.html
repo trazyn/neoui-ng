@@ -272,32 +272,76 @@
 	<header data-anchor="confirm">Confirm</header>
 
 	<section>
-		<xmp>
-		$.message.confirm( options );
 
-		Options:
-		{
-			title 		: 标题
-			message 	: 消息内容
-			onOk 		: 点击Ok时执行的回调,返回false时候不会关闭对话框
-			onClose 		: 点击Cancle时候执行的回调
-		}
+        <section>
+            <div class="ui ribbon">
+                <span>Example</span>
+            </div>
 
-		eg:
+            <p>
+            <button class="ui button outline coral transition" name="confirm" ng-click="showConfirm()">
+                <i class="icon star"></i> Show Confirm
+            </button>
+            </p>
+        </section>
 
-		$.message.confirm( {
+        <section>
+            <div class="ui ribbon">
+                <span>AngularJS</span>
+            </div>
 
-			title: "Please confirm",
-			message: "Exported successfully. Do you want to open the export query page?",
-			onOk: function() {
-				window.open( "//www.google.com", "_blank" );
-			}
-		} );
-		</xmp>
+            <xmp>
+            angular
+            .module( "app", [ "$ui.message" ] )
+            .controller( "messageController", [ "$message", function( $message ) {
 
-		<button class="ui button transition" name="confirm" ng-click="showConfirm()">
-			<i class="icon play"></i> Show Confirm
-		</button>
+                $message.confirm( {
+                    title: "Please confirm",
+                    message: "Exported successfully. Do you want to open the export query page?",
+                    onOk: function() {
+                        window.open( "//www.google.com", "_blank" );
+                    }
+                } );
+            } ] );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon">
+                <span>jQuery</span>
+            </div>
+
+            <xmp>
+            angular
+            .module( "app", [ "$ui.message" ] )
+            .controller( "messageController", [ "$message", function( $message ) {
+
+                $.message.confirm( {
+                    title: "Please confirm",
+                    message: "Exported successfully. Do you want to open the export query page?",
+                    onOk: function() {
+                        window.open( "//www.google.com", "_blank" );
+                    }
+                } );
+            } ] );
+            </xmp>
+        </section>
+        <section>
+            <div class="ui ribbon">
+                <span>API</span>
+            </div>
+
+            <p>
+            <code> confirm( options ); </code>
+            </p>
+            <blockquote>
+                <p><code>title</code> - String, 对话框标题</p>
+                <p><code>message</code> - String, 对话框内容</p>
+                <p><code>onOk</code> - Function, 点击 <button class="ui transition button success">Ok</button> 执行回调</p>
+                <p><code>onClose</code> - Function, 点击 <button class="ui button">Cancel</button> 执行回调</p>
+            </blockquote>
+        </section>
+
 	</section>
 
 	<br>
