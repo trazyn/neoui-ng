@@ -1,4 +1,6 @@
 
+<title>AutoComplete - Neoui-ng</title>
+
 <ul id="anchors">
     <li data-anchor="example" class="item active">Example</li>
     <li class="item">API
@@ -17,8 +19,10 @@
 
     <section>
         <div class="wrap">
-             <s-autocomplete data="data" value-key="value" text-key="text">
-                 {{ $name }} - {{ $value }} - {{ name }}
+             <s-autocomplete data="data" value-key="value" text-key="text" placeholder="Type 'a' or 'b' or 'c'">
+                 <div class="item">
+                     <i class="icon star"></i>r{{ $name }} - {{ $value }} - {{ name }}
+                 </div>
              </s-autocomplete>
         </div>
     </section>

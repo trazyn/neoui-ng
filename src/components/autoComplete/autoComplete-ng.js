@@ -12,13 +12,14 @@ define( [ "ui/autoComplete/autoComplete" ], function() {
  * */
 
 angular.module( "$ui.autoComplete", [] )
-    .directive( "sAutocomplete", [ "$rootScope", function( $rootScope ) {
+    .directive( "sAutocomplete", [ "$rootScope", "$compile", function( $rootScope, $compile ) {
 
-        function controller( $scope, $element, $attrs ) {
+        function link( $scope, $element, $attrs, undefined, link ) {
 
             var
             options = {},
-
+            transclude,
+            markup,
             isolateBindings = $scope.$$isolateBindings;
 
             for ( var key in isolateBindings ) {
@@ -30,7 +31,17 @@ angular.module( "$ui.autoComplete", [] )
                 }
             }
 
-            this[ "$autoComplete" ] = $( $element ).autoComplete( options );
+            transclude = link( $scope );
+            markup = transclude.parent().html().trim();
+            transclude.remove();
+
+            if ( markup ) {
+                options.formatter = function( item, index, query, settings ) {
+
+                };
+            }
+
+            $( $element ).autoComplete( options );
         }
 
         return {
@@ -47,16 +58,18 @@ angular.module( "$ui.autoComplete", [] )
                 localMatch      : "@",
                 autoSelect      : "@",
                 tabComplete     : "@",
-                formatter       : "&",
+                placeholder     : "@",
+                value           : "=ngModel"
             },
 
-            replace     : true,
-            template    : '<div class="ui autoComplete">' +
-                            '<input class="ui text front" type="text" />' +
-                            '<input class="ui text hint" type="text" tabindex="-1" />' +
-                            '<i class="icon"></i>' +
-                          '</div>',
-            controller  : controller
+            transclude          : true,
+            replace             : true,
+            template            : '<div class="ui autoComplete">' +
+                                    '<input class="ui text front" type="text" />' +
+                                    '<input class="ui text hint" type="text" tabindex="-1" />' +
+                                    '<i class="icon"></i>' +
+                                  '</div>',
+            link                : link
         };
     } ] );
 } );

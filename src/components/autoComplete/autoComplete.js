@@ -346,6 +346,9 @@
 									&& (fg.value.length && bg.value !== fg.value) ) {
 										setfg( data[ 0 ][ settings.textKey ] );
 										select( data[ 0 ] );
+
+										e.preventDefault();
+										e.stopPropagation();
 									}
 						}
 						break;
@@ -445,8 +448,10 @@
 					e.stopPropagation();
 				} );
 
+		fg.setAttribute( "placeholder", settings.placeholder );
 
 		this.setupCache = setupCache;
+
 		!settings.showHint && bg && (bg.style.display = "none");
 	};
 
@@ -634,6 +639,8 @@
 
 		autoSelect 		    : false,
 		tabComplete 		: true,
+
+		placeholder         : "",
 
 		/** Local data */
 		lookup 			    : [],
