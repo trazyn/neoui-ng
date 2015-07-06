@@ -1,0 +1,298 @@
+
+<ul id="anchors">
+    <li data-anchor="example" class="item active">Example</li>
+    <li class="item">API
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="autoComplete" ng-controller="autoCompleteController">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="wrap">
+             <s-autocomplete data="data" value-key="value" text-key="text">
+                 {{ $name }} - {{ $value }} - {{ name }}
+             </s-autocomplete>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="api">API</header>
+
+    <div class="markdown">
+    <section>
+        <div class="ui ribbon" data-anchor="html">
+            <span>HTML</span>
+        </div>
+
+        <xmp>
+        <div class="ui autoComplete">
+                <input class="ui text front" type="text" placeholder="Type 'a' or 'b' or 'c' or ','" />
+                <input class="ui text hint" type="text" tabindex="-1" />
+                <i class="icon"></i>
+        </div>
+        </xmp>
+    </section>
+
+    <section>
+        <div class="ui ribbon" data-anchor="constructor">
+            <span>Constructor</span>
+        </div>
+
+        <p><code>$( selector ).autoComplete( options )</code></p>
+
+        <blockquote>
+        <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+        <p><code>options</code> - 参数设置</p>
+        </blockquote>
+
+        <pre>
+        <code>
+        var lookup = [ {
+            value: "AD",
+            text: "Andorra"
+        }, {
+                        ...
+        }, {
+            value: "AO",
+            text: "Angola"
+        } ];
+
+        $( ".ui.autoComplete" ).autoComplete( { lookup: lookup } );
+        </code></pre>
+    </section>
+
+    <section>
+        <div class="ui ribbon" data-anchor="options">
+            <span>Options</span>
+        </div>
+
+        <blockquote>
+        <p><code>delimiter</code> - <code>","</code></p>
+        </blockquote>
+        <p>多值输入分隔符, 设置<code>false</code>单值输入</p>
+        <br>
+
+        <blockquote>
+        <p><code>minChars</code> - <code>1</code></p>
+        </blockquote>
+        <p>输入内容长度大于该值时候进行联想</p>
+        <br>
+
+        <blockquote>
+        <p><code>cacheKey</code> - <code>"autoComplete-data"</code></p>
+        </blockquote>
+        <p>缓存 Key 值, 用于 Debug</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4loading</code> - <code>"loading"</code></p>
+        </blockquote>
+        <p>Ajax 服务<code>Pending</code>时附加样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4success</code> - <code>"success"</code></p>
+        </blockquote>
+        <p>Ajax 服务<code>Resolve</code>时附加样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4error</code> - <code>"error"</code></p>
+        </blockquote>
+        <p>输入与联想结果不匹配时候附加改样式, <code>inputAnything</code>为<code>false</code>时有效</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4selected</code> - <code>"selected"</code></p>
+        </blockquote>
+        <p>联想列表内容, 选中样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4highlight</code> - <code>"highlight"</code></p>
+        </blockquote>
+        <p>文本匹配高亮样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4list</code> - <code>"list"</code></p>
+        </blockquote>
+        <p>下拉列表样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>selector4input</code> - <code>"input.front"</code></p>
+        </blockquote>
+        <p>输入框定位</p>
+        <br>
+
+        <blockquote>
+        <p><code>selector4indicator</code> - <code>"i.icon"</code></p>
+        </blockquote>
+        <p>状态指示</p>
+        <br>
+
+        <blockquote>
+        <p><code>textKey</code> - <code>"text"</code></p>
+        </blockquote>
+        <p>JSON[ textKey ]</p>
+        <br>
+
+        <blockquote>
+        <p><code>valueKey</code> - <code>"value"</code></p>
+        </blockquote>
+        <p>JSON[ valueKey ]</p>
+        <br>
+
+        <blockquote>
+        <p><code>highlight</code> - <code>false</code></p>
+        </blockquote>
+        <p>文本高亮</p>
+        <br>
+
+        <blockquote>
+        <p><code>inputAnything</code> - <code>true</code></p>
+        </blockquote>
+        <p>用于限制输入内容, 为<code>false</code>时, 输入内容必须存在于联想结果中</p>
+        <br>
+
+        <blockquote>
+        <p><code>breaksize</code> - <code>10</code></p>
+        </blockquote>
+        <p>联想结果会被缓存用于快速联想, 例如 Ajax服务时候, 输入foo服务器端返回5条结果</p>
+        <p>以foo作为key值缓存结果, 再次输入foobar时候, 回溯输入内容, 尝试以'fooba', 'foob', 'foo' 作为key值去匹配缓存</p>
+        <p>缓存结果集数量小于该值时命中缓存, 避免过多的Ajax服务请求</p>
+        <p>所以为了能最大效率的Ajax联想, 后台服务应该是模糊查询, 并且结果数接近该值</p>
+        <p>结果无法被精确匹配或者需要强制重新查询, ajaxOptions.enterforce 设置为true时候会重新查询并以当前输入创建缓存</p>
+        <br>
+
+
+        <blockquote>
+        <p><code>ajaxOptions</code> - <code>null</code></p>
+        </blockquote>
+        <p>Ajax 配置</p>
+        <pre>
+        <code>
+        {
+                dataProxy   - 返回Promise, 参考 <a href="#w3user">W3 User Choice</a> 代码
+                dataFilter  - 作用与<code>dataProxy</code>所产生的数据
+                enterforce  - 回车键强制查询
+        }
+        </code></pre>
+        <br>
+
+        <blockquote>
+        <p><code>fuzzy</code> - <code>true</code></p>
+        </blockquote>
+        <p>检索缓存时是否区分大小写</p>
+        <br>
+
+        <blockquote>
+        <p><code>localMatch</code> - <code>"true"</code></p>
+        </blockquote>
+        <p>缓存检索方式, 取值<code>'first'(^query)</code>, <code>'contains'(query)</code>, <code>'last'(query$)</code></p>
+        <br>
+
+        <blockquote>
+        <p><code>suggestDelay</code> - <code>333</code></p>
+        </blockquote>
+        <p>用于快速的键盘输入, 在键盘输入过程中丢弃上一个查询, 单位毫秒</p>
+        <br>
+
+        <blockquote>
+        <p><code>autoSelect</code> - <code>false</code></p>
+        </blockquote>
+        <p>联想结果仅一条时直接选中, 不展示列表</p>
+        <br>
+
+        <blockquote>
+        <p><code>tabComplete</code> - <code>true</code></p>
+        </blockquote>
+        <p>按<code>Tab</code>键选中联想结果中的第一条</p>
+        <br>
+
+        <blockquote>
+        <p><code>lookup</code> - <code>[]</code></p>
+        </blockquote>
+        <p>本地数据的联想</p>
+        <br>
+
+        <blockquote>
+        <p><code>set</code> - <code>null</code></p>
+        </blockquote>
+        <p>自定义值回写</p>
+	<xmp>
+        set: function( item, settings ) {
+
+		/** Example */
+		var values = [];
+
+		for ( var i = 0, length = item.length; i < length; ++i ) {
+			values.push( item[i][ settings.valueKey ] );
+		}
+
+		this.find( settings.selector4input ).attr( "data-value", values.join() );
+        }
+	</xmp>
+
+        <blockquote>
+        <p><code>formatter</code> - <code>如下:</code></p>
+        </blockquote>
+        <p>联想结果格式化, 用于联想结果的定制, 参考 <a href="#w3user">W3 User Choice</a></p>
+        <xmp>
+        formatter: function( item, index, query, settings ) {
+
+                var
+                  value = item[ settings.valueKey ],
+                  text = item[ settings.textKey ] || value;
+
+                return settings.hightlight
+                        ? "<li value='" + value + "' data-index='" + index + "'>" + text.replace( new RegExp( query, "i" ), "<span class='" + settings.class4highlight + "'>" + query + "</span>" ) + "</li>"
+                        : "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>";
+                        ;
+        }
+        </xmp>
+    </section>
+
+    <section>
+        <div class="ui ribbon" data-anchor="method">
+            <span>Method</span>
+        </div>
+
+        <blockquote>
+        <p><code>autoComplete.disabled()</code></p>
+        </blockquote>
+        <p>禁用控件</p>
+        <br>
+
+        <blockquote>
+        <p><code>autoComplete.enabled()</code></p>
+        </blockquote>
+        <p>启用控件</p>
+        <br>
+
+        <blockquote>
+        <p><code>autoComplete.stopSuggest()</code></p>
+        </blockquote>
+        <p>停止当前联想</p>
+        <br>
+
+        <blockquote>
+        <p><code>autoComplete.val( [value] )</code></p>
+        </blockquote>
+        <p>参数为空时返回控件值, 不为空时设置控件值, <code>value</code>为数组</p>
+    </section>
+    </div>
+
+</section>

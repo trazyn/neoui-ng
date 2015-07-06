@@ -14,13 +14,14 @@ require( [
         "ui/anchor/anchor",
         "demo/modal/index",
         "demo/tab/index",
-        "demo/message/index" ], function() {
+        "demo/message/index",
+        "demo/autoComplete/index" ], function() {
 
 	"use strict";
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab", "demo.message" ] )
+	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
@@ -33,6 +34,9 @@ require( [
 		    } )
 		    .when( "/message", {
 		        templateUrl: "/src/demo/message/index.html"
+		    } )
+		    .when( "/autoComplete", {
+		        templateUrl: "/src/demo/autoComplete/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/tab"

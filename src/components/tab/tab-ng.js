@@ -6,11 +6,11 @@ define( [ "ui/tab/tab" ], function() {
 /**
  * example:
  *
-  <ng-tab-set tab-selected="1">
-      <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="{{ tab.title }}" tab-template="./tab1.html">
-          {{ tab.content }}
-      </ng-tab>
-  </ng-tab-set>
+ <ng-tab-set tab-selected="1">
+     <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="{{ tab.title }}" tab-template="./tab1.html">
+         {{ tab.content }}
+     </ng-tab>
+ </ng-tab-set>
  * */
 
 angular.module( "$ui.tab", [] )
