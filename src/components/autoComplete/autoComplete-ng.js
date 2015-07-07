@@ -21,7 +21,8 @@ angular.module( "$ui.autoComplete", [] )
             autoComplete,
             transclude,
             markup,
-            template,
+            html,
+            inProgress = false,
             isolateBindings = $scope.$$isolateBindings;
 
             for ( var key in isolateBindings ) {
@@ -40,31 +41,36 @@ angular.module( "$ui.autoComplete", [] )
             if ( markup ) {
                 options.formatter = function( value, text, index, highlightText, query, settings ) {
 
-                    template = markup
+                    html = markup
                         .replace( /\{\{\s*\$value\s*\}\}/g, value )
                         .replace( /\{\{\s*\$text\s*\}\}/g, highlightText )
                         ;
 
-                    template = $compile( template )( $scope.$parent );
+                    html = $compile( html )( $scope.$parent );
                     $scope.$parent.$apply();
-                    template = template[0][ "innerHTML" ];
+                    html = html[0][ "innerHTML" ];
 
-                    return "<li value='" + value + "' data-index='" + index + "'>" + template + "</li>";
+                    return "<li value='" + value + "' data-index='" + index + "'>" + html + "</li>";
                 };
             }
 
             options.set = function( data, settings ) {
 
                 if ( !$rootScope.$$phase ) {
+
+                    inProgress = !inProgress;
+
                     $scope.value = data;
                     $scope.$apply();
+
+                    inProgress = !inProgress;
                 }
             };
 
-            autoComplete = $( $element ).autoComplete( options );
+            autoComplete = $( $element ).autoComplete( options ).val( $scope.value );
 
             $scope.$watch( "value", function( value ) {
-                autoComplete.val( $scope.value );
+                !inProgress && autoComplete.val( value );
             } );
         }
 

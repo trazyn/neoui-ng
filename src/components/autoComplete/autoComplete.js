@@ -210,8 +210,8 @@
 
 			if ( !item ) { return; }
 
-            value = ele.data( "data-value" ),
-            index = fg.value.toLowerCase().split( settings.delimiter ).indexOf( item[ settings.textKey ][ "toLowerCase" ]() );
+            value = ele.data( "data-value" );
+            index = fg.value.toLowerCase().split( settings.delimiter ).lastIndexOf( item[ settings.textKey ][ "toLowerCase" ]() );
 
 			if ( index !== -1 ) {
 
@@ -227,8 +227,7 @@
 				value[ index ] = item;
                 value.forEach( function( v ) { valid.push( v ); } );
 				ele.data( "data-value", valid );
-			} else
-				valid = [];
+			}
 
             /** When the input just focused, don't invoke the callbacks */
 			if ( multiple || multiple === undefined ) {
@@ -391,14 +390,7 @@
 
 				var
 				values = fg.value ? fg.value.split( settings.delimiter ) : 0,
-				valid = [],
-
-				invalid = function() {
-
-                    /** Clear the component data */
-				    fg.value = bg.value = "";
-                    settings.set.call( ele, [], settings );
-				};
+				valid = [];
 
 				e.preventDefault();
 				e.stopPropagation();
@@ -425,8 +417,12 @@
                         for ( var i = 0, length = valid.length; i < length; ++i ) {
                             select( cache[ valid[i].toLowerCase() ][ 0 ], i === length - 1 );
                         }
-                    } else invalid();
-				} else invalid();
+                    } else settings.set.call( ele, [], settings );
+				} else {
+
+                    /** Clear the component data */
+				    settings.set.apply( ele, [ [], settings ] );
+				}
 
 				query = "";
 				finishSuggest();
@@ -481,7 +477,7 @@
 
 				.delegate( "li", "mouseover", function( e ) {
 
-					suggestion && suggestion.removeClass( settings.class4selected );
+					suggestion.removeClass( settings.class4selected );
 
 					suggestion = $( this ).addClass( settings.class4selected );
 
@@ -626,6 +622,7 @@
 				.$node
 				.data( "data-value", value )
 				.find( settings.selector4input ).val( text.join() );
+				return this;
 			} else
 			return this.$node.data( "data-value" );
 		}
