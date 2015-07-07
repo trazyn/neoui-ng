@@ -1,0 +1,49 @@
+
+
+.ui.switch {
+	input {
+
+		outline: 0;
+		display: inline-block;
+		position: relative;
+		width: 40px;
+		height: 16px;
+		border-radius: 8px;
+		background-color: rgba(0,0,0,.026);
+		-webkit-transition: all .3s cubic-bezier(0.4,0,.2,1);
+		-moz-transition: all .3s cubic-bezier(0.4,0,.2,1);
+		-ms-transition: all .3s cubic-bezier(0.4,0,.2,1);
+		transition: all .3s cubic-bezier(0.4,0,.2,1);
+		vertical-align: middle;
+		cursor: pointer;
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: -4px;
+			left: -4px;
+			width: 24px;
+			height: 24px;
+			background-color: #fafafa;
+			box-shadow: 0 2px 8px rgba(0,0,0,.28);
+			border-radius: 50%;
+			-webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
+			-moz-transition: all .3s cubic-bezier(.4,0,.2,1);
+			-ms-transition: all .3s cubic-bezier(.4,0,.2,1);
+			transition: all .3s cubic-bezier(.4,0,.2,1);
+		}
+
+		-webkit-appearance: inherit;
+		-ms-appearance: inherit;
+		-moz-appearance: inherit;
+	}
+
+	input:checked {
+		background-color: rgba(0,150,136,.5);
+
+		&:before {
+			left: 20px;
+			background-color: #009688
+		}
+	}
+}

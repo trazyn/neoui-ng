@@ -18,12 +18,68 @@
     <header data-anchor="example">Example</header>
 
     <section>
+
+        <p>
+        <code>
+            <label>Value:</label>
+            {{ address || [] }}
+        </code>
+        </p>
+
+        <br>
+
         <div class="wrap">
-             <s-autocomplete data="data" value-key="value" text-key="text" placeholder="Type 'a' or 'b' or 'c'">
+             <s-autocomplete ng-model="address" data="data" value-key="value" text-key="text" highlight="true" placeholder="Type 'a' or 'b' or 'c'">
                  <div class="item">
-                     <i class="icon star"></i>r{{ $name }} - {{ $value }} - {{ name }}
+                     {{ $text }} - {{ $value }} - {{ name }}
                  </div>
              </s-autocomplete>
+
+             <br>
+
+             <ul class="options">
+                 <li>
+                     <label>匹配文本开头</label>
+                     <input name="radio" value="first" class="ui radio" type="radio" checked />
+                 </li>
+                 <li>
+                     <label>文本全文匹配</label>
+                     <input name="radio" value="contains" class="ui radio" type="radio" />
+                 </li>
+                 <li>
+                     <label>匹配文本结尾</label>
+                     <input name="radio" value="last" class="ui radio" type="radio" />
+                 </li>
+
+                 <li>
+                     <label>高亮搜索</label>
+                     <label class="ui switch">
+                         <input type="checkbox" name="highlight" checked />
+                     </label>
+                 </li>
+
+                 <li>
+                     <label><kbd>Tab</kbd>选中第一条结果</label>
+                     <label class="ui switch">
+                         <input type="checkbox" name="showHint" checked />
+                     </label>
+                 </li>
+
+                 <li>
+                     <label>显示结果提示</label>
+                     <label class="ui switch">
+                         <input type="checkbox" name="showHint" checked />
+                     </label>
+                 </li>
+
+                 <li>
+                     <label>模糊查询</label>
+                     <label class="ui switch">
+                         <input type="checkbox" name="fuzzy" checked />
+                     </label>
+                 </li>
+             </div>
+
         </div>
     </section>
 
@@ -60,7 +116,6 @@
         <p><code>options</code> - 参数设置</p>
         </blockquote>
 
-        <pre>
         <code>
         var lookup = [ {
             value: "AD",
@@ -73,7 +128,7 @@
         } ];
 
         $( ".ui.autoComplete" ).autoComplete( { lookup: lookup } );
-        </code></pre>
+        </code>
     </section>
 
     <section>
@@ -186,14 +241,13 @@
         <p><code>ajaxOptions</code> - <code>null</code></p>
         </blockquote>
         <p>Ajax 配置</p>
-        <pre>
         <code>
         {
                 dataProxy   - 返回Promise, 参考 <a href="#w3user">W3 User Choice</a> 代码
                 dataFilter  - 作用与<code>dataProxy</code>所产生的数据
                 enterforce  - 回车键强制查询
         }
-        </code></pre>
+        </code>
         <br>
 
         <blockquote>

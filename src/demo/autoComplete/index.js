@@ -51,5 +51,13 @@ define( [ "ui/autoComplete/autoComplete-ng" ], function() {
 			value: "AO",
 			text: "Angola"
 		} ];
+
+		$scope.address = [ {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
     } ] );
 } );

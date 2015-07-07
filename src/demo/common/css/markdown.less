@@ -107,6 +107,22 @@
         box-shadow: 0 1px 24px rgba(0,0,0,.24);
     }
 
+    code {
+        position: relative;
+
+        label {
+            display: block;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: green;
+            background-color: #fff;
+            border: 1px solid #eaeaea;
+            padding: 2px 4px;
+            font-family: cursive;
+        }
+    }
+
     xmp {
         padding-right: 20px;
     }
@@ -492,5 +508,20 @@
     xmp {
         overflow: auto;
         margin: 20px 0 30px 0;
+    }
+
+    kbd {
+        display: inline-block;
+        padding: 3px 5px;
+        font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        line-height: 10px;
+        color: #555;
+        margin: 3px;
+        vertical-align: middle;
+        background-color: #fcfcfc;
+        border: solid 1px #ccc;
+        border-bottom-color: #bbb;
+        border-radius: 3px;
+        box-shadow: inset 0 -1px 0 #bbb;
     }
 }

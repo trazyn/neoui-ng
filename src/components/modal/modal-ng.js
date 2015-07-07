@@ -8,13 +8,13 @@ angular.module( "$ui.modal", [] )
 
 function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 
-	var 
+	var
 	defaults = {
 
 		/** For angularjs */
-		controller 	: undefined,
+		controller 	    : undefined,
 		controllerAs 	: "modal",
-		scope 		: undefined
+		scope 		    : undefined
 
 		/** Overwrite the jQuery plugin default settings */
 	},
@@ -49,9 +49,9 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 		.when( deferred )
 		.then( function( html ) {
 
-			var 
+			var
 			settings = angular.extend( {}, defaults, options, {
-				
+
 				/** Overwite the jQuery plugin default settings */
 				render 	: html,
 				autoShow: true,

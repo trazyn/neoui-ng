@@ -41,6 +41,22 @@
 			cache[ key.toLowerCase() ] = data;
 		}
 
+		function highlight( text, query ) {
+
+		    var
+		    regex = {
+		        "^": new RegExp( "^" + query, "i" ),
+		        "*": new RegExp( query, "ig" ),
+		        "$": new RegExp( query + "$", "i" )
+		    }[ settings.localMatch ];
+
+            if ( regex && settings.highlight ) {
+                return text.replace( regex, "<span class='" + settings.class4highlight + "'>" + query + "</span>" );
+            }
+
+            return text;
+		}
+
 		function suggest( force ) {
 
 			var keyCode;
@@ -69,7 +85,7 @@
 				return;
 			}
 
-			settings.timer = setTimeout( function() {
+			settings.timer = setTimeout( function post() {
 
 				var
 				  value = fg.value,
@@ -83,7 +99,12 @@
 						  setupCache( query, data );
 
 						  for ( var html = "", i = 0, length = data.length; i < length; ++i ) {
-							  html += settings.formatter( data[ i ], i, query, settings );
+
+						      var
+						        value = data[i][ settings.valueKey ],
+						        text = data[i][ settings.textKey ] || value;
+
+							  html += settings.formatter( value, text, i, highlight( text, query ), query, settings );
 						  }
 
 						  setbg();
@@ -98,6 +119,8 @@
 								  return;
 							  }
 					  } else {
+                          /** Invalid input, reset the component value */
+					      $( fg ).trigger( "focusout" );
 						  return finishSuggest();
 					  }
 
@@ -121,7 +144,7 @@
 
 							var i = 0, res;
 
-							while ( key = key.replace( new RegExp( ".{1}$" ), "" ) ) {
+							while ( key = key.replace( new RegExp( ".{1}$" ), "" ), key ) {
 
 								res = cache[ key.toLowerCase() ];
 								if ( res && res.length < settings.breaksize ) {
@@ -155,7 +178,7 @@
 					self.list.removeClass( "show" );
 				}
 
-			}, settings.suggestDelay );
+			}, 100 );
 		}
 
 		function finishSuggest() {
@@ -175,17 +198,20 @@
 		function setfg( value ) {
 
 			if ( fg.value.indexOf( settings.delimiter ) === -1 ) {
-				return fg.value = value;
+				return (fg.value = value);
 			}
 
-			return fg.value = fg.value.replace( new RegExp( settings.delimiter + "[^+" + settings.delimiter + "]+$" ), "," ) + value;
+			return (fg.value = fg.value.replace( new RegExp( settings.delimiter + "[^+" + settings.delimiter + "]+$" ), "," ) + value);
 		}
 
 		function select( item, multiple ) {
 
-			var
-			  value = ele.data( "data-value" ),
-			  index = fg.value.toLowerCase().split( settings.delimiter ).indexOf( item[ settings.textKey ][ "toLowerCase" ]() );
+			var value, index, valid = [];
+
+			if ( !item ) { return; }
+
+            value = ele.data( "data-value" ),
+            index = fg.value.toLowerCase().split( settings.delimiter ).indexOf( item[ settings.textKey ][ "toLowerCase" ]() );
 
 			if ( index !== -1 ) {
 
@@ -199,13 +225,15 @@
 				value = value instanceof Array ? value : [];
 				value.length = fg.value.split( settings.delimiter ).length;
 				value[ index ] = item;
-				ele.data( "data-value", value );
+                value.forEach( function( v ) { valid.push( v ); } );
+				ele.data( "data-value", valid );
 			} else
-				value = [];
+				valid = [];
 
+            /** When the input just focused, don't invoke the callbacks */
 			if ( multiple || multiple === undefined ) {
 
-				"function" === typeof settings.set && settings.set.call( ele, value, settings );
+				settings.set.call( ele, valid, settings );
 
 				/** Remove other suggestion */
 				self.list.find( "ul" ).html( suggestion.attr( "data-index", 0 ) );
@@ -358,37 +386,47 @@
 				}
 			} )
 
-			/** Clear suggestion */
+			/** Clear suggestion, apply value to component */
 			.on( "focusout", function( e ) {
 
-				var values = fg.value ? fg.value.split( settings.delimiter ) : 0;
+				var
+				values = fg.value ? fg.value.split( settings.delimiter ) : 0,
+				valid = [],
+
+				invalid = function() {
+
+                    /** Clear the component data */
+				    fg.value = bg.value = "";
+                    settings.set.call( ele, [], settings );
+				};
 
 				e.preventDefault();
 				e.stopPropagation();
 
 				if ( e.relatedTarget === self.list[ 0 ] ) { return; }
 
-				ele.removeData( "data-value" );
+                ele.removeData( "data-value" );
 
 				if ( values.length ) {
 
-					if ( suggestion ) {
+                    for ( var i = 0, length = values.length; i < length; ++i ) {
 
-						for ( var i = 0, length = values.length; suggestion && i < length; ++i ) {
+                        var value = values[ i ];
 
-							var value = values[ i ];
+                        if ( value && cache[ value.toLowerCase() ] && cache[ value.toLowerCase() ].length === 1 ) {
+                            valid.push( value );
+                        } else if ( settings.inputAnything === false ) {
+                            indicator.addClass( settings.class4error );
+                        }
+                    }
 
-							if ( value && cache[ value.toLowerCase() ] && cache[ value.toLowerCase() ].length === 1 ) {
-
-								select( cache[ value.toLowerCase() ][ 0 ], i === length - 1 );
-							} else if ( settings.inputAnything === false ) {
-								indicator.addClass( settings.class4error );
-							}
-						}
-					} else indicator.addClass( settings.class4error );
-				} else
-				/** Reset the user data */
-				settings.set instanceof Function && settings.set.call( ele, [], settings );
+                    if ( valid.length ) {
+                        /** Set the value */
+                        for ( var i = 0, length = valid.length; i < length; ++i ) {
+                            select( cache[ valid[i].toLowerCase() ][ 0 ], i === length - 1 );
+                        }
+                    } else invalid();
+				} else invalid();
 
 				query = "";
 				finishSuggest();
@@ -397,6 +435,7 @@
 			/** Suggest current content */
 			.on( "focus", function() {
 
+                suggestion = self.list.find( "li:first" );
 				indicator.removeClass( settings.class4error );
 				suggest();
 			} );
@@ -421,8 +460,10 @@
 
 					var item = data[ this.getAttribute( "data-index" ) ];
 
-					setfg( item[ settings.textKey ] );
-					select( item );
+                    if ( item ) {
+                        setfg( item[ settings.textKey ] );
+                        select( item );
+                    }
 
 					query = "";
 
@@ -466,9 +507,9 @@
 		  deferred,
 
 		  regexs = {
-			"first": "^${text}",
-			"last": "${text}$",
-			"contains": "${text}"
+			"^": "^${text}",
+			"$": "${text}$",
+			"*": "${text}"
 		  },
 
 		  ajaxOptions = settings.ajaxOptions,
@@ -520,7 +561,7 @@
 		if ( settings.localMatch instanceof RegExp ) {
 			regex = settings.localMatch;
 		} else {
-			regex = new RegExp( (regexs[ settings.localMatch.toLowerCase() ] || regexs[ "first" ]).replace( /\${text}/, query )
+			regex = new RegExp( (regexs[ settings.localMatch.toLowerCase() ] || regexs[ (settings.localMatch = "^") ]).replace( /\${text}/, query )
 						, settings.fuzzy ? "i" : "");
 		}
 
@@ -633,9 +674,7 @@
 		fuzzy 			    : true,
 
 		/** 'first', 'contains', 'last' */
-		localMatch 		    : "first",
-
-		suggestDelay 		: 333,
+		localMatch 		    : "^",
 
 		autoSelect 		    : false,
 		tabComplete 		: true,
@@ -645,20 +684,17 @@
 		/** Local data */
 		lookup 			    : [],
 
+		set                 : $.noop,
+
 		/** From service */
 		ajaxOptions 		: undefined,
 
-		formatter: function( item, index, query, settings ) {
+		formatter: function( value, text, index, highlightText, query, settings ) {
 
-			var
-			  value = item[ settings.valueKey ],
-			  text = item[ settings.textKey ] || value;
-
-			return settings.hightlight
-				? "<li value='" + value + "' data-index='" + index + "'>" + text.replace( new RegExp( query, "i" ), "<span class='" + settings.class4highlight + "'>" + query + "</span>" ) + "</li>"
+			return settings.highlight
+				? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
 				: "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
 				;
 		}
 	};
-
 })( window.jQuery );
