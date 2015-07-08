@@ -70,5 +70,18 @@ define( [ "ui/autoComplete/autoComplete-ng" ], function() {
 			value: "AO",
 			text: "Angola"
 		} ];
+
+		/** Ajax example */
+		$scope.ajax = {
+		    dataProxy: function( key ) {
+                return $.ajax( {
+                    url: "https://api.github.com/search/repositories?q=" + key + "&sort=stars&order=desc"
+                } );
+		    },
+            enterforce: true,
+            dataFilter: function( data ) {
+                return data.items || [];
+            }
+		};
     } ] );
 } );

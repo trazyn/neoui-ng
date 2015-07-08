@@ -114,7 +114,7 @@
 						        value = data[i][ settings.valueKey ],
 						        text = data[i][ settings.textKey ] || value;
 
-							  html += settings.formatter( value, text, i, highlight( text, query ), query, settings );
+							  html += settings.formatter( value, text, data[i], i, highlight( text, query ), query, settings );
 						  }
 
 						  setbg();
@@ -258,7 +258,7 @@
 		function move( current, direction ) {
 
 			if ( data && !data.length
-					|| (settings.ajaxOptions && settings.ajaxOptions.request && settings.ajaxOptions.request.state() === "pending") ) {
+					|| (settings.ajax && settings.ajax.request && settings.ajax.request.state() === "pending") ) {
 						return;
 					}
 
@@ -367,7 +367,7 @@
 							/** Reset query string */
 							query = "";
 
-							if ( settings.ajaxOptions && settings.ajaxOptions.enterforce ) {
+							if ( settings.ajax && settings.ajax.enterforce ) {
 								suggest( true );
 							} else {
 								finishSuggest();
@@ -524,7 +524,9 @@
 			"*": "${text}"
 		  },
 
-		  ajaxOptions = settings.ajaxOptions,
+		  ajax = settings.ajax,
+
+	      request,
 
 		  regex;
 
@@ -532,40 +534,26 @@
 			res = res.concat( settings.lookup );
 		}
 
-		if ( !data && ajaxOptions ) {
+		if ( !data && ajax ) {
 
 			indicator.addClass( settings.class4loading );
 
 			deferred = $.Deferred();
 
-			ajaxOptions.request = ( ("function" === typeof ajaxOptions.dataProxy && ajaxOptions.dataProxy( query ))
+			request = ajax.request = ajax.dataProxy( query );
 
-					|| $.ajax( {
-						data: {
-							name: ajaxOptions.serviceName,
-							params: JSON.stringify( $.extend( {}, { find: query }, ajaxOptions.params || {} ) )
-						},
-                        type: ajaxOptions.type || "GET"
-					} ) )
+			request
+                .then( function( data ) {
 
-			.done( function( data ) {
-
-				if ( "function" === typeof ajaxOptions.dataFilter ) {
-					data = ajaxOptions.dataFilter( data );
-				} else {
-					data = JSON.parse( JSON.parse( data )[ "result" ][ ajaxOptions.moduleName || "gridElement_kiss" ] ).result;
-				}
-
-				res = res.concat( data );
-
-				deferred.resolve();
-			} )
-
-			.done( ajaxOptions.done )
-			.fail( ajaxOptions.fail )
-			.always( ajaxOptions.always )
-
-			.always( function() { indicator.removeClass( settings.class4loading ); } );
+                    if ( "function" === typeof ajax.dataFilter ) {
+                        data = ajax.dataFilter( data );
+                    }
+                    res = res.concat( data );
+                    deferred.resolve();
+                } )
+                .done( ajax.done )
+                .fail( ajax.fail )
+                .always( ajax.always, function() { indicator.removeClass( settings.class4loading ); } );
 		} else if ( data ) {
 			res = res.concat( data );
 		}
@@ -616,8 +604,8 @@
 
 			clearTimeout( settings.timer );
 
-			settings.ajaxOptions && settings.ajaxOptions.request
-				&& settings.ajaxOptions.request.abort();
+			settings.ajax && settings.ajax.request
+				&& settings.ajax.request.abort();
 			return this;
 		},
 
@@ -706,9 +694,9 @@
 		set                 : $.noop,
 
 		/** From service */
-		ajaxOptions 		: undefined,
+		ajax 		        : undefined,
 
-		formatter: function( value, text, index, highlightText, query, settings ) {
+		formatter: function( value, text, item, index, highlightText, query, settings ) {
 
 			return settings.highlight
 				? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"

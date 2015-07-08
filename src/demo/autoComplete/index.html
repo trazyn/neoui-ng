@@ -98,9 +98,42 @@
                          <input type="checkbox" ng-model="tabComplete" checked />
                      </label>
                  </li>
-
              </div>
+             <br>
 
+             <p>
+             <code>
+                 <label>Value:</label>
+                 {{ reps || [] }}
+             </code>
+             </p>
+             <br>
+
+             <s-autocomplete
+                 ng-model="reps"
+                 ajax="ajax"
+                 highlight="true"
+                 value-key="full_name"
+                 text-key="name"
+                 local-match="'*'"
+                 show-hint="false"
+                 placeholder="Search GitHub">
+                 <div class="rep">
+                     <p>
+                     {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+                     </p>
+                     <p>
+                     <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+                     </p>
+                     <p>
+                     <code>{{ watchers.toLocaleString() }} Watchers</code>
+                     <code>{{ forks.toLocaleString() }} Forks</code>
+                     <code>{{ language }}</code>
+                     <code>Last update: {{ updated_at }}</code>
+                     <code class="issue"><i class="icon issue"></i>{{ open_issues_count }}</code>
+                     </p>
+                 </div>
+             </s-autocomplete>
         </div>
     </section>
 
@@ -137,7 +170,7 @@
                  </div>
             </s-autocomplete>
             </xmp>
-            <code>内层不为空时,作为结果格式化模板, '$text', '$value' 为当前结果值和显示名称</code>
+            <code>内层不为空时,作为结果格式化模板, '$text', '$value' 为当前结果值和显示名称, '$index' 为序号</code>
             </div>
         </section>
 
@@ -455,13 +488,13 @@
         </blockquote>
         <p>格式化联想记录</p>
         <xmp>
-		formatter: function( value, text, index, highlightText, query, settings ) {
+        formatter: function( value, text, index, highlightText, query, settings ) {
 
-			return settings.highlight
-				? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
-				: "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
-				;
-		}
+            return settings.highlight
+                ? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
+                : "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
+                ;
+        }
         </xmp>
         <br>
 

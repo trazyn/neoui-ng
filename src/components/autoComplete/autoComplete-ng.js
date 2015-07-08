@@ -39,14 +39,15 @@ angular.module( "$ui.autoComplete", [] )
             transclude.remove();
 
             if ( markup ) {
-                options.formatter = function( value, text, index, highlightText, query, settings ) {
+                options.formatter = function( value, text, item, index, highlightText, query, settings ) {
 
                     html = markup
                         .replace( /\{\{\s*\$value\s*\}\}/g, value )
+                        .replace( /\{\{\s*\$index\s*\}\}/g, index )
                         .replace( /\{\{\s*\$text\s*\}\}/g, highlightText )
                         ;
 
-                    html = $compile( html )( $scope.$parent );
+                    html = $compile( html )( angular.extend( $scope.$parent.$new(), item ) );
                     $scope.$parent.$apply();
                     html = angular.element( "<w>" ).append( html ).html();
 
@@ -133,15 +134,15 @@ angular.module( "$ui.autoComplete", [] )
         return {
             scope: {
                 lookup          : "=",
+                ajax            : "=",
                 minChars        : "@",
                 valueKey        : "@",
                 textKey         : "@",
                 breaksize       : "@",
-                autoSelect      : "@",
                 placeholder     : "@",
                 delimiter       : "@",
                 inputAnything   : "@",
-                showHint        : "@",
+                showHint        : "=",
                 fuzzy           : "=",
                 tabComplete     : "=",
                 highlight       : "=",
