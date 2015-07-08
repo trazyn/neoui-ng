@@ -12,7 +12,7 @@
 		var
 		  self = this,
 
-		  /** Cache the search result */
+		  /** Cache the matched result */
 		  cache = {},
 
 		  /** Current input value */
@@ -38,7 +38,13 @@
 		this.list = $( "<div tabindex=-1 style='position: absolute; outline: 0;' class='" + settings.class4list + "'>" ).appendTo( ele );
 
 		function setupCache( key, data ) {
-			cache[ key.toLowerCase() ] = data;
+
+		    if ( key ) {
+                cache[ key.toLowerCase() ] = data;
+		    } else {
+		        /** Clean the cache */
+		        cache = {};
+		    }
 		}
 
 		function highlight( text, query ) {
@@ -578,12 +584,19 @@
 			this.stopSuggest();
 			this.$node.attr( "disabled", true );
 
+			var
+			settings = this.settings,
+			input = this.$node.find( settings.selector4input );
+
+            input.add( input.next() ).attr( "disabled", true );
+
 			return this;
 		},
 
 		enabled: function() {
 
-			this.$node.attr( "disabled", false );
+			var input = this.$node.find( this.settings.selector4input );
+			input.add( input.next() ).removeAttr( "disabled" );
 			return this;
 		},
 

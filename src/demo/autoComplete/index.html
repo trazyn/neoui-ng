@@ -29,7 +29,7 @@
         <br>
 
         <div class="wrap">
-             <s-autocomplete ng-model="address" data="data" value-key="value" text-key="text" highlight="true" placeholder="Type 'a' or 'b' or 'c'">
+             <s-autocomplete ng-disabled="isDisabled" ng-model="address" data="data" value-key="value" text-key="text" highlight="true" placeholder="Type 'a' or 'b' or 'c'">
                  <div class="item">
                      {{ $text }} - {{ $value }} - {{ name }}
                  </div>
@@ -38,6 +38,12 @@
              <br>
 
              <ul class="options">
+                 <li>
+                     <label>是否禁用?</label>
+                     <label class="ui checkbox">
+                         <input type="checkbox" ng-click="isDisabled = !isDisabled" />
+                     </label>
+                 </li>
                  <li>
                      <label>匹配文本开头</label>
                      <input name="radio" value="first" class="ui radio" type="radio" checked />
@@ -52,7 +58,7 @@
                  </li>
 
                  <li>
-                     <label>高亮搜索</label>
+                     <label>高亮搜索结果</label>
                      <label class="ui switch">
                          <input type="checkbox" name="highlight" checked />
                      </label>
@@ -82,9 +88,6 @@
 
         </div>
     </section>
-
-    <br>
-    <br>
 
     <header data-anchor="api">API</header>
 

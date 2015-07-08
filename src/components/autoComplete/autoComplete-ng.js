@@ -67,10 +67,30 @@ angular.module( "$ui.autoComplete", [] )
                 }
             };
 
-            autoComplete = $( $element ).autoComplete( options ).val( $scope.value );
+            autoComplete = $( $element ).autoComplete( options );
 
             $scope.$watch( "value", function( value ) {
                 !inProgress && autoComplete.val( value );
+            } );
+
+            $scope.$watch( "lookup", function( value ) {
+
+                if ( value !== autoComplete.settings.lookup ) {
+
+                    autoComplete.settings.lookup = value;
+                    autoComplete.setupCache();
+                }
+            } );
+
+            $scope.$watch( "disabled", function( value ) {
+
+                var disabled = $scope.disabled;
+
+                if ( disabled === "true" || disabled ) {
+                    autoComplete.disabled();
+                } else {
+                    autoComplete.enabled();
+                }
             } );
         }
 
@@ -89,6 +109,7 @@ angular.module( "$ui.autoComplete", [] )
                 autoSelect      : "@",
                 tabComplete     : "@",
                 placeholder     : "@",
+                disabled        : "=ngDisabled",
                 value           : "=ngModel"
             },
 

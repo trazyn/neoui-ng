@@ -8,6 +8,7 @@ define( [ "ui/autoComplete/autoComplete-ng" ], function() {
     .controller( "autoCompleteController", [ "$scope", function( $scope ) {
 
         $scope.name = "Test";
+        $scope.isDisabled = false;
         $scope.data = [ {
 			value: "AD",
 			text: "Andorra"
