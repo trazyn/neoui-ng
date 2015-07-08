@@ -670,7 +670,6 @@
 		cacheKey 		    : "autoComplete-data",
 
 		class4loading 		: "sync",
-		class4success 		: "success",
 		class4error 		: "error",
 		class4selected 		: "selected",
 		class4highlight 	: "highlight",

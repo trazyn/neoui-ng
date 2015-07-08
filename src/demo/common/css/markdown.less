@@ -318,6 +318,10 @@
         border-left: 4px solid #dddddd;
         padding: 0 15px;
         color: #777777;
+
+        &.required {
+            border-left: 4px solid @grape2;
+        }
     }
 
     blockquote > :first-child {
@@ -523,5 +527,23 @@
         border-bottom-color: #bbb;
         border-radius: 3px;
         box-shadow: inset 0 -1px 0 #bbb;
+    }
+
+    .wrap {
+        position: relative;
+        >label {
+            position: absolute;
+            color: @google;
+            display: block;
+            position: absolute;
+            top: -10px;
+            left: 11px;
+            display: block;
+            background-color: #FFF;
+            z-index: 1;
+            padding: 0 10px;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
     }
 }

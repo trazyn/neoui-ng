@@ -132,7 +132,7 @@ angular.module( "$ui.autoComplete", [] )
 
         return {
             scope: {
-                lookup          : "=data",
+                lookup          : "=",
                 minChars        : "@",
                 valueKey        : "@",
                 textKey         : "@",

@@ -34,21 +34,16 @@
         right: 10px;
         cursor: pointer;
 
-        &.loading:after {
-            color: #1abc9c;
-            content: "\e615";
-            display: inline-block;
-            -webkit-animation: spinner .5s infinite linear;
+        &.sync:after {
+            color: #009688;
         }
 
         &.success:after {
             color: @success;
-            content: "\e635";
         }
 
         &.error:after {
             color: @error;
-            content: "\e61e";
         }
     }
 
