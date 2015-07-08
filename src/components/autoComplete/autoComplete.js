@@ -40,11 +40,15 @@
 		function setupCache( key, data ) {
 
 		    if ( key ) {
-                cache[ key.toLowerCase() ] = data;
+                cache[ settings.fuzzy ? key.toLowerCase() : key ] = data;
 		    } else {
 		        /** Clean the cache */
 		        cache = {};
 		    }
+		}
+
+		function fromCache( key ) {
+            return cache[ settings.fuzzy ? key.toLowerCase() : key ];
 		}
 
 		function highlight( text, query ) {
@@ -146,13 +150,13 @@
 					if ( !force ) {
 
 						/** Try to get data from cache */
-						data = cache[ query.toLowerCase() ] || (function( key ) {
+						data = fromCache( query ) || (function( key ) {
 
 							var i = 0, res;
 
 							while ( key = key.replace( new RegExp( ".{1}$" ), "" ), key ) {
 
-								res = cache[ key.toLowerCase() ];
+								res = fromCache( key );
 								if ( res && res.length < settings.breaksize ) {
 									break;
 								}
@@ -163,7 +167,7 @@
 						data = false;
 					}
 
-					if ( data && cache[ query.toLowerCase() ] ) {
+					if ( data && fromCache( query ) ) {
 						showSuggestion();
 					} else {
 
@@ -409,9 +413,14 @@
 
                     for ( var i = 0, length = values.length; i < length; ++i ) {
 
-                        var value = values[ i ];
+                        var
+                        value = values[ i ],
+                        matched = fromCache( value );
 
-                        if ( value && cache[ value.toLowerCase() ] && cache[ value.toLowerCase() ].length === 1 ) {
+                        if ( value
+                                && matched
+                                && matched.length === 1
+                                && matched[0][ settings.textKey ] === value ) {
                             valid.push( value );
                         } else if ( settings.inputAnything === false ) {
                             indicator.addClass( settings.class4error );
@@ -421,7 +430,7 @@
                     if ( valid.length ) {
                         /** Set the value */
                         for ( var i = 0, length = valid.length; i < length; ++i ) {
-                            select( cache[ valid[i].toLowerCase() ][ 0 ], i === length - 1 );
+                            select( fromCache( valid[i] )[0], i === length - 1 );
                         }
                     } else settings.set.call( ele, [], settings );
 				} else {
@@ -494,6 +503,7 @@
 		fg.setAttribute( "placeholder", settings.placeholder );
 
 		this.setupCache = setupCache;
+		this.fromCache = fromCache;
 
 		!settings.showHint && bg && (bg.style.display = "none");
 	};

@@ -29,7 +29,18 @@
         <br>
 
         <div class="wrap">
-             <s-autocomplete ng-disabled="isDisabled" ng-model="address" data="data" value-key="value" text-key="text" highlight="true" placeholder="Type 'a' or 'b' or 'c'">
+             <s-autocomplete
+                 ng-disabled="isDisabled"
+                 ng-model="address"
+                 local-match="localMatch"
+                 tab-complete="tabComplete"
+                 highlight="highlight"
+                 fuzzy="fuzzy"
+                 data="data"
+                 value-key="value"
+                 text-key="text"
+                 highlight="true"
+                 placeholder="Type 'a' or 'b' or 'c'">
                  <div class="item">
                      {{ $text }} - {{ $value }} - {{ name }}
                  </div>
@@ -45,45 +56,39 @@
                      </label>
                  </li>
                  <li>
-                     <label>匹配文本开头</label>
-                     <input name="radio" value="first" class="ui radio" type="radio" checked />
+                     <label>文本全文匹配</label>
+                     <input name="radio" class="ui radio" ng-model="localMatch" value="*" type="radio" />
                  </li>
                  <li>
-                     <label>文本全文匹配</label>
-                     <input name="radio" value="contains" class="ui radio" type="radio" />
+                     <label>匹配文本开头</label>
+                     <input name="radio" class="ui radio" type="radio" ng-model="localMatch" value="^" />
                  </li>
                  <li>
                      <label>匹配文本结尾</label>
-                     <input name="radio" value="last" class="ui radio" type="radio" />
+                     <input name="radio" class="ui radio" ng-model="localMatch" value="$" type="radio" />
                  </li>
 
                  <li>
                      <label>高亮搜索结果</label>
                      <label class="ui switch">
-                         <input type="checkbox" name="highlight" checked />
+                         <input type="checkbox" ng-model="highlight" checked />
+                     </label>
+                 </li>
+
+                 <li>
+                     <label>不区分大小写</label>
+                     <label class="ui switch">
+                         <input type="checkbox" ng-model="fuzzy" />
                      </label>
                  </li>
 
                  <li>
                      <label>Press <kbd>Tab</kbd> select the first result</label>
                      <label class="ui switch">
-                         <input type="checkbox" name="showHint" checked />
+                         <input type="checkbox" ng-model="tabComplete" checked />
                      </label>
                  </li>
 
-                 <li>
-                     <label>显示结果提示</label>
-                     <label class="ui switch">
-                         <input type="checkbox" name="showHint" checked />
-                     </label>
-                 </li>
-
-                 <li>
-                     <label>模糊查询</label>
-                     <label class="ui switch">
-                         <input type="checkbox" name="fuzzy" checked />
-                     </label>
-                 </li>
              </div>
 
         </div>

@@ -48,7 +48,7 @@ angular.module( "$ui.autoComplete", [] )
 
                     html = $compile( html )( $scope.$parent );
                     $scope.$parent.$apply();
-                    html = html[0][ "innerHTML" ];
+                    html = angular.element( "<w>" ).append( html ).html();
 
                     return "<li value='" + value + "' data-index='" + index + "'>" + html + "</li>";
                 };
@@ -92,6 +92,42 @@ angular.module( "$ui.autoComplete", [] )
                     autoComplete.enabled();
                 }
             } );
+
+            $scope.$watch( "localMatch", function( value ) {
+
+                var
+                modes = [ "^", "$", "*" ],
+                settings = autoComplete.settings;
+
+                if ( modes.indexOf( value ) !== -1 && value !== settings.localMatch ) {
+
+                    autoComplete.setupCache();
+                    settings.localMatch = value;
+                }
+            } );
+
+            $scope.$watch( "highlight", function( value ) {
+                autoComplete.settings.highlight = value;
+            } );
+
+            $scope.$watch( "fuzzy", function( value ) {
+
+                var
+                settings = autoComplete.settings;
+
+                if ( settings.fuzzy !== value ) {
+
+                    settings.fuzzy = value;
+                    autoComplete.setupCache();
+
+                    /** Use current value rebuild the cache */
+                    autoComplete.val( autoComplete.val() );
+                }
+            } );
+
+            $scope.$watch( "tabComplete", function( value ) {
+                autoComplete.settings.tabComplete = value;
+            } );
         }
 
         return {
@@ -101,14 +137,15 @@ angular.module( "$ui.autoComplete", [] )
                 valueKey        : "@",
                 textKey         : "@",
                 breaksize       : "@",
-                inputAnything   : "@",
-                highlight       : "@",
-                showHint        : "@",
-                fuzzy           : "@",
-                localMatch      : "@",
                 autoSelect      : "@",
-                tabComplete     : "@",
                 placeholder     : "@",
+                delimiter       : "@",
+                inputAnything   : "@",
+                showHint        : "@",
+                fuzzy           : "=",
+                tabComplete     : "=",
+                highlight       : "=",
+                localMatch      : "=",
                 disabled        : "=ngDisabled",
                 value           : "=ngModel"
             },

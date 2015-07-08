@@ -8,7 +8,17 @@ define( [ "ui/autoComplete/autoComplete-ng" ], function() {
     .controller( "autoCompleteController", [ "$scope", function( $scope ) {
 
         $scope.name = "Test";
-        $scope.isDisabled = false;
+
+        /** AutoComplete options */
+        angular.extend( $scope, {
+
+            isDisabled: false,
+            localMatch: "^",
+            tabComplete: true,
+            highlight: true,
+            fuzzy: true
+        } );
+
         $scope.data = [ {
 			value: "AD",
 			text: "Andorra"
