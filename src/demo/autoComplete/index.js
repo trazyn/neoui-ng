@@ -83,5 +83,9 @@ define( [ "ui/autoComplete/autoComplete-ng" ], function() {
                 return data.items || [];
             }
 		};
+
+	    $scope.init = function() {
+            $( document.body ).anchor( { offset: -60 } );
+	    };
     } ] );
 } );

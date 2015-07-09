@@ -22,7 +22,7 @@
     </li>
 </ul>
 
-<section id="autoComplete" ng-controller="autoCompleteController">
+<section id="autoComplete" ng-controller="autoCompleteController" ng-init="init()">
 
     <header data-anchor="example">Example</header>
 
@@ -51,7 +51,6 @@
                  highlight="true"
                  placeholder="Type 'a' or 'b' or 'c'">
                  <div class="item">
-                     <i class="icon star"></i>
                      {{ $text }} - {{ $value }} - {{ name }}
                  </div>
              </s-autocomplete>
