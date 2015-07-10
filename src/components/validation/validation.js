@@ -71,7 +71,7 @@
     }
 
     Validation.prototype = {
-        valid: function() {
+        validate: function() {
 
             var
             settings = this.settings,
@@ -79,11 +79,46 @@
             eles = this.$node.find( settings.selector ),
             shims = settings.shims;
 
+            function getMessage( target ) {
+
+                var
+                messages = target.attr( "messages" ),
+                matched = (messages || "").match( /(\w+\s*:\s*'[^']+')+/g );
+
+                messages = {};
+
+                for ( var expr = matched.pop().split( ":" ); matched.length; ) {
+                    messages[ expr[0].trim() ] = expr[1].replace( /^\s*'|'\s*/g, "" );
+                }
+            }
+
             function handle( target, validator ) {
 
-                var promise = validator.call( target );
+                var
+                deferred,
+                result,
+                parameter;
 
-                $.when( promise )
+                if ( "string" === typeof validator ) {
+                    validator = settings.validators[ validator ];
+                } else {
+
+                    /** Use the first validator, ignore others */
+                    var key = Object.keys( validator )[0];
+                    validator = target.data( "validator-" + key );
+                    parameter = validator[ key ];
+                }
+
+                result = validator.call( settings.validators, target.val(), parameter, target );
+
+                if ( result === false ) {
+                    deferred = $.Deferred();
+                    deferred.reject();
+                } else {
+                    deferred = result;
+                }
+
+                $.when( deferred )
                     .fail( function() {
                         target
                         .removeClass( settings.class4success )
@@ -99,11 +134,13 @@
                         .off( "mouseleave", mouseleave );
                     } );
 
-                deferreds.push( promise );
+                deferreds.push( deferred );
 
                 target.off( "change", change ).on( "change"
                         , { args: { target: target, validator: validator, settings: settings } }
                         , change );
+
+                return result;
             }
 
             if ( shims instanceof Array && shims.length ) {
@@ -112,17 +149,30 @@
             }
 
             for ( var i = eles.length; --i >= 0; ) {
+
                 var
                 ele = eles.eq( i ),
-                validator = settings.validators[ ele.attr( "data-validation" )[ "toUpperCase" ]() ];
+                messages = getMessage( ele ),
+                validators = ele.attr( "validators" );
 
-                typeof validator === "function" && handle( ele, validator );
+                try {
+                    validators = eval( validators );
+                } catch( ex ) {
+                    validators = [];
+                }
+
+                for ( var i = 0, length = validators.length; i < length; ++i ) {
+
+                    if ( !handle( ele, validators[ i ] ) ) {
+                        break;
+                    }
+                }
             }
 
             return $.when.apply( $, deferreds );
         },
 
-        clear: function() {
+        clean: function() {
 
         }
     };
@@ -133,7 +183,7 @@
         instance = this.data( namespace );
 
         if ( !instance ) {
-            instance = new Validation( this, $.extend( {}, $.fn.validation.defaults, options ) );
+            instance = new Validation( this, $.extend( true, {}, $.fn.validation.defaults, options ) );
             this.data( namespace, instance );
         }
 
@@ -145,7 +195,7 @@
 
         class4error     : "error",
         class4success   : "success",
-        selector        : ":input[data-validation]:visible:not(button)",
+        selector        : ":input[validators]:visible:not(button)",
 
         validators      : $.extend( {}, {
 

@@ -10,5 +10,10 @@ define( [ "ui/validation/validation-ng" ], function() {
         $scope.push = function( info ) {
             console.log( info );
         };
+
+        $scope.uniqueName = function( name ) {
+
+            return name !== "abc";
+        };
     } ] );
 } );
