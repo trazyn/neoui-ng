@@ -1,0 +1,373 @@
+
+<title>Validation - Neoui-ng</title>
+
+<ul id="anchors">
+    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
+    <li class="item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="item">Markup</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="sValidation" class="item">Directive * s-validation</li>
+        </ul>
+    </li>
+    <li class="item">jQuery
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="validation" ng-controller="validationController">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+
+        <div class="wrap">
+            <s-validation class="ui form">
+                <p>
+                <input class="ui text" ng-model="info.name"
+                   validators="[ 'required', { min: 6 }, { max: 12 }, { unique: uniqueName } ]"
+                   messages="[ { required: 'This field is required' }, { unique: 'This name has exists' } ]"
+                   placeholder="Please enter your name" />
+                </p>
+
+                <p>
+                <input class="ui text" ng-model="info.age" validators="[ 'required', 'number' ]" placeholder="Your age?" />
+                </p>
+                <p>
+                <input class="ui text" ng-model="info.email" validators="[ 'email' ]" placeholder="Yours email?" />
+                </p>
+                <p><input class="ui text" ng-model="info.phone" validators="[ 'phone' ]" placeholder="Phone number?" /></p>
+                <p>
+                <label class="ui select">
+                    <select ng-model="info.sex"
+                            validators="[ 'required' ]" >
+                            <option value="">Choose your gender</option>
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                    </select>
+                </label>
+
+                <input class="ui button transition primary" type="submit" ng-click="push( info )" >
+                </p>
+
+            </s-validation>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header>AngularJS</header>
+
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <xmp>
+            <s-tab-set tab-selected="selected" tab-on-selected="onSelected">
+                <s-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="\{\{ tab.title \}\}">
+                <div ng-bind-html="\{\{ tab.content \}\}"></div>
+                </s-tab>
+            </ng-tab-set>
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+            angular
+            .module( "app", [ "$ui.tab" ] )
+            .controller( "tabController", [ "$scope", function( $scope ) {
+
+                /** Set the default selected */
+                $scope.selected = "1";
+
+                $scope.tabs = [ {
+                    header: "Tab 1",
+                    content: "Content 1",
+                    index: "1",
+                    disabled: true
+                }, {
+
+                    header: "Tab 2",
+                    content: "Content 2",
+                    index: "2"
+                } ];
+
+                $scope.onSelected = function( scope ) {
+                    console.log( "Current selected: " + scope.index );
+                };
+            } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="sTabSet">
+                <span>Directive * s-tab-set</span>
+            </div>
+
+            <blockquote>
+                <p><code>=tab-selected</code> - <code>"0"</code></p>
+            </blockquote>
+            <p>默认选中项</p>
+            <br>
+
+            <blockquote>
+            <p><code>@tab-no-ripple</code> - <code>null</code></p>
+            </blockquote>
+            <p>If present, disable ink ripple effects</p>
+            <br>
+
+            <blockquote>
+                <p><code>@tab-no-lavalamp</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>设置<code>true</code>后取消滑动效果</p>
+            <br>
+
+            <blockquote>
+                <p><code>&tab-on-selected</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中后执行回调</p>
+            <br>
+
+            <blockquote>
+                <p><code>@tab-vertical</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>设置<code>true</code>后垂直显示</p>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="sTab">
+                <span>Directive * s-tab</span>
+            </div>
+
+            <blockquote>
+                <p><code>@tab-index</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>页签索引, 不可为空或重复</p>
+            <br>
+
+            <blockquote>
+                <p><code>=tab-disabled</code> - <code>false</code></p>
+            </blockquote>
+            <p>禁用页签</p>
+            <br>
+
+            <blockquote>
+                <p><code>@tab-header</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>页签标题</p>
+            <br/>
+
+            <blockquote>
+            <p><code>@tab-template-url</code> - <code>null</code></p>
+            </blockquote>
+            <p>通过指定URL加载内容</p>
+
+        </section>
+    </div>
+
+    <br>
+    <br>
+
+    <header>jQuery</header>
+
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+            <div class="ui tab" style="min-height: 300px;">
+                <div class="nav">
+                    <div class="item selected" data-index="github">Github</div>
+                    <div class="item selected" data-index="dribbble">Dribbble</div>
+                    <div class="item selected" data-index="twitter">Twitter</div>
+                </div>
+
+                <div class="content">
+                    <div data-index="github"></div>
+                    <div data-index="dribbble"></div>
+                    <div data-index="twitter"></div>
+                </div>
+            </div>
+            </xmp>
+            <blockquote>
+                <p><code>Ajax</code>页面的加载, 添加<code>data-page="url"</code>属性</p>
+            </blockquote>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).tab( options )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+            <xmp>
+            $( ".ui.tab" ).tab( { duration: 500 } );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>rule</code> - <code>"data-index"</code></p>
+            </blockquote>
+            <p>页签和内容映射</p>
+            <br>
+
+            <blockquote>
+            <p><code>class4loading</code> - <code>"loading"</code></p>
+            </blockquote>
+            <p><code>Ajax</code>加载内容时作用于页签样式</p>
+            <br>
+
+            <blockquote>
+                <p><code>class4error</code> - <code>"error"</code>
+                </p>
+            </blockquote>
+            <p><code>Ajax</code>加载失败时作用于页签样式</p>
+            <br>
+
+            <blockquote>
+                <p><code>ripple</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>If present, enable ink ripple effects</p>
+            <br>
+
+            <blockquote>
+                <p><code>duration</code> - <code>300</code>
+                </p>
+            </blockquote>
+            <p>设置<code>lavalamp</code>后, 动画时间, 单位毫秒</p>
+            <br>
+
+            <blockquote>
+                <p><code>onSelect</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>取值为<code>function</code>时, 页签选中后执行该方法, 取值为<code>Hash</code>对象时, 通过<code>data-index</code>执行对应回调</p>
+            <xmp>
+            $( ".ui.tab" ).tab( {
+                onSelect: {
+
+                    "github": function( tab, settings ) {
+                        console.log( "Github" );
+                    },
+
+                    "dribbble": function( tab, settings ) {
+                        console.log( "Dribbble" );
+                    }
+                }
+            } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <p><code>tab.add( items )</code>
+            </p>
+
+            <blockquote>
+                <p><code>items</code> - Object/Array</p>
+            </blockquote>
+            <p>新增一个或多个<code>tab</code></p>
+            <xmp>
+            {
+                name - 新增页签显示(HTML)
+                index - 页签索引值
+                render - 内容渲染, 返回内容
+                immediate - render不为空时, 是否立即加载内容, 默认 false
+                page - 通过指定URL加载内容
+            }
+            </xmp>
+            <br>
+            <br>
+
+            <p><code>tab.remove( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>移除指定<code>tab</code></p>
+            <br>
+            <br>
+
+            <p><code>tab.getTab( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>获取指定<code>tab</code>的DOM</p>
+            <br>
+            <br>
+
+            <p><code>tab.active( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>选中对应<code>tab</code></p>
+            <br>
+            <br>
+
+            <p><code>tab.isActive( index )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String</p>
+            </blockquote>
+            <p>判断对应<code>tab</code>是否被选中</p>
+            <br>
+            <br>
+
+            <p><code>tab.disabled( [index] )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String/Array</p>
+            </blockquote>
+            <p>禁用<code>tab</code>, 参数空时禁用所有<code>tab</code></p>
+            <br>
+            <br>
+
+            <p><code>tab.enabled( [index] )</code>
+            </p>
+            <blockquote>
+                <p><code>index</code> - String/Array</p>
+            </blockquote>
+            <p>取消禁用, 参数空时取消所有已禁用<code>tab</code></p>
+        </section>
+    </div>
+</section>

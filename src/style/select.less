@@ -6,6 +6,7 @@
     padding: 7px 30px;
     position: relative;
     margin: 10px;
+    transition: .2s;
 
     select {
         width: auto;
@@ -33,5 +34,9 @@
         border-right: .35em solid transparent;
         border-top: .375em solid #009688;
         pointer-events: none;
+    }
+
+    &:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,.2);
     }
 }

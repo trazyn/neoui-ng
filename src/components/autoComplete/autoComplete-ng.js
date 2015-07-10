@@ -104,6 +104,7 @@ angular.module( "$ui.autoComplete", [] )
 
                     autoComplete.setupCache();
                     settings.localMatch = value;
+                    autoComplete.val( autoComplete.val() );
                 }
             } );
 
