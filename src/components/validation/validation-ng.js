@@ -42,11 +42,48 @@ angular.module( "$ui.validation", [] )
 
         function link( $scope, $element, $attrs, undefined, transclude ) {
 
-            var validation;
+            var
+            selector4inputs = ":input[validators]:visible:not(:button)",
+            eles,
+            validation,
+            custom = {};
+
+            function parse( names, values ) {
+
+                values = values.slice( -names.length );
+
+                for ( var i = 0, length = values.length; i < length; ++i ) {
+
+                    var
+                    value = values[i],
+                    key = "object" === typeof value && Object.keys( value )[0],
+                    handler = key && value[ key ];
+
+                    if ( typeof handler === "function" ) {
+                        custom[ names[i].replace( /^:\s*/, "" ) ] = handler;
+                    }
+                }
+            }
 
             $element.html( transclude( $scope ) );
 
-            validation = $( $element ).validation();
+            eles = $element.find( selector4inputs );
+
+            for ( var i = eles.length; --i >= 0; ) {
+
+                var validators = eles[i].getAttribute( "validators" );
+
+                try {
+                    eval( validators );
+                } catch ( ex ) {
+                    parse( validators.match( /:\s*(\w+)/g ), $scope.$eval( validators ) );
+                }
+            }
+
+            validation = $element.validation( {
+                selector    : selector4inputs,
+                custom      : custom
+            } );
 
             $element
             .find( "input:submit" )
@@ -54,9 +91,9 @@ angular.module( "$ui.validation", [] )
             /** Validate the form */
             .on( "click", function( e ) {
 
-                if ( !validation.validate() ) {
+                validation.validate().fail( function() {
                     e.stopImmediatePropagation();
-                }
+                } );
 
                 e.preventDefault();
             } )
@@ -72,7 +109,7 @@ angular.module( "$ui.validation", [] )
         return {
             transclude  : true,
             replace     : true,
-            template    : "<div class='ui form'></div>",
+            template    : "<form class='ui form validation'></form>",
             link        : link
         };
     } );

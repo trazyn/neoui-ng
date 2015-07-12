@@ -7,25 +7,30 @@
 
     Validation = function( container, settings ) {
 
+        var self = this;
+
         this.$node = container;
         this.settings = settings;
+
+        container.delegate( ":reset", "click", function() {
+            self.clean();
+        } );
     };
 
     function mouseenter( e ) {
 
         var
         self = $( this ),
-        args = e.data.args,
-        message = self.attr( "data-validation-message" ),
+        message = e.data.message,
         offset = self.offset(),
         tooltip;
 
         if ( self.is( ".tooltiped" ) ) { return; }
 
-        tooltip = $( "<div class='ui tooltip error arrow down animate scale'><p>" + (message || args.message) + "</p></div>" )
+        tooltip = $( "<div class='ui validation message'><p>" + message + "</p></div>" )
             .css( {
                 "position": "absolute",
-                "top": offset.top + 10,
+                "top": offset.top - 30,
                 "left": offset.left
             } )
             .appendTo( document.body );
@@ -42,29 +47,36 @@
         var tooltip = e.data.tooltip;
 
         tooltip.removeClass( "show" );
-        setTimeout( function() { tooltip.remove(); }, 333 );
+        setTimeout( function() { tooltip.remove(); }, 300 );
         e.data.target.removeClass( "tooltiped" );
+    }
+
+    function clean( target, settings ) {
+
+        target
+        /** Remove all events and classes */
+        .removeClass( settings.class4error )
+        .removeClass( settings.class4success )
+        .off( "mouseenter", mouseenter )
+        .off( "mouseleave", mouseleave )
+        .removeClass( "tooltiped" )
+        .removeData( "tooltip" );
     }
 
     function change( e ) {
 
         var
-        settings = e.data.args.settings,
+        instance = e.data.args.instance,
+        settings = instance.settings,
         target = e.data.args.target,
+        parameter = e.data.args.parameter,
         validator = e.data.args.validator;
 
-        $.when( validator.call( target ) )
+        $.when( validator.call( settings.validators, target.val(), parameter, target, instance ) )
             .done( function() {
                 var tooltip = target.data( "tooltip" );
 
-                target
-                    /** Remove all events and classes */
-                    .removeClass( settings.class4error )
-                    .removeClass( settings.class4success )
-                    .off( "mouseenter", mouseenter )
-                    .off( "mouseleave", mouseleave )
-                    .removeClass( "tooltiped" )
-                    .removeData( "tooltip" );
+                clean( target, settings );
 
                 tooltip && tooltip.remove();
             } );
@@ -74,6 +86,7 @@
         validate: function() {
 
             var
+            self = this,
             settings = this.settings,
             deferreds = [],
             eles = this.$node.find( settings.selector ),
@@ -83,33 +96,47 @@
 
                 var
                 messages = target.attr( "messages" ),
-                matched = (messages || "").match( /(\w+\s*:\s*'[^']+')+/g );
+                matched = (messages || "").match( /(\w+\s*:\s*'[^']+')+/g ) || [];
 
                 messages = {};
 
-                for ( var expr = matched.pop().split( ":" ); matched.length; ) {
+                while ( matched.length ) {
+                    var expr = matched.pop().split( ":" );
                     messages[ expr[0].trim() ] = expr[1].replace( /^\s*'|'\s*/g, "" );
                 }
+
+                return messages;
             }
 
-            function handle( target, validator ) {
+            function handle( target, validator, messages ) {
 
                 var
                 deferred,
                 result,
-                parameter;
+                parameter,
+                message;
 
                 if ( "string" === typeof validator ) {
+                    message = messages[ validator ];
                     validator = settings.validators[ validator ];
                 } else {
 
+                    var
                     /** Use the first validator, ignore others */
-                    var key = Object.keys( validator )[0];
-                    validator = target.data( "validator-" + key );
+                    key = Object.keys( validator )[0],
                     parameter = validator[ key ];
+                    validator = settings.validators[ key ],
+                    message = messages[ key ];
+
+                    if ( !validator && parameter instanceof Function ) {
+                        validator = parameter;
+                        parameter = void 0;
+                    }
                 }
 
-                result = validator.call( settings.validators, target.val(), parameter, target );
+                message = message || settings.message;
+
+                result = validator.call( settings.validators, target.val(), parameter, target, self );
 
                 if ( result === false ) {
                     deferred = $.Deferred();
@@ -118,13 +145,15 @@
                     deferred = result;
                 }
 
+                target = settings.parseElement( target, settings );
+
                 $.when( deferred )
                     .fail( function() {
                         target
                         .removeClass( settings.class4success )
                         .addClass( settings.class4error )
                         .off( "mouseenter", mouseenter )
-                        .on( "mouseenter", { args: this }, mouseenter );
+                        .on( "mouseenter", { message: message }, mouseenter );
                     } )
                     .done( function() {
                         target
@@ -137,7 +166,7 @@
                 deferreds.push( deferred );
 
                 target.off( "change", change ).on( "change"
-                        , { args: { target: target, validator: validator, settings: settings } }
+                        , { args: { target: target, validator: validator, parameter: parameter, instance: self } }
                         , change );
 
                 return result;
@@ -156,14 +185,17 @@
                 validators = ele.attr( "validators" );
 
                 try {
-                    validators = eval( validators );
+
+                    with ( settings.custom ) {
+                        validators = eval( validators );
+                    }
                 } catch( ex ) {
                     validators = [];
                 }
 
-                for ( var i = 0, length = validators.length; i < length; ++i ) {
+                for ( var m = 0, length = validators.length; m < length; ++m ) {
 
-                    if ( !handle( ele, validators[ i ] ) ) {
+                    if ( !handle( ele, validators[ m ], messages ) && settings.breakOnError ) {
                         break;
                     }
                 }
@@ -174,6 +206,14 @@
 
         clean: function() {
 
+            var settings = this.settings;
+
+            this
+            .$node
+            .find( settings.selector )
+            .each( function() {
+                clean( settings.parseElement( $( this ) ), settings );
+            } );
         }
     };
 
@@ -197,7 +237,38 @@
         class4success   : "success",
         selector        : ":input[validators]:visible:not(button)",
 
+        custom          : {},
+        message         : "Invalid input",
+        breakOnError    : true,
+
+        parseElement    : function( target ) {
+
+            var parent = target.parent();
+
+            if ( target.is( "select, :checkbox, :radio" ) && parent.is( ".ui.select, .ui.switch, .ui.radioes" ) ) {
+                return parent;
+            } else if ( target.is( ":checkbox" ) && (parent = target.parents( ".ui.checkboxes:first" ), parent.length) ) {
+                return parent;
+            }
+
+            return target;
+        },
+
         validators      : $.extend( {}, {
+
+            /** Field is required */
+            required: function( value, nothing, target, instance ) {
+
+                if ( target.is( ":checkbox" ) ) {
+                    return target.is( ":checked" );
+                } else if ( target.is( ":radio" ) ) {
+
+                    var name = target.attr( "name" );
+                    return !!instance.$node.find( ":radio[name='" + name + "']:checked" ).length;
+                }
+
+                return /[^\s]+/.test( value );
+            },
 
             /** Check if the value matches the comparison */
             equals: function( value, comparison ) {
@@ -221,7 +292,7 @@
 
             /** Is number under comparison parameter */
             min: function( value, comparison ) {
-                return value && comparison && +value.replace( /,/g, "" ) < comparison.replace( /,/g, "" );
+                return value && comparison && +value.replace( /,/g, "" ) < comparison.toString().replace( /,/g, "" );
             },
 
             /** Is number above comparison parameter */
@@ -230,13 +301,19 @@
             },
 
             /** String length is less length */
-            minLength: function( value, length ) {
-                return value && !isNan( +length ) && value.length < length;
+            minLength: function( value, length, target, instance ) {
+
+                if ( target.is( ":checkbox" ) ) {
+                    var name = target.attr( "name" );
+                    return instance.$node.find( ":checkbox[name='" + name + "']:checked" ).length > length;
+                }
+
+                return value && !isNaN( +length ) && value.length > length;
             },
 
             /** String length is greater than length */
-            maxLength: function( value, length ) {
-                return !this.minLength( value, length );
+            maxLength: function() {
+                return !this.minLength.apply( this, arguments );
             },
 
             /** Is a given date past? */
@@ -246,8 +323,8 @@
             },
 
             /** Is a given date future? */
-            future: function( value ) {
-                return !this.past( value );
+            future: function() {
+                return !this.past.apply( this, arguments );
             },
 
             /** Check if the value is a date that's after the specified date(defaults to now) */
@@ -257,21 +334,22 @@
             },
 
             /** Value that's before the specified date */
-            before: function( value, comparison ) {
+            before: function() {
                 !this.after.apply( this, arguments );
             }
         }, (function() {
 
             var
             regexps = {
-                required: /[^\s]+/,
                 int: /^(?:[-+]?(?:0|[1-9][0-9]*))$/,
                 float: /^(?:[-+]?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/,
                 alpha: /^[A-Z]+$/i,
                 numeric: /^[-+]?[0-9]+$/,
                 hexadecimal: /^[0-9a-fA-F]+$/,
                 alphaNumeric: /^[A-Za-z0-9]+$/,
-                email: /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e])|(\\[\x01-\x09\x0b\x0c\x0d-\x7f])))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))$/i,
+                uppercase: /[A-Z]+/,
+                lowercase: /[a-z]+/,
+                email: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i,
                 phone: /^(\+?0?86\-?)?1[345789]\d{9}$/,
                 url: /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i,
                 zipCode: /^[1-9]d{5}$/,
