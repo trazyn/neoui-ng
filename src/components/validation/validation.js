@@ -56,7 +56,6 @@
         target
         /** Remove all events and classes */
         .removeClass( settings.class4error )
-        .removeClass( settings.class4success )
         .off( "mouseenter", mouseenter )
         .off( "mouseleave", mouseleave )
         .removeClass( "tooltiped" )
@@ -150,7 +149,6 @@
                 $.when( deferred )
                     .fail( function() {
                         target
-                        .removeClass( settings.class4success )
                         .addClass( settings.class4error )
                         .off( "mouseenter", mouseenter )
                         .on( "mouseenter", { message: message }, mouseenter );
@@ -158,7 +156,6 @@
                     .done( function() {
                         target
                         .removeClass( settings.class4error )
-                        .addClass( settings.class4success )
                         .off( "mouseenter", mouseenter )
                         .off( "mouseleave", mouseleave );
                     } );
@@ -234,7 +231,6 @@
     $.fn.validation.defaults = {
 
         class4error     : "error",
-        class4success   : "success",
         selector        : ":input[validators]:visible:not(button)",
 
         custom          : {},
