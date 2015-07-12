@@ -129,7 +129,7 @@
 		symbol 			    : "data-anchor",
 		offset 			    : 0,
 
-		selector4anchor 	: "#anchors li",
+		selector4anchor 	: "#anchors li, a",
 		selector4content 	: "#container header, #canvas h3, .ui.ribbon"
 	};
 

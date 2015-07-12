@@ -122,7 +122,7 @@ angular.module( "$ui.validation", [] )
                 try {
                     eval( validators );
                 } catch ( ex ) {
-                    parse( validators.match( /:\s*(\w+)/g ), $scope.$eval( validators ) );
+                    parse( validators.match( /:\s*(\w+)/g ), $scope.$parent.$eval( validators ) );
                 }
             }
 

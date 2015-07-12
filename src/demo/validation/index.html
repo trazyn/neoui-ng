@@ -19,14 +19,17 @@
         </ul>
     </li>
 
-    <li class="item" data-anchor="validators">Validators
+    <li class="item">Validators
+
+        <ul>
             <li data-anchor="regular" class="item">Regular</li>
             <li data-anchor="radio" class="item">Radio</li>
             <li data-anchor="checkbox" class="item">Checkbox</li>
+        </ul>
     </li>
 </ul>
 
-<section id="validation" ng-controller="validationController">
+<section id="validation" ng-controller="validationController" ng-init="init()">
 
     <header data-anchor="example">Example</header>
 
@@ -242,7 +245,7 @@
             <blockquote>
                 <p><code>@validators</code> - <code>null</code></p>
             </blockquote>
-            <p>校验规则, 见<a href="" data-anchor="validators">Validators</a></p>
+            <p>校验规则, 见<a href="" data-anchor="regular">Validators</a></p>
             <br>
 
             <blockquote>
@@ -388,7 +391,7 @@
             <blockquote>
             <p><code>validators</code> - </p>
             </blockquote>
-            <p>检验规则, 详见<a href data-anchor="validator">Validators</a></p>
+            <p>检验规则, 详见<a href data-anchor="regular">Validators</a></p>
             <br>
 
             <blockquote>
@@ -415,6 +418,22 @@
                 </p>
             </blockquote>
             <p>自定义控制元素, 组模式校验中, 返回外层元素, 见源码部分</p>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <p><code>validation.validate()</code>
+            </p>
+            <p>检验表单, 返回<code>$.Deferred</code></p>
+            <br>
+            <br>
+
+            <p><code>validation.clean()</code>
+            </p>
+            <p>移除校验信息</p>
         </section>
     </div>
 
@@ -565,6 +584,8 @@
                 <span>Radio</span>
             </div>
             <p>可用规则: <code>required</code></p>
+            <br>
+            <br>
 
             <div class="ui ribbon" data-anchor="checkbox">
                 <span>Checkbox</span>

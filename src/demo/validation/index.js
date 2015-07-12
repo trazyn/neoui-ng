@@ -12,8 +12,11 @@ define( [ "ui/validation/validation-ng" ], function() {
         };
 
         $scope.uniqueName = function( name ) {
-
             return name !== "abc";
         };
+
+	    $scope.init = function() {
+            $( document.body ).anchor( { offset: 310 } );
+	    };
     } ] );
 } );
