@@ -5,7 +5,7 @@ define( [ "ui/modal/modal-ng", "ui/message/message-ng" ], function() {
 
 	angular
 	.module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
-	.controller( "modalController", [ "$scope", "$modal", "$message", function( $scope, $modal, $message ) {
+	.controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
 
         $scope.name = "trazyn";
 
@@ -18,28 +18,9 @@ define( [ "ui/modal/modal-ng", "ui/message/message-ng" ], function() {
 			} );
 		};
 
-		$scope.showSuccess = function() {
-			$message.success.apply( $message, arguments );
-		};
-		$scope.showError = function() {
-			$message.error.apply( $message, arguments );
-		};
-		$scope.showInfo = function() {
-			$message.info.apply( $message, arguments );
-		};
-		$scope.showWarn = function() {
-			$message.warn.apply( $message, arguments );
-		};
-		$scope.showConfirm = function() {
-
-			$message.confirm( {
-				title: "Please confirm",
-				message: "Exported successfully. Do you want to open the export query page?",
-				onOk: function() {
-					window.open( "//www.google.com", "_blank" );
-				}
-			} );
-		};
+	    $scope.init = function() {
+            $( document.body ).anchor( { offset: -80 } );
+	    };
 	} ] );
 } );
 

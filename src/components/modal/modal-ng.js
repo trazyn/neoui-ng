@@ -54,9 +54,7 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 
 				/** Overwite the jQuery plugin default settings */
 				render 	: html,
-				autoShow: true,
-				success : $.noop,
-				error 	: $.noop
+				autoShow: true
 			} );
 
 			if ( settings.controller ) {

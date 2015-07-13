@@ -7,34 +7,27 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		modal = $( template ),
 
 		close = function() {
-
 			$( document ).off( "keyup", closeByESC ).off( "click", closeByDocument );
 
-			options.unload instanceof Function && options.unload();
-
+			options.unload();
 			modal.removeClass( "show" );
-
 			setTimeout( function() { modal.remove(); }, 300 );
 		},
 
 		closeByESC = function( e ) {
-
 			27 === e.keyCode && close();
 		},
 
 		closeByDocument = function( e ) {
-
 			$( e.target ).hasClass( "overlay" ) && close();
 		},
 
 		loading = modal.find( ".ui.loading:first" ).loading( {
 
 			before: function() {
-
 				this.css( "z-index", 10000 );
 			},
 			after: function() {
-
 				this.css( "z-index", -999 );
 			}
 		} ),
@@ -42,15 +35,12 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		progress = modal.find( ".ui.progress:first" ).progress( {
 
 			seed: 0.7,
-
 			render: function( status, icon ) {
-
 				this.css( {
 					"-webkit-transform": "translate3d(-" + status + "%,0px,0px)",
 					"transition": "all 200ms ease",
 					"-webkit-transition": "all 200ms ease"
 				} );
-
 				icon.css( {
 					"top": 54,
 					"right": 14
@@ -94,13 +84,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			/** Do something for init */
 			deferred
-
-			.done( function() {
-				typeof options.success === "function" && options.success.call( body, loading, close );
-			} )
-			.fail( function() {
-				typeof options.error === "function" && options.error.call( body, loading, close );
-			} )
 			.always( function() {
 
 				true === options.fadeIn && setTimeout( function() { body.removeClass( "out" ); } );
@@ -125,7 +108,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			setTimeout( function() {
 				modal.first().addClass( "show" );
-			}, 77 );
+			}, 100 );
 
 			if ( options.selector4drag ) {
 
@@ -161,7 +144,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 	noop = function() {},
 
 	template = [ "<div class='ui modal animate'>",
-
 				"<div style='height: 100%;'>",
 					"<h3 class='title'></h3><div class='icon close transition rotate'></div>",
 					"<div class='ui loading'></div>",
@@ -194,8 +176,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		animate 	    : "slide",
 		render 		    : "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
 
-		success 	    : noop,
-		error 		    : noop,
 		unload 		    : noop,
 	};
 
