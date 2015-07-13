@@ -157,6 +157,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 	$.fn.modal.defaults = {
 
 		title 		    : "Modal.JS",
+		class4dialog    : "",
 
 		css 		    : {},
 		attr 		    : {},

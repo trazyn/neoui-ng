@@ -22,12 +22,11 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 	Modal = function( options ) {
 
 		var
-
 		$modal,
-
 		controller,
 		scope,
-
+        settings,
+		html,
 		deferred;
 
 		if ( !options.template && !options.templateUrl ) {
@@ -35,43 +34,49 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 		}
 
 		if ( options.template ) {
-			deferred = $q.when( options.template );
+            html = options.template;
 		} else {
-			deferred = $http.get( options.templateUrl, {
-				cache: $templateCache
-			} )
-			.then( function( html ) {
-				return response.data;
-			} );
+
+            deferred = $.Deferred();
+
+            html = function( deferred, loading, close ) {
+                var
+                self = $( this );
+
+                deferred = $.ajax( {
+                    url: options.templateUrl,
+                    dataType: "html"
+                } )
+                .done( function( data ) {
+                    self.html( data );
+                } );
+            };
 		}
 
-		$q
-		.when( deferred )
-		.then( function( html ) {
+        settings = angular.extend( {}, defaults, options, {
 
-			var
-			settings = angular.extend( {}, defaults, options, {
+            /** Overwite the jQuery plugin default settings */
+            render 	: html,
+            autoShow: true
+        } );
 
-				/** Overwite the jQuery plugin default settings */
-				render 	: html,
-				autoShow: true
-			} );
+        $modal = $.modal( settings );
 
-			if ( settings.controller ) {
+        $.when( deferred ).done( function() {
 
-				scope = (settings.scope || $rootScope).$new();
-				controller = $controller( settings.controller, { $scope: scope } );
+            if ( settings.controller ) {
+                scope = (settings.scope || $rootScope).$new();
+                controller = $controller( settings.controller, { $scope: scope } );
 
-				if ( typeof settings.controllerAs === "string" ) {
-					scope[ settings.controllerAs ] = controller;
-				}
-			}
+                if ( typeof settings.controllerAs === "string" ) {
+                    scope[ settings.controllerAs ] = controller;
+                }
+            }
 
-			$modal = $.modal( settings );
-			$compile( $modal.$node )( scope );
+            $compile( $modal.$node )( scope );
+        } );
 
-			return $modal;
-		} );
+        return $modal;
 	};
 
 	return {

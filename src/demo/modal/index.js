@@ -7,7 +7,7 @@ define( [ "ui/modal/modal-ng", "ui/message/message-ng" ], function() {
 	.module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
 	.controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
 
-        $scope.name = "trazyn";
+        $scope.name = "test";
 
 		$scope.open = function( animate ) {
 
