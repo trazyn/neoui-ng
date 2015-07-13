@@ -4,6 +4,18 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 	$.fn.modal = function( options ) {
 
 		var
+
+        template = [ "<div class='ui modal animate'>",
+                    "<div style='height: 100%;'>",
+                        "<h3 class='title'></h3><div class='icon close transition rotate'></div>",
+                        "<div class='ui loading'></div>",
+                        "<div class='ui progress'></div>",
+                        "<div class='content'></div>",
+                    "</div>",
+
+                "</div>",
+                "<div class='ui overlay'></div>" ].join( "" ),
+
 		modal = $( template ),
 
 		close = function() {
@@ -67,6 +79,8 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				body.html( options.render );
 				deferred.resolve();
 			}
+
+			body.addClass( settings.class4modal );
 
 			modal.delegate( ".close", "click", close );
 
@@ -140,24 +154,10 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		};
 	};
 
-	var
-	noop = function() {},
-
-	template = [ "<div class='ui modal animate'>",
-				"<div style='height: 100%;'>",
-					"<h3 class='title'></h3><div class='icon close transition rotate'></div>",
-					"<div class='ui loading'></div>",
-					"<div class='ui progress'></div>",
-					"<div class='content'></div>",
-				"</div>",
-
-			"</div>",
-			"<div class='ui overlay'></div>" ].join( "" );
-
 	$.fn.modal.defaults = {
 
 		title 		    : "Modal.JS",
-		class4dialog    : "",
+		class4modal     : "",
 
 		css 		    : {},
 		attr 		    : {},
@@ -177,7 +177,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		animate 	    : "slide",
 		render 		    : "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
 
-		unload 		    : noop,
+		unload 		    : $.noop,
 	};
 
 	/** Export to $ */
