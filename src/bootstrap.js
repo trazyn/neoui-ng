@@ -11,7 +11,7 @@ require.config( {
 } );
 
 require( [
-        "ui/anchor/anchor",
+        "ui/sidenav/sidenav-ng",
         "demo/modal/index",
         "demo/tab/index",
         "demo/message/index",
@@ -22,7 +22,7 @@ require( [
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation" ] )
+	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
@@ -48,7 +48,14 @@ require( [
 			.otherwise( {
 				redirectTo: "/home"
 			} );
-	} ] );
+	} ] )
+
+    .controller( "mainController", [ "$scope", function( $scope ) {
+
+        $scope.openMenu = function( menu ) {
+            menu.right();
+        };
+    } ] );
 
 	angular.bootstrap( document, [ "neoui" ] );
 } );
