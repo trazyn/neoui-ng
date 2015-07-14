@@ -14,16 +14,22 @@ define( [ "ui/modal/modal" ], function() {
 
     $.slidenav = function( options ) {
 
+        var instance;
+
         return {
 
             right   : function() {
                 options.class4nav += " right";
-                return show( options );
+                return (instance = show( options ));
             },
 
             left    : function() {
                 options.class4nav += " left";
-                return show( options );
+                return (instance = show( options ));
+            },
+
+            close   : function() {
+                instance && instance.close();
             }
         };
     };

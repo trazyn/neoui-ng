@@ -11,6 +11,7 @@ require.config( {
 } );
 
 require( [
+        "ui/anchor/anchor",
         "ui/sidenav/sidenav-ng",
         "demo/modal/index",
         "demo/tab/index",
@@ -50,11 +51,21 @@ require( [
 			} );
 	} ] )
 
-    .controller( "mainController", [ "$scope", function( $scope ) {
+    .controller( "mainController", [ "$scope", "$location", function( $scope, $location ) {
 
         $scope.openMenu = function( menu ) {
-            menu.right();
+
+            menu
+            .right()
+            .$node
+            .delegate( "[data-url]", "click", function( e ) {
+                $location.path( "/" + this.getAttribute( "data-url" ) );
+                menu.close();
+                $scope.$apply();
+            } );
         };
+
+        $scope.menu;
     } ] );
 
 	angular.bootstrap( document, [ "neoui" ] );
