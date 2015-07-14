@@ -1,0 +1,40 @@
+
+@import (reference) "../../style/main.less";
+
+.ui.toast {
+    background: none;
+    color: white;
+    padding: 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+    border-radius: 10px;
+
+    &.top {
+        left: 75px;
+        top: 45px;
+        transform: none;
+    }
+
+    .content {
+        padding: 10px 20px;
+        min-height: 32px;
+        line-height: 32px;
+        max-width: 240px;
+        word-wrap: break-word;
+    }
+
+    .message, .close {
+        display: inline-block;
+        margin: 0;
+    }
+
+    .message {
+        width: 85%;
+    }
+
+    .close {
+        width: 10%;
+        top: 10px;
+        right: 22px;
+        vertical-align: top;
+    }
+}

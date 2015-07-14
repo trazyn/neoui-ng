@@ -5,10 +5,10 @@ define( [ "ui/modal/modal" ], function() {
 
 		var defaults = {
 
-			showHead 	: false,
+			showHead 	    : false,
 			showOverlay 	: true,
 			showProgress 	: false,
-			fadeIn 		: false
+			fadeIn 		    : false
 		};
 
 		setTimeout( function() {
@@ -51,14 +51,11 @@ define( [ "ui/modal/modal" ], function() {
 					} );
 
 					if ( delay = +delay, delay > 100 ) {
-
 						setTimeout( close, delay );
 					}
-
 					ready.resolve();
 				}
 			};
-
 			show( options );
 		},
 
@@ -72,7 +69,6 @@ define( [ "ui/modal/modal" ], function() {
 								"<div class='flag'><i class='icon'></i></div>",
 								"<div class='content'><p>", message, "</p></div>",
 							"</div>" ];
-
 					this.parent().css( "overflow", "visible" );
 
 					this

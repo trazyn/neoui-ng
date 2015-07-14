@@ -42,8 +42,11 @@ require( [
 		    .when( "/validation", {
 		        templateUrl: "/src/demo/validation/index.html"
 		    } )
+		    .when( "/home", {
+		        templateUrl: "/src/demo/home/index.html"
+		    } )
 			.otherwise( {
-				redirectTo: "/tab"
+				redirectTo: "/home"
 			} );
 	} ] );
 

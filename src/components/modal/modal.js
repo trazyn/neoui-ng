@@ -80,12 +80,10 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				deferred.resolve();
 			}
 
-			body.addClass( settings.class4modal );
-
 			modal.delegate( ".close", "click", close );
 
 			/** Set animate */
-			modal.addClass( options.animate );
+			modal.addClass( options.animate ).addClass( options.class4modal );
 
 			/** Show the overlay */
 			overlay.addClass( options.showOverlay ? "show" : "blank" );
