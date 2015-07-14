@@ -2,8 +2,31 @@
 s-sidenav {
     display: none;
 }
-.ui.modal.right.show > div {
-    overflow: auto;
+.ui.modal {
+
+    &.animate {
+        &.right {
+            opacity: 0;
+            transition: all .3s;
+            top: 0;
+            left: -300px;
+            -webkit-transform: translateX(0) translateY(0);
+            -moz-transform: translateX(0) translateY(0);
+            -ms-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+
+            &.show {
+
+                >div {
+                    overflow: auto;
+                }
+
+                left: 0px;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
 }
 
 .ui.sldenav {
