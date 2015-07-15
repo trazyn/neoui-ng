@@ -8,28 +8,17 @@
 		position: absolute;
 		background: rgba(0, 0, 0, .15);
 		border-radius: 100%;
-		-webkit-transform: scale(0);
-		-ms-transform: scale(0);
 		transform: scale(0);
 		pointer-events: none;
 
 		&.show {
-			-webkit-animation: ripple-icon .5s ease-out;
 			animation: ripple-icon .5s ease-out;
 		}
 	}
 }
 
-@-webkit-keyframes ripple-icon {
-    to {
-        -webkit-transform: scale(2);
-        transform: scale(2);
-        opacity: 0;
-    }
-}
 @keyframes ripple-icon {
     to {
-        -webkit-transform: scale(2);
         transform: scale(2);
         opacity: 0;
     }

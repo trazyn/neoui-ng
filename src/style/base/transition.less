@@ -1,9 +1,5 @@
 
 .transition {
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -ms-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     &.fade {
         transition: opacity 200ms linear 400ms;
@@ -15,38 +11,24 @@
         }
     }
 
-    &.slide {
-        opacity: 0;
-        transition: all .3s linear;
-        &.down {
-            opacity: 1;
-            -webkit-transform: translateY(-50px);
-            -moz-transform: translateY(-50px);
-            -ms-transform: translateY(-50px);
-            transform: translateY(-50px);
-        }
-
-        &.up {
-            opacity: 1;
-            -webkit-transform: translateY(50px);
-            -moz-transform: translateY(50px);
-            -ms-transform: translateY(50px);
-            transform: translateY(50px);
-        }
-    }
-
     &.rotate {
         &:hover {
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
             transform: rotate(360deg);
         }
     }
 
     &.pulse {
         &:hover {
+            animation: pulse 1.6s infinite linear;
         }
     }
 }
 
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.04);
+    }
+}

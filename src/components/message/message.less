@@ -2,9 +2,9 @@
 @import (reference) "../../style/main.less";
 
 .ui.message {
-	
+
 	#variation( @color, @content ) {
-	
+
 		background-color: lighten( @color, 10% );
 		i.icon:after {
 			content: @content;
@@ -27,8 +27,6 @@
 		padding: 30px;
 		text-align: center;
 		background-color: rgba(0, 0, 0, 0.25);
-		-webkit-transform: translateX(-1px);
-		-moz-transform: translateX(-1px);
 		transform: translateX(-1px);
 
 		>i.icon {
@@ -45,7 +43,7 @@
 		color: white;
 
 		> p {
-			margin-bottom: 0;	
+			margin-bottom: 0;
 		}
 	}
 
@@ -67,10 +65,10 @@
 
 	/**  Patch*/
 	&.tooltip {
-		
+
 		&:before {
 			bottom: 115%;
-			left: 15px;		
+			left: 15px;
 		}
 
 		&:after {
