@@ -1,0 +1,206 @@
+
+@import (reference) "../../style/main.less";
+
+#color {
+	width: 900px;
+	height: 840px;
+	margin: 0 auto;
+
+	header {
+
+		text-align: center;
+		margin: 25px 0;
+		padding-bottom: 25px;
+
+		font-size: 14px;
+
+		h1 {
+
+			font-weight: 200;
+			font-size: 3.5rem;
+			color: #656D78;
+			text-align: center;
+		}
+	}
+
+	.box {
+
+		font-family: "Roboto", Sans-serif;
+		line-height: 24px;
+		width: 200px;
+		background-color: #FFFFFF;
+		display: block;
+		float: left;
+		margin: 10px;
+
+		transition: .3s;
+
+		&:hover {
+			box-shadow: 0 1px 24px rgba(0, 0, 0, 0.24);
+		}
+
+		h1 {
+			font-weight: 400;
+			font-size: 14px;
+			color: #494A4A;
+			display: block;
+			width: 100%;
+			padding: 5px 0px 0px 5px;
+		}
+
+		p {
+
+			font-weight: 300;
+			font-size: 11px;
+			color: #999999;
+			display: block;
+			float: left;
+			padding: 5px 0px 5px 5px;
+		}
+	}
+
+	.left {
+
+		width: 100px;
+		height: 60px;
+		background-color: #000;
+		display: block;
+		float: left;
+
+		&.grape {
+			background-color: @grape;
+		}
+
+		&.bittersweet {
+			background-color: @bittersweet;
+		}
+
+		&.sunflower {
+			background-color: @sunflower;
+		}
+
+		&.grass {
+			background-color: @grass;
+		}
+
+		&.mint {
+			background-color: @mint;
+		}
+
+		&.aqua {
+			background-color: @aqua;
+		}
+
+		&.blueJeans {
+			background-color: @blueJeans;
+		}
+
+		&.lavender {
+			background-color: @lavender;
+		}
+
+		&.pinkRose {
+			background-color: @pinkRose;
+		}
+
+		&.lightGray {
+			background-color: @lightGray;
+		}
+
+		&.mediumGray {
+			background-color: @mediumGray;
+		}
+
+		&.darkGray {
+			background-color: @darkGray;
+		}
+
+		&.success {
+			background-color: @success;
+		}
+
+		&.error {
+			background-color: @error;
+		}
+
+		&.info {
+			background-color: @info;
+		}
+
+		&.warn {
+			background-color: @warn;
+		}
+	}
+
+	.right {
+		width: 100px;
+		height: 60px;
+		background-color: #000;
+		display: block;
+		float: left;
+
+		&.grape {
+			background-color: @grape2;
+		}
+
+		&.bittersweet {
+			background-color: @bittersweet2;
+		}
+
+		&.sunflower {
+			background-color: @sunflower2;
+		}
+
+		&.grass {
+			background-color: @grass2;
+		}
+
+		&.mint {
+			background-color: @mint2;
+		}
+
+		&.aqua {
+			background-color: @aqua2;
+		}
+
+		&.blueJeans {
+			background-color: @blueJeans2;
+		}
+
+		&.lavender {
+			background-color: @lavender2;
+		}
+
+		&.pinkRose {
+			background-color: @pinkRose2;
+		}
+
+		&.lightGray {
+			background-color: @lightGray2;
+		}
+
+		&.mediumGray {
+			background-color: @mediumGray2;
+		}
+
+		&.darkGray {
+			background-color: @darkGray2;
+		}
+
+		&.success {
+			background-color: darken( @success, 5% );
+		}
+
+		&.error {
+			background-color: darken( @error, 5% );
+		}
+
+		&.info {
+			background-color: darken( @info, 5% );
+		}
+
+		&.warn {
+			background-color: darken( @warn, 5% );
+		}
+	}
+}

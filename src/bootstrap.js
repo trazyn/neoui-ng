@@ -28,6 +28,12 @@ require( [
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
 		$routeProvider
+		    .when( "/home", {
+		        templateUrl: "/src/demo/home/index.html"
+		    } )
+			.when( "/color", {
+				templateUrl: "/src/demo/color/index.html"
+			} )
 			.when( "/modal", {
 				templateUrl: "/src/demo/modal/index.html"
 			} )
@@ -42,9 +48,6 @@ require( [
 		    } )
 		    .when( "/validation", {
 		        templateUrl: "/src/demo/validation/index.html"
-		    } )
-		    .when( "/home", {
-		        templateUrl: "/src/demo/home/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"
