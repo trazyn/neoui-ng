@@ -5,12 +5,37 @@
     background: none;
     color: white;
     padding: 0;
-    box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
-    border-radius: 10px;
 
-    &.top {
-        left: 75px;
-        top: 45px;
+    > div {
+        box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+        width: 240px;
+    }
+
+    &.topleft {
+        left: 35px;
+        top: 15px;
+        transform: none;
+    }
+
+    &.topright {
+        right: 35px;
+        top: 15px;
+        left: initial;
+        transform: none;
+    }
+
+    &.bottomleft {
+        top: initial;
+        left: 35px;
+        bottom: 15px;
+        transform: none;
+    }
+
+    &.bottomright {
+        top: initial;
+        left: initial;
+        right: 35px;
+        bottom: 15px;
         transform: none;
     }
 
@@ -20,6 +45,8 @@
         line-height: 32px;
         max-width: 240px;
         word-wrap: break-word;
+        color: white;
+        background-color: rgba(0,0,0,.8);
     }
 
     .message, .close {
@@ -28,13 +55,14 @@
     }
 
     .message {
-        width: 85%;
+        width: 88%;
     }
 
     .close {
         width: 10%;
         top: 10px;
-        right: 22px;
+        float: right;
+        right: 16px;
         vertical-align: top;
     }
 }
