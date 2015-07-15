@@ -55,11 +55,14 @@ require( [
 
         $scope.openMenu = function( menu ) {
 
+            $scope.title = location.hash.split( "/" )[1];
+
             menu
-            .right()
+            .left()
             .$node
             .delegate( "[data-url]", "click", function( e ) {
                 $location.path( "/" + this.getAttribute( "data-url" ) );
+                document.body.scrollTop = 0;
                 menu.close();
                 $scope.$apply();
             } );

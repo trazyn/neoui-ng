@@ -5,7 +5,7 @@ s-sidenav {
 .ui.modal {
 
     &.animate {
-        &.right {
+        &.left {
             opacity: 0;
             transition: all .3s;
             top: 0;
@@ -22,6 +22,28 @@ s-sidenav {
                 }
 
                 left: 0px;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &.right {
+            opacity: 0;
+            transition: all .3s;
+            top: 0;
+            right: -300px;
+            -webkit-transform: translateX(0) translateY(0);
+            -moz-transform: translateX(0) translateY(0);
+            -ms-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+
+            &.show {
+
+                >div {
+                    overflow: auto;
+                }
+
+                right: 0px;
                 opacity: 1;
                 visibility: visible;
             }

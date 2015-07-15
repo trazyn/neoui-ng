@@ -45,11 +45,13 @@ bs, gulp = require( "gulp" )
 
 		var
 		dest = pkg.dest,
-		minifyCSS = require( "gulp-minify-css" );
+		minifyCSS = require( "gulp-minify-css" ),
+		autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 2 versions" ] } ),
+		cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true } );
 
 		return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "src/demo/**/*.less" ] )
 			.pipe( debug() )
-			.pipe( less() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( "css.css" ) )
 			.pipe( gulp.dest( dest ) )
 			.pipe( minifyCSS() )
