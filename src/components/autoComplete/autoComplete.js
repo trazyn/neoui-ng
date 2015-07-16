@@ -258,6 +258,7 @@
 		function move( current, direction ) {
 
 			if ( data && !data.length
+			        || !self.list.hasClass( "show" )
 					|| (settings.ajax && settings.ajax.request && settings.ajax.request.state() === "pending") ) {
 						return;
 					}

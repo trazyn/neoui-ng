@@ -53,6 +53,7 @@
         box-shadow: 0 0 3px rgba(0,0,0,.3);
         box-sizing: border-box;
         opacity: 0;
+        visibility: hidden;
         transition: .3s;
         transform: scale(-.8);
         max-height: 240px;
@@ -61,6 +62,7 @@
 
         &.show {
             opacity: 1;
+            visibility: visible;
             transform: scale(1);
             z-index: 99;
         }

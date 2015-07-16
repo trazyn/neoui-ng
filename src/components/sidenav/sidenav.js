@@ -3,6 +3,8 @@ define( [ "ui/modal/modal" ], function() {
 
     "use strict";
 
+    var instance;
+
     function show( options ) {
 
         return $.modal( $.extend( {}, $.extend( {}, $.slidenav.defaults, options ), {
@@ -14,7 +16,7 @@ define( [ "ui/modal/modal" ], function() {
 
     $.slidenav = function( options ) {
 
-        var instance;
+        instance && instance.close();
 
         return {
 
