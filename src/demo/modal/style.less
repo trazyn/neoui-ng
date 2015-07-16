@@ -17,12 +17,21 @@
 
 .ui.modal.demo {
     .content {
-        max-height: 520px;
+        max-height: 560px;
         overflow-y: auto;
         text-align: center;
     }
 
     img {
+        transition: .2s;
         width: 80%;
+        &:hover {
+            box-shadow: 0 1px 24px rgba(0,0,0,.24);
+        }
+    }
+
+    .text {
+        margin-top: 10px;
+        text-align: left;
     }
 }
