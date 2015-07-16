@@ -13,9 +13,6 @@ s-sidenav {
             transform: translateX(0) translateY(0);
 
             &.show {
-                >div {
-                    overflow: auto;
-                }
                 left: 0px;
                 opacity: 1;
                 visibility: visible;
@@ -31,13 +28,19 @@ s-sidenav {
             transform: translateX(0) translateY(0);
 
             &.show {
-                >div {
-                    overflow: auto;
-                }
                 right: 0px;
                 opacity: 1;
                 visibility: visible;
             }
         }
     }
+
+    &.sidenav .content {
+        height: 100%;
+    }
+}
+
+.ui.sidenav {
+    height: 100%;
+    overflow-y: auto;
 }

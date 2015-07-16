@@ -66,13 +66,32 @@
             </ul>
         </s-sidenav>
 
+        <s-sidenav id="profile" ng-model="profile">
+            <ul>
+                <li class="avatar">
+                    <a href="//github.com/trayn" class="ui tooltip right" data-tooltip="View On GitHub">
+                        <img src="/images/5271843.jpg" alt="fs3kuu">
+                    </a>
+                </li>
+                <li>News</li>
+                <li>Feeds</li>
+                <li>Messages</li>
+                <li>Friends</li>
+                <li>Photos</li>
+                <li>Music</li>
+                <li class="exit">
+                    <i class="icon exit"></i>
+                </li>
+            </ul>
+        </s-sidenav>
+
         <header id="nav">
-            <a class="hamburger" ng-click="openMenu( menu )">
+            <a class="hamburger ui tooltip right" ng-click="openMenu( menu )" data-tooltip="Open Menu">
                 <span class="line line-1"></span>
                 <span class="line line-2"></span>
                 <span class="line line-3"></span>
             </a>
-            <a href="//github.com/trazyn/neoui-ng">
+            <a href="//github.com/trazyn/neoui-ng" class="ui tooltip left" data-tooltip="View On GitHub">
                 <i class="icon github2"></i>
             </a>
         </header>
