@@ -3,9 +3,18 @@ define( [ "ui/modal/modal" ], function() {
 
     "use strict";
 
-    function show( message, position, class4toast, delay ) {
+    var modal;
 
-        var modal = $.modal( {
+    function show( message, position, delay, class4toast ) {
+
+        if ( void 0 === class4toast && typeof delay === "string"  ) {
+            class4toast = delay;
+            delay = false;
+        }
+
+        modal && modal.close();
+
+        modal = $.modal( {
             showHead        : false,
             showOverlay     : false,
             showProgress    : false,
@@ -37,11 +46,11 @@ define( [ "ui/modal/modal" ], function() {
             return {
 
                 left: function() {
-                    show( message, "topleft", class4toast, delay );
+                    show( message, "topleft", delay, class4toast );
                 },
 
                 right: function() {
-                    show( message, "topright", class4toast, delay );
+                    show( message, "topright", delay, class4toast );
                 }
             };
         },
@@ -51,11 +60,11 @@ define( [ "ui/modal/modal" ], function() {
             return {
 
                 left: function() {
-                    show( message, "bottomleft", class4toast, delay );
+                    show( message, "bottomleft", delay, class4toast );
                 },
 
                 right: function() {
-                    show( message, "bottomright", class4toast, delay );
+                    show( message, "bottomright", delay, class4toast );
                 }
             };
         }

@@ -6,6 +6,11 @@
     color: white;
     padding: 0;
 
+    #theme( @bg: rgba(0,0,0,.8), @fg: white ) {
+        background-color: @bg;
+        color: @fg;
+    }
+
     > div {
         box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
         width: 240px;
@@ -41,12 +46,11 @@
 
     .content {
         padding: 10px 20px;
-        min-height: 32px;
-        line-height: 32px;
+        min-height: 24px;
+        line-height: 24px;
         max-width: 240px;
         word-wrap: break-word;
-        color: white;
-        background-color: rgba(0,0,0,.8);
+        #theme();
     }
 
     .message, .close {
@@ -64,5 +68,79 @@
         float: right;
         right: 16px;
         vertical-align: top;
+    }
+
+    &.grape .content {
+        #theme( @grape );
+    }
+
+    &.bittersweet .content {
+        #theme( @bittersweet );
+    }
+
+    &.sunflower .content {
+        #theme( @sunflower );
+    }
+
+    &.grass .content {
+        #theme( @grass );
+    }
+
+    &.mint .content {
+        #theme( @mint );
+    }
+
+    &.aqua .content {
+        #theme( @aqua );
+    }
+
+    &.blueJeans .content {
+        #theme( @blueJeans );
+    }
+
+    &.lavender .content {
+        #theme( @lavender );
+    }
+
+    &.pinkRose .content {
+        #theme( @pinkRose );
+    }
+
+    &.lightGray {
+        .content {
+            #theme( @lightGray, #7a7a7a );
+        }
+        .close {
+            color: #7a7a7a;
+        }
+    }
+
+    &.mediumGray {
+        .content {
+            #theme( @mediumGray, #333 );
+        }
+        .close {
+            color: #333;
+        }
+    }
+
+    &.darkGray .content {
+        #theme( @darkGray );
+    }
+
+    &.success .content {
+        #theme( @success );
+    }
+
+    &.error .content {
+        #theme( @error );
+    }
+
+    &.warn .content {
+        #theme( @warn );
+    }
+
+    &.info .content {
+        #theme( @info );
     }
 }

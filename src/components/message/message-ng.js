@@ -1,14 +1,12 @@
 
 define( [ "ui/message/message" ], function( undefined ) {
 
-"use strict";
+    "use strict";
 
-angular.module( "$ui.message", [] )
-	.factory( "$message", 
+    angular.module( "$ui.message", [] )
 
-function() {
+    .factory( "$message", function() {
 
-	return $.message;
-} );
-	
+        return $.message;
+    } );
 } );

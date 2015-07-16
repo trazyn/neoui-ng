@@ -12,7 +12,6 @@ define( [ "ui/modal/modal" ], function() {
 		};
 
 		setTimeout( function() {
-
 			$.modal( $.extend( true, {}, defaults, options ) );
 		}, 250 );
 	};

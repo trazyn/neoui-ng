@@ -1,5 +1,5 @@
 
-define( [ "ui/modal/modal-ng", "ui/message/message-ng", "ui/toast/toast" ], function() {
+define( [ "ui/modal/modal-ng" ], function() {
 
 	"use strict";
 
