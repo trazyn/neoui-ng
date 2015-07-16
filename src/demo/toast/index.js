@@ -8,7 +8,7 @@ define( [ "ui/toast/toast-ng" ], function() {
     .controller( "toastController", [ "$scope", "$toast", function( $scope, $toast ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 20 } );
+            $( document.body ).anchor( { offset: 0 } );
         };
 
         $scope.theme = "default";
