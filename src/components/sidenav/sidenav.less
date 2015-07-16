@@ -13,11 +13,9 @@ s-sidenav {
             transform: translateX(0) translateY(0);
 
             &.show {
-
                 >div {
                     overflow: auto;
                 }
-
                 left: 0px;
                 opacity: 1;
                 visibility: visible;
@@ -28,23 +26,18 @@ s-sidenav {
             opacity: 0;
             transition: all .3s;
             top: 0;
+            left: initial;
             right: -300px;
             transform: translateX(0) translateY(0);
 
             &.show {
-
                 >div {
                     overflow: auto;
                 }
-
                 right: 0px;
                 opacity: 1;
                 visibility: visible;
             }
         }
     }
-}
-
-.ui.sldenav {
-
 }

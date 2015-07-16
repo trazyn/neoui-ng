@@ -65,7 +65,7 @@ require( [
             $scope.title = location.hash.split( "/" )[1];
 
             menu
-            .left()
+            .right()
             .$node
             .delegate( "[data-url]", "click", function( e ) {
                 $location.path( "/" + this.getAttribute( "data-url" ) );
