@@ -43,12 +43,13 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
                 var
                 self = $( this );
 
-                deferred = $.ajax( {
+                $.ajax( {
                     url: options.templateUrl,
                     dataType: "html"
                 } )
                 .done( function( data ) {
                     self.html( data );
+                    deferred.resolve();
                 } );
             };
 		}
