@@ -18,13 +18,14 @@ require( [
         "demo/message/index",
         "demo/autoComplete/index",
         "demo/toast/index",
+        "demo/getstarted/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast" ] )
+	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
@@ -37,6 +38,9 @@ require( [
 			} )
 			.when( "/getstarted", {
 				templateUrl: "/src/demo/getstarted/index.html"
+			} )
+			.when( "/tooltip", {
+				templateUrl: "/src/demo/tooltip/index.html"
 			} )
 			.when( "/modal", {
 				templateUrl: "/src/demo/modal/index.html"

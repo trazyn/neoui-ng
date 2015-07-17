@@ -22,6 +22,9 @@
 		}
 	}
 
+	#theme( @bg: rgba(0,0,0,.8), @fg: white ) {
+	}
+
 	&:before {
 
 		content: '';
@@ -43,26 +46,25 @@
 	}
 
 	&.top {
-
 		&:before {
 			bottom: 100%;
-			left: 15%;
-			margin: 0 0 -26px 0;
+			left: 10px;
+			margin: 0 0 -26px;
 			border-top-color: rgba(0, 0, 0, 0.8);
 		}
 
 		&:after {
 			bottom: 100%;
-			left: 15%;
-			margin: 0 0 -14px -10px;
+			left: 0;
+			margin: 0 0 -14px;
 		}
 
 		&:hover {
 			&:before {
-				margin: 0 0 -18px 0;
+				margin: 0 0 -18px;
 			}
 			&:after {
-				margin: 0 0 -6px -10px;
+				margin: 0 0 -6px;
 			}
 		}
 	}
@@ -71,23 +73,23 @@
 
 		&:before {
 			top: 100%;
-			left: 35%;
-			margin: -22px 0 0 0;
+			left: 10px;
+			margin: -22px 0 0;
 			border-bottom-color: rgba(0, 0, 0, 0.8);
 		}
 
 		&:after {
 			top: 100%;
-			left: 35%;
-			margin: -10px 0 0 -10px;
+			left: 0;
+			margin: -10px 0 0;
 		}
 
 		&:hover {
 			&:before {
-				margin: -16px 0 0 0;
+				margin: -16px 0 0;
 			}
 			&:after {
-				margin: -4px 0 0 -10px;
+				margin: -4px 0 0;
 			}
 		}
 	}
@@ -97,22 +99,22 @@
 		&:before {
 			left: 110%;
 			bottom: 50%;
-			margin: 0 0 5px 8px;
+			margin: 0 0 -5px 8px;
 			border-right-color: rgba(0,0,0,0.8);
 		}
 
 		&:after {
 			left: 110%;
 			bottom: 50%;
-			margin: 0 0 -6px 20px;
+			margin: 0 0 -16px 20px;
 		}
 
 		&:hover {
 			&:before {
-				margin: 0 0 5px -4px;
+				margin: 0 0 -5px -4px;
 			}
 			&:after {
-				margin: 0 0 -6px 8px;
+				margin: 0 0 -16px 8px;
 			}
 		}
 	}
@@ -121,46 +123,22 @@
 		&:before {
 			right: 110%;
 			bottom: 50%;
-			margin: 0 -15px -4px 0;
+			margin: 0 8px -5px 0;
 			border-left-color: rgba(0,0,0,0.8);
 		}
 
 		&:after {
 			right: 110%;
 			bottom: 50%;
-			margin: 0 -3px -13px 0;
+			margin: 0 20px -16px 0;
 		}
 
 		&:hover {
 			&:before {
-				margin: 0 -23px -4px 0;
+				margin: 0 -4px -5px 0;
 			}
 			&:after {
-				margin: 0 -11px -13px 0;
-			}
-		}
-	}
-
-	&.center {
-		&:before {
-			bottom: 140%;
-			left: -14%;
-			margin: 0 0 -13px 0;
-			border-top-color: rgba(0, 0, 0, 0.8);
-		}
-
-		&:after {
-			bottom: 100%;
-			margin: 0 0 2px 0px;
-			transform: translateX(-50%);
-		}
-
-		&:hover {
-			&:before {
-				margin: 0 0 -5px 0;
-			}
-			&:after {
-				margin: 0 0 10px 0px;
+				margin: 0 8px -16px 0;
 			}
 		}
 	}
