@@ -53,6 +53,9 @@ require( [
 		    .when( "/toast", {
 		        templateUrl: "/src/demo/toast/index.html"
 		    } )
+		    .when( "/tree", {
+		        templateUrl: "/src/demo/tree/index.html"
+		    } )
 			.otherwise( {
 				redirectTo: "/home"
 			} );

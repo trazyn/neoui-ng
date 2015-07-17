@@ -1,0 +1,90 @@
+
+
+.ui.tree {
+
+    ul {
+        list-style: none;
+    }
+
+    border: 1px solid #DDD;
+    padding: 10px;
+    display: block;
+    color: #777;
+    overflow: auto;
+
+    >.icon {
+        position: relative;
+        &:before {
+
+            content: "\e6c4";
+            position: absolute;
+            left: 12px;
+            top: 6px;
+        }
+    }
+
+    .ui.text {
+        text-indent: 20px;
+    }
+
+    .node {
+
+        cursor: pointer;
+
+        a {
+            transition: .2s;
+            position: relative;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            &:hover {
+                background-color: #ddd;
+            }
+        }
+
+        &.open > a span, &.close > a span, .icon {
+            color: rgba(0,0,0,.8);
+        }
+
+        &.open > a .icon:before {
+            content: "\e6b9";
+            margin-right: .5rem;
+            font-style: normal;
+        }
+
+        &.open > ul {
+            display: block;
+        }
+
+        &.close > a .icon:before {
+            content: "\e603";
+            margin-right: .5rem;
+            font-style: normal;
+        }
+
+        &.close > ul {
+            display: none;
+        }
+
+        .icon {
+            position: relative;
+            &:before {
+                position: absolute;
+                top: -7px;
+                left: 14px;
+            }
+
+            & + span {
+                margin-left: 38px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    li.selected > a {
+        & i, & span {
+            color: #E9573F !important;
+        }
+    }
+}

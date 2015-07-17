@@ -1,0 +1,279 @@
+
+<title>Tree - Neoui-ng</title>
+
+<ul id="anchors">
+    <li data-anchor="example" class="item active">Example</li>
+    <li class="item">API
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="tree">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="wrap">
+            <label>Normal</label>
+            <div class="ui ntree" style="height: 430px; width: 270px;">
+                <div class="icon">
+                    <input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">
+                </div>
+                <div class="content"></div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <label>Close the same level</label>
+            <div class="ui ntree" style="height: 430px; width: 270px;">
+                <div class="icon">
+                    <input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">
+                </div>
+                <div class="content"></div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="api">API</header>
+
+    <div class="markdown">
+
+        <section>
+            <div class="ui ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+            <div class="ui ntree" style="height: 430px; width: 270px;">
+                <div class="icon">
+                    <input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">
+                </div>
+                <div class="content"></div>
+            </div>
+            </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).ntree( [options] )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+        <xmp>
+        $( ".ui.ntree" ).ntree( {
+
+                service: {
+                        serviceName: "help.online.faq.tree.QuerySaas",
+                        moduleName: "catalog"
+                },
+
+                parentKey: "a03_parent_id",
+                textKey: "a03_name",
+                valueKey: "a03_id",
+                rootIds: [ "C000000000481935" ]
+        } );
+        </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>rootIds</code> - <code>null</code></p>
+            </blockquote>
+            <p><code>Root</code>节点<code>ID</code>, 可以为数组</p>
+            <br>
+
+            <blockquote>
+                <p><code>parentKey</code> - <code>"parentId"</code></p>
+            </blockquote>
+            <p>关联键</p>
+            <br>
+
+            <blockquote>
+                <p><code>textKey</code> - <code>"text"</code></p>
+            </blockquote>
+            <p>节点文本</p>
+            <br>
+
+            <blockquote>
+                <p><code>value</code> - <code>"value"</code></p>
+            </blockquote>
+            <p>节点实际值</p>
+            <br>
+
+            <blockquote>
+                <p><code>collapsed</code> - <code>true</code></p>
+            </blockquote>
+            <p>为<code>false</code>时展开所有节点</p>
+            <br>
+
+            <blockquote>
+                <p><code>callback</code> - <code>null</code></p>
+            </blockquote>
+            <p>节点选择时回调</p>
+            <br>
+
+            <blockquote>
+                <p><code>data</code> - <code>null</code></p>
+            </blockquote>
+            <p>本地数据</p>
+            <br>
+
+            <blockquote>
+                <p><code>dataProxy</code> - <code>null</code></p>
+            </blockquote>
+            <p>返回<code>Promise</code>对象</p>
+            <xmp>
+            $( ".ui.ntree" ).ntree( {
+                    ...
+
+                    dataProxy: function() {
+
+                            var deferred = $.Deferred();
+
+                            $.ajax( "url" ).done( function( data ) {
+
+                                    deferred.resolveWith( JSON.parse( data ) );
+                            } )
+                            .fail( function() {
+
+                                    deferred.reject();
+                            } );
+
+                            return deferred.promise();
+                    }
+            } );
+            </xmp>
+            <br>
+
+            <blockquote>
+                <p><code>duration</code> - <code>200</code></p>
+            </blockquote>
+            <p>节点展开动画速度, 单位毫秒</p>
+            <br>
+
+            <blockquote>
+                <p><code>closeSameLevel</code> - <code>false</code></p>
+            </blockquote>
+            <p>展开节点时关闭同一级的节点</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4content</code> - <code>".content"</code></p>
+            </blockquote>
+            <p>树形节点容器</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4filter</code> - <code>"input[name=filter]"</code></p>
+            </blockquote>
+            <p>过滤框选择器</p>
+            <br>
+
+            <blockquote>
+                <p><code>filter</code> - <code>null</code></p>
+            </blockquote>
+            <p><code>function</code>或<code>hash</code>对象, 作用于每一级节点的过滤器</p>
+            <xmp>
+            $( ".ui.ntree" ).ntree( {
+
+                ...
+
+                filter: {
+                    "0": function( item ) {
+                        return !!item.value;
+                    },
+
+                    "1": function( item ) {
+                        return item.value > 100;
+                    }
+                }
+            } );
+            </xmp>
+            <br>
+
+            <blockquote>
+                <p><code>render</code> - <code></code></p>
+            </blockquote>
+            <p>节点渲染, 用于高级定制</p>
+            <xmp>
+            $( ".ui.ntree" ).ntree( {
+                    ...
+
+                    render: function( item, level, settings ) {
+
+                        return "<li class='node " + (settings.collapsed ? "close" : "open") +
+                                "' value='" + item[ settings.valueKey ] +
+                                "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
+                                "' data-level=" + level + " data-key='" + item[ settings.valueKey ] +
+                                "'><a style='padding-left: " + ((level - 1) * 3) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a></li>";
+                    }
+            } );
+            </xmp>
+            <br>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <p><code>tree.toggle( nodeid )</code></p>
+            <blockquote>
+                <p><code>nodeid</code> - <code>String</code></p>
+            </blockquote>
+            <p>展开收起指定节点</p>
+            <br>
+
+            <p><code>tree.expand( nodeid )</code></p>
+            <blockquote>
+                <p><code>nodeid</code> - <code>String</code></p>
+            </blockquote>
+            <p>展开指定节点</p>
+            <br>
+
+            <p><code>tree.collapsed( nodeid )</code></p>
+            <blockquote>
+                <p><code>nodeid</code> - <code>String</code></p>
+            </blockquote>
+            <p>关闭指定节点</p>
+            <br>
+
+            <p><code>tree.filter( text )</code></p>
+            <blockquote>
+                <p><code>text</code> - <code>String</code></p>
+            </blockquote>
+            <p>过滤节点树</p>
+        </section>
+    </div>
+
+</section>
+
