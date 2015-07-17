@@ -1,0 +1,254 @@
+
+<title>Get Started - Neoui-ng</title>
+
+<ul id="anchors">
+    <li data-anchor="deploy" class="item active">Deploy</li>
+    <li data-anchor="contribute" class="item">Contribute</li>
+    <li data-anchor="build" class="item">Build</li>
+    <li data-anchor="joinUs" class="item">Join Us</li>
+    <li class="item">Develop
+        <ul>
+            <li data-anchor="style" class="item">Less/CSS</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="getstarted" class="markdown">
+
+    <header data-anchor="deploy">Deploy</header>
+
+    <section>
+        <p>通过下面内容, 部署项目到本地</p>
+
+        <blockquote>
+            <p>安装<a href="//www.git-scm.com">git</a></p>
+        </blockquote>
+        <p><a href="//www.git-scm.com">What is Git?</a></p>
+        <br>
+
+        <blockquote>
+            <p>安装<a href="http://nodejs.org">NodeJs</a></p>
+        </blockquote>
+        <p>Get the <a href="https://nodejs.org/">Node.js</a></p>
+        <br>
+
+        <blockquote>
+            <p>安装<a href="//gulpjs.com">Gulp.js</a></p>
+        </blockquote>
+        <p>工程构建基于<a href="//gulpjs.com">Gulp.js</a></p>
+        <code>$ npm install -g gulp</code>
+        <br>
+        <br>
+
+        <blockquote>
+            <p>安装<a href="//bower.io">Bower.js</a></p>
+        </blockquote>
+        <p><code>JS</code>依赖管理</p>
+        <code>$ npm install -g bower</code>
+        <br>
+        <br>
+
+        <blockquote>
+            <p>安装<a href="//lesscss.org">Less</a></p>
+        </blockquote>
+        <code>$ npm install -g less</code>
+        <br>
+        <br>
+
+        <blockquote>
+            <p>获取代码</p>
+        </blockquote>
+        <p>打开项目主页 <a href="//github.com/trazyn/neoui-ng">neoui-ng</a> 点击<code>Download</code>下载项目到本地</p>
+        <p>或者<code>git clone https://github.com/trazyn/neoui.js.git</code>克隆代码到本地</p>
+        <br>
+
+        <blockquote>
+            <p>安装项目构建依赖</p>
+        </blockquote>
+        <p><code>$ npm install</code>
+        </p>
+        <br>
+
+        <blockquote>
+            <p>安装<code>JS</code>依赖</p>
+        </blockquote>
+        <p><code>$ bower install</code></p>
+        <br>
+
+        <blockquote>
+            <p>运行项目</p>
+        </blockquote>
+        <p><code>$ gulp</code>
+        </p>
+        <br>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="contribute">Contribute</header>
+
+    <section>
+
+        <blockquote>
+            <p>Fork Me On GitHub</p>
+        </blockquote>
+        <p><a href="https://github.com/trazyn/neoui-ng">https://github.com/trazyn/neoui-ng</a></p>
+        <br>
+
+        <blockquote>
+            <p>创建<code>Merge Request</code></p>
+        </blockquote>
+        <p>提交<code>commit</code>至<code>dev</code>分支</p>
+        <br>
+
+        <blockquote>
+            <p>Have any issue or idea?</p>
+        </blockquote>
+        <p><a href="https://github.com/trazyn/neoui-js/issues/new">Create Issue</a> Or <a href="mailto:tn.razy@google.com">Send Mail To Me</a>
+        </p>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="build">Build</header>
+
+    <section>
+        <blockquote>
+            <p><code>gulp start</code></p>
+        </blockquote>
+        <p>启动<code>http</code>服务</p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp vendor</code></p>
+        </blockquote>
+        <p>压缩项目<code>JS</code>依赖到<code>dist/vendor.js</code> / <code>dist/vendor.min.js</code>
+        </p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp css</code></p>
+        </blockquote>
+        <p>压缩合并<code>CSS</code>到<code>dist/css.css</code> / <code>css.min.css</code>
+        </p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp jshint</code></p>
+        </blockquote>
+        <p>执行代码检测
+        </p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp</code></p>
+        </blockquote>
+        <p>顺序执行 <code>gulp css</code> <code>start</code>
+        </p>
+        <br>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="joinUs">Join Us</header>
+
+    <section>
+        ...
+    </section>
+
+    <br>
+    <br>
+
+    <header>Develop</header>
+
+    <section>
+        <div class="ui ribbon" data-anchor="style">
+            <span>Less/CSS</span>
+        </div>
+
+        <h3>Introduction</h3>
+        <p>样式部分由<code>Less</code>编写, 不建议<code>CSS</code>
+        </p>
+        <p>目的样式的复用, 可读可维护</p>
+        <p>原则存在几何形状的组件以<code>ui</code>开头</p>
+        <p>尽可能嵌套进行复用, 命名尽量使用单个单词(从哲学角度讲, 命名越准确, 重用的可能性越小, 比如: <code>.tab-nav-item</code>和<code>.item</code>, 第二个命名就有可能用在<code>tab</code>或者<code>menu</code>等组件中, 所以样式名应尽可能抽象, 为后续重用提供可能)</p>
+        <br>
+
+        <h3>Style Guide</h3>
+        <p>请保持良好的代码结构, 保证代码的可读, 可维护</p>
+
+        <div class="wrap">
+            <label class="bad">Bad</label>
+            <xmp>
+            .box{border:1px solid #ddd;height:200px;width:200px;}
+            </xmp>
+        </div>
+
+        <div class="wrap">
+            <label class="good">Good</label>
+            <xmp>
+            .box {
+                border: 1px solid #ddd;
+                height: 200px;
+                width: 200px;
+
+                .right {
+                    ...
+                }
+
+                .left {
+                    ...
+                }
+            }
+            </xmp>
+        </div>
+        <p>4格缩进, 1个空格</p>
+        <br>
+
+        <h3>References</h3>
+        <p>参考资料 <a href="//www.semantic-ui.com">Semantic UI</a>, <a href="http://getbootstrap.com/">Bootstrap</a>
+        </p>
+
+    </section>
+
+    <section>
+        <div class="ui ribbon" data-anchor="javascript">
+            <span>Javascript</span>
+        </div>
+
+        <h3>Introduction</h3>
+        <p>控件间应无耦合, 能组合存在或独立存在, 不应过分抽象, 保持简洁</p>
+        <br>
+
+        <h3>Style Guide</h3>
+        <p>请参考<a href="">Google Javascript</a>, <a href="//github.com/airbnb/javascript">Airbnb Javascript</a></p>
+        <p>请保持良好的排版和结构, 所有代码4格缩进</p>
+        <p>请使用<a href="//www.jshint.com">Jshint</a>做静态检查, 参考设置</p>
+        <xmp>
+        {
+            "laxcomma": true,
+            "smarttabs": true,
+            "loopfunc": true,
+            "shadow": true,
+
+            /** 1 && callback() */
+            "expr": true,
+
+            /** var a = b = c = "" */
+            "-W120": true,
+
+            "-W099": true,
+            "-W061": true,
+            "-W007": true,
+            "-W064": true,
+            "-W069": true,
+            "-W014": true,
+            "-W018": true
+        }
+        </xmp>
+    </section>
+</section>

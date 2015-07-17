@@ -35,6 +35,9 @@ require( [
 			.when( "/color", {
 				templateUrl: "/src/demo/color/index.html"
 			} )
+			.when( "/getstarted", {
+				templateUrl: "/src/demo/getstarted/index.html"
+			} )
 			.when( "/modal", {
 				templateUrl: "/src/demo/modal/index.html"
 			} )
