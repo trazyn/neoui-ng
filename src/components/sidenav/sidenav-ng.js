@@ -8,21 +8,21 @@ angular.module( "$ui.sidenav", [] )
 
         function link( $scope, $element, $attrs ) {
 
-            var slidenav;
+            var sidenav;
 
             /** Detach from the document root */
             $element.detach();
 
-            slidenav = $.slidenav( {
+            sidenav = $.sidenav( {
                 render  : function( deferred, loading, close ) {
 
-                    this.css( "padding", 0 ).html( $element );
+                    this.html( $element );
                     deferred.resolve();
                 },
                 unload  : $scope.unload
             } );
 
-            $scope.instance = slidenav;
+            $scope.instance = sidenav;
 
             $rootScope.$$phase || $scope.$apply();
         }

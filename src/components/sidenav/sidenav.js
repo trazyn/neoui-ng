@@ -7,7 +7,7 @@ define( [ "ui/modal/modal" ], function() {
 
     function show( options ) {
 
-        return $.modal( $.extend( {}, $.extend( {}, $.slidenav.defaults, options ), {
+        return $.modal( $.extend( {}, $.extend( {}, $.sidenav.defaults, options ), {
             showHead    : false,
             animate     : options.class4nav,
             class4modal : "sidenav",
@@ -15,7 +15,7 @@ define( [ "ui/modal/modal" ], function() {
         } ) );
     }
 
-    $.slidenav = function( options ) {
+    $.sidenav = function( options ) {
 
         instance && instance.close();
 
@@ -37,7 +37,7 @@ define( [ "ui/modal/modal" ], function() {
         };
     };
 
-    $.slidenav.defaults = {
+    $.sidenav.defaults = {
 
         /** Same to the modal component */
         render      : "",
@@ -45,3 +45,4 @@ define( [ "ui/modal/modal" ], function() {
         class4nav   : " "
     };
 } );
+
