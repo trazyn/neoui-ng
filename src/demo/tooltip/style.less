@@ -7,6 +7,7 @@
 
     .wrap {
         padding-left: 30px;
+        margin-bottom: 60px;
     }
 
     .wrap p {
@@ -54,6 +55,23 @@
             &.github:hover {
                 color: @mint;
             }
+        }
+
+        .ui.tooltip.top {
+            &:hover:before {
+                margin-bottom: 0px;
+            }
+            &:hover:after {
+                margin-bottom: 12px;
+            }
+        }
+    }
+
+    img {
+
+        transition: .2s;
+        &:hover {
+            box-shadow: 0 1px 24px rgba(0,0,0,.24);
         }
     }
 }

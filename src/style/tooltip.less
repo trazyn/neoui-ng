@@ -1,4 +1,6 @@
 
+@import "base/colors.less";
+
 .ui.tooltip {
 
 	position: relative;
@@ -22,9 +24,6 @@
 		}
 	}
 
-	#theme( @bg: rgba(0,0,0,.8), @fg: white ) {
-	}
-
 	&:before {
 
 		content: '';
@@ -36,13 +35,15 @@
 
 	&:after {
 
-		content: attr(data-tooltip);
-		background: rgba(0, 0, 0, 0.8);
-		color: white;
-		padding: 8px 10px;
-		font-size: 12px;
-		white-space: nowrap;
-		box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+        content: attr(data-tooltip);
+        background: rgba(0,0,0,.8);
+        color: #fff;
+        padding: 8px 10px;
+        font-size: 12px;
+        box-shadow: 4px 4px 8px rgba(0,0,0,.3);
+        max-width: 240px;
+        white-space: pre;
+        word-wrap: break-word;
 	}
 
 	&.top {
@@ -142,4 +143,15 @@
 			}
 		}
 	}
+}
+
+span.ui.tooltip.top {
+    &:hover {
+        &:before {
+            margin-bottom: 0px;
+        }
+        &:after {
+            margin-bottom: 12px;
+        }
+    }
 }
