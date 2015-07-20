@@ -17,7 +17,7 @@ angular.module( "$ui.autoComplete", [] )
         function link( $scope, $element, $attrs, undefined, link ) {
 
             var
-            options = args( $scope.$isolateBindings, $attrs ),
+            options = args( $scope, $attrs, { "showHint": "boolean" } ),
             autoComplete,
             transclude,
             markup,
@@ -131,7 +131,7 @@ angular.module( "$ui.autoComplete", [] )
                 placeholder     : "@",
                 delimiter       : "@",
                 inputAnything   : "@",
-                showHint        : "=",
+                showHint        : "@",
                 fuzzy           : "=",
                 tabComplete     : "=",
                 highlight       : "=",

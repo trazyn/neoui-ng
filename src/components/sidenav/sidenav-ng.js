@@ -8,21 +8,38 @@ angular.module( "$ui.sidenav", [] )
 
         function link( $scope, $element, $attrs ) {
 
-            var sidenav;
+            var
+            sidenav,
+            render = function( deferred, loading, close ) {
+
+                this.html( $element );
+                deferred.resolve();
+            };
 
             if ( $scope.templateUrl ) {
 
+                render = function( deferred, loading, close ) {
+
+                    var self = this;
+
+                    $.ajax( {
+                        url: templateUrl,
+                        dataType: "html"
+                    } )
+                    .done( function( data ) {
+                        self.html( data );
+                    } )
+                    .always( function() {
+                        deferred.resolve();
+                    } );
+                };
+            } else {
+                /** Detach from the document root */
+                $element.detach();
             }
 
-            /** Detach from the document root */
-            $element.detach();
-
             sidenav = $.sidenav( {
-                render  : function( deferred, loading, close ) {
-
-                    this.html( $element );
-                    deferred.resolve();
-                },
+                render  : render,
                 unload  : $scope.unload
             } );
 

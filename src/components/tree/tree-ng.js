@@ -1,7 +1,15 @@
 
-define( [ "ui/tree/tree", "util/ng-args" ], function( args ) {
+define( [ "util/ng-args", "ui/tree/tree" ], function( args ) {
 
 "use strict";
+
+/**
+ * example:
+ *
+ <s-autoComplete items="items" value-key="value" text-key="text">
+     {{ $name }} - {{ $value }}
+ </s-autoComplete>
+ * */
 
 angular.module( "$ui.tree", [] )
     .directive( "sTree", [ "$rootScope", function( $rootScope ) {
@@ -9,10 +17,9 @@ angular.module( "$ui.tree", [] )
         function link( $scope, $element, $attrs, undefined, link ) {
 
             var
-            options = args( $scope.$isolateBindings, $attrs ),
+            options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean" } ),
             tree,
-            transclude,
-            isolateBindings = $scope.$isolateBindings;
+            transclude;
         }
 
         return {
@@ -35,7 +42,12 @@ angular.module( "$ui.tree", [] )
 
             transclude          : true,
             replace             : true,
-            template            : "",
+            template            : '<div class="ui tree">' +
+                                    '<div class="icon">' +
+                                        '<input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">' +
+                                    '</div>' +
+                                    '<div class="content"></div>' +
+                                  '</div>',
             link                : link
         };
     } ] );

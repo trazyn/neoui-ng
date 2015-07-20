@@ -22,13 +22,14 @@ require( [
         "demo/tooltip/index",
         "demo/sidenav/index",
         "demo/dateutil/index",
+        "demo/tree/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted", "demo.tooltip", "demo.sidenav", "demo.dateutil" ] )
+	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted", "demo.tooltip", "demo.sidenav", "demo.dateutil", "demo.tree" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
