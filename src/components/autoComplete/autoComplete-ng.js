@@ -1,5 +1,5 @@
 
-define( [ "ui/autoComplete/autoComplete" ], function() {
+define( [ "util/ng-args", "ui/autoComplete/autoComplete" ], function( args ) {
 
 "use strict";
 
@@ -17,22 +17,12 @@ angular.module( "$ui.autoComplete", [] )
         function link( $scope, $element, $attrs, undefined, link ) {
 
             var
-            options = {},
+            options = args( $scope.$isolateBindings, $attrs ),
             autoComplete,
             transclude,
             markup,
             html,
-            inProgress = false,
-            isolateBindings = $scope.$$isolateBindings;
-
-            for ( var key in isolateBindings ) {
-
-                var attr = isolateBindings[ key ];
-
-                if ( attr.attrName in $attrs.$attr ) {
-                    options[ key ] = $scope[ key ];
-                }
-            }
+            inProgress = false;
 
             transclude = link( $scope );
             markup = transclude.parent().html().trim();
@@ -77,9 +67,7 @@ angular.module( "$ui.autoComplete", [] )
             $scope.$watch( "lookup", function( value ) {
 
                 if ( value !== autoComplete.settings.lookup ) {
-
                     autoComplete.settings.lookup = value;
-                    autoComplete.setupCache();
                 }
             } );
 

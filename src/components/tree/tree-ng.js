@@ -1,37 +1,42 @@
 
-define( [ "ui/tree/tree" ], function() {
+define( [ "ui/tree/tree", "util/ng-args" ], function( args ) {
 
 "use strict";
 
 angular.module( "$ui.tree", [] )
     .directive( "sTree", [ "$rootScope", function( $rootScope ) {
 
-        function link( $scope, $element, $attrs ) {
+        function link( $scope, $element, $attrs, undefined, link ) {
 
+            var
+            options = args( $scope.$isolateBindings, $attrs ),
+            tree,
+            transclude,
+            isolateBindings = $scope.$isolateBindings;
         }
 
         return {
             scope               : {
                 rootIds         : "=",
-                parentId        : "@",
+                parentKey       : "@",
                 textKey         : "@",
                 valueKey        : "@",
                 collapsed       : "@",
                 closeSameLevel  : "@",
-                duration        : "@",
                 placeholder     : "@",
+                dataProxy       : "&",
+                render          : "&",
                 data            : "=",
                 filter          : "=",
-                dataProxy       : "&",
-                render          : "&"
+                controller      : "="
             },
 
-            restric         : "E",
+            restric             : "E",
 
-            transclude      : true,
-            replace         : true,
-            template        : "",
-            link            : link
+            transclude          : true,
+            replace             : true,
+            template            : "",
+            link                : link
         };
     } ] );
 } );
