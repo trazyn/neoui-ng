@@ -10,6 +10,10 @@ angular.module( "$ui.sidenav", [] )
 
             var sidenav;
 
+            if ( $scope.templateUrl ) {
+
+            }
+
             /** Detach from the document root */
             $element.detach();
 
@@ -29,17 +33,18 @@ angular.module( "$ui.sidenav", [] )
 
         return {
 
-            scope       : {
-                instance: "=ngModel",
-                unload  : "&"
+            scope           : {
+                instance    : "=ngModel",
+                templateUrl : "@",
+                unload      : "&"
             },
 
-            restric     : "E",
+            restric         : "E",
 
-            transclude  : true,
-            replace     : true,
-            template    : "<div class='ui sidenav' ng-transclude></div>",
-            link        : link
+            transclude      : true,
+            replace         : true,
+            template        : "<div class='ui sidenav' ng-transclude></div>",
+            link            : link
         };
     } ] );
 } );
