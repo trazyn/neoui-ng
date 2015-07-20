@@ -1,25 +1,23 @@
 
 define( function() {
-	
-	var 
+
+	var
 	storageName = "sessionStorage",
 
 	isSupport = (function() {
-		
+
 		try {
 			return (storageName in window && window[storageName]);
 		} catch( e ) { return false; }
 	})(),
 
 	serialize = function( value ) {
-		
 		return JSON.stringify( value || "" );
 	},
 
 	deserialize = function( value ) {
-		
+
 		if ( "string" !== typeof value ) {
-			
 			return value;
 		}
 
@@ -29,7 +27,7 @@ define( function() {
 	},
 
 	store = {
-		
+
 		/**
 		 * sessionStorage or localStorage
 		 *
@@ -57,7 +55,7 @@ define( function() {
 		/** Get all */
 		all: function() {},
 
-		/** 
+		/**
 		 * Foreach the storage
 		 *
 		 * @param callback 	Function
@@ -74,15 +72,15 @@ define( function() {
 		/** Remove all */
 		clear: function() {}
 	},
-	
+
 	_storage;
 
 	if ( isSupport ) {
-		
+
 		_storage = window[ storageName ];
 
 		store.use = function( name ) {
-			
+
 			name &&
 				({ "sessionStorage": 1, "localStorage": 1 }).hasOwnProperty( name ) &&
 				(_storage = window[ name ]);
@@ -91,25 +89,25 @@ define( function() {
 		};
 
 		store.get = function( key, scope ) {
-			
+
 			this.use( scope === true ? "localStorage" : "sessionStorage" );
 
 			return deserialize( _storage[ key ] );
 		};
 
 		store.set = function( key, value, scope ) {
-			
+
 			this.use( scope === true ? "localStorage" : "sessionStorage" );
 
 			return (_storage[ key ] = serialize( value ));
 		};
 
 		store.foreach = function( callback ) {
-			
+
 			var key;
 
 			for ( var i = _storage.length; --i >= 0; ) {
-				
+
 				key = _storage.key( i );
 
 				callback( key, deserialize( _storage[ key ] ) );
@@ -117,13 +115,13 @@ define( function() {
 		};
 
 		store.all = function( scope ) {
-			
+
 			var result = {};
 
-			this.use( scope === true ? "localStorage" : "sessionStorage" );	
+			this.use( scope === true ? "localStorage" : "sessionStorage" );
 
 			this.foreach( function( key, value ) {
-				
+
 				result[ key ] = value;
 			} );
 
@@ -131,14 +129,14 @@ define( function() {
 		};
 
 		store.remove = function( key, scope ) {
-		
-			this.use( scope === true ? "localStorage" : "sessionStorage" );	
+
+			this.use( scope === true ? "localStorage" : "sessionStorage" );
 			_storage.removeItem( key );
 		};
 
 		store.clear = function( scope ) {
 
-			this.use( scope === true ? "localStorage" : "sessionStorage" );	
+			this.use( scope === true ? "localStorage" : "sessionStorage" );
 			_storage.clear();
 		};
 	}

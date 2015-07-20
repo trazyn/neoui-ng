@@ -52,7 +52,7 @@
 
             <xmp>
             angular
-            .module( "app", [ "$ui.message" ] )
+            .module( "app", [ "$ui.toast" ] )
             .controller( "toastController", [ "$toast", function( $toast ) {
                 $toast.top( "On the top left!" ).left();
             } ] );

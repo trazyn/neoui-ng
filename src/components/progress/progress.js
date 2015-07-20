@@ -1,5 +1,5 @@
 
-define( [ "util/Poll" ], function( Poll ) {
+define( [ "util/poll" ], function( poll ) {
 
 	"use strict";
 
@@ -25,7 +25,7 @@ define( [ "util/Poll" ], function( Poll ) {
 			var settings = this.settings;
 
 			this.set( 0 );
-			this.runner && Poll.remove( this.runner );
+			this.runner && poll.remove( this.runner );
 			this.runner = runner.call( this, settings );
 
 			/** Fadein */
@@ -36,7 +36,7 @@ define( [ "util/Poll" ], function( Poll ) {
 				"display": ""
 			} );
 
-			Poll.start( this.runner );
+			poll.start( this.runner );
 
 			return this;
 		},
@@ -77,7 +77,7 @@ define( [ "util/Poll" ], function( Poll ) {
 			/** After '-webkit-transform' */
 			}, 277 );
 
-			Poll.remove( self.runner );
+			poll.remove( self.runner );
 
 			return this;
 		}
@@ -103,7 +103,7 @@ define( [ "util/Poll" ], function( Poll ) {
 
 		var self = this;
 
-		return Poll.add( {
+		return poll.add( {
 
 			action: function( deferred ) {
 

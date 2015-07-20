@@ -1,0 +1,278 @@
+
+<title>DateUtil - Neoui-ng</title>
+
+<ul id="anchors">
+    <li data-anchor="example" class="item active">Example</li>
+    <li data-anchor="constructor" class="item">Constructor</li>
+    <li data-anchor="options" class="item">Options</li>
+    <li data-anchor="method" class="item">Method</li>
+</ul>
+
+<section id="dateutil" class="markdown" ng-controller="dateutilController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <p class="subhead"><code>{{ now }}</code> -> <code>"%Y - %m - %d"</code> -> <code>{{ now2 }}</code></p>
+        <p class="subhead"><code>{{ now }}</code> -> <code>"%B %A, %Y"</code> -> <code>{{ now3 }}</code></p>
+        <p class="subhead"><code>{{ now }}</code> -> <code>"%x %X"</code> -> <code>{{ now4 }}</code></p>
+        <p class="subhead"><code>{{ justAgo }}</code> -> <code>{{ justAgo2 }}</code></p>
+        <p class="subhead"><code>{{ minuteAgo }}</code> -> <code>{{ minuteAgo2 }}</code></p>
+        <p class="subhead"><code>{{ hourAgo }}</code> -> <code>{{ hourAgo2 }}</code></p>
+        <p class="subhead"><code>{{ yesterday }}</code> -> <code>{{ yesterday2 }}</code></p>
+        <p class="subhead"><code>{{ morethan }}</code> -> <code>{{ morethan2 }}</code></p>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="constructor">Constructor</header>
+
+    <section>
+        <p><code>$.dateutil( [value], [options] )</code>
+        </p>
+
+        <blockquote>
+            <p><code>value</code> - String/Date</p>
+
+            <p><code>options</code> - Object</p>
+        </blockquote>
+
+        <xmp>
+        define( [ "util/dateutil" ], function() {
+
+            "use strict";
+
+            angular
+            .module( "demo.dateutil", [] )
+            .controller( "dateutilController", [ "$scope", function( $scope ) {
+
+                var du = $.dateutil( new Date() );
+                console.log( du.format( "%Y - %d / %m" ) );
+            } ] );
+        } );
+        </xmp>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="options">Options</header>
+
+    <section>
+        <blockquote>
+            <p><code>format</code> - <code>"%Y-%m-%d"</code>
+            </p>
+            <blockquote>
+                <p><code>%a</code> - Abbreviated weekday name</p>
+                <p><code>%A</code> - Full weekday name</p>
+                <p><code>%b</code> - Abbreviated month name</p>
+                <p><code>%B</code> - Full month name</p>
+                <p><code>%c</code> - Date and time, as "%a %b %e %H:%M:%S %Y"</p>
+                <p><code>%d</code> - Zero-padded day of the month as a decimal number[01, 31]</p>
+                <p><code>%e</code> - Space-padded day of the month as a decimal number [1, 31]</p>
+                <p><code>%H</code> - Hour(24-hour clock) as decimal number[00, 23]</p>
+                <p><code>%I</code> - Hour(12-hour clock) as a decimal number[01, 12]</p>
+                <p><code>%j</code> - Day of the year as a decimal number[001, 366]</p>
+                <p><code>%m</code> - Month as a decimal number[01, 12]</p>
+                <p><code>%M</code> - Minute as a decimal number[00, 59]</p>
+                <p><code>%L</code> - Milliseconds as a decimal number[000, 999]</p>
+                <p><code>%p</code> - Either AM or PM</p>
+                <p><code>%S</code> - Second as a decimal number[00, 59]</p>
+                <p><code>%U</code> - Week nunber of the year(Sunday as the first day of the week) as a decimal number[00, 53]</p>
+                <p><code>%w</code> - Weekday as a decimal number[0(Sunday), 6]</p>
+                <p><code>%x</code> - Date, as "%m/%d/%Y"</p>
+                <p><code>%X</code> - Time, as "%H:%M:%S"</p>
+                <p><code>%y</code> - Year without century as a decimal number[00, 99]</p>
+                <p><code>%Y</code> - Year with century as a decimal number</p>
+                <p><code>%Z</code> - Tiem zone offset, such as "-0700"</p>
+                <p><code>%</code> - A literal "%" character</p>
+            </blockquote>
+        </blockquote>
+        <p>默认日期格式化, See <a href="//python.org">Python Date Format</a>
+        </p>
+        <br>
+
+        <blockquote>
+            <p><code>abbreviatedWeekdayName</code> - <code>[ "Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat" ]</code>
+            </p>
+        </blockquote>
+        <p>星期简写</p>
+        <br>
+
+        <blockquote>
+            <p><code>weekdayName</code> - <code>[ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satruday" ]</code>
+            </p>
+        </blockquote>
+        <p>星期全称</p>
+        <br>
+
+        <blockquote>
+            <p><code>abbreviatedMonthName</code> - <code>[ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ]</code>
+            </p>
+        </blockquote>
+        <p>月份简写</p>
+        <br>
+
+        <blockquote>
+            <p><code>monthName</code> - <code>[ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]</code>
+            </p>
+        </blockquote>
+        <p>月份全称</p>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="method">Method</header>
+
+    <section>
+
+        <blockquote>
+            <p><code>nice()</code> - 语义化时间输出
+            </p>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>monday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期一</p>
+        <br>
+
+        <blockquote>
+            <p><code>tuesday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期二</p>
+        <br>
+
+        <blockquote>
+            <p><code>wednesday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期三</p>
+        <br>
+
+        <blockquote>
+            <p><code>thursday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期四</p>
+        <br>
+
+        <blockquote>
+            <p><code>friday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期五</p>
+        <br>
+
+        <blockquote>
+            <p><code>saturday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期六</p>
+        <br>
+
+        <blockquote>
+            <p><code>sunday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回星期日</p>
+        <br>
+
+        <blockquote>
+            <p><code>yesterday( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回昨天</p>
+        <br>
+
+        <blockquote>
+            <p><code>tomorrow( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回明天</p>
+        <br>
+
+        <blockquote>
+            <p><code>lastWeek( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回上星期的今天</p>
+        <br>
+
+        <blockquote>
+            <p><code>nextWeek( [ format ] )</code>
+            </p>
+            <blockquote>
+                <p><code>format</code> - String</p>
+            </blockquote>
+        </blockquote>
+        <p>返回下星期的今天</p>
+        <br>
+
+        <blockquote>
+            <p><code>month( value )</code>
+            </p>
+            <blockquote>
+                <p><code>value</code> - Number</p>
+            </blockquote>
+        </blockquote>
+        <p>相对单位为月的时间偏移, 返回<code>Date</code>类型, eg: <code>month( -1 )</code>, 返回上月的日期</p>
+        <br>
+
+        <blockquote>
+            <p><code>week( value )</code>
+            </p>
+            <blockquote>
+                <p><code>value</code> - Number</p>
+            </blockquote>
+        </blockquote>
+        <p>相对单位为星期的时间偏移</p>
+        <br>
+
+        <blockquote>
+            <p><code>day( value )</code>
+            </p>
+            <blockquote>
+                <p><code>value</code> - Number</p>
+            </blockquote>
+        </blockquote>
+        <p>相对单位为天的时间偏移</p>
+    </section>
+
+</section>
+

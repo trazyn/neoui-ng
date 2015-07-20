@@ -21,13 +21,14 @@ require( [
         "demo/getstarted/index",
         "demo/tooltip/index",
         "demo/sidenav/index",
+        "demo/dateutil/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted", "demo.tooltip", "demo.sidenav" ] )
+	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted", "demo.tooltip", "demo.sidenav", "demo.dateutil" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
@@ -67,6 +68,9 @@ require( [
 		    } )
 		    .when( "/sidenav", {
 		        templateUrl: "/src/demo/sidenav/index.html"
+		    } )
+		    .when( "/dateutil", {
+		        templateUrl: "/src/demo/dateutil/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

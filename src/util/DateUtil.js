@@ -1,6 +1,6 @@
 
 (function( exports ) {
-	
+
     /**
      * See python date format
      *
@@ -29,10 +29,10 @@
      * %% - A literal "%" character
      * */
 
-    var DateUtil = function( value, options ) {
+    var Dateutil = function( value, options ) {
 
         switch( true ) {
-            
+
             case value instanceof Date:
                 break;
 
@@ -49,10 +49,10 @@
         }
 
         this.value = defaultValue = isNaN( value ) ? new Date() : value;
-        this.settings = $.extend( {}, DateUtil.defaults, options || {} );
+        this.settings = $.extend( {}, Dateutil.defaults, options || {} );
     };
 
-    DateUtil.defaults = {
+    Dateutil.defaults = {
     	format: "%Y-%m-%d",
     	abbreviatedWeekdayName: [ "Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat" ],
     	weekdayName: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satruday" ],
@@ -60,14 +60,14 @@
     	monthName: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
     };
 
-    DateUtil.prototype = {
+    Dateutil.prototype = {
         format: function( format ) {
-            
-            var 
+
+            var
             self = this,
             value = this.value,
             settings = this.settings,
-            
+
             /** Shortcuts */
             abbreviatedWeekdayName = settings.abbreviatedWeekdayName,
             weekdayName = settings.weekdayName,
@@ -86,9 +86,9 @@
 
             return (format || settings.format)
                 .replace( /(yyyy|MM|dd|HH|mm|ss|%a|%A|%b|%B|%c|%d|%e|%H|%I|%j|%m|%M|%L|%p|%S|%U|%w|%x|%X|%y|%Y|%Z|%%)/g, function( match, post, originalText ) {
-                
+
                     switch ( match ) {
-                        
+
                         case "yyyy":
                             return fullYear;
                         case "MM":
@@ -160,13 +160,46 @@
                 } );
         },
 
+        nice: function() {
+
+            var
+            diff  = (new Date() - this.value) / 1000,
+            days = Math.floor( diff / 86400 );
+
+            if ( diff < 0 ) {
+
+                return this.format.call( {
+                        settings: this.settings,
+                        value: this.value
+                } );
+            } else if ( diff < 60 ) {
+                return "just ago";
+            } else if ( diff < 120 ) {
+                return "1 minute ago";
+            } else if ( diff < 3600 ) {
+                return Math.floor( diff / 60 ) + " minutes ago";
+            } else if ( diff < 7200 ) {
+                return "1 hour ago";
+            } else if ( diff < 86400 ) {
+                return Math.floor( diff / 3600 ) + " hours ago";
+            } else if ( days === 1 ) {
+                return "Yesterday";
+            } else if ( days < 7 ) {
+                return days + " days ago";
+            } else if ( days < 31 ) {
+                Math.ceil( days / 7 ) + " weeks ago";
+            } else if ( days >= 31 ) {
+                return "more than 5 weeks ago";
+            }
+        },
+
         day: function( value ) {
             return new Date( +this.value + value * 3600 * 1000 * 24 );
         },
 
         name: function( name, format ) {
-        
-            var 
+
+            var
             date = this.value,
             offset,
             mapping = {
@@ -185,9 +218,9 @@
                 offset = -(date.getDay() - mapping[ name ]);
             }
 
-            return this.format.call( { 
+            return this.format.call( {
                     settings: this.settings,
-                    value: this.day( offset ) 
+                    value: this.day( offset )
             }, format );
         },
 
@@ -220,16 +253,16 @@
         },
 
         yesterday: function( format ) {
-            return this.format.call( { 
+            return this.format.call( {
                     settings: this.settings,
-                    value: this.day( -1 ) 
+                    value: this.day( -1 )
             }, format );
         },
 
         tomorrow: function( format ) {
-            return this.format.call( { 
+            return this.format.call( {
                     settings: this.settings,
-                    value: this.day( 1 ) 
+                    value: this.day( 1 )
             }, format );
         },
 
@@ -238,22 +271,22 @@
         },
 
         lastWeek: function( format ) {
-            return this.format.call( { 
+            return this.format.call( {
                     settings: this.settings,
-                    value: this.week( -1 ) 
+                    value: this.week( -1 )
             }, format );
         },
 
         nextWeek: function( format ) {
-            return this.format.call( { 
+            return this.format.call( {
                     settings: this.settings,
-                    value: this.week( 1 ) 
+                    value: this.week( 1 )
             }, format );
         },
 
         month: function( value ) {
 
-            var 
+            var
             date = this.value,
             current = [ date.getFullYear(), date.getMonth() ],
             offset = [ Math.floor( value / 12 ), value % 12 ];
@@ -266,6 +299,13 @@
         }
     };
 
-    exports.DateUtil = DateUtil;
-})( window );
+    exports = exports || window;
 
+    exports.dateutil = function() {
+
+        var instance = {};
+        Dateutil.apply( instance, arguments );
+        return $.extend( instance, Dateutil.prototype );
+    };
+
+})( window.jQuery );
