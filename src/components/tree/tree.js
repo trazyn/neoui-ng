@@ -2,7 +2,6 @@
 (function( $ ) {
 
 	var
-
 	namespace = "$ui.tree",
 
 	Tree = function( target, settings ) {
@@ -283,6 +282,5 @@
 			        "'><a style='padding-left: " + ((level - 1) * 3) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a></li>";
 		}
 	};
-
 } )( window.jQuery );
 

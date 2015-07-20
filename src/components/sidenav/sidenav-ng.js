@@ -26,7 +26,10 @@ angular.module( "$ui.sidenav", [] )
                 unload  : $scope.unload
             } );
 
-            $scope.instance = sidenav;
+            if ( "object" === typeof $scope.instance ) {
+                angular.extend( $scope.instance, sidenav );
+            } else
+                $scope.instance = sidenav;
 
             $rootScope.$$phase || $scope.$apply();
         }
@@ -34,7 +37,7 @@ angular.module( "$ui.sidenav", [] )
         return {
 
             scope           : {
-                instance    : "=ngModel",
+                instance    : "=controller",
                 templateUrl : "@",
                 unload      : "&"
             },
