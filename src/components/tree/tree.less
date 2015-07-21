@@ -27,12 +27,16 @@
         text-indent: 20px;
     }
 
+    .content > ul > li {
+        margin-left: 0;
+    }
+
     .node {
 
         cursor: pointer;
-        margin-left: 0px;
+        margin-left: 0;
 
-        a {
+        p {
             transition: .2s;
             position: relative;
             display: block;
@@ -47,11 +51,11 @@
             margin-left: 0px;
         }
 
-        &.open > a span, &.close > a span, .icon {
+        .icon, &.open > p span, &.close > p span {
             color: rgba(0,0,0,.8);
         }
 
-        &.open > a .icon:before {
+        &.open > p .icon:before {
             content: "\e6b9";
             margin-right: .5rem;
             font-style: normal;
@@ -61,7 +65,7 @@
             display: block;
         }
 
-        &.close > a .icon:before {
+        &.close > p .icon:before {
             content: "\e603";
             margin-right: .5rem;
             font-style: normal;
@@ -89,7 +93,7 @@
 
     li {
         margin: 15px 0 15px 15px;
-        &.selected > a {
+        &.selected > p {
             & i, & span {
                 color: #E9573F !important;
             }

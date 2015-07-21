@@ -46,8 +46,8 @@ bs, gulp = require( "gulp" )
 		var
 		dest = pkg.dest,
 		minifyCSS = require( "gulp-minify-css" ),
-    cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true } ),
-    autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
+        cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true } ),
+        autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
 
 		return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "src/demo/**/*.less" ] )
 			.pipe( debug() )
@@ -88,23 +88,26 @@ bs, gulp = require( "gulp" )
 
 					fs.stat( file, function( err, stat ) {
 
-                        result.push( {
-                            id: file,
-                            parent: dir,
-                            name: file.substr( dir.length ).replace( "/", "" )
-                        } );
+					    if ( !/(node_modules|\.git|\.DS_Store)/i.test( file ) ) {
 
-						if ( !/(node_modules|\.git)/i.test( file )
-						        && stat && stat.isDirectory() ) {
+                            result.push( {
+                                id: file,
+                                parent: dir,
+                                name: file.substr( dir.length ).replace( "/", "" )
+                            } );
 
-							walk( file, function( err, res ) {
-								result = result.concat( res );
-								next();
-							} );
-						} else {
-                            /** Regular file */
-							next();
-						}
+                            if ( stat && stat.isDirectory() ) {
+
+                                walk( file, function( err, res ) {
+                                    result = result.concat( res );
+                                    next();
+                                } );
+                            } else {
+                                next();
+                            }
+					    } else {
+					        next();
+					    }
 					} );
 				})();
 			} );

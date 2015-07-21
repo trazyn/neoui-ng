@@ -283,7 +283,7 @@
 		filter          : {},
 
 		formatter       : function( item, level, settings ) {
-			return "<a style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a>";
+			return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
 		}
 	};
 } )( window.jQuery );

@@ -25,8 +25,8 @@
 
         <div class="wrap">
             <label>Custome</label>
-            <s-tree style="height: 430px; width: 270px;" data="files" root-ids="[ './' ]" parent-key="parent" text-key="name" value-key="id">
-                <i class="icon file-type-{{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
+            <s-tree class="file" style="height: 430px; width: 270px;" data="files" root-ids="[ './' ]" parent-key="parent" text-key="name" value-key="id">
+                <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
             </s-tree>
         </div>
     </section>

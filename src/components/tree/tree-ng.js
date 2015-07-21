@@ -38,7 +38,7 @@ angular.module( "$ui.tree", [] )
 
                         html = $compile( markup )( angular.extend( $scope.$parent.$new(), item ) );
                         $scope.$parent.$apply();
-                        html = $( html ).css( "margin-left", (level - 1) * 2 + "em" );
+                        html = angular.element( "<p>" ).css( "padding-left", (level - 1) * 2 + "em" ).html( html );
                         html = angular.element( "<w>" ).html( html ).html();
 
                         return html;

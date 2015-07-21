@@ -1,4 +1,6 @@
 
+@import (less) "colors.less";
+
 @font-face {
     font-family: 'icomoon';
     src: url('/fonts/icomoon/fonts/icomoon.eot?31413622');
@@ -161,19 +163,51 @@
     &.calendar:after {
         content: "\e6e9";
     }
-    &.icon.location:after {
+    &.location:after {
         content: "\e6ae";
     }
-    &.icon.email:after {
+    &.email:after {
         content: "\e639";
     }
-    &.icon.phone:after {
+    &.phone:after {
         content: "\e714";
     }
-    &.icon.star:after {
+    &.star:after {
         content: "\e6d7";
     }
-    &.icon.exit:after {
+    &.exit:after {
         content: "\e641";
+    }
+    &.js:after {
+        content: "\e723";
+        color: @dribbble;
+    }
+    &.py:after {
+        content: "\e6fd";
+        color: @darkGray;
+    }
+    &.html:after {
+        content: "\e708";
+        color: @mint;
+    }
+    &.json:after {
+        content: "\e701";
+        color: @sunflower;
+    }
+    &.jpg:after, &.jpeg:after, &.png:after {
+        content: "\e705";
+        color: @twitter;
+    }
+    &.less:after, &.css:after {
+        content: "\e71c";
+        color: @aqua;
+    }
+    &.md:after {
+        content: "\e6ff";
+        color: @lavender;
+    }
+    &.editorconfig:after, &.jshintrc:after {
+        content: "\e71e";
+        color: @darkGray;
     }
 }

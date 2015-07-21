@@ -22,4 +22,26 @@
             letter-spacing: 2px;
         }
     }
+
+    .ui.tree.file {
+
+        li .icon {
+            position: relative;
+            &:after {
+                position: absolute;
+                top: -1px;
+                left: 14px;
+            }
+
+            & + span {
+                margin-left: 32px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .node .icon:after {
+            top: -6px;
+        }
+    }
 }
