@@ -110,11 +110,14 @@
 
 						  for ( var html = "", i = 0, length = data.length; i < length; ++i ) {
 
-						      var
-						        value = data[i][ settings.valueKey ],
-						        text = data[i][ settings.textKey ] || value;
+                              var
+                              item = data[i],
+                              value = item[ settings.valueKey ],
+                              text = item[ settings.textKey ] || value;
 
-							  html += settings.formatter( value, text, data[i], i, highlight( text, query ), query, settings );
+							  html += "<li value='" + value + "' data-index='" + i + "'>" +
+                                      settings.formatter( item, i, highlight( text, query ), query, settings ) +
+                                      "</li>";
 						  }
 
 						  setbg();
@@ -697,11 +700,15 @@
 		/** From service */
 		ajax 		        : undefined,
 
-		formatter: function( value, text, item, index, highlightText, query, settings ) {
+		formatter: function( item, index, highlightText, query, settings ) {
+
+            var
+            value = item[ settings.valueKey ],
+            text = item[ settings.textKey ] || value;
 
 			return settings.highlight
-				? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
-				: "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
+				? highlightText
+				: text
 				;
 		}
 	};

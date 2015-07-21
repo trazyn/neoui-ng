@@ -29,7 +29,11 @@ angular.module( "$ui.autoComplete", [] )
             transclude.remove();
 
             if ( markup ) {
-                options.formatter = function( value, text, item, index, highlightText, query, settings ) {
+                options.formatter = function( item, index, highlightText, query, settings ) {
+
+                    var
+                    value = item[ settings.valueKey ],
+                    text = item[ settings.textKey ] || value;
 
                     html = markup
                         .replace( /\{\{\s*\$value\s*\}\}/g, value )
@@ -41,7 +45,7 @@ angular.module( "$ui.autoComplete", [] )
                     $scope.$parent.$apply();
                     html = angular.element( "<w>" ).append( html ).html();
 
-                    return "<li value='" + value + "' data-index='" + index + "'>" + html + "</li>";
+                    return html;
                 };
             }
 

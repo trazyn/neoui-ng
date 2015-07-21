@@ -12,14 +12,39 @@ define( [ "util/ng-args", "ui/tree/tree" ], function( args ) {
  * */
 
 angular.module( "$ui.tree", [] )
-    .directive( "sTree", [ "$rootScope", function( $rootScope ) {
+    .directive( "sTree", [ "$rootScope", "$compile", function( $rootScope, $compile ) {
 
         function link( $scope, $element, $attrs, undefined, link ) {
 
             var
             options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean" } ),
             tree,
-            transclude;
+            transclude,
+            markup,
+            html;
+
+            transclude = link( $scope );
+            if ( transclude.length ) {
+
+                markup = transclude.parent().html().trim();
+                transclude.remove();
+
+                if ( markup ) {
+                    options.formatter = function( item, level, settings ) {
+
+                        var
+                        value = item[ settings.valueKey ],
+                        text = item[ settings.textKey ];
+
+                        html = $compile( markup )( angular.extend( $scope.$parent.$new(), item ) );
+                        $scope.$parent.$apply();
+                        html = $( html ).css( "margin-left", (level - 1) * 2 + "em" );
+                        html = angular.element( "<w>" ).html( html ).html();
+
+                        return html;
+                    };
+                }
+            }
 
             tree = $( $element ).tree( options );
 
@@ -53,7 +78,7 @@ angular.module( "$ui.tree", [] )
             replace             : true,
             template            : '<div class="ui tree">' +
                                     '<div class="icon">' +
-                                        '<input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">' +
+                                        '<input type="text" class="ui text" name="filter" value="">' +
                                     '</div>' +
                                     '<div class="content"></div>' +
                                   '</div>',

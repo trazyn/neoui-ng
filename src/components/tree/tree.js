@@ -90,7 +90,10 @@
 
         var timer;
 
-		target.find( settings.selector4filter ).on( "keyup", function( e ) {
+		target
+		.find( settings.selector4filter )
+		.attr( "placeholder", settings.placeholder )
+		.on( "keyup", function( e ) {
 
             var value = this.value;
 
@@ -211,7 +214,14 @@
 				data.splice( i--, 1 );
 
                 if ( filter( item ) ) {
-                    html += settings.render( item, level + 1, settings );
+
+                    html += "<li class='node " + (settings.collapsed ? "close" : "open") +
+                            "' value='" + item[ settings.valueKey ] +
+                            "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
+                            "' data-level=" + (level + 1) + " data-key='" + item[ settings.valueKey ] +
+                            "'>" +
+                            settings.formatter( item, level + 1, settings ) +
+                            "</li>";
                 }
 			}
 		}
@@ -261,6 +271,9 @@
 		/** Animation duration should be tweaked according to easing */
 		duration        : 150,
 
+		/** Same to input placeholder */
+		placeholder     : "Type for search...",
+
 		selector4content: ".content",
 		selector4filter : "input[name=filter]",
 
@@ -269,13 +282,8 @@
 
 		filter          : {},
 
-		render          : function( item, level, settings ) {
-
-			return "<li class='node " + (settings.collapsed ? "close" : "open") +
-			        "' value='" + item[ settings.valueKey ] +
-			        "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
-			        "' data-level=" + level + " data-key='" + item[ settings.valueKey ] +
-			        "'><a style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a></li>";
+		formatter       : function( item, level, settings ) {
+			return "<a style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a>";
 		}
 	};
 } )( window.jQuery );
