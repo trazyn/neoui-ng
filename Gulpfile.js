@@ -66,6 +66,58 @@ bs, gulp = require( "gulp" )
 		} );
 	} )
 
+	.task( "treeData", function() {
+
+		var walk = function( dir, done ) {
+
+			var result = [];
+
+			fs.readdir( dir, function( err, list ) {
+
+                var i = 0;
+
+				if ( err ) return done( err );
+
+				(function next() {
+
+					var file = list[ i++ ];
+
+					if ( !file ) return done( null, result );
+
+					file = (dir + "/" + file).replace( ".//", "./" );
+
+					fs.stat( file, function( err, stat ) {
+
+                        result.push( {
+                            id: file,
+                            parent: dir,
+                            name: file.substr( dir.length ).replace( "/", "" )
+                        } );
+
+						if ( !/(node_modules|\.git)/i.test( file )
+						        && stat && stat.isDirectory() ) {
+
+							walk( file, function( err, res ) {
+								result = result.concat( res );
+								next();
+							} );
+						} else {
+                            /** Regular file */
+							next();
+						}
+					} );
+				})();
+			} );
+		};
+
+		walk( "./", function( err, result ) {
+
+		    if ( err ) throw err;
+
+            fs.writeFile( "./src/demo/tree/files.json", JSON.stringify( result ) );
+		} );
+	} )
+
 	.task( "jshint", function() {
 
 		return gulp.src( "src/**/*.js" )

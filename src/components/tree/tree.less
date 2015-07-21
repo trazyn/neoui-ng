@@ -3,11 +3,11 @@
 .ui.tree {
 
     ul {
-        list-style: none;
+        list-style: none !important;
+        padding-left: 0 !important;
     }
 
     border: 1px solid #DDD;
-    padding: 10px;
     display: block;
     color: #777;
     overflow: auto;
@@ -30,6 +30,7 @@
     .node {
 
         cursor: pointer;
+        margin-left: 0px;
 
         a {
             transition: .2s;
@@ -40,6 +41,10 @@
             &:hover {
                 background-color: #ddd;
             }
+        }
+
+        li {
+            margin-left: 0px;
         }
 
         &.open > a span, &.close > a span, .icon {
@@ -75,16 +80,19 @@
             }
 
             & + span {
-                margin-left: 38px;
+                margin-left: 32px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
         }
     }
 
-    li.selected > a {
-        & i, & span {
-            color: #E9573F !important;
+    li {
+        margin: 15px 0 15px 15px;
+        &.selected > a {
+            & i, & span {
+                color: #E9573F !important;
+            }
         }
     }
 }

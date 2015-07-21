@@ -20,6 +20,15 @@ angular.module( "$ui.tree", [] )
             options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean" } ),
             tree,
             transclude;
+
+            tree = $( $element ).tree( options );
+
+            if ( typeof $scope.controller === "object" ) {
+                angular.extend( $scope.controller, tree );
+            } else if ( !$rootScope.$$phase ) {
+                $scope.controller = tree;
+                $scope.$apply();
+            }
         }
 
         return {

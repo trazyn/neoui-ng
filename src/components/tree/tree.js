@@ -16,24 +16,23 @@
 		this.$node = target;
 		this.settings = settings;
 
-        if ( !data && typeof settings.dataProxy === "function" ) {
-            deferred = settings.dataProxy();
+        if ( typeof settings.data === "function" ) {
+            deferred = settings.data();
         }
 
 		$.when( deferred ).done( function() {
 
 			var node = $( "<ul>" );
 
-			data = data || this;
+			data = data && (data instanceof Array ? data : this);
 
-			if ( !(data instanceof Array) && data.result instanceof Array ) {
-                data = data.result;
-			}
+            if ( data ) {
 
-            /** Filter support */
-			settings.data = ([].concat( data ));
-            renderTree( node, data, settings, hash, true );
-            target.find( settings.selector4content ).html( node.html() );
+                /** Filter support */
+                settings.data = ([].concat( data ));
+                renderTree( node, data, settings, hash, true );
+                target.find( settings.selector4content ).html( node.html() );
+            }
 		} );
 
 		var
@@ -75,7 +74,7 @@
                     clearTimeout( timer );
 
                     timer = setTimeout( function() {
-                        settings.callback.call( self, e, hash[ self.attr( "data-key" ) ], hash, level );
+                        settings.onSelect.call( self, e, hash[ self.attr( "data-key" ) ], hash, level );
                     }, delay );
                 } else {
                     operation();
@@ -251,7 +250,7 @@
 		textKey         : "text",
 		valueKey        : "value",
 
-		callback        : $.noop,
+		onSelect        : $.noop,
 
 		/** Start with collapsed menu( only level 1 items visible ) */
 		collapsed       : true,
@@ -260,18 +259,15 @@
 		closeSameLevel  : false,
 
 		/** Animation duration should be tweaked according to easing */
-		duration        : 200,
+		duration        : 150,
 
 		selector4content: ".content",
 		selector4filter : "input[name=filter]",
 
-        /** Local array */
+        /** Local array or return a promise */
 		data            : undefined,
 
 		filter          : {},
-
-		/** Return a promise */
-		dataProxy       : undefined,
 
 		render          : function( item, level, settings ) {
 
@@ -279,7 +275,7 @@
 			        "' value='" + item[ settings.valueKey ] +
 			        "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
 			        "' data-level=" + level + " data-key='" + item[ settings.valueKey ] +
-			        "'><a style='padding-left: " + ((level - 1) * 3) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a></li>";
+			        "'><a style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a></li>";
 		}
 	};
 } )( window.jQuery );

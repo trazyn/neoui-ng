@@ -20,17 +20,12 @@
     <section>
         <div class="wrap">
             <label>Normal</label>
-            <s-tree style="height: 430px; width: 270px;"></s-tree>
+            <s-tree style="height: 430px; width: 270px;" data="data" root-ids="rootIds" parent-key="a03_parent_id" text-key="a03_name" value-key="a03_id"></s-tree>
         </div>
 
         <div class="wrap">
-            <label>Close the same level</label>
-            <div class="ui tree" style="height: 430px; width: 270px;">
-                <div class="icon">
-                    <input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">
-                </div>
-                <div class="content"></div>
-            </div>
+            <label>Custome</label>
+            <s-tree style="height: 430px; width: 270px;" data="files" root-ids="[ './' ]" parent-key="parent" text-key="name" value-key="id"></s-tree>
         </div>
     </section>
 

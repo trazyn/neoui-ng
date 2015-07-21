@@ -45,10 +45,10 @@ angular.module( "$ui.sidenav", [] )
 
             if ( "object" === typeof $scope.instance ) {
                 angular.extend( $scope.instance, sidenav );
-            } else
+            } else {
                 $scope.instance = sidenav;
-
-            $rootScope.$$phase || $scope.$apply();
+                $rootScope.$$phase || $scope.$apply();
+            }
         }
 
         return {
