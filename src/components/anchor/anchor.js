@@ -10,7 +10,9 @@
 		current,
 		mappings = {};
 
-		target.find( settings.selector4anchor + "[" + settings.symbol + "]" )
+		target
+		.find( settings.selector4anchor + "[" + settings.symbol + "]" )
+		.filter( ".ui.anchor [" + settings.symbol + "]" )
 		.each( function() {
 
 			var
@@ -31,8 +33,8 @@
 		} );
 
 		target
-		.undelegate( settings.selector4anchor + "[" + settings.symbol + "]", "click" )
-		.delegate( settings.selector4anchor + "[" + settings.symbol + "]", "click", function( e, args ) {
+		.undelegate( settings.selector4delegate + "[" + settings.symbol + "]", "click" )
+		.delegate( settings.selector4delegate + "[" + settings.symbol + "]", "click", function( e, args ) {
 
 			var
 			self = $( this ),
@@ -129,7 +131,8 @@
 		symbol 			    : "data-anchor",
 		offset 			    : 0,
 
-		selector4anchor 	: "#anchors li, a",
+		selector4anchor 	: "#anchors li",
+		selector4delegate   : "#anchors li, a",
 		selector4content 	: "#container header, #canvas h3, .ui.ribbon"
 	};
 
