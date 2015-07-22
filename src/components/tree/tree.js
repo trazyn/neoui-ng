@@ -1,6 +1,8 @@
 
 (function( $ ) {
 
+    "use strict";
+
 	var
 	namespace = "$ui.tree",
 
@@ -9,7 +11,6 @@
 		deferred,
 		selected,
 		cache = [],
-        hash = {},
         self = this,
 		data = settings.data;
 
@@ -28,9 +29,9 @@
 
             if ( data ) {
 
-                /** Filter support */
+                /** Use '[].concat()' get data copy */
                 settings.data = ([].concat( data ));
-                renderTree( node, data, settings, hash, true );
+                renderTree( node, data, settings, true );
                 target.find( settings.selector4content ).html( node.html() );
             }
 		} );
@@ -41,8 +42,10 @@
         timer;
 
 		target
-        .undelegate( "li[data-level]", "click.tree" )
-        .delegate( "li[data-level]", "click.tree", function( e ) {
+        .undelegate( "li[data-level]", "click" )
+        .delegate( "li[data-level]", "click", function( e ) {
+
+            var hash = settings.hash;
 
             e.stopPropagation();
             e.preventDefault();
@@ -51,6 +54,7 @@
 
                 var
                 self = $( this ),
+                level = +self.attr( "data-level" ),
                 duration = settings.duration,
                 operation = self.hasClass( "open" ) ? function() { close( self, duration ); } : function() { open( self, duration ); };
 
@@ -59,7 +63,6 @@
                 if ( settings.closeSameLevel ) {
 
                     var
-                    level = self.attr( "data-level" ),
                     recent = cache[ level ];
 
                     cache[ level ] = self;
@@ -104,39 +107,8 @@
 		} );
 	};
 
-	function close( target, duration ) {
-
-        var post = function() {
-            $( this ).css( "display", "" ).parent().removeClass( "open" ).addClass( "close" ).css( "display", "" );
-        };
-
-        /** Close all the children */
-        if ( target.hasClass( "open" ) ) {
-
-            if ( duration ) {
-                target.find( "ul[style='display: block;']" ).slideToggle( duration, function() {
-                    post.call( this );
-                } );
-            } else {
-                /** Disable animate */
-                target.find( "ul[style='display: block;']" ).each( function() {
-                    post.call( this );
-                } );
-            }
-        }
-    }
-
-    function open( target, duration ) {
-
-        if ( target.hasClass( "close" ) ) {
-
-            target.find( "ul:first" ).slideToggle( duration || 0, function() {
-                target.removeClass( "close" ).addClass( "open" );
-            } );
-        }
-    }
-
 	Tree.prototype = {
+
         toggle: function( nodeid ) {
 
         },
@@ -188,10 +160,43 @@
         }
 	};
 
-	function renderTree( node, data, settings, hash, recursion ) {
+	function close( target, duration ) {
+
+        var post = function() {
+            $( this ).css( "display", "" ).parent().removeClass( "open" ).addClass( "close" ).css( "display", "" );
+        };
+
+        /** Close all the children */
+        if ( target.hasClass( "open" ) ) {
+
+            if ( duration ) {
+                target.find( "ul[style='display: block;']" ).slideToggle( duration, function() {
+                    post.call( this );
+                } );
+            } else {
+                /** Disable animate */
+                target.find( "ul[style='display: block;']" ).each( function() {
+                    post.call( this );
+                } );
+            }
+        }
+    }
+
+    function open( target, duration ) {
+
+        if ( target.hasClass( "close" ) ) {
+
+            target.find( "ul:first" ).slideToggle( duration || 0, function() {
+                target.removeClass( "close" ).addClass( "open" );
+            } );
+        }
+    }
+
+	function renderTree( node, data, settings, recursion ) {
 
 		var
 		html = "",
+		hash = {},
 		key = node.attr( "data-key" ) || settings.rootIds,
 		level = +node.attr( "data-level" ) || 0,
 		filter = settings.filter[ level ] || function() { return true; };
@@ -238,6 +243,8 @@
         } else {
             node.removeClass( "node open close" );
 		}
+
+		settings.hash = hash;
 	}
 
 	$.fn.tree = function( options ) {

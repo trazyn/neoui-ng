@@ -29,7 +29,14 @@
     <section>
         <div class="wrap example">
             <label>Normal</label>
-            <s-tree style="height: 430px; width: 270px;" data="data" root-ids="rootIds" parent-key="a03_parent_id" text-key="a03_name" value-key="a03_id"></s-tree>
+            <s-tree style="height: 430px; width: 270px;"
+                data="data"
+                on-select="onSelect"
+                root-ids="rootIds"
+                parent-key="a03_parent_id"
+                text-key="a03_name"
+                value-key="a03_id">
+            </s-tree>
         </div>
 
         <div class="wrap example">
@@ -318,6 +325,15 @@
                 <p><code>onSelect</code> - <code>null</code></p>
             </blockquote>
             <p>选中节点时回调</p>
+            <xmp>
+            $( ".ui.ntree" ).ntree( {
+
+                onSelect: function( e, item, dataContext, level ) {
+
+                    console.log( arguments );
+                }
+            } );
+            </xmp>
             <br>
 
             <blockquote>

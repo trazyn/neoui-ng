@@ -46,6 +46,16 @@ angular.module( "$ui.tree", [] )
                 }
             }
 
+            options.onSelect = function( e, item, dataContext, level ) {
+
+                if ( !$rootScope.$$phase ) {
+
+                    $scope.ngModel = item;
+                    ($scope.onSelect() || $.noop).apply( this, arguments );
+                    $scope.$apply();
+                }
+            };
+
             tree = $( $element ).tree( options );
 
             if ( typeof $scope.controller === "object" ) {
@@ -65,10 +75,10 @@ angular.module( "$ui.tree", [] )
                 collapsed       : "@",
                 closeSameLevel  : "@",
                 placeholder     : "@",
-                render          : "&",
                 data            : "=",
                 onSelect        : "&",
-                controller      : "="
+                controller      : "=",
+                ngModel         : "="
             },
 
             restric             : "E",
