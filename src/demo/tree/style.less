@@ -5,7 +5,7 @@
 #tree {
     #markdown();
 
-    .wrap {
+    .example.wrap {
         position: relative;
         margin: 10px 120px 0 10px;
         display: inline-block;
@@ -25,11 +25,23 @@
 
     .ui.tree.file {
 
+        li p {
+            transition: .2s;
+            transition: .2s;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+
+            &:hover {
+                background-color: #ddd;
+            }
+        }
+
         li .icon {
             position: relative;
             &:after {
                 position: absolute;
-                top: -1px;
+                top: -7px;
                 left: 14px;
             }
 

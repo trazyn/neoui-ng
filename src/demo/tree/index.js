@@ -8,28 +8,33 @@ define( [ "ui/tree/tree-ng" ], function() {
     .controller( "treeController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 0 } );
+            $( document.body ).anchor( { offset: -60 } );
         };
 
-        $scope.rootIds = [ "C000000000481935" ];
-        $scope.data = function() {
+        /** Simple */
+        angular.extend( $scope, {
 
-            var deferred = $.Deferred();
+            rootIds: [ "C000000000481935" ],
+            data: function() {
 
-            $.ajax( {
-                url: "/src/demo/tree/tree.json",
-                dataType: "json"
-            } )
+                var deferred = $.Deferred();
 
-            .done( function( data ) {
+                $.ajax( {
+                    url: "/src/demo/tree/tree.json",
+                    dataType: "json"
+                } )
 
-                data = data.result.catalog;
-                deferred.resolveWith( JSON.parse( data ) );
-            } );
+                .done( function( data ) {
 
-            return deferred.promise();
-        };
+                    data = data.result.catalog;
+                    deferred.resolveWith( JSON.parse( data ) );
+                } );
 
+                return deferred.promise();
+            }
+        } );
+
+        /** Custom */
         $scope.files = function() {
 
             var deferred = $.Deferred();

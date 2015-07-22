@@ -3,7 +3,16 @@
 
 <ul id="anchors">
     <li data-anchor="example" class="item active">Example</li>
-    <li class="item">API
+
+    <li class="item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="item">Markup</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="sTree" class="item">Directive * s-tree</li>
+        </ul>
+    </li>
+
+    <li class="item">jQuery
         <ul>
             <li data-anchor="html" class="item">Html</li>
             <li data-anchor="constructor" class="item">Constructor</li>
@@ -18,12 +27,12 @@
     <header data-anchor="example">Example</header>
 
     <section>
-        <div class="wrap">
+        <div class="wrap example">
             <label>Normal</label>
             <s-tree style="height: 430px; width: 270px;" data="data" root-ids="rootIds" parent-key="a03_parent_id" text-key="a03_name" value-key="a03_id"></s-tree>
         </div>
 
-        <div class="wrap">
+        <div class="wrap example">
             <label>Custome</label>
             <s-tree class="file" style="height: 430px; width: 270px;" data="files" root-ids="[ './' ]" parent-key="parent" text-key="name" value-key="id">
                 <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
@@ -33,6 +42,170 @@
 
     <br>
     <br>
+
+    <header>AngularJS</header>
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <div class="wrap">
+                <label>Simple</label>
+                <xmp>
+                <s-tree style="height: 430px; width: 270px;"
+                    data="data"
+                    root-ids="rootIds"
+                    parent-key="a03_parent_id"
+                    text-key="a03_name"
+                    value-key="a03_id">
+                </s-tree>
+                </xmp>
+            </div>
+
+            <div class="wrap">
+            <label>Custom template</label>
+            <xmp>
+            <s-tree class="file" style="height: 430px; width: 270px;"
+                data="files"
+                root-ids="[ './' ]"
+                parent-key="parent"
+                text-key="name"
+                value-key="id">
+                <i class="icon \{\{ name.substr( name.lastIndexOf( '.' ) + 1 ) \}\}"></i><span>\{\{ name \}\}</span>
+            </s-tree>
+            </xmp>
+            <code>内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></code>
+            </div>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+            angular
+            .module( "demo.tree", [ "$ui.tree" ] )
+            .controller( "treeController", [ "$scope", function( $scope ) {
+
+                /** Simple */
+                angular.extend( $scope, {
+
+                    rootIds: [ "C000000000481935" ],
+                    data: function() {
+
+                        var deferred = $.Deferred();
+
+                        $.ajax( {
+                            url: "/src/demo/tree/tree.json",
+                            dataType: "json"
+                        } )
+
+                        .done( function( data ) {
+
+                            data = data.result.catalog;
+                            deferred.resolveWith( JSON.parse( data ) );
+                        } );
+
+                        return deferred.promise();
+                    }
+                } );
+
+                /** Custom */
+                $scope.files = function() {
+
+                    var deferred = $.Deferred();
+
+                    $.ajax( {
+                        url: "/src/demo/tree/files.json",
+                    } )
+
+                    .done( function( data ) {
+                        deferred.resolveWith( data );
+                    } );
+
+                    return deferred;
+                };
+            } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="sTree">
+                <span>Directive * s-tree</span>
+            </div>
+
+            <blockquote class="required">
+                <p><code>=root-ids</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p><code>Root</code>节点<code>ID</code></p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>@parent-key</code> - <code>"parentId"</code>
+                </p>
+            </blockquote>
+            <p>关联键</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>@text-key</code> - <code>"text"</code></p>
+            </blockquote>
+            <p><code>text</code>取值</p>
+            <br>
+
+            <blockquote class="required">
+            <p><code>@value-key</code> - <code>"value"</code></p>
+            </blockquote>
+            <p><code>text</code>取值</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>=data</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
+            <br>
+
+            <blockquote>
+                <p><code>@collapsed</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>为<code>false</code>时展开所有节点</p>
+            <br>
+
+            <blockquote>
+                <p><code>@closeSameLevel</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>展开节点时关闭同一级的节点</p>
+            <br>
+
+            <blockquote>
+                <p><code>@placeholder</code> - <code>"Type to search..."</code>
+                </p>
+            </blockquote>
+            <p>The same to input placeholder</p>
+            <br>
+
+            <blockquote>
+                <p><code>&onSelect</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中节点时回调</p>
+            <br>
+
+            <blockquote>
+                <p><code>=controller</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>Tree's controller, <a href="" data-anchor="method">See Method</a></p>
+            <br>
+        </section>
+    </div>
 
     <header data-anchor="api">API</header>
 
@@ -73,15 +246,26 @@
         <xmp>
         $( ".ui.ntree" ).ntree( {
 
-                service: {
-                        serviceName: "help.online.faq.tree.QuerySaas",
-                        moduleName: "catalog"
-                },
+            data: function() {
 
-                parentKey: "a03_parent_id",
-                textKey: "a03_name",
-                valueKey: "a03_id",
-                rootIds: [ "C000000000481935" ]
+                var deferred = $.Deferred();
+
+                $.ajax( {
+                    url: "/src/demo/tree/tree.json",
+                    dataType: "json"
+                } )
+                .done( function( data ) {
+                    data = data.result.catalog;
+                    deferred.resolveWith( JSON.parse( data ) );
+                } );
+
+                return deferred.promise();
+            },
+
+            parentKey: "a03_parent_id",
+            textKey: "a03_name",
+            valueKey: "a03_id",
+            rootIds: [ "C000000000481935" ]
         } );
         </xmp>
         </section>
@@ -94,28 +278,34 @@
                 <span>Options</span>
             </div>
 
-            <blockquote>
+            <blockquote class="required">
                 <p><code>rootIds</code> - <code>null</code></p>
             </blockquote>
-            <p><code>Root</code>节点<code>ID</code>, 可以为数组</p>
+            <p><code>Root</code>节点<code>ID</code></p>
             <br>
 
-            <blockquote>
+            <blockquote class="required">
                 <p><code>parentKey</code> - <code>"parentId"</code></p>
             </blockquote>
             <p>关联键</p>
             <br>
 
-            <blockquote>
+            <blockquote class="required">
                 <p><code>textKey</code> - <code>"text"</code></p>
             </blockquote>
-            <p>节点文本</p>
+            <p><code>text</code>取值</p>
             <br>
 
-            <blockquote>
+            <blockquote class="required">
                 <p><code>value</code> - <code>"value"</code></p>
             </blockquote>
-            <p>节点实际值</p>
+            <p><code>text</code>取值</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>data</code> - <code>null</code></p>
+            </blockquote>
+            <p>为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
             <br>
 
             <blockquote>
@@ -125,48 +315,15 @@
             <br>
 
             <blockquote>
-                <p><code>callback</code> - <code>null</code></p>
+                <p><code>onSelect</code> - <code>null</code></p>
             </blockquote>
-            <p>节点选择时回调</p>
+            <p>选中节点时回调</p>
             <br>
 
             <blockquote>
-                <p><code>data</code> - <code>null</code></p>
+                <p><code>duration</code> - <code>150</code></p>
             </blockquote>
-            <p>本地数据</p>
-            <br>
-
-            <blockquote>
-                <p><code>dataProxy</code> - <code>null</code></p>
-            </blockquote>
-            <p>返回<code>Promise</code>对象</p>
-            <xmp>
-            $( ".ui.ntree" ).ntree( {
-                    ...
-
-                    dataProxy: function() {
-
-                            var deferred = $.Deferred();
-
-                            $.ajax( "url" ).done( function( data ) {
-
-                                    deferred.resolveWith( JSON.parse( data ) );
-                            } )
-                            .fail( function() {
-
-                                    deferred.reject();
-                            } );
-
-                            return deferred.promise();
-                    }
-            } );
-            </xmp>
-            <br>
-
-            <blockquote>
-                <p><code>duration</code> - <code>200</code></p>
-            </blockquote>
-            <p>节点展开动画速度, 单位毫秒</p>
+            <p>展开动画速度, 单位毫秒</p>
             <br>
 
             <blockquote>
@@ -178,7 +335,7 @@
             <blockquote>
                 <p><code>selector4content</code> - <code>".content"</code></p>
             </blockquote>
-            <p>树形节点容器</p>
+            <p>树形节点容器选择器</p>
             <br>
 
             <blockquote>
@@ -194,8 +351,6 @@
             <xmp>
             $( ".ui.ntree" ).ntree( {
 
-                ...
-
                 filter: {
                     "0": function( item ) {
                         return !!item.value;
@@ -210,21 +365,15 @@
             <br>
 
             <blockquote>
-                <p><code>render</code> - <code></code></p>
+                <p><code>formatter</code> - <code></code></p>
             </blockquote>
-            <p>节点渲染, 用于高级定制</p>
+            <p>节点格式化</p>
             <xmp>
             $( ".ui.ntree" ).ntree( {
-                    ...
+                formatter: function() {
 
-                    render: function( item, level, settings ) {
-
-                        return "<li class='node " + (settings.collapsed ? "close" : "open") +
-                                "' value='" + item[ settings.valueKey ] +
-                                "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
-                                "' data-level=" + level + " data-key='" + item[ settings.valueKey ] +
-                                "'><a style='padding-left: " + ((level - 1) * 3) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></a></li>";
-                    }
+                    return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
+                }
             } );
             </xmp>
             <br>
@@ -244,22 +393,40 @@
             </blockquote>
             <p>展开收起指定节点</p>
             <br>
+            <br>
 
             <p><code>tree.expand( nodeid )</code></p>
             <blockquote>
                 <p><code>nodeid</code> - <code>String</code></p>
             </blockquote>
-            <p>展开指定节点</p>
+            <p>展开指定节点, <code>nodeid</code>为空时展开所有节点</p>
+            <br>
             <br>
 
             <p><code>tree.collapsed( nodeid )</code></p>
             <blockquote>
                 <p><code>nodeid</code> - <code>String</code></p>
             </blockquote>
-            <p>关闭指定节点</p>
+            <p>关闭指定节点, <code>nodeid</code>为空时收起所有节点</p>
+            <br>
             <br>
 
-            <p><code>tree.filter( text )</code></p>
+            <p><code>tree.add( item )</code></p>
+            <blockquote>
+                <p><code>item</code> - <code>Object</code></p>
+            </blockquote>
+            <p>添加节点</p>
+            <xmp>
+            {
+                text: "Text",
+                value: "Value",
+                parentId: "0"
+            }
+            </xmp>
+            <br>
+            <br>
+
+            <p>TODO:<code>tree.filter( text )</code></p>
             <blockquote>
                 <p><code>text</code> - <code>String</code></p>
             </blockquote>
@@ -268,4 +435,3 @@
     </div>
 
 </section>
-

@@ -73,6 +73,9 @@ require( [
 		    .when( "/dateutil", {
 		        templateUrl: "/src/demo/dateutil/index.html"
 		    } )
+		    .when( "/editor", {
+		        templateUrl: "/src/demo/editor/index.html"
+		    } )
 			.otherwise( {
 				redirectTo: "/home"
 			} );

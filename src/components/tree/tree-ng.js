@@ -65,10 +65,9 @@ angular.module( "$ui.tree", [] )
                 collapsed       : "@",
                 closeSameLevel  : "@",
                 placeholder     : "@",
-                dataProxy       : "&",
                 render          : "&",
                 data            : "=",
-                filter          : "=",
+                onSelect        : "&",
                 controller      : "="
             },
 
