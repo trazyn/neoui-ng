@@ -33,7 +33,7 @@ bs, gulp = require( "gulp" )
 	.task( "start", function() {
 
 		bs = browserSync( {
-			files: [ "css/**/*.css", "js/**/*.js" ],
+			files: [ "**/*.css", "**/*.js", "src/demo/**/*.html" ],
 			server: {
 				baseDir: "./",
 				index: "index.html"
@@ -61,9 +61,6 @@ bs, gulp = require( "gulp" )
 
 	.task( "watch", function() {
 		gulp.watch( "src/**/*.less", [ "css" ] );
-		gulp.watch( "dist/style/css.min.css", function() {
-			bs && bs.reload();
-		} );
 	} )
 
 	.task( "treeData", function() {

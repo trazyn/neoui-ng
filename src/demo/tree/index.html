@@ -28,18 +28,41 @@
 
     <section>
         <div class="wrap example">
+
+            <code>
+                <label>Value:</label>
+                {{ menu || [] | json }}
+            </code>
+
+            <br>
+            <br>
+
             <label>Normal</label>
             <s-tree style="height: 430px; width: 270px;"
                 data="data"
+                ng-model="menu"
                 on-select="onSelect"
                 root-ids="rootIds"
                 parent-key="a03_parent_id"
                 text-key="a03_name"
                 value-key="a03_id">
             </s-tree>
+
         </div>
 
+        <br>
+        <br>
+
         <div class="wrap example">
+
+            <code>
+                <label>Value:</label>
+                {{ menu || [] | json }}
+            </code>
+
+            <br>
+            <br>
+
             <label>Custome</label>
             <s-tree class="file" style="height: 430px; width: 270px;" data="files" root-ids="[ './' ]" parent-key="parent" text-key="name" value-key="id">
                 <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
