@@ -49,7 +49,7 @@ define( [ "util/poll" ], function( poll ) {
 			node = this.$node;
 
 			this.status = status;
-			this.settings.render.call( node.find( settings.selector4bar ), (1 - status) * 100, node.find( settings.selector4icon ) );
+			this.settings.render.call( node.find( settings.selector4bar ), status * 100, node.find( settings.selector4icon ) );
 
 			return this;
 		},
@@ -63,19 +63,15 @@ define( [ "util/poll" ], function( poll ) {
 			setTimeout( function() {
 
 				self.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
-
 					"opacity": 0,
 					"visibility": "hidden"
 				} );
 
 				setTimeout( function() {
-
-					self.$node.find( settings.selector4icon ).css( "display", "none" );
 					self.set( 0 );
-				}, 200 );
-
-			/** After '-webkit-transform' */
-			}, 277 );
+					self.$node.find( settings.selector4icon ).css( "display", "none" );
+				}, 800 );
+			}, 400 );
 
 			poll.remove( self.runner );
 
@@ -86,16 +82,12 @@ define( [ "util/poll" ], function( poll ) {
 	function render( status, icon ) {
 
 		this.css( {
-			"-webkit-transform": "translate3d(-" + status + "%,0px,0px)",
-			"-moz-transform": "translate3d(-" + status + "%,0px,0px)",
-			"-ms-transform": "translate3d(-" + status + "%,0px,0px)",
-			"-o-transform": "translate3d(-" + status + "%,0px,0px)",
-			"transform": "translate3d(-" + status + "%,0px,0px)",
-			"-webkit-transition": "all 200ms ease",
-			"-moz-transition": "all 200ms ease",
-			"-ms-transition": "all 200ms ease",
-			"-o-transition": "all 200ms ease",
-			"transition": "all 200ms ease",
+			"width": status + "%",
+			"-webkit-transition": "all .2s ease-out",
+			"-moz-transition": "all .2s ease-out",
+			"-ms-transition": "all .2s ease-out",
+			"-o-transition": "all .2s ease-out",
+			"transition": "all .2s ease-out",
 		} );
 	}
 

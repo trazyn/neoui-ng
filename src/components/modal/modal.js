@@ -44,21 +44,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			}
 		} ),
 
-		progress = modal.find( ".ui.progress:first" ).progress( {
-
-			seed: 0.7,
-			render: function( status, icon ) {
-				this.css( {
-					"-webkit-transform": "translate3d(-" + status + "%,0px,0px)",
-					"transition": "all 200ms ease",
-					"-webkit-transition": "all 200ms ease"
-				} );
-				icon.css( {
-					"top": 54,
-					"right": 14
-				} );
-			}
-		} ),
+		progress = modal.find( ".ui.progress:first" ).progress(),
 
 		deferred = $.Deferred(),
 
