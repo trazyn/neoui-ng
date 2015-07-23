@@ -31,23 +31,36 @@
 
             <code>
                 <label>Value:</label>
-                {{ menu || [] | json }}
+                {{ treeValue || {} }}
             </code>
 
             <br>
             <br>
 
-            <label>Normal</label>
-            <s-tree style="height: 430px; width: 270px;"
+            <label>Simple</label>
+            <s-tree style="height: 430px; width: 320px;"
                 data="data"
-                ng-model="menu"
+                ng-model="treeValue"
                 on-select="onSelect"
                 root-ids="rootIds"
                 parent-key="a03_parent_id"
                 text-key="a03_name"
+                controller="menuTree"
                 value-key="a03_id">
             </s-tree>
 
+            <div>
+                <p><button class="ui transition button primary" ng-disabled="!treeValue"
+                    ng-click="addBranch( menuTree, treeValue.a03_id )">Add Branch</button></p>
+                <p><button class="ui transition button warn" ng-disabled="!treeValue"
+                    ng-click="menuTree.remove( treeValue.a03_id )">Remove Branch</button></p>
+                <p><button class="ui transition button coral" ng-disabled="!treeValue"
+                    ng-click="menuTree.toggle( treeValue.a03_id )">Toggle</button></p>
+                <p><button class="ui transition button mint" ng-disabled="!treeValue"
+                    ng-click="menuTree.expand( treeValue.a03_id )">Expand</button></p>
+                <p><button class="ui transition button mint" ng-disabled="!treeValue"
+                    ng-click="menuTree.collapse( treeValue.a03_id )">Collapse</button></p>
+            </div>
         </div>
 
         <br>
@@ -57,16 +70,36 @@
 
             <code>
                 <label>Value:</label>
-                {{ menu || [] | json }}
+                {{ fileValue || {} | json }}
             </code>
 
             <br>
             <br>
 
             <label>Custome</label>
-            <s-tree class="file" style="height: 430px; width: 270px;" data="files" root-ids="[ './' ]" parent-key="parent" text-key="name" value-key="id">
+            <s-tree class="file" style="height: 430px; width: 320px;"
+                data="files"
+                ng-model="fileValue"
+                controller="fileTree"
+                root-ids="[ './' ]"
+                parent-key="parent"
+                text-key="name"
+                value-key="id">
                 <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
             </s-tree>
+
+            <div>
+                <p><button class="ui transition button primary" ng-disabled="!fileValue"
+                    ng-click="addBranch( fileTree, fileValue.id )">Add Branch</button></p>
+                <p><button class="ui transition button warn" ng-disabled="!fileValue"
+                    ng-click="fileTree.remove( fileValue.id )">Remove Branch</button></p>
+                <p><button class="ui transition button coral" ng-disabled="!fileValue"
+                    ng-click="fileTree.toggle( fileValue.id )">Toggle</button></p>
+                <p><button class="ui transition button mint" ng-disabled="!fileValue"
+                    ng-click="fileTree.expand( fileValue.id )">Expand</button></p>
+                <p><button class="ui transition button mint" ng-disabled="!fileValue"
+                    ng-click="fileTree.collapse( fileValue.id )">Collapse</button></p>
+            </div>
         </div>
     </section>
 
@@ -85,9 +118,12 @@
                 <xmp>
                 <s-tree style="height: 430px; width: 270px;"
                     data="data"
+                    ng-model="treeValue"
+                    on-select="onSelect"
                     root-ids="rootIds"
                     parent-key="a03_parent_id"
                     text-key="a03_name"
+                    controller="menuTree"
                     value-key="a03_id">
                 </s-tree>
                 </xmp>
@@ -98,11 +134,13 @@
             <xmp>
             <s-tree class="file" style="height: 430px; width: 270px;"
                 data="files"
+                ng-model="fileValue"
+                controller="fileTree"
                 root-ids="[ './' ]"
                 parent-key="parent"
                 text-key="name"
                 value-key="id">
-                <i class="icon \{\{ name.substr( name.lastIndexOf( '.' ) + 1 ) \}\}"></i><span>\{\{ name \}\}</span>
+                <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
             </s-tree>
             </xmp>
             <code>内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></code>
@@ -139,6 +177,10 @@
                         } );
 
                         return deferred.promise();
+                    },
+
+                    onSelect: function( e, item, dataContext, level ) {
+                        console.log( arguments );
                     }
                 } );
 
@@ -156,6 +198,19 @@
                     } );
 
                     return deferred;
+                };
+
+                $scope.addBranch = function( tree, parentId ) {
+
+                    var
+                    settings = tree.settings,
+                    item = {};
+
+                    item[ settings.parentKey ] = parentId;
+                    item[ settings.valueKey ] = +new Date();
+                    item[ settings.textKey ] = "New Branch";
+
+                    tree.add( item );
                 };
             } ] );
             </xmp>
@@ -345,6 +400,13 @@
             <br>
 
             <blockquote>
+                <p><code>placeholder</code> - <code>"Type to search..."</code>
+                </p>
+            </blockquote>
+            <p>The same to input placeholder</p>
+            <br>
+
+            <blockquote>
                 <p><code>onSelect</code> - <code>null</code></p>
             </blockquote>
             <p>选中节点时回调</p>
@@ -442,11 +504,19 @@
             <br>
             <br>
 
-            <p><code>tree.collapsed( nodeid )</code></p>
+            <p><code>tree.collapse( nodeid )</code></p>
             <blockquote>
                 <p><code>nodeid</code> - <code>String</code></p>
             </blockquote>
             <p>关闭指定节点, <code>nodeid</code>为空时收起所有节点</p>
+            <br>
+            <br>
+
+            <p><code>tree.render( data )</code></p>
+            <blockquote>
+                <p><code>data</code> - <code>Array/Function</code></p>
+            </blockquote>
+            <p>渲染树节点, 为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
             <br>
             <br>
 
@@ -462,6 +532,14 @@
                 parentId: "0"
             }
             </xmp>
+            <br>
+            <br>
+
+            <p><code>tree.remove( nodeid )</code></p>
+            <blockquote>
+                <p><code>nodeid</code> - <code>String</code></p>
+            </blockquote>
+            <p>移除指定节点</p>
             <br>
             <br>
 

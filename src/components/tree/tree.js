@@ -8,38 +8,11 @@
 
 	Tree = function( target, settings ) {
 		var
-		deferred,
 		selected,
-		cache = [],
         self = this,
-		data = settings.data;
-
-		this.$node = target;
-		this.settings = settings;
-
-        if ( typeof settings.data === "function" ) {
-            deferred = settings.data();
-        }
-
-		$.when( deferred ).done( function() {
-
-			var node = $( "<ul>" );
-
-			data = data && (data instanceof Array ? data : this);
-
-            if ( data ) {
-
-                /** Use '[].concat()' get data copy */
-                settings.data = ([].concat( data ));
-                renderTree( node, data, settings, true );
-                target.find( settings.selector4content ).html( node.html() );
-            }
-		} );
-
-		var
+		cache = [],
         inHandle = false,
-        delay = settings.duration + 100,
-        timer;
+        delay = settings.duration + 100;
 
 		target
         .undelegate( "li[data-level]", "click" )
@@ -69,16 +42,12 @@
                     recent && recent.get( 0 ) !== this && close( recent );
                 }
 
-                if ( $( e.target ).is( "span" ) ) {
+                if ( !self.hasClass( "node" ) || $( e.target ).is( "span" ) ) {
 
                     selected && selected.removeClass( "selected" );
                     selected = self.addClass( "selected" );
 
-                    clearTimeout( timer );
-
-                    timer = setTimeout( function() {
-                        settings.onSelect.call( self, e, hash[ self.attr( "data-key" ) ], hash, level );
-                    }, delay );
+                    settings.onSelect.call( self, e, hash[ self.attr( "data-key" ) ], hash, level );
                 } else {
                     operation();
                 }
@@ -91,72 +60,154 @@
             }
 		} );
 
-        var timer;
-
 		target
 		.find( settings.selector4filter )
 		.attr( "placeholder", settings.placeholder )
 		.on( "keyup", function( e ) {
-
-            var value = this.value;
-
-            clearTimeout( timer );
-            timer = setTimeout( function() {
-                self.filter( value );
-            }, 300 );
+            self.filter( this.value );
 		} );
+
+        self.$node = target;
+		self.settings = settings;
+		self.render( settings.data );
 	};
 
 	Tree.prototype = {
 
-        toggle: function( nodeid ) {
+        render: function( data ) {
 
+            var
+            deferred,
+            self = this,
+            settings = this.settings;
+
+            if ( typeof data === "function" ) {
+                deferred = data();
+            }
+
+            $.when( deferred ).done( function() {
+
+                var node = $( "<ul>" );
+
+                data = data && (data instanceof Array ? data : this);
+
+                if ( data ) {
+
+                    settings.hash = {};
+
+                    /** Use '[].concat()' get data copy */
+                    settings.data = ([].concat( data ));
+                    renderTree( node, data, settings, true );
+                    self.$node.find( settings.selector4content ).html( node.html() );
+                }
+            } );
         },
 
-		collapsed: function( nodeid ) {
+        add: function( item ) {
 
+            var
+            $node = this.$node,
+            settings = this.settings,
+            parentId = item[ settings.parentKey ],
+            node = $node.find( "[data-key='" + parentId + "']" );
+
+            /** Add data memory */
+            settings.data.push( item );
+
+            /** After the angularjs $apply() */
+            setTimeout( function() {
+                /** Generate the dom */
+                renderTree( node, item, settings, false );
+
+                /** Add child to sington node */
+                node.hasClass( "node" ) || node.addClass( "node close" );
+
+                /** Sington node */
+                node.find( "[data-key='" + item[ settings.valueKey ] + "']" ).removeClass( "node" );
+
+                /** Expand the parent */
+                open( node, settings.duration );
+            } );
+        },
+
+        remove: function( nodeid ) {
+
+            var
+            settings = this.settings,
+            index = settings.data.indexOf( settings.hash[ nodeid ] ),
+            node = this.$node.find( "[data-key='" + nodeid + "']" ),
+            parentNode = node.parents( ".node:first" );
+
+            settings.data.splice( index, 1 );
+            delete this.settings.hash[ nodeid ];
+
+            node.remove();
+            if ( !parentNode.find( "[data-key]" ).length ) {
+                parentNode.removeClass( "node open close" );
+            }
+        },
+
+        toggle: function( nodeid ) {
+
+            var
+            duration = this.settings.duration,
+            node = this.$node.find( ".node[data-key='" + nodeid + "']" );
+
+            (node.hasClass( "open" ) ? close : open)( node, duration );
+        },
+
+		collapse: function( nodeid ) {
+            close( this.$node.find( ".node[data-key='" + nodeid + "']" ), this.settings.duration );
 		},
 
         expand: function( nodeid ) {
-
+            open( this.$node.find( ".node[data-key='" + nodeid + "']" ), this.settings.duration );
         },
 
         filter: function( text ) {
 
             var
-            matched,
-            settings = this.settings,
+            self = this,
+            $node = self.$node,
+            settings = self.settings;
 
-            /** Prevent multiple reflow */
-            node = this.$node.css( "display", "none" ),
-            lis = node.find( "li[data-filter]" ).css( "display", "" );
+            self.filter.timer && clearTimeout( self.filter.timer );
+            self.filter.timer = setTimeout( function() {
 
-            /** Close all parent node */
-            lis.filter( "li.open" ).each( function() {
-                close( $( this ) );
-            } );
+                var
+                matched,
 
-            if ( text ) {
-                matched = lis.filter( "[data-filter*='" + text.toLowerCase() + "']" );
-                lis.not( matched ).css( "display", "none" );
+                /** Prevent multiple reflow */
+                node = $node.css( "display", "none" ),
+                lis = node.find( "li[data-filter]" ).css( "display", "" );
 
-                matched.each( function() {
-
-                    var self = $( this );
-
-                    if ( !self.find( "li[data-level][style!='display: none;']" ).length ) {
-                        /** Show the subitem */
-                        self.find( "li[data-level]" ).css( "display", "" );
-                    }
-
-                    /** Expand the matched node */
-                    self.parents( "li[data-filter]" ).each( function() {
-                        open( $( this ).show() );
-                    } );
+                /** Close all parent node */
+                lis.filter( "li.open" ).each( function() {
+                    close( $( this ) );
                 } );
-            }
 
-            node.css( "display", "" );
+                if ( text ) {
+                    matched = lis.filter( "[data-filter*='" + text.toLowerCase() + "']" );
+                    lis.not( matched ).css( "display", "none" );
+
+                    matched.each( function() {
+
+                        var self = $( this );
+
+                        if ( !self.find( "li[data-level][style!='display: none;']" ).length ) {
+                            /** Show the subitem */
+                            self.find( "li[data-level]" ).css( "display", "" );
+                        }
+
+                        /** Expand the matched node */
+                        self.parents( "li[data-filter]" ).each( function() {
+                            open( $( this ).show() );
+                        } );
+                    } );
+                }
+
+                node.css( "display", "" );
+            }, 500 );
         }
 	};
 
@@ -196,7 +247,7 @@
 
 		var
 		html = "",
-		hash = {},
+		hash = settings.hash,
 		key = node.attr( "data-key" ) || settings.rootIds,
 		level = +node.attr( "data-level" ) || 0,
 		filter = settings.filter[ level ] || function() { return true; };
@@ -211,7 +262,7 @@
 			hash[ item[ settings.valueKey ] ] = item;
 
 			/** Match undefined */
-			if ( key[ 0 ] === (item[ settings.parentKey ] || "")
+			if ( key[ 0 ] == (item[ settings.parentKey ] || "")
 					|| key.indexOf( item[ settings.parentKey ] ) !== -1 ) {
 
 				/** Remove this entry and fallback the step */
@@ -243,8 +294,6 @@
         } else {
             node.removeClass( "node open close" );
 		}
-
-		settings.hash = hash;
 	}
 
 	$.fn.tree = function( options ) {

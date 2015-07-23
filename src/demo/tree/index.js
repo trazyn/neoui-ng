@@ -53,5 +53,18 @@ define( [ "ui/tree/tree-ng" ], function() {
 
             return deferred;
         };
+
+        $scope.addBranch = function( tree, parentId ) {
+
+            var
+            settings = tree.settings,
+            item = {};
+
+            item[ settings.parentKey ] = parentId;
+            item[ settings.valueKey ] = +new Date();
+            item[ settings.textKey ] = "New Branch";
+
+            tree.add( item );
+        };
     } ] );
 } );

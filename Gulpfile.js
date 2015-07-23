@@ -63,7 +63,8 @@ bs, gulp = require( "gulp" )
 		gulp.watch( "src/**/*.less", [ "css" ] );
 	} )
 
-	.task( "treeData", function() {
+    /** Build the test data */
+	.task( "data", function() {
 
 		var walk = function( dir, done ) {
 
@@ -85,7 +86,7 @@ bs, gulp = require( "gulp" )
 
 					fs.stat( file, function( err, stat ) {
 
-					    if ( !/(node_modules|\.git|\.DS_Store)/i.test( file ) ) {
+					    if ( !/(node_modules|\.git|\.DS_Store|dist)/i.test( file ) ) {
 
                             result.push( {
                                 id: file,
@@ -127,7 +128,7 @@ bs, gulp = require( "gulp" )
 
 	.task( "init", [ "vendor", "css" ] )
 
-	.task( "default", [ "watch", "css", "start" ] );
+	.task( "default", [ "data", "watch", "css", "start" ] );
 
 pkg.dest = pkg.dest || "dist";
 fs.existsSync( pkg.dest ) || fs.mkdirSync( pkg.dest );

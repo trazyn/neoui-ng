@@ -37,7 +37,7 @@ angular.module( "$ui.tree", [] )
                         text = item[ settings.textKey ];
 
                         html = $compile( markup )( angular.extend( $scope.$parent.$new(), item ) );
-                        $scope.$parent.$apply();
+                        $rootScope.$$phase || $scope.$parent.$apply();
                         html = angular.element( "<p>" ).css( "padding-left", (level - 1) * 2 + "em" ).html( html );
                         html = angular.element( "<w>" ).html( html ).html();
 
@@ -60,10 +60,29 @@ angular.module( "$ui.tree", [] )
 
             if ( typeof $scope.controller === "object" ) {
                 angular.extend( $scope.controller, tree );
-            } else if ( !$rootScope.$$phase ) {
+            } else {
                 $scope.controller = tree;
-                $scope.$apply();
             }
+
+            $scope.$watch( "data", function( value ) {
+
+                if ( !$rootScope.$$phase ) {
+                    tree.render( value );
+                    $scope.ngModel = void 0;
+                    $scope.$apply();
+                }
+            } );
+
+            $scope.$watch( "rootIds", function( value ) {
+
+                if ( $rootScope.$$phase ) {
+                    return;
+                }
+
+                tree.render( tree.settings.data );
+                $scope.ngModel = void 0;
+                $scope.$apply();
+            } );
         }
 
         return {
