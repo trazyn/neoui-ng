@@ -302,7 +302,7 @@
             </div>
 
             <xmp>
-            <div class="ui ntree" style="height: 430px; width: 270px;">
+            <div class="ui tree" style="height: 430px; width: 270px;">
                 <div class="icon">
                     <input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">
                 </div>
@@ -319,7 +319,7 @@
                 <span>Constructor</span>
             </div>
 
-            <p><code>$( selector ).ntree( [options] )</code>
+            <p><code>$( selector ).tree( [options] )</code>
             </p>
 
             <blockquote>
@@ -329,7 +329,7 @@
             </blockquote>
 
         <xmp>
-        $( ".ui.ntree" ).ntree( {
+        $( ".ui.tree" ).tree( {
 
             data: function() {
 
@@ -411,7 +411,7 @@
             </blockquote>
             <p>选中节点时回调</p>
             <xmp>
-            $( ".ui.ntree" ).ntree( {
+            $( ".ui.tree" ).tree( {
 
                 onSelect: function( e, item, dataContext, level ) {
 
@@ -450,7 +450,7 @@
             </blockquote>
             <p><code>function</code>或<code>hash</code>对象, 作用于每一级节点的过滤器</p>
             <xmp>
-            $( ".ui.ntree" ).ntree( {
+            $( ".ui.tree" ).tree( {
 
                 filter: {
                     "0": function( item ) {
@@ -470,7 +470,7 @@
             </blockquote>
             <p>节点格式化</p>
             <xmp>
-            $( ".ui.ntree" ).ntree( {
+            $( ".ui.tree" ).tree( {
                 formatter: function() {
 
                     return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
