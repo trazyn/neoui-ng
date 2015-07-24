@@ -34,7 +34,7 @@ angular.module( "$ui.tab", [] )
                         $scope.$apply( function( scope ) {
                             selectedAccessor.assign( $scope, self.attr( settings.rule ) );
                         } );
-                        "function" === typeof $scope.onSelected && $scope.onSelected()();
+                        "function" === typeof $scope.onSelect && $scope.onSelect()();
                     }
                 }
             } ),
@@ -54,7 +54,7 @@ angular.module( "$ui.tab", [] )
                 noLavalamp  : "@tabNoLavalamp",
                 vertical    : "@tabVertical",
                 selected    : "=tabSelected",
-                onSelected  : "&tabOnSelected"
+                onSelect    : "&tabOnSelect"
             },
 
             restrict        : "E",

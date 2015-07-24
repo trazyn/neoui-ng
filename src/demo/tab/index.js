@@ -95,7 +95,7 @@ define( [ "ui/tab/tab-ng" ], function() {
             tabs[ index ][ "disabled" ] = !tabs[ index ][ "disabled" ];
         };
 
-        $scope.onSelected = function() {
+        $scope.onSelect = function() {
             console.log( $scope.selected );
         };
 

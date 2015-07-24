@@ -23,13 +23,14 @@ require( [
         "demo/sidenav/index",
         "demo/dateutil/index",
         "demo/tree/index",
+        "demo/calendar/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
 
 	angular
 
-	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted", "demo.tooltip", "demo.sidenav", "demo.dateutil", "demo.tree" ] )
+	.module( "neoui", [ "ngRoute", "$ui.sidenav", "demo.modal", "demo.tab", "demo.message", "demo.autoComplete", "demo.validation", "demo.toast", "demo.getstarted", "demo.tooltip", "demo.sidenav", "demo.dateutil", "demo.tree", "demo.calendar" ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
@@ -75,6 +76,9 @@ require( [
 		    } )
 		    .when( "/editor", {
 		        templateUrl: "/src/demo/editor/index.html"
+		    } )
+		    .when( "/calendar", {
+		        templateUrl: "/src/demo/calendar/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

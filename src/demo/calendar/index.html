@@ -1,0 +1,145 @@
+
+<title>Calendar - Neoui-ng</title>
+
+<ul id="anchors" class="ui anchor">
+    <li data-anchor="example" class="item active">Example</li>
+    <li class="item">API
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="calendar" ng-controller="calendarController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="wrap">
+            <s-calendar ng-model="date"></s-calendar>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <div class="markdown">
+
+        <header data-anchor="api">API</header>
+
+        <section>
+            <div class="ui ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+            <div class="ui calendar">
+                <input class="ui text" type="text" placeholder="Year - Month - Day" readonly />
+                <i class="icon calendar"></i>
+            </div>
+            </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).calendar( [options] )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+        <xmp>
+        $( ".ui.calendar" ).calendar();
+        </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>months</code> - <code>[ "January", "February", "March", "April", "May", "July", "August", "September", "October", "November", "December" ]</code>
+                </p>
+            </blockquote>
+            <p>月份显示名称</p>
+            <br>
+
+            <blockquote>
+                <p><code>format</code> - <code>"%Y-%m-%d"</code>
+                </p>
+            </blockquote>
+            <p>日期格式化, 见 <a href="#dateutil">Date Util</a>
+            </p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4input</code> - <code>".input:first"</code>
+                </p>
+            </blockquote>
+            <p>输入框</p>
+            <br>
+
+            <blockquote>
+                <p><code>showTime</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>是否显示时间选择栏(注意时分秒的显示是由<code>format</code>参数控制的)</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4trigger</code> - <code>".icon.calendar"</code>
+                </p>
+            </blockquote>
+            <p>事件源</p>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <blockquote>
+                <p><code>calendar.val( [ value ] )</code>
+                </p>
+                <blockquote>
+                    <p><code>value</code> - String/Date</p>
+                </blockquote>
+            </blockquote>
+            <p>设置/取值</p>
+            <br>
+
+            <blockquote>
+                <p><code>calendar.disabled()</code>
+                </p>
+            </blockquote>
+            <p>禁用控件, <code>.ui.calendar[disabled]</code>等效</p>
+            <br>
+
+            <blockquote>
+                <p><code>calendar.enabled()</code>
+                </p>
+            </blockquote>
+            <p>取消禁用</p>
+        </section>
+    </div>
+
+</section>

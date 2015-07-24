@@ -1,0 +1,204 @@
+
+@import (reference) "../../style/main.less";
+
+.ui.calendar {
+    position: relative;
+
+    .container {
+        box-shadow: 0 1px 24px rgba(0,0,0,.24);
+        outline: 0;
+        position: absolute;
+        right: 0;
+        width: 345px;
+        transition: .2s;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(.6);
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+    }
+
+    .icon.calendar {
+        transition: .2s;
+        top: 8px;
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        &:hover {
+            color: @mint;
+        }
+    }
+
+    .control {
+        color: #fff;
+        padding: 20px 15px;
+        box-shadow: 0 1px 5px rgba(0,0,0,.2);
+        position: relative;
+        height: 50px;
+        background-color: @google;
+    }
+
+    .icon.first, .icon.prev, .icon.next, .icon.last, .date {
+        transition: .2s;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        &:hover {
+            color: @dribbble;
+        }
+    }
+
+    .icon.first {
+        left: 14px;
+    }
+
+    .icon.last {
+        right: 14px;
+    }
+
+    .icon.prev {
+        left: 40px;
+    }
+
+    .icon.next {
+        right: 40px;
+    }
+
+    .date {
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        text-shadow: 6px 3px 15px #fff;
+
+        &.next, &.prev {
+
+            position: absolute;
+            top: 48px;
+        }
+
+        &.next {
+            left: 100%;
+        }
+
+        &.prev {
+            left: -100%;
+        }
+    }
+
+    .content {
+        position: relative;
+    }
+
+    .days {
+        background-color: #fff;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dates {
+        width: 336px;
+        margin: 0 auto;
+        padding-bottom: 5px;
+    }
+
+    .header {
+        background-color: #eaf4f8;
+
+        & > div {
+            width: 48px;
+            display: inline-block;
+            text-align: center;
+            font-size: 12px;
+            line-height: 48px;
+        }
+    }
+
+    .day {
+        width: 48px;
+        display: inline-block;
+        line-height: 48px;
+        text-align: center;
+        color: #313131;
+        cursor: pointer;
+        border-radius: 48px;
+        position: relative;
+        z-index: 1;
+
+        &:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+            transform: scale(0);
+            content: "";
+            display: block;
+            width: 48px;
+            height: 48px;
+            border-radius: 48px;
+            background-color: #deeef7;
+            z-index: -1;
+        }
+
+        &:hover {
+            color: @darkGray;
+            &:before {
+                transform: scale(.8);
+            }
+        }
+
+        &.adjacent {
+            color: rgba(0,0,0,.26);
+        }
+
+
+        &.current, &.today {
+            color: #fff;
+        }
+
+        &.current:before {
+            background-color: #83d8b6 !important;
+            transform: scale(.8);
+        }
+
+        &.today:before {
+            background-color: @google;
+            transform: scale(.8);
+        }
+    }
+
+    .time {
+        text-align: center;
+        z-index: 2;
+        background-color: #fff;
+        > input {
+            transition: .3s;
+            outline: 0;
+            height: 30px;
+            width: 30px;
+            margin: 10px 14px;
+            border: 1px solid #ccc;
+            text-align: center;
+            border-radius: 100%;
+            display: inline-block;
+            padding: 0;
+            text-indent: 0;
+            color: rgba(0,0,0,.75);
+            &:focus {
+                border-radius: 0;
+                border-color: rgba(39,91,255,.6);
+                box-shadow: 0 1px 5px rgba(27, 91, 255, 0.3), 1px 0 5px rgba(27, 91, 255, 0.3), 0 -1px 5px rgba(27, 91, 255, 0.3);
+                width: 60px;
+            }
+        }
+    }
+}
