@@ -20,6 +20,10 @@
             visibility: visible;
             transform: scale(1);
         }
+
+        &.double {
+            width: 690px;
+        }
     }
 
     .icon.calendar {
@@ -96,6 +100,7 @@
 
     .content {
         position: relative;
+        background-color: #fff;
     }
 
     .days {
@@ -103,12 +108,31 @@
         text-align: center;
         position: relative;
         overflow: hidden;
+        display: inline-block;
+        width: 345px;
+        vertical-align: top;
     }
 
     .dates {
         width: 336px;
         margin: 0 auto;
         padding-bottom: 5px;
+
+        &.next, &.prev {
+            position: absolute;
+            left: 100%;
+            top: 48px;
+            background-color: #fff;
+        }
+
+        &.next {
+            left: 100%;
+            z-index: 1;
+        }
+        &.prev {
+            left: -100%;
+            z-index: 2;
+        }
     }
 
     .header {
@@ -133,6 +157,26 @@
         border-radius: 48px;
         position: relative;
         z-index: 1;
+
+        &.valid:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 4px;
+            height: 4px;
+            border-radius: 4px;
+            background-color: @aqua;
+            bottom: 12px;
+            right: 12px;
+        }
+
+        &.invalid {
+            color: rgba(0,0,0,.26);
+            cursor: not-allowed;
+            &:hover:before {
+                transform: scale(0);
+            }
+        }
 
         &:before {
             position: absolute;

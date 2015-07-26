@@ -11,44 +11,100 @@ define( [ "util/dateutil" ], function() {
 		var
         defaultDate,
 		current,
-		show = function( setup ) {
+		inAnimate = false,
+		show = function( step ) {
 
-			setup = setup || new Date();
+            var
+            container = calendar.find( ".content .dates.current" ),
+            label = [],
+            steps = [ step ];
 
-			switch ( setup ) {
+            if ( inAnimate ) { return; }
 
-				case -1:
-					if ( 1 === current[ 1 ] ) {
+            if ( settings.double ) {
 
-                        --current[ 0 ];
-						current[ 1 ] = 12;
-					} else
-						--current[ 1 ];
-					break;
+                if ( step instanceof Date ) {
+                    steps.push( new Date( step.getFullYear(), step.getMonth() + 1 ) );
+                } else {
+                    steps.push( step > 0 ? 1 : -1 );
+                }
+            }
 
-				case 1:
-					if ( 12 === current[ 1 ] ) {
+            for ( var i = 0, length = steps.length; i < length; ++i ) {
 
-						++current[ 0 ];
-						current[ 1 ] = 1;
-					}
-					else ++current[ 1 ];
-					break;
+                var step = steps[i];
 
-				case 12:
-					++current[ 0 ];
-					break;
+                (function( container, step ) {
 
-				case -12:
-					--current[ 0 ];
-					break;
+                    var
+                    prev,
+                    next,
+                    animation,
+                    html;
 
-				default:
-					current = [ setup.getFullYear(), setup.getMonth() + 1, 1 ];
-			}
+                    prev = container.prev();
+                    next = container.next();
+                    step = step || new Date();
 
-			calendar.find( ".date" ).html( settings.months[ current[ 1 ] - 1 ] + " , " + current[ 0 ] );
-			calendar.find( ".content .dates.current" ).html( calc( new Date( current.join( "-" ) ), defaultDate, settings.daysOfTheWeek ) );
+                    switch ( step ) {
+
+                        /** Previous month */
+                        case -1:
+                            if ( 1 === current[ 1 ] ) {
+                                --current[ 0 ];
+                                current[ 1 ] = 12;
+                            } else
+                                --current[ 1 ];
+                            break;
+                        /** Next month */
+                        case 1:
+                            if ( 12 === current[ 1 ] ) {
+                                ++current[ 0 ];
+                                current[ 1 ] = 1;
+                            }
+                            else ++current[ 1 ];
+                            break;
+                        /** Next year */
+                        case 12:
+                            ++current[ 0 ];
+                            break;
+
+                        /** Previous year */
+                        case -12:
+                            --current[ 0 ];
+                            break;
+
+                        default:
+                            current = [ step.getFullYear(), step.getMonth() + 1, 1 ];
+                    }
+
+                    label.push( settings.months[ current[ 1 ] - 1 ] + " , " + current[ 0 ] );
+
+                    html = calc( new Date( current.join( "-" ) ), defaultDate, settings );
+
+                    if ( step instanceof Date ) {
+                        return container.html( html ).css( "height", "auto" );
+                    }
+
+                    inAnimate = true;
+                    animation = step > 0 ? next : prev;
+                    animation.html( html );
+                    container.animate( { "height": animation.height() }, 100 );
+                    animation.animate( { "left": "1%" }, 200, function() {
+                        container.html( html );
+                        animation.css( "left", step > 0 ? "100%" : "-100%" );
+
+                        /** Unlock animation */
+                        i === steps.length && (inAnimate = 0);
+                    } );
+                })( container.eq( step > -1 ? i : length - 1 - i ), step );
+
+                if ( step < 0 ) {
+                    label = label.reverse();
+                }
+
+                calendar.find( ".date" ).html( label.join( " - " ) );
+            }
 		},
 
 		input = target.find( settings.selector4input ),
@@ -61,7 +117,7 @@ define( [ "util/dateutil" ], function() {
 		this.$node = target;
 		this.settings = settings;
 
-		calendar = "<div tabindex=-1 class='container' >" +
+		template = "<div tabindex=-1 class='container' >" +
 					"<div class='control'>" +
 					"<div class='icon first'></div>" +
 					"<div class='icon prev'></div>" +
@@ -121,7 +177,9 @@ define( [ "util/dateutil" ], function() {
 		trigger
         .on( "click", function( e ) {
 
-            var rect;
+            var
+            rect,
+            container;
 
 			if ( target.is( "[disabled]" ) ) { return; }
 
@@ -130,7 +188,13 @@ define( [ "util/dateutil" ], function() {
 			e.preventDefault();
 			e.stopPropagation();
 
-			calendar = $( calendar );
+			calendar = $( template );
+
+            if ( settings.double ) {
+                container = calendar.find( ".content .days" );
+                container.clone().appendTo( calendar.addClass( "double" ).find( ".content" ) );
+            }
+
             calendar.find( ".header" ).html( header.join( "" ) );
 			show( defaultDate );
 			calendar.appendTo( target )
@@ -169,21 +233,28 @@ define( [ "util/dateutil" ], function() {
 				.delegate( "div.day", "click", function() {
 
 					var
-					date = new Date( this.getAttribute( "data-date" ) + " " +
-                            (calendar.find( "input[name=hour]" ).val()   || 0) + ":" +
-                            (calendar.find( "input[name=minute]" ).val() || 0) + ":" +
-                            (calendar.find( "input[name=second]" ).val() || 0) ),
-                    value = $.dateutil( date ).format( settings.format );
+					self = $( this ),
+                    date,
+                    value;
 
-					input.val( value ).focus();
+                    if ( !self.hasClass( "invalid" ) ) {
 
-                    settings.onSelect( value );
+                        date = new Date( this.getAttribute( "data-date" ) + " " +
+                                (calendar.find( "input[name=hour]" ).val()   || 0) + ":" +
+                                (calendar.find( "input[name=minute]" ).val() || 0) + ":" +
+                                (calendar.find( "input[name=second]" ).val() || 0) );
+                        value = $.dateutil( date ).format( settings.format );
 
-                    input.trigger( "change" );
-					defaultDate = date;
-					setTimeout( function() {
-						//calendar.remove();
-					} );
+                        input.val( value ).focus();
+                        settings.onSelect( value );
+
+                        input.trigger( "change" );
+
+                        defaultDate = date;
+                        setTimeout( function() {
+                            calendar.remove();
+                        } );
+                    }
 				} )
 
 				.delegate( "input", "focusout", function( e ) {
@@ -239,9 +310,9 @@ define( [ "util/dateutil" ], function() {
                         return;
                     }
 
-                    //calendar.removeClass( "show" );
+                    calendar.removeClass( "show" );
                     setTimeout( function() {
-                        //calendar.remove();
+                        calendar.remove();
                     }, 300 );
                 } );
 
@@ -255,7 +326,7 @@ define( [ "util/dateutil" ], function() {
 		} );
 	};
 
-    function calc( date, defaultDate ) {
+    function calc( date, defaultDate, settings ) {
 
         var
         prev = new Date( date.getFullYear(), date.getMonth(), 0 ),
@@ -269,18 +340,41 @@ define( [ "util/dateutil" ], function() {
             next: [ 1, 6 - next.getDay() + 1 ]
         },
 
+        isValid = function( date, start ) {
+
+            var
+            minDate = new Date( settings.minDate ),
+            maxDate = new Date( settings.maxDate ),
+            date = new Date( date.getFullYear(), date.getMonth(), start );
+
+            if ( minDate || maxDate ) {
+
+                if ( (date >= minDate && date <= maxDate)
+                        || (!maxDate  && date >= minDate)
+                        || (!minDate  && date <= maxDate) ) {
+
+                    return " valid ";
+                }
+
+                return " invalid ";
+            }
+
+            return " ";
+        },
+
         html = "";
 
         for ( var start = range.prev[ 0 ], end = range.prev[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
-            html += "<div class='day adjacent prev' data-date='" + [ prev.getFullYear(), prev.getMonth() + 1, start ].join( "-" ) + "'>" +
-                start +
-                "</div>";
+            html += "<div class='day " + isValid( prev, start ) + " adjacent prev' " +
+                        "data-date='" + [ prev.getFullYear(), prev.getMonth() + 1, start ].join( "-" ) + "'>" +
+                        start +
+                    "</div>";
         }
 
         for ( var start = range.current[ 0 ], end = range.current[ 1 ]; start <= end; ++start ) {
 
-            var clazz = "";
+            var clazz = isValid( date, start );
 
             start < now.getDate() && (clazz += " past ");
 
@@ -301,9 +395,10 @@ define( [ "util/dateutil" ], function() {
 
         for ( var start = range.next[ 0 ], end = range.next[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
-            html += "<div class='day adjacent next' data-date='" + [ next.getFullYear(), next.getMonth() + 1, start ].join( "-" ) + "'>" +
-                start +
-                "</div>";
+            html += "<div class='day " + isValid( next, start ) + " adjacent next' " +
+                        " data-date='" + [ next.getFullYear(), next.getMonth() + 1, start ].join( "-" ) + "'>" +
+                        start +
+                    "</div>";
         }
 
         return html;
@@ -360,9 +455,10 @@ define( [ "util/dateutil" ], function() {
 		onSelect        : $.noop,
 
 		showTime        : false,
+		double          : true,
 
-		minDate         : undefined,
-		maxDate         : undefined,
+		minDate         : "2015/06/10",
+		maxDate         : new Date( "2015/09/12" ),
 
 		defaultDate     : new Date(),
 
@@ -370,4 +466,3 @@ define( [ "util/dateutil" ], function() {
 		selector4trigger: ".icon.calendar"
 	};
 } );
-
