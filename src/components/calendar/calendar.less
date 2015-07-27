@@ -35,6 +35,13 @@
         &:hover {
             color: @mint;
         }
+
+        &[disabled] {
+            cursor: not-allowed;
+            &:hover {
+                color: inherit;
+            }
+        }
     }
 
     .control {

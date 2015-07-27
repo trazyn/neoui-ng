@@ -1,5 +1,5 @@
 
-define( [ "ui/calendar/calendar-ng" ], function() {
+define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
 
     "use strict";
 
@@ -10,5 +10,17 @@ define( [ "ui/calendar/calendar-ng" ], function() {
         $scope.init = function() {
             $( document.body ).anchor( { offset: 0 } );
         };
+
+        var now = new Date();
+
+        angular.extend( $scope, {
+
+            showTime: false,
+            twoMonths: true,
+            date: $.dateutil( now ).tomorrow(),
+            isDisabled: false,
+            minDate: $.dateutil( now ).lastWeek(),
+            maxDate: $.dateutil( now ).nextWeek()
+        } );
     } ] );
 } );

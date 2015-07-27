@@ -15,7 +15,7 @@ define( [], function() {
 
             if ( attr.attrName in $attrs.$attr ) {
 
-                if ( type = types[ key ], type ) {
+                if ( types && (type = types[ key ]), type ) {
                     options[ key ] = args[ type ]( $scope[ key ] );
                 } else
                     options[ key ] = $scope[ key ];

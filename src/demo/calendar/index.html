@@ -18,8 +18,64 @@
     <header data-anchor="example">Example</header>
 
     <section>
+
+        <p>
+        <code>
+            <label>Value:</label>
+            {{ date || [] }}
+        </code>
+        </p>
+
+        <br>
         <div class="wrap">
-            <s-calendar ng-model="date"></s-calendar>
+            <s-calendar
+                ng-disabled="isDisabled"
+                ng-model="date"
+                placeholder="Year-Month-Day"
+                double="twoMonths"
+                show-time="showTime"
+                min-date="minDate"
+                max-date="maxDate"
+                default-date="defaultDate"
+                ng-model="date"></s-calendar>
+
+            <br>
+
+            <ul class="options">
+                <li>
+                    <label>是否禁用?</label>
+                    <label class="ui checkbox">
+                        <input type="checkbox" ng-click="isDisabled = !isDisabled" />
+                    </label>
+                </li>
+                <li>
+                    <label>显示双月</label>
+                    <label class="ui switch">
+                        <input type="checkbox" ng-model="twoMonths" />
+                    </label>
+                </li>
+
+                <li>
+                    <label>显示时间</label>
+                    <label class="ui switch">
+                        <input type="checkbox" ng-model="showTime" />
+                    </label>
+                </li>
+
+                <li>
+                    <label>最小时间</label>
+                    <label class="ui switch">
+                        {{ minDate }}
+                    </label>
+                </li>
+
+                <li>
+                    <label>最大时间</label>
+                    <label class="ui switch">
+                        {{ maxDate }}
+                    </label>
+                </li>
+            </ul>
         </div>
     </section>
 

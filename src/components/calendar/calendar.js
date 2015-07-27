@@ -2,6 +2,8 @@
 
 define( [ "util/dateutil" ], function() {
 
+    "use strict";
+
 	var
 
 	namespace = "$ui.calendar",
@@ -112,11 +114,6 @@ define( [ "util/dateutil" ], function() {
 
         header = [],
 
-		calendar;
-
-		this.$node = target;
-		this.settings = settings;
-
 		template = "<div tabindex=-1 class='container' >" +
 					"<div class='control'>" +
 					"<div class='icon first'></div>" +
@@ -133,15 +130,22 @@ define( [ "util/dateutil" ], function() {
                         "<div class='dates current'></div>" +
                         "<div class='dates next'></div>" +
 				    "</div>" +
-                "</div>";
+                "</div>",
+
+		calendar;
+
+		this.$node = target;
+		this.settings = settings;
+
 
 		input.attr( {
-			"name": target.attr( "name" )
+			"name": target.attr( "name" ),
+			"placeholder": settings.placeholder
 		} );
 
 		if ( settings.showTime ) {
 
-            calendar += "<div class='time'>" +
+            template += "<div class='time'>" +
 
                 "<input name='hour' maxlength=2 value='00' />" +
                 "<input name='minute' maxlength=2 value='00' />" +
@@ -155,9 +159,9 @@ define( [ "util/dateutil" ], function() {
 
 		switch ( true ) {
 
-            case settings.defaultDate:
+            case "string" === typeof settings.defaultDate:
 				defaultDate = new Date( settings.defaultDate );
-				input.val( $.dateutil( defaultDate ).format( setting.format ) );
+				input.val( $.dateutil( defaultDate ).format( settings.format ) );
 				break;
 
 			default:
@@ -173,7 +177,6 @@ define( [ "util/dateutil" ], function() {
                     defaultDate = new Date();
 		}
 
-
 		trigger
         .on( "click", function( e ) {
 
@@ -181,7 +184,10 @@ define( [ "util/dateutil" ], function() {
             rect,
             container;
 
-			if ( target.is( "[disabled]" ) ) { return; }
+            /** Prevent multiple instance */
+			if ( inAnimate
+			        || trigger.is( "[disabled]" )
+			        || (calendar && calendar.hasClass( "show" )) ) { return; }
 
             rect = input[ 0 ].getBoundingClientRect();
 
@@ -310,9 +316,12 @@ define( [ "util/dateutil" ], function() {
                         return;
                     }
 
+                    inAnimate = 1;
+
                     calendar.removeClass( "show" );
                     setTimeout( function() {
                         calendar.remove();
+                        inAnimate = 0;
                     }, 300 );
                 } );
 
@@ -343,8 +352,9 @@ define( [ "util/dateutil" ], function() {
         isValid = function( date, start ) {
 
             var
-            minDate = new Date( settings.minDate ),
-            maxDate = new Date( settings.maxDate ),
+            minDate = settings.minDate && new Date( settings.minDate ),
+            maxDate = settings.maxDate && new Date( settings.maxDate ),
+
             date = new Date( date.getFullYear(), date.getMonth(), start );
 
             if ( minDate || maxDate ) {
@@ -418,11 +428,23 @@ define( [ "util/dateutil" ], function() {
 		},
 
 		disabled: function() {
-			this.$node.attr( "disabled", true );
+
+            var settings = this.settings;
+
+			this
+			.$node
+			.find( settings.selector4input + " , " + settings.selector4trigger )
+			.attr( "disabled", true );
 		},
 
 		enabled: function() {
-			this.$node.attr( "disabled", false );
+
+            var settings = this.settings;
+
+			this
+			.$node
+			.find( settings.selector4input + " , " + settings.selector4trigger )
+			.removeAttr( "disabled" );
 		},
 
 		focus: function() {
@@ -450,15 +472,17 @@ define( [ "util/dateutil" ], function() {
 		months          : [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
 		daysOfTheWeek   : [ "S", "M", "T", "W", "T", "F", "S" ],
 
-		format          : "%Y-%m-%d",
+		format          : "%Y - %m - %d",
 
 		onSelect        : $.noop,
 
 		showTime        : false,
-		double          : true,
+		double          : false,
 
-		minDate         : "2015/06/10",
-		maxDate         : new Date( "2015/09/12" ),
+		minDate         : undefined,
+		maxDate         : undefined,
+
+		placeholder     : "Year - Month - Day",
 
 		defaultDate     : new Date(),
 
