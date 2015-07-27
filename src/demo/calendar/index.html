@@ -3,7 +3,16 @@
 
 <ul id="anchors" class="ui anchor">
     <li data-anchor="example" class="item active">Example</li>
-    <li class="item">API
+
+    <li class="item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="item">Markup</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="sCalendar" class="item">Directive * s-calendar</li>
+        </ul>
+    </li>
+
+    <li class="item">jQuery
         <ul>
             <li data-anchor="html" class="item">Html</li>
             <li data-anchor="constructor" class="item">Constructor</li>
@@ -36,8 +45,10 @@
                 show-time="showTime"
                 min-date="minDate"
                 max-date="maxDate"
+                on-select="onSelect"
                 default-date="defaultDate"
-                ng-model="date"></s-calendar>
+                ng-model="date">
+            </s-calendar>
 
             <br>
 
@@ -75,6 +86,13 @@
                         {{ maxDate }}
                     </label>
                 </li>
+
+                <li>
+                    <label>Format</label>
+                    <label class="ui switch">
+                        %Y-%m-%d
+                    </label>
+                </li>
             </ul>
         </div>
     </section>
@@ -83,6 +101,129 @@
     <br>
 
     <div class="markdown">
+
+        <header>AngularJS</header>
+        <div class="markdown">
+            <section>
+                <div class="ui ribbon" data-anchor="markup">
+                    <span>Markup</span>
+                </div>
+
+                <div class="wrap">
+                    <xmp>
+                    <s-calendar
+                        ng-disabled="isDisabled"
+                        ng-model="date"
+                        placeholder="Year-Month-Day"
+                        double="twoMonths"
+                        show-time="showTime"
+                        min-date="minDate"
+                        max-date="maxDate"
+                        on-select="onSelect"
+                        default-date="defaultDate"
+                        ng-model="date">
+                    </s-calendar>
+                    </xmp>
+                </div>
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="javascript">
+                    <span>Javascript</span>
+                </div>
+
+                <xmp>
+                angular
+                .module( "demo.calendar", [ "$ui.calendar" ] )
+                .controller( "calendarController", [ "$scope", function( $scope ) {
+
+                    $scope.init = function() {
+                        $( document.body ).anchor( { offset: -60 } );
+                    };
+
+                    var now = new Date();
+
+                    angular.extend( $scope, {
+
+                        showTime: false,
+                        twoMonths: true,
+                        date: $.dateutil( now ).tomorrow(),
+                        isDisabled: false,
+                        minDate: $.dateutil( now ).lastWeek(),
+                        maxDate: $.dateutil( now ).nextWeek(),
+                        onSelect: function( value ) {
+                            console.log( value );
+                        }
+                    } );
+                } ] );
+                </xmp>
+
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="sCalendar">
+                    <span>Directive * s-calendar</span>
+                </div>
+
+                <blockquote>
+                    <p><code>=ng-disabled</code> - <code>false</code></p>
+                </blockquote>
+                <p>禁用控件</p>
+                <br>
+
+                <blockquote>
+                    <p><code>=ng-model</code> - <code>null</code></p>
+                </blockquote>
+                <p>当前选择时间</p>
+                <br>
+
+                <blockquote>
+                    <p><code>&on-select</code> - <code>null</code></p>
+                </blockquote>
+                <p>选中时执行</p>
+                <br>
+
+                <blockquote>
+                    <p><code>@format</code> - <code>"%Y-%m-%d"</code></p>
+                </blockquote>
+                <p>日期格式化, <a href="/#dateutil">See Dateutil</a></p>
+                <br>
+
+                <blockquote>
+                <p><code>=show-time</code> - <code>false</code></p>
+                </blockquote>
+                <p>显示时间输入框</p>
+                <br>
+
+                <blockquote>
+                    <p><code>@placeholder</code> - <code>"Year - Month - Day"</code>
+                    </p>
+                </blockquote>
+                <p>The same to input placeholder</p>
+                <br>
+
+                <blockquote>
+                    <p><code>=min-date</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>最小可选日期</p>
+                <br>
+
+                <blockquote>
+                    <p><code>=max-data</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>最大可选日期</p>
+                <br>
+
+                <blockquote>
+                    <p><code>=double</code> - <code>false</code>
+                    </p>
+                </blockquote>
+                <p>显示双月</p>
+                <br>
+            </section>
+        </div>
 
         <header data-anchor="api">API</header>
 
@@ -137,25 +278,81 @@
             <br>
 
             <blockquote>
+                <p><code>daysOfTheWeek</code> - <code>[ "S", "M", "T", "W", "T", "F", "S" ]</code>
+                </p>
+            </blockquote>
+            <p>日期名称</p>
+            <br>
+
+            <blockquote>
                 <p><code>format</code> - <code>"%Y-%m-%d"</code>
                 </p>
             </blockquote>
-            <p>日期格式化, 见 <a href="#dateutil">Date Util</a>
+            <p>日期格式化, <a href="/#dateutil">See Dateutil</a></p>
             </p>
             <br>
 
             <blockquote>
-                <p><code>selector4input</code> - <code>".input:first"</code>
+                <p><code>double</code> - <code>false</code>
                 </p>
             </blockquote>
-            <p>输入框</p>
+            <p>双月显示</p>
+            <br>
+
+            <blockquote>
+                <p><code>defaultDate</code> - <code>new Date()</code>
+                </p>
+            </blockquote>
+            <p>默认日期</p>
+            <br>
+
+            <blockquote>
+                <p><code>minDate</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>最小可选日期</p>
+            <br>
+
+            <blockquote>
+                <p><code>maxDate</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>最大可选日期</p>
+            <br>
+
+            <blockquote>
+                <p><code>onSelect</code> - <code>nul</code>
+                </p>
+            </blockquote>
+            <p>选中时回调, example:</p>
+            <xmp>
+            $( ".ui.calendar" ).calendar( {
+                onSelect: function( value ) {
+                    console.log( "Current: " + value );
+                }
+            } );
+            </xmp>
+            <br>
+
+            <blockquote>
+                <p><code>placeholder</code> - <code>"Year - Month - Day"</code>
+                </p>
+            </blockquote>
+            <p>The same to input placeholder</p>
             <br>
 
             <blockquote>
                 <p><code>showTime</code> - <code>false</code>
                 </p>
             </blockquote>
-            <p>是否显示时间选择栏(注意时分秒的显示是由<code>format</code>参数控制的)</p>
+            <p>显示时间输入框</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4input</code> - <code>".input:first"</code>
+                </p>
+            </blockquote>
+            <p>输入框选择器</p>
             <br>
 
             <blockquote>

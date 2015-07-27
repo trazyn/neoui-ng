@@ -17,6 +17,7 @@ angular.module( "$ui.calendar", [] )
 
                 if ( $rootScope.$$pahse ) { return; }
 
+                ($scope.onSelect() || $.noop)( value );
                 $scope.defaultDate = value;
                 $scope.$apply();
             };
@@ -59,6 +60,7 @@ angular.module( "$ui.calendar", [] )
                 defaultDate : "=ngModel",
                 minDate     : "=",
                 maxDate     : "=",
+                onSelect    : "&",
                 double      : "="
             },
 

@@ -8,7 +8,7 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
     .controller( "calendarController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 0 } );
+            $( document.body ).anchor( { offset: -60 } );
         };
 
         var now = new Date();
@@ -20,7 +20,10 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
             date: $.dateutil( now ).tomorrow(),
             isDisabled: false,
             minDate: $.dateutil( now ).lastWeek(),
-            maxDate: $.dateutil( now ).nextWeek()
+            maxDate: $.dateutil( now ).nextWeek(),
+            onSelect: function( value ) {
+                console.log( value );
+            }
         } );
     } ] );
 } );

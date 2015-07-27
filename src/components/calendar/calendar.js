@@ -472,7 +472,7 @@ define( [ "util/dateutil" ], function() {
 		months          : [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
 		daysOfTheWeek   : [ "S", "M", "T", "W", "T", "F", "S" ],
 
-		format          : "%Y - %m - %d",
+		format          : "%Y-%m-%d",
 
 		onSelect        : $.noop,
 
