@@ -28,10 +28,10 @@
     <section>
 
         <div class="wrap">
-            <s-tab-set tab-selected="selected" tab-on-select="onSelect">
-            <s-tab ng-repeat="tab in tabs" tab-header="{{ tab.header }}" tab-index="{{ tab.index }}" ng-disabled="tab.disabled" tab-template="{{ tab.page }}">
-                <div ng-bind-html="tab.content"></div>
-            </s-tab>
+            <s-tab-set selected="selected" on-select="onSelect">
+                <s-tab ng-repeat="tab in tabs" header="{{ tab.header }}" index="{{ tab.index }}" ng-disabled="tab.disabled" template-url="{{ tab.page }}">
+                    <div ng-bind-html="tab.content"></div>
+                </s-tab>
             </s-tab-set>
         </div>
 
@@ -77,8 +77,8 @@
             </div>
 
             <xmp>
-            <s-tab-set tab-selected="selected" tab-on-select="onSelected">
-                <s-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="\{\{ tab.title \}\}">
+            <s-tab-set selected="selected" on-select="onSelected">
+                <s-tab ng-repeat="tab in tabs" index="tab.index" header="\{\{ tab.title \}\}">
                 <div ng-bind-html="\{\{ tab.content \}\}"></div>
                 </s-tab>
             </ng-tab-set>
@@ -124,36 +124,30 @@
             </div>
 
             <blockquote>
-                <p><code>=tab-selected</code> - <code>"0"</code></p>
+                <p><code>=selected</code> - <code>"0"</code></p>
             </blockquote>
             <p>默认选中项</p>
             <br>
 
             <blockquote>
-            <p><code>@tab-no-ripple</code> - <code>null</code></p>
+            <p><code>@ripple</code> - <code>true</code></p>
             </blockquote>
             <p>If present, disable ink ripple effects</p>
             <br>
 
             <blockquote>
-                <p><code>@tab-no-lavalamp</code> - <code>null</code>
+                <p><code>@lavalamp</code> - <code>true</code>
                 </p>
             </blockquote>
             <p>设置<code>true</code>后取消滑动效果</p>
             <br>
 
             <blockquote>
-                <p><code>&tab-on-select</code> - <code>null</code>
+                <p><code>&on-select</code> - <code>null</code>
                 </p>
             </blockquote>
             <p>选中后执行回调</p>
             <br>
-
-            <blockquote>
-                <p><code>@tab-vertical</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>设置<code>true</code>后垂直显示</p>
         </section>
 
         <section>
@@ -162,27 +156,27 @@
             </div>
 
             <blockquote>
-                <p><code>@tab-index</code> - <code>null</code>
+                <p><code>=ng-disable</code> - <code>false</code></p>
+            </blockquote>
+            <p>禁用页签</p>
+            <br>
+
+            <blockquote>
+                <p><code>@index</code> - <code>null</code>
                 </p>
             </blockquote>
             <p>页签索引, 不可为空或重复</p>
             <br>
 
             <blockquote>
-                <p><code>=tab-disabled</code> - <code>false</code></p>
-            </blockquote>
-            <p>禁用页签</p>
-            <br>
-
-            <blockquote>
-                <p><code>@tab-header</code> - <code>null</code>
+                <p><code>@header</code> - <code>null</code>
                 </p>
             </blockquote>
             <p>页签标题</p>
             <br/>
 
             <blockquote>
-            <p><code>@tab-template-url</code> - <code>null</code></p>
+            <p><code>@template-url</code> - <code>null</code></p>
             </blockquote>
             <p>通过指定URL加载内容</p>
 

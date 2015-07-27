@@ -211,6 +211,8 @@
             .each( function() {
                 clean( settings.parseElement( $( this ) ), settings );
             } );
+
+            return this;
         }
     };
 

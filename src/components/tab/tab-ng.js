@@ -1,16 +1,16 @@
 
-define( [ "ui/tab/tab" ], function() {
+define( [ "util/ng-args", "ui/tab/tab" ], function( args ) {
 
 "use strict";
 
 /**
  * example:
  *
- <ng-tab-set tab-selected="1">
-     <ng-tab ng-repeat="tab in tabs" tab-index="tab.index" tab-header="{{ tab.title }}" tab-template="./tab1.html">
-         {{ tab.content }}
-     </ng-tab>
- </ng-tab-set>
+<s-tab-set selected="selected" on-select="onSelect">
+    <s-tab ng-repeat="tab in tabs" header="{{ tab.header }}" index="{{ tab.index }}" ng-disabled="tab.disabled" template-url="{{ tab.page }}">
+        <div ng-bind-html="tab.content"></div>
+    </s-tab>
+</s-tab-set>
  * */
 
 angular.module( "$ui.tab", [] )
@@ -19,12 +19,10 @@ angular.module( "$ui.tab", [] )
         function controller( $scope, $element, $attrs ) {
 
             var
-            instance = $( $element ).tab( {
-                ripple      : !($scope.noRipple === "true"),
-                lavalamp    : !($scope.noLavalamp === "true"),
-                vertical    : $scope.vertial === "true",
-                selected    : $scope.selected || 0,
-                onSelect    : function( tab, settings ) {
+            options = args( $scope, $attrs, { "ripple": "boolean", "lavalamp": "boolean" } ),
+            instance = $( $element ).tab( angular.extend( options, {
+
+                onSelect: function( tab, settings ) {
 
                     var self = this;
 
@@ -34,12 +32,12 @@ angular.module( "$ui.tab", [] )
                         $scope.$apply( function( scope ) {
                             selectedAccessor.assign( $scope, self.attr( settings.rule ) );
                         } );
-                        "function" === typeof $scope.onSelect && $scope.onSelect()();
+                        "function" === typeof $scope.onSelect && $scope.onSelect().apply( instance, arguments );
                     }
                 }
-            } ),
+            } ) ),
 
-            selectedAccessor = $parse( $attrs.tabSelected );
+            selectedAccessor = $parse( $attrs.selected );
 
             $scope.$watch( selectedAccessor, function( value ) {
                 instance.active( value );
@@ -50,11 +48,10 @@ angular.module( "$ui.tab", [] )
 
         return {
             scope: {
-                noRipple    : "@tabNoRipple",
-                noLavalamp  : "@tabNoLavalamp",
-                vertical    : "@tabVertical",
-                selected    : "=tabSelected",
-                onSelect    : "&tabOnSelect"
+                ripple      : "@ripple",
+                lavalamp    : "@lavalamp",
+                selected    : "=selected",
+                onSelect    : "&"
             },
 
             restrict        : "E",
@@ -117,9 +114,9 @@ angular.module( "$ui.tab", [] )
 
             scope: {
 
-                index       : "@tabIndex",
-                header      : "@tabHeader",
-                templateUrl : "@tabTemplate",
+                index       : "@",
+                header      : "@",
+                templateUrl : "@templateUrl",
                 disabled    : "=ngDisabled"
             },
 

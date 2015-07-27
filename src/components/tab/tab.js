@@ -330,13 +330,16 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
                 navs.add( tabs ).filter( selector ).remove();
 
                 index = navs.index( navs.filter( selector ) );
-
                 navs.splice( index, 1 );
+                /** Maybe the content generate by ajax */
+                index = tabs.index( tabs.filter( selector ) );
                 tabs.splice( index, 1 );
 
                 this.callbacks && (delete this.callbacks[ index ]);
                 this.active( navs.last().attr( settings.rule ) );
             }
+
+            return this;
 		},
 
 		getTab: function( index ) {
@@ -382,6 +385,8 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		    } else {
 		        navs.attr( "disabled", true );
 		    }
+
+		    return this;
 		},
 
 		enabled: function( indexes ) {
@@ -410,6 +415,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		    } else {
 		        navs.removeAttr( "disabled" );
 		    }
+		    return this;
 		}
 	};
 
