@@ -47,7 +47,10 @@
                     selected && selected.removeClass( "selected" );
                     selected = self.addClass( "selected" );
 
-                    settings.onSelect.call( self, e, hash[ self.attr( "data-key" ) ], hash, level );
+                    settings.onSelect( {
+                        item: hash[ self.attr( "data-key" ) ],
+                        level: level
+                    } );
                 } else {
                     operation();
                 }
@@ -62,7 +65,6 @@
 
 		target
 		.find( settings.selector4filter )
-		.attr( "placeholder", settings.placeholder )
 		.on( "keyup", function( e ) {
             self.filter( this.value );
 		} );
@@ -101,6 +103,8 @@
                     self.$node.find( settings.selector4content ).html( node.html() );
                 }
             } );
+
+            return this;
         },
 
         add: function( item ) {
@@ -128,6 +132,8 @@
                 /** Expand the parent */
                 open( node, settings.duration );
             } );
+
+            return this;
         },
 
         remove: function( nodeid ) {
@@ -145,6 +151,8 @@
             if ( !parentNode.find( "[data-key]" ).length ) {
                 parentNode.removeClass( "node open close" );
             }
+
+            return this;
         },
 
         toggle: function( nodeid ) {
@@ -154,14 +162,18 @@
             node = this.$node.find( ".node[data-key='" + nodeid + "']" );
 
             (node.hasClass( "open" ) ? close : open)( node, duration );
+
+            return this;
         },
 
 		collapse: function( nodeid ) {
             close( this.$node.find( ".node[data-key='" + nodeid + "']" ), this.settings.duration );
+            return this;
 		},
 
         expand: function( nodeid ) {
             open( this.$node.find( ".node[data-key='" + nodeid + "']" ), this.settings.duration );
+            return this;
         },
 
         filter: function( text ) {
@@ -208,6 +220,8 @@
 
                 node.css( "display", "" );
             }, 500 );
+
+            return this;
         }
 	};
 
@@ -326,9 +340,6 @@
 
 		/** Animation duration should be tweaked according to easing */
 		duration        : 150,
-
-		/** Same to input placeholder */
-		placeholder     : "Type for search...",
 
 		selector4content: ".content",
 		selector4filter : "input[name=filter]",

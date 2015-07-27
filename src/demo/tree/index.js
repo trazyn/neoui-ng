@@ -33,8 +33,8 @@ define( [ "ui/tree/tree-ng" ], function() {
                 return deferred.promise();
             },
 
-            onSelect: function( e, item, dataContext, level ) {
-                console.log( arguments );
+            onSelect: function( node ) {
+                console.log( node );
             }
         } );
 

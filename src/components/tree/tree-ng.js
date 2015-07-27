@@ -17,8 +17,9 @@ angular.module( "$ui.tree", [] )
         function link( $scope, $element, $attrs, undefined, link ) {
 
             var
-            options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean" } ),
+            options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean", "showFilterBar": "boolean" } ),
             tree,
+            filterBar,
             transclude,
             markup,
             html;
@@ -46,15 +47,22 @@ angular.module( "$ui.tree", [] )
                 }
             }
 
-            options.onSelect = function( e, item, dataContext, level ) {
+            options.onSelect = function( node ) {
 
                 if ( !$rootScope.$$phase ) {
 
-                    $scope.ngModel = item;
-                    ($scope.onSelect() || $.noop).apply( this, arguments );
+                    $scope.ngModel = node.item;
+                    ($scope.onSelect() || $.noop).apply( tree, arguments );
                     $scope.$apply();
                 }
             };
+
+            filterBar = $element.find( $.fn.tree.defaults.selector4filter );
+            if ( options.showFilterBar ) {
+                filterBar.attr( "placeholder", options.placeholder );
+            } else {
+                filterBar.parent().remove();
+            }
 
             tree = $( $element ).tree( options );
 
@@ -83,6 +91,11 @@ angular.module( "$ui.tree", [] )
                 $scope.ngModel = void 0;
                 $scope.$apply();
             } );
+
+            $scope.$watch( "filterValue", function( text ) {
+
+                tree.filter( text );
+            } );
         }
 
         return {
@@ -94,9 +107,11 @@ angular.module( "$ui.tree", [] )
                 collapsed       : "@",
                 closeSameLevel  : "@",
                 placeholder     : "@",
+                showFilterBar   : "@",
                 data            : "=",
                 onSelect        : "&",
                 controller      : "=",
+                filterValue     : "=",
                 ngModel         : "="
             },
 
@@ -106,7 +121,7 @@ angular.module( "$ui.tree", [] )
             replace             : true,
             template            : '<div class="ui tree">' +
                                     '<div class="icon">' +
-                                        '<input type="text" class="ui text" name="filter" value="">' +
+                                        '<input type="text" class="ui text" name="filter" placeholder="Type to search..." value="">' +
                                     '</div>' +
                                     '<div class="content"></div>' +
                                   '</div>',

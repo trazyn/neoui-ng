@@ -41,6 +41,7 @@
             <s-tree style="height: 430px; width: 320px;"
                 data="data"
                 ng-model="treeValue"
+                show-filter-bar="true"
                 on-select="onSelect"
                 root-ids="rootIds"
                 parent-key="a03_parent_id"
@@ -80,6 +81,8 @@
             <s-tree class="file" style="height: 430px; width: 320px;"
                 data="files"
                 ng-model="fileValue"
+                filter-value="filterValue"
+                close-same-level="true"
                 controller="fileTree"
                 root-ids="[ './' ]"
                 parent-key="parent"
@@ -99,6 +102,8 @@
                     ng-click="fileTree.expand( fileValue.id )">Expand</button></p>
                 <p><button class="ui transition button mint" ng-disabled="!fileValue"
                     ng-click="fileTree.collapse( fileValue.id )">Collapse</button></p>
+
+                <p><input class="ui text" placeholder="Type for search..." ng-model="filterValue"></p>
             </div>
         </div>
     </section>
@@ -118,6 +123,7 @@
                 <xmp>
                 <s-tree style="height: 430px; width: 270px;"
                     data="data"
+                    show-filter-bar="true"
                     ng-model="treeValue"
                     on-select="onSelect"
                     root-ids="rootIds"
@@ -138,6 +144,8 @@
                 controller="fileTree"
                 root-ids="[ './' ]"
                 parent-key="parent"
+                filter-value="filterValue"
+                close-same-level="true"
                 text-key="name"
                 value-key="id">
                 <i class="icon \{\{ name.substr( name.lastIndexOf( '.' ) + 1 ) \}\}"></i><span>\{\{ name \}\}</span>
@@ -179,8 +187,8 @@
                         return deferred.promise();
                     },
 
-                    onSelect: function( e, item, dataContext, level ) {
-                        console.log( arguments );
+                    onSelect: function( node ) {
+                        console.log( node );
                     }
                 } );
 
@@ -256,6 +264,13 @@
             <br>
 
             <blockquote>
+                <p><code>=filter-value</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>通过该值过滤树</p>
+            <br>
+
+            <blockquote>
                 <p><code>@collapsed</code> - <code>true</code>
                 </p>
             </blockquote>
@@ -274,6 +289,13 @@
                 </p>
             </blockquote>
             <p>The same to input placeholder</p>
+            <br>
+
+            <blockquote>
+                <p><code>@show-filter-bar</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>显示过滤栏</p>
             <br>
 
             <blockquote>
@@ -391,19 +413,45 @@
                 <p><code>data</code> - <code>null</code></p>
             </blockquote>
             <p>为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
-            <br>
-
-            <blockquote>
-                <p><code>collapsed</code> - <code>true</code></p>
-            </blockquote>
-            <p>为<code>false</code>时展开所有节点</p>
-            <br>
-
-            <blockquote>
-                <p><code>placeholder</code> - <code>"Type to search..."</code>
-                </p>
-            </blockquote>
-            <p>The same to input placeholder</p>
+            <xmp>
+            [{
+                "id": "./dist",
+                "parent": "./",
+                "name": "dist"
+            }, {
+                "id": "./dist/.DS_Store",
+                "parent": "./dist",
+                "name": ".DS_Store"
+            }, {
+                "id": "./dist/css.css",
+                "parent": "./dist",
+                "name": "css.css"
+            }, {
+                "id": "./dist/css.min.css",
+                "parent": "./dist",
+                "name": "css.min.css"
+            }, {
+                "id": "./dist/style",
+                "parent": "./dist",
+                "name": "style"
+            }, {
+                "id": "./dist/style/css.css",
+                "parent": "./dist/style",
+                "name": "css.css"
+            }, {
+                "id": "./dist/style/css.min.css",
+                "parent": "./dist/style",
+                "name": "css.min.css"
+            }, {
+                "id": "./dist/vendor.js",
+                "parent": "./dist",
+                "name": "vendor.js"
+            }, {
+                "id": "./dist/vendor.min.js",
+                "parent": "./dist",
+                "name": "vendor.min.js"
+            }]
+            </xmp>
             <br>
 
             <blockquote>
@@ -413,9 +461,34 @@
             <xmp>
             $( ".ui.tree" ).tree( {
 
-                onSelect: function( e, item, dataContext, level ) {
+                onSelect: function( node ) {
+                    console.log( node );
+                }
+            } );
+            </xmp>
+            <br>
 
-                    console.log( arguments );
+            <blockquote>
+                <p><code>closeSameLevel</code> - <code>false</code></p>
+            </blockquote>
+            <p>展开节点时关闭同一级的节点</p>
+            <br>
+
+            <blockquote>
+                <p><code>collapsed</code> - <code>true</code></p>
+            </blockquote>
+            <p>为<code>false</code>时展开所有节点</p>
+            <br>
+
+            <blockquote>
+                <p><code>formatter</code> - <code></code></p>
+            </blockquote>
+            <p>节点格式化</p>
+            <xmp>
+            $( ".ui.tree" ).tree( {
+                formatter: function() {
+
+                    return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
                 }
             } );
             </xmp>
@@ -425,12 +498,6 @@
                 <p><code>duration</code> - <code>150</code></p>
             </blockquote>
             <p>展开动画速度, 单位毫秒</p>
-            <br>
-
-            <blockquote>
-                <p><code>closeSameLevel</code> - <code>false</code></p>
-            </blockquote>
-            <p>展开节点时关闭同一级的节点</p>
             <br>
 
             <blockquote>
@@ -465,19 +532,6 @@
             </xmp>
             <br>
 
-            <blockquote>
-                <p><code>formatter</code> - <code></code></p>
-            </blockquote>
-            <p>节点格式化</p>
-            <xmp>
-            $( ".ui.tree" ).tree( {
-                formatter: function() {
-
-                    return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
-                }
-            } );
-            </xmp>
-            <br>
         </section>
 
         <br>
