@@ -82,7 +82,7 @@ define( [ "util/dateutil" ], function() {
 
                     label.push( settings.months[ current[ 1 ] - 1 ] + " , " + current[ 0 ] );
 
-                    html = calc( new Date( current.join( "-" ) ), defaultDate, settings );
+                    html = calc( new Date( current.join( "/" ) ), defaultDate, settings );
 
                     if ( step instanceof Date ) {
                         return container.html( html ).css( "height", "auto" );
@@ -377,7 +377,7 @@ define( [ "util/dateutil" ], function() {
         for ( var start = range.prev[ 0 ], end = range.prev[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
             html += "<div class='day " + isValid( prev, start ) + " adjacent prev' " +
-                        "data-date='" + [ prev.getFullYear(), prev.getMonth() + 1, start ].join( "-" ) + "'>" +
+                        "data-date='" + [ prev.getFullYear(), prev.getMonth() + 1, start ].join( "/" ) + "'>" +
                         start +
                     "</div>";
         }
@@ -398,7 +398,7 @@ define( [ "util/dateutil" ], function() {
                 && start ===  now.getDate()
                 && (clazz += " today ");
 
-            html += "<div class='day " + clazz + "' data-date='" + [ date.getFullYear(), date.getMonth() + 1, start ].join( "-" ) + "'>" +
+            html += "<div class='day " + clazz + "' data-date='" + [ date.getFullYear(), date.getMonth() + 1, start ].join( "/" ) + "'>" +
                 start +
                 "</div>";
         }
@@ -406,7 +406,7 @@ define( [ "util/dateutil" ], function() {
         for ( var start = range.next[ 0 ], end = range.next[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
             html += "<div class='day " + isValid( next, start ) + " adjacent next' " +
-                        " data-date='" + [ next.getFullYear(), next.getMonth() + 1, start ].join( "-" ) + "'>" +
+                        " data-date='" + [ next.getFullYear(), next.getMonth() + 1, start ].join( "/" ) + "'>" +
                         start +
                     "</div>";
         }
