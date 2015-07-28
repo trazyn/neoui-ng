@@ -2,13 +2,20 @@
 <title>Neoui-ng</title>
 
 <div id="brand" class="center">
-    <div id="logo">
-        <p>neoui-ng</p>
-        <p>neoui-ng</p>
-    </div>
-    <small>
-        Keep It Simple, Stupid
-    </small>
+
+    <svg>
+        <defs>
+            <pattern id="mask" patternUnits="userSpaceOnUse" height="400" width="400">
+                <image xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/images/bgcolorful.jpg" y="-209.307px" width="600" height="600" x="-84.0822px">
+                    <animate attributeName="y" values="-100px;-230px;-90px;-290px" dur="3s" repeatCount="indefinite"></animate>
+                    <animate attributeName="x" values="0px;-100px;-190px;-20px" dur="3s" repeatCount="indefinite"></animate>
+                </image>
+            </pattern>
+        </defs>
+        <text class="title" text-anchor="middle" x="50%" y="0" dy="100px">neoui-ng</text>
+        <text class="subtitle" text-anchor="middle" x="50%" y="0" dy="170px">Keep It Simple, Stupid</text>
+    </svg>
+
     <div id="intro">
         <h3>A CSS Framework and a Set of Javascript Components</h3>
         <h3>that Implement Google's Material Design</h3>
@@ -17,6 +24,15 @@
         <a class="ui button transition outline coral" ng-click="openMenu( menu )">WIKI</a>
         <a href="//github.com/trazyn/neoui-ng" class="ui button transition outline coral">GITHUB</a>
     </div>
+    <!--
+    <div id="logo">
+        <p>neoui-ng</p>
+        <p>neoui-ng</p>
+    </div>
+    <small>
+        Keep It Simple, Stupid
+    </small>
+    -->
 </div>
 
 <div class="feature-wrap">
