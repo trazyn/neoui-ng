@@ -11,11 +11,9 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 	var
 	defaults = {
 
-		/** For angularjs */
-		controller 	    : undefined,
-		controllerAs 	: "modal",
-		scope 		    : undefined
-
+		scope 		    : undefined,
+		template        : undefined,
+		templateUrl     : undefined
 		/** Overwrite the jQuery plugin default settings */
 	},
 
@@ -23,7 +21,6 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 
 		var
 		$modal,
-		controller,
 		scope,
         settings,
 		html,
@@ -64,16 +61,6 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
         $modal = $.modal( settings );
 
         $.when( deferred ).done( function() {
-
-            if ( settings.controller ) {
-                scope = (settings.scope || $rootScope).$new();
-                controller = $controller( settings.controller, { $scope: scope } );
-
-                if ( typeof settings.controllerAs === "string" ) {
-                    scope[ settings.controllerAs ] = controller;
-                }
-            }
-
             $compile( $modal.$node )( scope );
         } );
 

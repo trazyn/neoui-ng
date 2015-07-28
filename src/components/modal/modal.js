@@ -110,9 +110,14 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			if ( options.selector4drag ) {
 
+                var handle = options.selector4drag;
+
+
 				modal.drag( function( ev, dd ) {
 
 					$( this ).css( {
+                        "width": modal.width(),
+                        "height": modal.height(),
 						top: dd.offsetY,
 						left: dd.offsetX,
 						"-webkit-transform": "none",
@@ -120,7 +125,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 						"-ms-transform": "none",
 						"transform": "none",
 					} );
-				}, { handle: ".title" } );
+				}, { handle: handle === true ? ".title" : handle } );
 			}
 		};
 

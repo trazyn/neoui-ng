@@ -9,13 +9,29 @@
 	.bar {
 		opacity: 0;
 		visibility: hidden;
-        background: #29d;
 		position: fixed;
 		z-index: 999;
 		top: 0;
 		left: 0;
 		width: 0%;
 		height: 2px;
+        transition: opacity 0.3s ease, animation 0.3s ease;
+        background: linear-gradient(
+            to right,
+            #62efab 5%,
+            #F2EA7D 15%,
+            #F2EA7D 25%,
+            #FF8797 35%,
+            #FF8797 45%,
+            #e1a4f4 55%,
+            #e1a4f4 65%,
+            #82fff4 75%,
+            #82fff4 85%,
+            #62efab 95%);
+
+        background-size: 200%;
+        background-position: 0%;
+        animation: progress-bar 15s linear infinite;
 
 		> div {
 			display: block;
@@ -58,4 +74,10 @@
 	100% {
 		transform: rotate(360deg);
 	}
+}
+@keyframes progress-bar {
+
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+
 }

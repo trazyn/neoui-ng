@@ -19,6 +19,7 @@ bs, gulp = require( "gulp" )
 	.task( "vendor", function() {
 
 		return gulp.src( [ "bower_components/jquery/dist/jquery.js",
+		        "bower_components/jquery.event.drag-new/event.drag/jquery.event.drag.js",
 				"bower_components/angular/angular.js",
 				"bower_components/angular-route/angular-route.js",
 				"bower_components/requirejs/require.js" ] )
