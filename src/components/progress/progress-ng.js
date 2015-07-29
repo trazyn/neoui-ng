@@ -20,10 +20,8 @@ angular.module( "$ui.progress", [] )
 
             var progress;
 
-            $element.addClass( $scope.theme );
-
             /** Some function on the prototype don't extend it */
-            $scope.controller = progress = $( $element ).progress( { theme: $scope.theme } );
+            $scope.controller = progress = $( $element ).progress();
 
             if ( [ "true", "1" ].indexOf( $scope.autoStart ) > -1 ) {
                 progress.start();
@@ -33,7 +31,6 @@ angular.module( "$ui.progress", [] )
         return {
 
             scope           : {
-                theme       : "@",
                 autoStart   : "@",
                 controller  : "="
             },

@@ -35,8 +35,7 @@
 
         <div class="example">
             <div class="wrap">
-                <s-progress
-                    theme="ios"
+                <s-progress class="ios"
                     auto-start="true"
                     controller="progress">
                 </s-progress>
@@ -54,6 +53,201 @@
         <h1>Looking for collaborators!</h1>
 
         <p>If you interested in helping to build neoui-ng, <a href="https://github.com/trazyn/neoui-ng">check out this on GitHub</a></p>
+    </div>
+
+    <div class="block aqua">
+        <div class="content">
+            <h3>Here's how you use it in angularJS</h3>
+
+            <div class="code">
+                <label>Markup</label>
+                <xmp>
+                <s-progress class="ios"
+                    auto-start="true"
+                    controller="progress">
+                </s-progress>
+                </xmp>
+            </div>
+
+            <br>
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+                angular
+                .module( "demo.progress", [ "$ui.progress" ] )
+                .controller( "progressContorller", [ "$scope", function( $scope ) {
+                    $scope.stop = function() {
+                        $scope.progress.done();
+                    }
+                } ] );
+                </xmp>
+            </div>
+
+            <br>
+            <br>
+            <h3>Attributes</h3>
+
+            <div class="prop">
+                <div class="name"><p>controller</p></div>
+                <div class="desc">
+                    <p>null</p>
+                    <p>进度条控制器, <a href="" data-anchor="method">See Method</a></p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">auto-show</div>
+                <div class="desc">
+                    <p>false</p>
+                    <p>自动开始进度条</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block gray">
+        <s-progress controller="normalProgress"></s-progress>
+
+        <div class="action">
+            <button class="ui button transition success" ng-click="normalProgress.start()">
+                <i class="icon play"></i>
+            </button>
+            <button class="ui button transition error" ng-click="normalProgress.done()">
+                <i class="icon stop"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="block yellow">
+        <div class="content">
+            <h3>Use it in jQuery</h3>
+            <div class="code">
+                <label>Contructor</label>
+                <xmp>
+                $( selector ).progress( options )
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>HTML</label>
+                <xmp>
+                <div class="ui progress"></div>
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+                require( [ "ui/progress/progress" ], function() {
+                    var progress = $( ".ui.progress" ).progress().start();
+                } );
+                </xmp>
+            </div>
+            <br>
+
+            <h3>Options</h3>
+            <div class="prop">
+                <div class="name"><p>seed</p></div>
+                <div class="desc">
+                    <p>0.05</p>
+                    <p>进度条增量值随机种子, 该值越大, 进度条增量越快</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">speed</div>
+                <div class="desc">
+                    <p>800</p>
+                    <p>进度条速度值, 单位毫秒, 越小越快</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">max</div>
+                <div class="desc">
+                    <p>0.99123</p>
+                    <p>未完成时进度条最大值</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">template</div>
+                <div class="desc">
+                    <p>&lt;div class='bar'&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class='spinner'&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+                    <p>进度条模板</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">selector4bar</div>
+                <div class="desc">
+                    <p>".bar"</p>
+                    <p>Selector of the progress bar</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">selector4icon</div>
+                <div class="desc">
+                    <p>".bar"</p>
+                    <p>Selector of the spinner icon</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">render</div>
+                <div class="desc">
+                    <p>function</p>
+                    <p>进度条状态更新时调用, 控制进度条展示</p>
+                </div>
+            </div>
+            <xmp>
+            $( ".ui.progress" ).progress( {
+                render: function( status ) {
+
+                    this
+                    .$node
+                    .find( this.settings.selector4bar )
+                    .css( {
+                        "width": status + "%",
+                        "-webkit-transition": "all .2s ease-out",
+                        "-moz-transition": "all .2s ease-out",
+                        "-ms-transition": "all .2s ease-out",
+                        "-o-transition": "all .2s ease-out",
+                        "transition": "all .2s ease-out",
+                    } );
+                }
+            } );
+            </xmp>
+
+            <h3>Method</h3>
+            <div class="method">
+                <div class="name">progress.start()</div>
+                <div class="desc">
+                    开始进度条
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">progress.done()</div>
+                <div class="desc">
+                    更新进度条进度
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">progress.set( status )</div>
+                <div class="param">
+                    <p>status</p>
+                    <p>Number, 小于等于1</p>
+                </div>
+                <div class="desc">
+                    更新进度条进度
+                </div>
+            </div>
+        </div>
     </div>
 
 </section>

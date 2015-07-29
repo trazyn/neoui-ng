@@ -37,19 +37,13 @@ define( [ "util/poll" ], function( poll ) {
 			} );
 
 			poll.start( this.runner );
-
 			return this;
 		},
 
 		set: function( status ) {
 
-			var
-			settings = this.settings,
-
-			node = this.$node;
-
 			this.status = status;
-			this.settings.render.call( node.find( settings.selector4bar ), status * 100, node.find( settings.selector4icon ) );
+			this.settings.render.call( this, status * 100 );
 
 			return this;
 		},
@@ -79,18 +73,6 @@ define( [ "util/poll" ], function( poll ) {
 		}
 	};
 
-	function render( status, icon ) {
-
-		this.css( {
-			"width": status + "%",
-			"-webkit-transition": "all .2s ease-out",
-			"-moz-transition": "all .2s ease-out",
-			"-ms-transition": "all .2s ease-out",
-			"-o-transition": "all .2s ease-out",
-			"transition": "all .2s ease-out",
-		} );
-	}
-
 	function runner( settings ) {
 
 		var self = this;
@@ -114,14 +96,15 @@ define( [ "util/poll" ], function( poll ) {
 
 	$.fn.progress = function( options ) {
 
-		var instance = this.data( namespace );
+		var
+		settings,
+		instance = this.data( namespace );
 
 		if ( !instance ) {
 
-			options = $.extend( {}, $.fn.progress.defaults, options || {} );
-			"function" !== typeof options.render && (options.render = render);
-			options.max = options.max > 1 ? 0.99123 : options.max;
-			instance = new Progress( this, options );
+			settings = $.extend( {}, $.fn.progress.defaults, options || {} );
+			settings.max = settings.max > 1 ? 0.99123 : settings.max;
+			instance = new Progress( this, settings );
 			this.data( namespace, instance );
 		}
 
@@ -138,7 +121,22 @@ define( [ "util/poll" ], function( poll ) {
 		template 	    : "<div class='bar'><div></div></div><div class='spinner'><div></div></div>",
 
 		selector4bar 	: ".bar",
-		selector4icon 	: ".spinner"
+		selector4icon 	: ".spinner",
+
+		render          : function( status ) {
+
+            this
+            .$node
+            .find( this.settings.selector4bar )
+            .css( {
+                "width": status + "%",
+                "-webkit-transition": "all .2s ease-out",
+                "-moz-transition": "all .2s ease-out",
+                "-ms-transition": "all .2s ease-out",
+                "-o-transition": "all .2s ease-out",
+                "transition": "all .2s ease-out",
+            } );
+		}
 	};
 } );
 

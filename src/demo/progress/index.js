@@ -7,8 +7,9 @@ define( [ "ui/progress/progress-ng" ], function() {
     .module( "demo.progress", [ "$ui.progress" ] )
     .controller( "progressContorller", [ "$scope", function( $scope ) {
 
-        $scope.start = function( progress ) {
-            console.log( progress );
+        $scope.stop = function() {
+            $scope.progress.done();
         };
     } ] );
 } );
+
