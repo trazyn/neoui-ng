@@ -43,7 +43,8 @@
 
             <div class="action">
                 <button class="ui button transition mint" ng-click="progress.start()">.start()</button>
-                <button class="ui button transition mint">.inc()</button>
+                <button class="ui button transition mint" ng-click="progress.dec()">.dec()</button>
+                <button class="ui button transition mint" ng-click="progress.inc()">.inc()</button>
                 <button class="ui button transition mint" ng-click="progress.done()">.done()</button>
             </div>
         </div>
@@ -91,7 +92,7 @@
                 <div class="name"><p>controller</p></div>
                 <div class="desc">
                     <p>null</p>
-                    <p>进度条控制器, <a href="" data-anchor="method">See Method</a></p>
+                    <p>进度条控制器, <a href="" data-anchor="method">See the jQuery part</a></p>
                 </div>
             </div>
 
@@ -211,7 +212,7 @@
                     .$node
                     .find( this.settings.selector4bar )
                     .css( {
-                        "width": status + "%",
+                        "width": status * 100 + "%",
                         "-webkit-transition": "all .2s ease-out",
                         "-moz-transition": "all .2s ease-out",
                         "-ms-transition": "all .2s ease-out",
@@ -238,6 +239,20 @@
             </div>
 
             <div class="method">
+                <div class="name">progress.inc()</div>
+                <div class="desc">
+                    进度条快进
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">progress.dec()</div>
+                <div class="desc">
+                    进度条快退
+                </div>
+            </div>
+
+            <div class="method" data-anchor="method">
                 <div class="name">progress.set( status )</div>
                 <div class="param">
                     <p>status</p>

@@ -43,7 +43,7 @@ define( [ "util/poll" ], function( poll ) {
 		set: function( status ) {
 
 			this.status = status;
-			this.settings.render.call( this, status * 100 );
+			this.settings.render.call( this, status );
 
 			return this;
 		},
@@ -70,6 +70,31 @@ define( [ "util/poll" ], function( poll ) {
 			poll.remove( self.runner );
 
 			return this;
+		},
+
+		inc: function() {
+
+            var
+            status = this.status,
+            settings = this.settings;
+
+		    status += Math.random() * settings.seed;
+            status = status > settings.max ? settings.max : status;
+            this.status = status;
+            return this;
+		},
+
+		dec: function() {
+
+            var
+            status = this.status,
+            settings = this.settings,
+            value = Math.random() * settings.seed;
+
+		    status -= value;
+            status = status < 0.02 ? value : status;
+            this.status = status;
+            return this;
 		}
 	};
 
@@ -129,7 +154,7 @@ define( [ "util/poll" ], function( poll ) {
             .$node
             .find( this.settings.selector4bar )
             .css( {
-                "width": status + "%",
+                "width": status * 100 + "%",
                 "-webkit-transition": "all .2s ease-out",
                 "-moz-transition": "all .2s ease-out",
                 "-ms-transition": "all .2s ease-out",
