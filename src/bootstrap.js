@@ -112,6 +112,7 @@ require( [
             .left()
             .$node
             .delegate( "[data-url]", "click", function( e ) {
+
                 $location.path( "/" + this.getAttribute( "data-url" ) );
                 document.body.scrollTop = 0;
                 menu.close();
