@@ -6,9 +6,18 @@ define( [ "util/ng-args", "ui/tree/tree" ], function( args ) {
 /**
  * example:
  *
- <s-autoComplete items="items" value-key="value" text-key="text">
-     {{ $name }} - {{ $value }}
- </s-autoComplete>
+    <s-tree class="file" style="height: 430px; width: 320px;"
+        data="files"
+        ng-model="fileValue"
+        filter-value="filterValue"
+        close-same-level="true"
+        controller="fileTree"
+        root-ids="[ './' ]"
+        parent-key="parent"
+        text-key="name"
+        value-key="id">
+        <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
+    </s-tree>
  * */
 
 angular.module( "$ui.tree", [] )
@@ -66,11 +75,8 @@ angular.module( "$ui.tree", [] )
 
             tree = $( $element ).tree( options );
 
-            if ( typeof $scope.controller === "object" ) {
-                angular.extend( $scope.controller, tree );
-            } else {
-                $scope.controller = tree;
-            }
+            /** Export instance to controller */
+            $scope.controller = tree;
 
             $scope.$watch( "data", function( value ) {
 

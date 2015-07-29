@@ -3,6 +3,23 @@ define( [ "util/ng-args", "ui/calendar/calendar" ], function( args ) {
 
 "use strict";
 
+/**
+ * example:
+ *
+    <s-calendar
+        ng-disabled="isDisabled"
+        ng-model="date"
+        placeholder="Year-Month-Day"
+        double="twoMonths"
+        show-time="showTime"
+        min-date="minDate"
+        max-date="maxDate"
+        on-select="onSelect"
+        default-date="defaultDate"
+        ng-model="date">
+    </s-calendar>
+ * */
+
 angular.module( "$ui.calendar", [] )
     .directive( "sCalendar", [ "$rootScope", function( $rootScope ) {
 

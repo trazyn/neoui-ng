@@ -6,9 +6,9 @@ define( [ "util/ng-args", "ui/autoComplete/autoComplete" ], function( args ) {
 /**
  * example:
  *
- <s-autoComplete items="items" value-key="value" text-key="text">
-     {{ $name }} - {{ $value }}
- </s-autoComplete>
+    <s-autoComplete items="items" value-key="value" text-key="text">
+         {{ $name }} - {{ $value }}
+    </s-autoComplete>
  * */
 
 angular.module( "$ui.autoComplete", [] )

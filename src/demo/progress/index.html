@@ -1,0 +1,59 @@
+
+<title>Progress - Neoui-ng</title>
+
+<section id="progress" ng-controller="progressContorller">
+
+    <div class="block">
+
+        <svg>
+            <defs>
+            <style>
+            /** FIREFOX CAN'T USE EXTERNAL CSS FILE */
+            #progress svg {
+                width: 100%;
+                height: 200px;
+            }
+            #progress text {
+                font-size: 2.5rem;
+                fill: url(#mask);
+                text-shadow: 1px 1px 0 rgba(227, 218, 219, 1), 3px 3px 0 rgba(227, 218, 219, 0.9), 5px 5px 0 rgba(227, 218, 219, 0.8), 7px 7px 0 rgba(227, 218, 219, 0.7), 9px 9px 0 rgba(227, 218, 219, 0.6), 11px 11px 0 rgba(227, 218, 219, 0.5), 13px 13px 0 rgba(227, 218, 219, 0.4), 15px 15px 0 rgba(227, 218, 219, 0.3), 17px 17px 0 rgba(227, 218, 219, 0.2), 19px 19px 0 rgba(227, 218, 219, 0.1), 21px 21px 0 rgba(227, 218, 219, 0.08), 22px 22px 0 rgba(227, 218, 219, 0.07);
+            }
+            #progress .subtitle {
+                font-size: 1rem;
+                text-shadow: none;
+            }
+            </style>
+                <pattern id="mask" patternUnits="userSpaceOnUse" height="600" width="600">
+                    <image xmlns:xlink="http://www.w3.org/1999/xlink" y="-100px" xlink:href="/images/bgcolorful.jpg" width="600" height="600"></image>
+                </pattern>
+            </defs>
+            <text class="title" text-anchor="middle" x="50%" y="0" dy="100px">A jQuery Progress Plugin</text>
+            <a xlink:href="http://ricostacruz.com/nprogress/">
+            <text class="subtitle" text-anchor="middle" x="50%" y="0" dy="170px"> Inspired by NProgress.js </text>
+            </a>
+        </svg>
+
+        <div class="example">
+            <div class="wrap">
+                <s-progress
+                    theme="ios"
+                    auto-start="true"
+                    controller="progress">
+                </s-progress>
+            </div>
+
+            <div class="action">
+                <button class="ui button transition mint" ng-click="progress.start()">.start()</button>
+                <button class="ui button transition mint">.inc()</button>
+                <button class="ui button transition mint" ng-click="progress.done()">.done()</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="block green">
+        <h1>Looking for collaborators!</h1>
+
+        <p>If you interested in helping to build neoui-ng, <a href="https://github.com/trazyn/neoui-ng">check out this on GitHub</a></p>
+    </div>
+
+</section>

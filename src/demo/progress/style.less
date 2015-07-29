@@ -1,0 +1,56 @@
+
+@import (reference) "../../style/main.less";
+@import (reference) "../common/css/markdown.less";
+
+#progress {
+
+    .ui.button {
+        width: 100px;
+    }
+
+    h1 {
+        font-weight: 200;
+        font-size: 2.5rem;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .block {
+        text-align: center;
+        padding: 0 100px 40px;
+        &.green {
+            background-color: #97ce7f;
+            padding: 50px 0 100px;
+        }
+
+        p {
+            font-weight: 800;
+            word-spacing: 6px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+    }
+
+    .wrap {
+        width: 900px;
+        height: 100px;
+        margin: 100px auto 0;
+        position: relative;
+        overflow: hidden;
+        padding: 0 30px;
+    }
+
+    a {
+        text-decoration: none;
+        background-color: #ebebeb;
+        color: #3883a3;
+        padding: 0 2px;
+        border-radius: 2px;
+        transition: background-color 0.2s, color 0.4s;
+        &:hover {
+            background-color: #98cede;
+            color: #212121;
+        }
+    }
+}

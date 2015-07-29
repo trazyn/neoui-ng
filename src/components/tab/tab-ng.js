@@ -6,11 +6,11 @@ define( [ "util/ng-args", "ui/tab/tab" ], function( args ) {
 /**
  * example:
  *
-<s-tab-set selected="selected" on-select="onSelect">
-    <s-tab ng-repeat="tab in tabs" header="{{ tab.header }}" index="{{ tab.index }}" ng-disabled="tab.disabled" template-url="{{ tab.page }}">
-        <div ng-bind-html="tab.content"></div>
-    </s-tab>
-</s-tab-set>
+    <s-tab-set selected="selected" on-select="onSelect">
+        <s-tab ng-repeat="tab in tabs" header="{{ tab.header }}" index="{{ tab.index }}" ng-disabled="tab.disabled" template-url="{{ tab.page }}">
+            <div ng-bind-html="tab.content"></div>
+        </s-tab>
+    </s-tab-set>
  * */
 
 angular.module( "$ui.tab", [] )
