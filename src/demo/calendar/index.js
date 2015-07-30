@@ -21,7 +21,7 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
             isDisabled: false,
             minDate: $.dateutil( now ).lastWeek(),
             maxDate: $.dateutil( now ).nextWeek(),
-            onSelect: function( value ) {
+            onClick: function( value ) {
                 console.log( value );
             }
         } );

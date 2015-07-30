@@ -252,7 +252,7 @@ define( [ "util/dateutil" ], function() {
                         value = $.dateutil( date ).format( settings.format );
 
                         input.val( value ).focus();
-                        settings.onSelect( value );
+                        settings.onClick( value );
 
                         input.trigger( "change" );
 
@@ -474,7 +474,7 @@ define( [ "util/dateutil" ], function() {
 
 		format          : "%Y-%m-%d",
 
-		onSelect        : $.noop,
+		onClick         : $.noop,
 
 		showTime        : false,
 		double          : false,

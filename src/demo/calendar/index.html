@@ -45,7 +45,7 @@
                 show-time="showTime"
                 min-date="minDate"
                 max-date="maxDate"
-                on-select="onSelect"
+                on-click="onClick"
                 default-date="defaultDate"
                 ng-model="date">
             </s-calendar>
@@ -119,7 +119,7 @@
                         show-time="showTime"
                         min-date="minDate"
                         max-date="maxDate"
-                        on-select="onSelect"
+                        on-click="onClick"
                         default-date="defaultDate"
                         ng-model="date">
                     </s-calendar>
@@ -151,7 +151,7 @@
                         isDisabled: false,
                         minDate: $.dateutil( now ).lastWeek(),
                         maxDate: $.dateutil( now ).nextWeek(),
-                        onSelect: function( value ) {
+                        onClick: function( value ) {
                             console.log( value );
                         }
                     } );
@@ -178,7 +178,7 @@
                 <br>
 
                 <blockquote>
-                    <p><code>&on-select</code> - <code>null</code></p>
+                    <p><code>&on-click</code> - <code>null</code></p>
                 </blockquote>
                 <p>选中时执行</p>
                 <br>
@@ -321,13 +321,13 @@
             <br>
 
             <blockquote>
-                <p><code>onSelect</code> - <code>nul</code>
+                <p><code>onClick</code> - <code>nul</code>
                 </p>
             </blockquote>
             <p>选中时回调, example:</p>
             <xmp>
             $( ".ui.calendar" ).calendar( {
-                onSelect: function( value ) {
+                onClick: function( value ) {
                     console.log( "Current: " + value );
                 }
             } );
@@ -359,7 +359,7 @@
                 <p><code>selector4trigger</code> - <code>".icon.calendar"</code>
                 </p>
             </blockquote>
-            <p>事件源</p>
+            <p>事件触发节点选择器</p>
         </section>
 
         <br>

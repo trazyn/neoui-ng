@@ -14,7 +14,7 @@ define( [ "util/ng-args", "ui/calendar/calendar" ], function( args ) {
         show-time="showTime"
         min-date="minDate"
         max-date="maxDate"
-        on-select="onSelect"
+        on-select="onClick"
         default-date="defaultDate"
         ng-model="date">
     </s-calendar>
@@ -30,11 +30,11 @@ angular.module( "$ui.calendar", [] )
             calendar,
             settings;
 
-            options.onSelect = function( value ) {
+            options.onClick = function( value ) {
 
                 if ( $rootScope.$$pahse ) { return; }
 
-                ($scope.onSelect() || $.noop)( value );
+                ($scope.onClick() || $.noop)( value );
                 $scope.defaultDate = value;
                 $scope.$apply();
             };
@@ -77,7 +77,7 @@ angular.module( "$ui.calendar", [] )
                 defaultDate : "=ngModel",
                 minDate     : "=",
                 maxDate     : "=",
-                onSelect    : "&",
+                onClick     : "&",
                 double      : "="
             },
 
