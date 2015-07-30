@@ -504,8 +504,6 @@
 					e.stopPropagation();
 				} );
 
-		fg.setAttribute( "placeholder", settings.placeholder );
-
 		this.setupCache = setupCache;
 		this.fromCache = fromCache;
 
@@ -689,8 +687,6 @@
 
 		autoSelect 		    : false,
 		tabComplete 		: true,
-
-		placeholder         : "",
 
 		/** Local data */
 		lookup 			    : [],

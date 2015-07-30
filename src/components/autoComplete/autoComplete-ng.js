@@ -62,6 +62,8 @@ angular.module( "$ui.autoComplete", [] )
                 }
             };
 
+            $element.find( $.fn.autoComplete.defaults.selector4input ).attr( "placeholder", options.placeholder || "" );
+
             autoComplete = $( $element ).autoComplete( options );
 
             $scope.$watch( "value", function( value ) {
@@ -147,7 +149,7 @@ angular.module( "$ui.autoComplete", [] )
             transclude          : true,
             replace             : true,
             template            : '<div class="ui autoComplete">' +
-                                    '<input class="ui text front" type="text" />' +
+                                    '<input class="ui text front" type="text" placeholder="Type for search..." />' +
                                     '<input class="ui text hint" type="text" tabindex="-1" />' +
                                     '<i class="icon"></i>' +
                                   '</div>',
