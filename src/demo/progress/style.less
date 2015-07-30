@@ -110,7 +110,7 @@
         }
     }
 
-    .prop {
+    .prop, .clazz {
         font-size: 14px;
         transition: .2s;
         font-weight: 100;
@@ -157,6 +157,33 @@
             text-align: left;
             margin: -55px 0 100px;
             box-shadow: none;
+        }
+    }
+
+    .clazz {
+
+        > .name:after {
+            content: none;
+        }
+
+        > .desc {
+
+            &:after {
+                content: "";
+                transition: .2s;
+                width: 66%;
+                height: .1rem;
+                bottom: 20px;
+                left: 32%;
+                position: absolute;
+                background-color: @lightGray;
+            }
+        }
+
+        &:hover {
+            > .desc:after {
+                background-color: @darkGray;
+            }
         }
     }
 
