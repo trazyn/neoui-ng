@@ -1,0 +1,257 @@
+
+<title>Dropdown - Neoui-ng</title>
+
+<ul id="anchors" class="ui anchor">
+    <li data-anchor="simple" class="item active">Simple</li>
+    <li data-anchor="advance" class="item">Advance</li>
+    <li class="item">API
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="event" class="item">Event</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="dropdown" ng-controller="dropdownController" ng-init="init()">
+
+    <header data-anchor="simple">Simple</header>
+
+    <section>
+
+        <div class="wrap">
+            <s-dropdown data="data"></s-dropdown>
+        </div>
+
+        <div class="wrap">
+            <s-dropdown
+                data="data"
+                nothing="Hover me ^_^"
+                type="mouseover">
+            </s-dropdown>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="advance">Advance</header>
+
+    <section>
+
+        <div class="wrap">
+            <s-dropdown
+                data="data"
+                required="true"
+                multiple="true"
+                close-on-select="false"
+                nothing="Multiple and less one item">
+            </s-dropdown>
+        </div>
+
+        <div class="wrap">
+            <div class="ui dropdown" name="format">
+                <div class="title" tabindex="-1">
+                    <p></p>
+                    <i class="icon arrow down"></i>
+                </div>
+                <div class="content">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header>API</header>
+
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+                <div class="ui dropdown" name="format">
+                    <div class="title">
+                        <p></p>
+                        <i class="icon arrow down"></i>
+                    </div>
+                    <div class="content">
+                    </div>
+                </div>
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).dropdown( options )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+            <xmp>
+            $( &quot;.ui.dropdown&quot; ).dropdown( data: [ {
+                    value: &quot;AD&quot;,
+                    text: &quot;Andorra&quot;
+            }, {
+                    value: &quot;BS&quot;,
+                    text: &quot;Bulgaria&quot;
+            } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>nothing</code> - <code>Please Select</code>
+                </p>
+            </blockquote>
+            <p>默认的显示内容, 即无任何选择项时的显示内容</p>
+            <br>
+
+            <blockquote>
+                <p><code>data</code> - <code>[]</code>
+                </p>
+            </blockquote>
+            <p>数组对象</p>
+            <br>
+
+            <blockquote>
+                <p><code>textKey</code> - <code>text</code>
+                </p>
+            </blockquote>
+            <p>通过该值解析<code>data</code>中<code>JSON</code>对象, 取值用于显示</p>
+            <br>
+
+            <blockquote>
+                <p><code>valueKey</code> - <code>value</code>
+                </p>
+            </blockquote>
+            <p>实际数据取值</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4title</code> - <code>.title:first &gt; p</code>
+                </p>
+            </blockquote>
+            <p>标题选择器或 DOM 元素</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4content</code> - <code>.content:first</code>
+                </p>
+            </blockquote>
+            <p>内容区域选择器(列表部分)或 DOM 元素</p>
+            <br>
+
+            <blockquote>
+                <p><code>type</code> - <code>click</code>
+                </p>
+            </blockquote>
+            <p>默认通过<code>click</code>事件展开下拉区域, 取值事件类型名称, 比如<code>hover</code>, <code>mouseenter</code>等, 见 <a href="http://www.w3school.com.cn/js/js_htmldom_events.asp">W3 DOM事件</a>
+            </p>
+            <br>
+
+            <blockquote>
+                <p><code>multiple</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>是否可多选, 设置为<code>true</code>后可进行多选</p>
+            <br>
+
+            <blockquote>
+                <p><code>required</code> - <code>false</code>
+            </blockquote>
+            </p>
+            <p>设置为<code>true</code>后, 必须有一个选中项, 即无法取消所有的已选择项</p>
+            <br>
+
+            <blockquote>
+                <p><code>formatter</code> - 见代码实现</p>
+            </blockquote>
+            <p>用于格式化列表项, 接受两个参数<code>item</code>和<code>settings</code>, 需实现<code>data-item-value</code>属性用于存放原始值, 如下:</p>
+            <xmp>
+            $( &quot;.ui.dropdown&quot; ).dropdown( {
+                    data: [ ... ],
+                    formatter: function( item, settings ) {
+                            return &quot;&lt;li data-item-value=&quot; + item[ settings.valueKey ] + &quot;&gt;&lt;span&gt;&quot; + (item[ settings.textKey ] || item[ settings.valueKey ]) + &quot;&lt;/span&gt;&lt;/li&gt;&quot;;
+                    }
+            } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <p><code>dropdown.val( [value] )</code>
+            </p>
+            <blockquote>
+                <p><code>value</code> - JSON 数组, 通过<code>textKey</code>和<code>valueKey</code>进行解析</p>
+            </blockquote>
+            <p>参数为空时返回选数组类型的选中值, 不为空时, 选中指定项(通过<code>valueKey</code>匹配)</p>
+            <br>
+
+            <p><code>dropdown.add( data )</code>
+            </p>
+            <blockquote>
+                <p><code>data</code> - 同<code>options</code>中<code>data</code>参数</p>
+            </blockquote>
+            <p>用于新增记录(<code>Ajax</code> 服务统一在 Render.js 中处理进行异步管理, 不会单独写入 UI 控件)</p>
+            <br>
+
+            <p><code>dropdown.selectAll()</code>
+            </p>
+            <p>全选所有列表项</p>
+            <br>
+
+            <p><code>dropdown.deselectAll()</code>
+            </p>
+            <p>取消全选</p>
+            <br>
+
+            <p><code>dropdown.disabled()</code>
+            </p>
+            <p>禁用控件, 和在其 HTML 添加 <code>disabled=&quot;disabled&quot;</code> 等效</p>
+            <br>
+
+            <p><code>dropdown.enabled()</code>
+            </p>
+            <p>启用控件</p>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="event">
+                <span>Event</span>
+            </div>
+
+            <p>所有元素均在<code>.ui.dropdown</code>下, 所以冒泡即可, 简单高效灵活, 所以不要问 XXX 事件是否支持等问题</p>
+
+            <xmp>
+            var dropdown = $( &quot;.ui.dropdown&quot; ).dropdown( { data: [ ... ] } );
+
+            dropdown.$node
+                    .delegate( &quot;li[data-item-value=1]&quot;, &quot;click&quot;, function() { ... } )
+                    .delegate( &quot;li[data-item-value=2]&quot;, &quot;mouseover&quot;, function() { ... } );
+            </xmp>
+        </section>
+    </div>
+</section>
+
+<script id="pjax-init" data-module="views/dropdown"></script>

@@ -25,6 +25,7 @@ require( [
         "demo/tree/index",
         "demo/progress/index",
         "demo/calendar/index",
+        "demo/dropdown/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
@@ -43,6 +44,7 @@ require( [
 	        "demo.sidenav",
 	        "demo.dateutil",
 	        "demo.tree",
+	        "demo.dropdown",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -96,6 +98,9 @@ require( [
 		    } )
 		    .when( "/progress", {
 		        templateUrl: "/src/demo/progress/index.html"
+		    } )
+		    .when( "/dropdown", {
+		        templateUrl: "/src/demo/dropdown/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

@@ -1,0 +1,108 @@
+
+@import (reference) "../../style/main.less";
+
+.ui.dropdown {
+    position: relative;
+    outline: 0;
+    width: 240px;
+    border-bottom: 3px solid @lightGray2;
+    transition: .2s;
+    &:hover {
+        border-bottom: 3px solid @mint;
+    }
+
+    &.ripple {
+        overflow: visible;
+    }
+
+    > .title {
+
+        position: relative;
+        display: block;
+        height: 32px;
+        line-height: 32px;
+        width: 90%;
+        color: rgba(0,0,0,.8);
+        font-size: 12px;
+        text-align: left;
+        letter-spacing: 1px;
+        cursor: pointer;
+        outline: 0;
+        text-indent: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-right: 30px;
+        text-overflow: ellipsis;
+    }
+
+    > i.icon {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        display: block;
+        text-align: center;
+        height: 24px;
+        width: 24px;
+        font-size: 20px;
+        opacity: 1;
+        transition: .2s;
+        &:after {
+            content: "\e68a";
+        }
+    }
+
+    .content {
+        transition: .2s;
+        padding: 10px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(.2);
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        background: white;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        z-index: -1;
+        min-width: 240px;
+        max-height: 320px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    ul {
+        list-style: none;
+        li {
+            transition: .2s;
+            line-height: 36px;
+            height: 36px;
+            background: #fff;
+            text-indent: 18px;
+            cursor: pointer;
+            overflow: hidden;
+
+            &:hover {
+                color: @mint;
+            }
+
+            &.selected {
+                color: @coral;
+            }
+
+        }
+    }
+
+    &.open {
+        > .title, > i.icon {
+            opacity: 0;
+        }
+
+        .content {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 1;
+        }
+    }
+}
