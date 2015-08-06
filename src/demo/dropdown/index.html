@@ -112,6 +112,234 @@
     <br>
     <br>
 
+    <header>AngularJS</header>
+    <div class="markdown">
+        <section>
+            <div class="ui ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <div class="wrap">
+                <label>Simple</label>
+                <xmp>
+                <s-dropdown data="data"></s-dropdown>
+                </xmp>
+            </div>
+
+            <div class="wrap">
+            <label>Custom template</label>
+            <xmp>
+            <s-dropdown
+                data="ajax"
+                ng-disabled="isDisabled"
+                ng-model="reps"
+                required="required"
+                auto-width="true"
+                text-key="full_name"
+                value-key="false"
+                multiple="multiple"
+                close-on-select="false"
+                nothing="Multiple and less one item">
+                <p>
+                    \{\{ name }} - <a href="\{\{ owner.html_url }}" title="Author by \{\{ owner.login }}">\{\{ owner.login }}</a>
+                </p>
+                <p>
+                    <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">\{\{ html_url }}</a></code>
+                </p>
+                <p>
+                    <code>\{\{ watchers.toLocaleString() }} Watchers</code>
+                    <code>\{\{ forks.toLocaleString() }} Forks</code>
+                    <code>\{\{ language }}</code>
+                    <code>Last update: \{\{ updated_at }}</code>
+                    <code class="issue"><i class="icon issue"></i>\{\{ open_issues_count }}</code>
+                </p>
+            </s-dropdown>
+            </xmp>
+            <code>内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></code>
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+            angular
+            .module( "demo.dropdown", [ "$ui.dropdown" ] )
+            .controller( "dropdownController", [ "$scope", function( $scope ) {
+
+                $scope.init = function() {
+                    $( document.body ).anchor( { offset: -60 } );
+                };
+
+                $scope.data = [ {
+                    value: "AD",
+                    text: "Andorra"
+                }, {
+                    value: "AZ",
+                    text: "Azerbaijan"
+                }, {
+                    value: "AW",
+                    text: "Aruba"
+                }, {
+                    value: "BI",
+                    text: "Bulgaria"
+                }, {
+                    value: "BS",
+                    text: "Bahamas"
+                }, {
+                    value: "CH",
+                    text: "Switzerland"
+                }, {
+                    value: "CK",
+                    text: "Cook Island"
+                }, {
+                    value: "CL",
+                    text: "Chile"
+                }, {
+                    value: "CN",
+                    text: "China"
+                }, {
+                    value: "CM",
+                    text: "Cambodia"
+                }, {
+                    value: "AE",
+                    text: "United Arab Emirates"
+                }, {
+                    value: "AF",
+                    text: "Afghanistan"
+                }, {
+                    value: "AG",
+                    text: "Antigua and Barbuda"
+                }, {
+                    value: "AO",
+                    text: "Angola"
+                } ];
+
+                angular.extend( $scope, {
+
+                    ajax: function() {
+
+                        var deferred = $.Deferred();
+
+                        $.ajax( {
+                            url: "https://api.github.com/search/repositories?q=" + "an" + "&sort=stars&order=desc"
+                        } )
+
+                        .done( function( data ) {
+                            data = data.items;
+                            deferred.resolveWith( data );
+                        } )
+
+                        .fail( deferred.reject );
+
+                        return deferred;
+                    },
+
+                    required: true,
+                    multiple: true
+                } );
+
+            } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="ui ribbon" data-anchor="sDropdown">
+                <span>Directive * s-dropdown</span>
+            </div>
+
+            <blockquote>
+                <p><code>=ng-model</code> - <code>null</code></p>
+            </blockquote>
+            <p>下拉框值</p>
+            <br>
+
+            <blockquote>
+                <p><code>=ng-disabled</code> - <code>false</code></p>
+            </blockquote>
+            <p>禁用控件</p>
+            <br>
+
+            <blockquote>
+                <p><code>=controller</code> - <code>null</code></p>
+            </blockquote>
+            <p>Dropdown's controller, <a href="" data-anchor="method">See Method</a></p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>=data</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>为数组时候为本地数据, function时返回$.Deferred</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>@text-key</code> - <code>"text"</code>
+                </p>
+            </blockquote>
+            <p><code>text</code>取值</p>
+            <br>
+
+            <blockquote>
+                <p><code>@value-key</code> - <code>"value"</code>
+                </p>
+            </blockquote>
+            <p><code>value</code>取值, 为<code>false</code>时候, 取值<code>json</code>对象</p>
+            <br>
+
+            <blockquote>
+                <p><code>@nothing</code> - <code>"Please Select"</code>
+                </p>
+            </blockquote>
+            <p>默认显示内容</p>
+            <br>
+
+            <blockquote>
+                <p><code>@close-on-select</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>选中后收起下拉列表</p>
+            <br>
+
+            <blockquote>
+                <p><code>@multiple</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>是否可多选</p>
+            <br>
+
+            <blockquote>
+                <p><code>@required</code> - <code>false</code>
+            </blockquote>
+            <p>设置为<code>true</code>后, 必须有一个选中项</p>
+            <br>
+
+            <blockquote>
+                <p><code>@auto-width</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>宽度对齐</p>
+            <br>
+
+            <blockquote>
+                <p><code>&on-select</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中时触发</p>
+            <br>
+
+            <blockquote>
+                <p><code>@type</code> - <code>"click"</code>
+                </p>
+            </blockquote>
+            <p><code>"click"</code>或<code>"mouseover"</code></p>
+            <br>
+
+        </section>
+    </div>
+
     <header>jQuery</header>
 
     <div class="markdown">
@@ -224,7 +452,7 @@
             <br>
 
             <blockquote>
-                <p><code>nothing</code> - <code>Please Select</code>
+                <p><code>nothing</code> - <code>"Please Select"</code>
                 </p>
             </blockquote>
             <p>默认显示内容</p>
@@ -268,7 +496,6 @@
             <blockquote>
                 <p><code>required</code> - <code>false</code>
             </blockquote>
-            </p>
             <p>设置为<code>true</code>后, 必须有一个选中项</p>
             <br>
 

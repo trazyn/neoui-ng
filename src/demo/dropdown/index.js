@@ -8,7 +8,7 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
     .controller( "dropdownController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: -60 } );
+            $( document.body ).anchor( { offset: -10 } );
         };
 
         $scope.data = [ {
@@ -78,6 +78,5 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
             required: true,
             multiple: true
         } );
-
     } ] );
 } );

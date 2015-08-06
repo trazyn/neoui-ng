@@ -8,12 +8,13 @@ define( [ "util/ng-args", "ui/dropdown/dropdown" ], function( args ) {
  *
     <s-dropdown
         data="ajax"
+        ng-disabled="isDisabled"
         ng-model="reps"
-        required="true"
-        multiple="true"
+        required="required"
         auto-width="true"
         text-key="full_name"
         value-key="false"
+        multiple="multiple"
         close-on-select="false"
         nothing="Multiple and less one item">
         <p>
@@ -80,7 +81,7 @@ angular.module( "$ui.dropdown", [] )
                 }
             }
 
-            dropdown = $( $element ).dropdown( options );
+            $scope.controller = dropdown = $( $element ).dropdown( options );
 
             /** Get the reference */
             options = dropdown.settings;
