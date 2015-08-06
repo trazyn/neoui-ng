@@ -41,17 +41,9 @@ define( [ "ui/tree/tree-ng" ], function() {
         /** Custom */
         $scope.files = function() {
 
-            var deferred = $.Deferred();
-
-            $.ajax( {
+            return $.ajax( {
                 url: "/src/demo/tree/files.json",
-            } )
-
-            .done( function( data ) {
-                deferred.resolveWith( data );
             } );
-
-            return deferred;
         };
 
         $scope.addBranch = function( tree, parentId ) {

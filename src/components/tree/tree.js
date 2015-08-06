@@ -87,9 +87,13 @@
                 deferred = data();
             }
 
-            $.when( deferred ).done( function() {
+            $.when( deferred ).done( function( result ) {
 
                 var node = $( "<ul>" );
+
+                if ( result instanceof Array ) {
+                    data = result;
+                }
 
                 data = data && (data instanceof Array ? data : this);
 

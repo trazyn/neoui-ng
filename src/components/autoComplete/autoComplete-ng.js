@@ -6,9 +6,31 @@ define( [ "util/ng-args", "ui/autoComplete/autoComplete" ], function( args ) {
 /**
  * example:
  *
-    <s-autoComplete items="items" value-key="value" text-key="text">
-         {{ $name }} - {{ $value }}
-    </s-autoComplete>
+     <s-autocomplete
+         ng-model="reps"
+         ajax="ajax"
+         highlight="true"
+         value-key="full_name"
+         text-key="name"
+         local-match="'*'"
+         show-hint="false"
+         placeholder="Search GitHub Repository">
+         <div class="rep">
+             <p>
+             {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+             </p>
+             <p>
+             <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+             </p>
+             <p>
+             <code>{{ watchers.toLocaleString() }} Watchers</code>
+             <code>{{ forks.toLocaleString() }} Forks</code>
+             <code>{{ language }}</code>
+             <code>Last update: {{ updated_at }}</code>
+             <code class="issue"><i class="icon issue"></i>{{ open_issues_count }}</code>
+             </p>
+         </div>
+     </s-autocomplete>
  * */
 
 angular.module( "$ui.autoComplete", [] )
