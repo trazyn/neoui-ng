@@ -6,31 +6,80 @@ define( [ "util/ng-args", "ui/dropdown/dropdown" ], function( args ) {
 /**
  * example:
  *
+    <s-dropdown
+        data="ajax"
+        ng-model="reps"
+        required="true"
+        multiple="true"
+        auto-width="true"
+        text-key="full_name"
+        value-key="false"
+        close-on-select="false"
+        nothing="Multiple and less one item">
+        <p>
+            {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+        </p>
+        <p>
+            <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+        </p>
+        <p>
+            <code>{{ watchers.toLocaleString() }} Watchers</code>
+            <code>{{ forks.toLocaleString() }} Forks</code>
+            <code>{{ language }}</code>
+            <code>Last update: {{ updated_at }}</code>
+            <code class="issue"><i class="icon issue"></i>{{ open_issues_count }}</code>
+        </p>
+    </s-dropdown>
  * */
 
 angular.module( "$ui.dropdown", [] )
-    .directive( "sDropdown", [ "$rootScope", function( $rootScope ) {
+    .directive( "sDropdown", [ "$rootScope", "$compile", function( $rootScope, $compile ) {
 
-        function link( $scope, $element, $attrs ) {
+        function link( $scope, $element, $attrs, undefined, link ) {
 
             var
             options = args( $scope, $attrs, {
                 "closeOnSelect" : "boolean",
                 "autoWidth"     : "boolean"
             } ),
+            dropdown,
+            transclude,
+            markup,
+            html;
 
-            dropdown;
-
-            options.onSelect = function( item ) {
+            options.onSelect = function( item, settings ) {
 
                 if ( !$rootScope.$$phase ) {
 
-                    $scope.value = item;
+                    $scope.value = dropdown.val();
                     $scope.$apply();
 
                     ($scope.onSelect() || $.noop).apply( this, arguments );
                 }
             };
+
+            options.valueKey = options.valueKey === "false" ? false : options.valueKey;
+
+            transclude = link( $scope );
+
+            if ( transclude.length ) {
+
+                markup = transclude.parent().html().trim();
+                transclude.remove();
+
+                if ( markup ) {
+                    options.formatter = function( item, settings ) {
+
+                        markup;
+
+                        html = $compile( markup )( angular.extend( $scope.$parent.$new(), item ) );
+                        $scope.$parent.$apply();
+                        html = angular.element( "<w>" ).append( html ).html();
+
+                        return html;
+                    };
+                }
+            }
 
             dropdown = $( $element ).dropdown( options );
 
@@ -69,6 +118,7 @@ angular.module( "$ui.dropdown", [] )
             },
 
             restric             : "E",
+            transclude          : true,
             replace             : true,
             template            : "<div class='ui dropdown'>" +
                                     "<i class='icon status'></i>" +

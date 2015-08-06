@@ -55,5 +55,23 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
 			text: "Angola"
 		} ];
 
+		$scope.ajax = function() {
+
+            var deferred = $.Deferred();
+
+            $.ajax( {
+                url: "https://api.github.com/search/repositories?q=" + "an" + "&sort=stars&order=desc"
+            } )
+
+            .done( function( data ) {
+                data = data.items;
+                deferred.resolveWith( data );
+            } )
+
+            .fail( deferred.reject );
+
+            return deferred;
+		};
+
     } ] );
 } );

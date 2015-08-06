@@ -97,7 +97,7 @@
 
                     settings.hash = {};
 
-                    /** Use '[].concat()' get data copy */
+                    /** Use '[].concat()' get data copy, used by text filter */
                     settings.data = ([].concat( data ));
                     renderTree( node, data, settings, true );
                     self.$node.find( settings.selector4content ).html( node.html() );

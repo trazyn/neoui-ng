@@ -20,7 +20,7 @@ define( [ "ui/ripple/ripple" ], function() {
 		this.$node = target;
 		this.settings = settings;
 
-		title = target.find( settings.selector4title );
+		title = target.find( settings.selector4title ).html( settings.nothing );
 		content = target.find( settings.selector4content );
 
 		target
@@ -40,7 +40,7 @@ define( [ "ui/ripple/ripple" ], function() {
 			text = [],
 			lis = content.find( "li.selected" );
 
-			for ( var i = 0; i < lis.length; text.push( lis.eq( i++ ).text() ) );
+			for ( var i = 0; i < lis.length; text.push( settings.data[ lis.eq( i++ ).attr( "data-index" ) ][ settings.textKey ] ) );
 
 			text = text.join( "," ) || settings.nothing;
 
@@ -62,15 +62,51 @@ define( [ "ui/ripple/ripple" ], function() {
 		/** Show the content */
 		.delegate( settings.selector4title, settings.type, function( e ) {
 
-            if ( target.is( "[disabled]" ) ) {
+            var
+            deferred,
+            data = settings.data;
+
+            if ( target.is( "[disabled]" ) || target.hasClass( settings.class4loading ) ) {
                 return;
             }
 
-            if ( !target.hasClass( "open" ) ) {
-                target
-                .addClass( "open" )
-                .focus();
+            if ( data instanceof Array ) {
+
+                if ( !target.hasClass( "open" ) ) {
+                    target
+                    .addClass( "open" )
+                    .focus();
+                }
+                return;
             }
+
+            /** Ajax loading */
+            deferred = (data || $.noop)();
+
+            target.addClass( settings.class4loading );
+
+            $.when( deferred ).done( function( result ) {
+
+                if ( result instanceof Array ) {
+                    data = result;
+                } else if ( this instanceof Array ) {
+                    data = this;
+                } else {
+                    throw new Error( "Invalid data" );
+                }
+
+                settings.data = data;
+                renderList( target.find( settings.selector4content ), settings );
+                target.addClass( "open" );
+            } )
+
+            .fail( function() {
+                target.addClass( settings.class4error );
+            } )
+
+            .always( function() {
+                target.removeClass( settings.class4loading );
+            } );
 		} )
 
 		/** Select an item */
@@ -119,7 +155,7 @@ define( [ "ui/ripple/ripple" ], function() {
 
                 target.trigger( "update.dropdown" );
 
-                settings.onSelect.call( $( this ), item );
+                settings.onSelect.call( item, settings.data[ item.attr( "data-index" ) ], settings );
 
                 if ( settings.closeOnSelect ) {
                     target.trigger( "focusout", "Force close the dropdown~" );
@@ -127,14 +163,27 @@ define( [ "ui/ripple/ripple" ], function() {
             }
 		} );
 
-		render( content, settings );
+		self.render( settings.data );
 	};
 
 	Dropdown.prototype = {
 
+        render: function( data ) {
+
+            var settings = this.settings;
+
+            settings.data = data;
+
+            if ( settings.data instanceof Array ) {
+                renderList( this.$node.find( settings.selector4content ), settings );
+            }
+        },
+
 		val: function( value ) {
 
-			var res = [];
+			var
+			settings = this.settings,
+			res = [];
 
 			if ( value ) {
 
@@ -143,11 +192,11 @@ define( [ "ui/ripple/ripple" ], function() {
 				for ( var i = value.length; --i >= 0; ) {
 
 					var
-					item = this.$node.find( "ul li[item-value='" + value[ i ][ this.settings.valueKey ] + "']" );
+					item = this.$node.find( "ul li[data-value='" + value[ i ][ settings.valueKey ] + "']" );
 
 					if ( item.length ) {
 						item.trigger( "select.dropdown" );
-						res.push( value[ i ][ this.settings.valueKey ] );
+						res.push( value[ i ][ settings.valueKey ] );
 					}
 				}
 				this.$node.trigger( "update.dropdown" );
@@ -155,7 +204,7 @@ define( [ "ui/ripple/ripple" ], function() {
 				this.$node
 					.find( "li.selected" )
 					.each( function() {
-						res.push( this.getAttribute( "item-value" ) );
+						res.push( settings.valueKey ? this.getAttribute( "data-value" ) : settings.data[ this.getAttribute( "data-index" ) ] );
 					} );
 			}
 
@@ -169,7 +218,7 @@ define( [ "ui/ripple/ripple" ], function() {
             data = settings.data.concat( data );
 
 			this.settings.data = data;
-			render( this.$node.find( settings.selector4content ), this.settings );
+			renderList( this.$node.find( settings.selector4content ), this.settings );
 			return this;
 		},
 
@@ -206,20 +255,23 @@ define( [ "ui/ripple/ripple" ], function() {
 		}
 	};
 
-	function render( content, settings ) {
+	function renderList( content, settings ) {
 
 		var
 		lis = function() {
 
 			var res = "";
-			settings.clicks = {};
 
 			for ( var data = settings.data, i = 0, length = settings.data.length;
 					i < length; ++i ) {
 
-				var li = settings.formatter( data[ i ], settings );
+                var
+                item = data[ i ],
+				li = "<li data-value='" + item[ settings.valueKey ] + "' data-index='" + i + "' title='" + item[ settings.textKey ] + "'>" +
+                        settings.formatter( item, settings ) +
+                     "</li>";
+
 				res += $( "<p>" ).append( $( li ).attr( "data-index", i ) ).html();
-				settings.clicks[ i ] = data[ i ][ "click" ];
 			}
 			return res;
 		}();
@@ -256,6 +308,9 @@ define( [ "ui/ripple/ripple" ], function() {
 		selector4title 	: ".title:first",
 		selector4content: ".content:first",
 
+		class4loading   : "sync",
+		class4error     : "error",
+
 		type 	        : "click",
 
 		multiple 	    : false,
@@ -271,7 +326,7 @@ define( [ "ui/ripple/ripple" ], function() {
 		onSelect        : undefined,
 
 		formatter: function( item, settings ) {
-			return "<li item-value='" + item[ settings.valueKey ] + "' title='" + item[settings.textKey] + "'><span>" + (item[ settings.textKey ] || item[ settings.valueKey ]) + "</span></li>";
+			return "<span>" + (item[ settings.textKey ] || item[ settings.valueKey ]) + "</span>";
 		}
 	};
 } );

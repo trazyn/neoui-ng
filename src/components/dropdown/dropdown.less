@@ -7,7 +7,7 @@
     width: 240px;
     border-bottom: 3px solid @lightGray2;
     transition: .2s;
-    &:hover {
+    &:hover, &.sync {
         border-bottom: 3px solid @mint;
     }
 
@@ -49,6 +49,20 @@
         &:after {
             content: "\e68a";
         }
+    }
+
+    &.sync > i.icon:after {
+        content: "\e615";
+        color: @mint;
+    }
+
+    &.error {
+        > i.icon:after {
+            content: "\e61e";
+            color: @error;
+        }
+
+        border-bottom: 3px solid @error;
     }
 
     .content {

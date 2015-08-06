@@ -4,8 +4,31 @@
 
 #dropdown {
     #markdown();
-    .wrap {
+    .simple .wrap {
         display: inline-block;
         margin: 20px;
+    }
+
+    .advance .ui.dropdown {
+        width: 100%;
+
+        .content {
+            padding: 0px;
+        }
+
+        ul li {
+            line-height: 28px;
+            height: auto;
+            padding: 10px 0;
+
+            &:hover {
+                background: @lightGray2;
+            }
+
+            &.selected {
+                background: @coral;
+                color: white;
+            }
+        }
     }
 }

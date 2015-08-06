@@ -19,7 +19,7 @@
 
     <header data-anchor="simple">Simple</header>
 
-    <section>
+    <section class="simple">
 
         <div class="wrap">
             <s-dropdown data="data"></s-dropdown>
@@ -39,28 +39,43 @@
 
     <header data-anchor="advance">Advance</header>
 
-    <section>
+    <section class="advance">
+
+        <p>
+        <code>
+            <label>Yours selected:</label>
+            {{ reps || [] }}
+        </code>
+        </p>
+        <br>
 
         <div class="wrap">
             <s-dropdown
-                data="data"
+                data="ajax"
+                ng-model="reps"
                 required="true"
                 multiple="true"
+                auto-width="true"
+                text-key="full_name"
+                value-key="false"
                 close-on-select="false"
                 nothing="Multiple and less one item">
+                <p>
+                    {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+                </p>
+                <p>
+                    <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+                </p>
+                <p>
+                    <code>{{ watchers.toLocaleString() }} Watchers</code>
+                    <code>{{ forks.toLocaleString() }} Forks</code>
+                    <code>{{ language }}</code>
+                    <code>Last update: {{ updated_at }}</code>
+                    <code class="issue"><i class="icon issue"></i>{{ open_issues_count }}</code>
+                </p>
             </s-dropdown>
         </div>
 
-        <div class="wrap">
-            <div class="ui dropdown" name="format">
-                <div class="title" tabindex="-1">
-                    <p></p>
-                    <i class="icon arrow down"></i>
-                </div>
-                <div class="content">
-                </div>
-            </div>
-        </div>
     </section>
 
     <br>
