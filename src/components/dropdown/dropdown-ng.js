@@ -59,7 +59,6 @@ angular.module( "$ui.dropdown", [] )
             };
 
             options.valueKey = options.valueKey === "false" ? false : options.valueKey;
-
             transclude = link( $scope );
 
             if ( transclude.length ) {
@@ -83,6 +82,9 @@ angular.module( "$ui.dropdown", [] )
 
             dropdown = $( $element ).dropdown( options );
 
+            /** Get the reference */
+            options = dropdown.settings;
+
             $scope.$watch( "value", function( value ) {
 
                 if ( !$rootScope.$$phase ) {
@@ -98,6 +100,10 @@ angular.module( "$ui.dropdown", [] )
                 options.required = [ "true", 1 ].indexOf( value ) > -1;
             } );
 
+            $scope.$watch( "disabled", function( value ) {
+                value ? dropdown.disabled() : dropdown.enabled();
+            } );
+
             dropdown.val( $scope.value );
         }
 
@@ -109,10 +115,10 @@ angular.module( "$ui.dropdown", [] )
                 textKey         : "@",
                 valueKey        : "@",
                 autoWidth       : "@",
-                closeOnSelect   : "@",
                 onSelect        : "&",
                 type            : "@",
                 nothing         : "@",
+                closeOnSelect   : "@",
                 multiple        : "=",
                 required        : "="
             },

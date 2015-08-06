@@ -101,7 +101,7 @@ define( [ "ui/ripple/ripple" ], function() {
             } )
 
             .fail( function() {
-                target.addClass( settings.class4error );
+                target.addClass( "error" );
             } )
 
             .always( function() {
@@ -309,7 +309,6 @@ define( [ "ui/ripple/ripple" ], function() {
 		selector4content: ".content:first",
 
 		class4loading   : "sync",
-		class4error     : "error",
 
 		type 	        : "click",
 
