@@ -84,14 +84,14 @@ define( [ "util/dateutil" ], function() {
 
                     html = calc( new Date( current.join( "/" ) ), defaultDate, settings );
 
-                    if ( step instanceof Date ) {
+                    if ( step instanceof Date || steps[0] === void 0 ) {
                         return container.html( html ).css( "height", "auto" );
                     }
 
                     inAnimate = true;
                     animation = step > 0 ? next : prev;
                     animation.html( html );
-                    container.animate( { "height": animation.height() }, 100 );
+                    container.animate( { "height": animation.height() }, 200 );
                     animation.animate( { "left": "1%" }, 200, function() {
                         container.html( html );
                         animation.css( "left", step > 0 ? "100%" : "-100%" );

@@ -22,7 +22,36 @@
         }
 
         &.double {
-            width: 690px;
+            width: 540px;
+
+            .dates, .days {
+                width: 266px;
+            }
+
+            .header {
+                > div {
+                    height: 38px;
+                    line-height: 38px;
+                    width: 38px;
+                }
+            }
+
+            .day {
+                width: 38px;
+                height: 38px;
+                line-height: 38px;
+                border-radius: 38px;
+
+                &:before {
+                    width: 38px;
+                    height: 38px;
+                }
+
+                &:after {
+                    bottom: 8px;
+                    right: 8px;
+                }
+            }
         }
     }
 
@@ -108,6 +137,7 @@
     .content {
         position: relative;
         background-color: #fff;
+        text-align: center;
     }
 
     .days {
