@@ -26,7 +26,7 @@
     }
 
     > .title {
-
+        transition: .2s;
         position: relative;
         display: block;
         height: 32px;
@@ -44,6 +44,7 @@
     }
 
     > i.icon {
+        transition: .2s;
         position: absolute;
         top: 0px;
         right: 5px;
@@ -117,6 +118,7 @@
     &.open {
         > .title, > i.icon {
             opacity: 0;
+            transform: translateY(10px);
         }
 
         .content {

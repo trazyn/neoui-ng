@@ -98,7 +98,7 @@ angular.module( "$ui.dropdown", [] )
             } );
 
             $scope.$watch( "required", function( value ) {
-                options.required = [ "true", 1 ].indexOf( value ) > -1;
+                options.required = !!value;
             } );
 
             $scope.$watch( "disabled", function( value ) {
