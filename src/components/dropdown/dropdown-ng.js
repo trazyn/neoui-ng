@@ -81,7 +81,7 @@ angular.module( "$ui.dropdown", [] )
                 }
             }
 
-            $scope.controller = dropdown = $( $element ).dropdown( options );
+            dropdown = $( $element ).dropdown( options );
 
             /** Get the reference */
             options = dropdown.settings;
@@ -135,5 +135,4 @@ angular.module( "$ui.dropdown", [] )
             link                : link
         };
     } ] );
-
 } );
