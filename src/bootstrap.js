@@ -1,12 +1,12 @@
 
 require.config( {
 
-	baseUrl: "/src",
+	baseUrl: "src",
 
 	paths: {
-		ui: "/src/components",
-		util: "/src/util",
-		modules: "/src/modules"
+		ui: "../src/components",
+		util: "../src/util",
+		modules: "../src/modules"
 	}
 } );
 
@@ -52,55 +52,55 @@ require( [
 
 		$routeProvider
 		    .when( "/home", {
-		        templateUrl: "/src/demo/home/index.html"
+		        templateUrl: "src/demo/home/index.html"
 		    } )
 			.when( "/color", {
-				templateUrl: "/src/demo/color/index.html"
+				templateUrl: "src/demo/color/index.html"
 			} )
 			.when( "/getstarted", {
-				templateUrl: "/src/demo/getstarted/index.html"
+				templateUrl: "src/demo/getstarted/index.html"
 			} )
 			.when( "/tooltip", {
-				templateUrl: "/src/demo/tooltip/index.html"
+				templateUrl: "src/demo/tooltip/index.html"
 			} )
 			.when( "/modal", {
-				templateUrl: "/src/demo/modal/index.html"
+				templateUrl: "src/demo/modal/index.html"
 			} )
 		    .when( "/tab", {
-		        templateUrl: "/src/demo/tab/index.html"
+		        templateUrl: "src/demo/tab/index.html"
 		    } )
 		    .when( "/message", {
-		        templateUrl: "/src/demo/message/index.html"
+		        templateUrl: "src/demo/message/index.html"
 		    } )
 		    .when( "/autoComplete", {
-		        templateUrl: "/src/demo/autoComplete/index.html"
+		        templateUrl: "src/demo/autoComplete/index.html"
 		    } )
 		    .when( "/validation", {
-		        templateUrl: "/src/demo/validation/index.html"
+		        templateUrl: "src/demo/validation/index.html"
 		    } )
 		    .when( "/toast", {
-		        templateUrl: "/src/demo/toast/index.html"
+		        templateUrl: "src/demo/toast/index.html"
 		    } )
 		    .when( "/tree", {
-		        templateUrl: "/src/demo/tree/index.html"
+		        templateUrl: "src/demo/tree/index.html"
 		    } )
 		    .when( "/sidenav", {
-		        templateUrl: "/src/demo/sidenav/index.html"
+		        templateUrl: "src/demo/sidenav/index.html"
 		    } )
 		    .when( "/dateutil", {
-		        templateUrl: "/src/demo/dateutil/index.html"
+		        templateUrl: "src/demo/dateutil/index.html"
 		    } )
 		    .when( "/editor", {
-		        templateUrl: "/src/demo/editor/index.html"
+		        templateUrl: "src/demo/editor/index.html"
 		    } )
 		    .when( "/calendar", {
-		        templateUrl: "/src/demo/calendar/index.html"
+		        templateUrl: "src/demo/calendar/index.html"
 		    } )
 		    .when( "/progress", {
-		        templateUrl: "/src/demo/progress/index.html"
+		        templateUrl: "src/demo/progress/index.html"
 		    } )
 		    .when( "/dropdown", {
-		        templateUrl: "/src/demo/dropdown/index.html"
+		        templateUrl: "src/demo/dropdown/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

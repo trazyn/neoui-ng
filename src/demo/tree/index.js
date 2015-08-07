@@ -20,7 +20,7 @@ define( [ "ui/tree/tree-ng" ], function() {
                 var deferred = $.Deferred();
 
                 $.ajax( {
-                    url: "/src/demo/tree/tree.json",
+                    url: "src/demo/tree/tree.json",
                     dataType: "json"
                 } )
 
@@ -42,7 +42,7 @@ define( [ "ui/tree/tree-ng" ], function() {
         $scope.files = function() {
 
             return $.ajax( {
-                url: "/src/demo/tree/files.json",
+                url: "src/demo/tree/files.json",
             } );
         };
 

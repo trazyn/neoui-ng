@@ -18,23 +18,23 @@ define( [ "ui/tab/tab-ng" ], function() {
             header: "One",
             index: "1",
             disabled: true,
-            content: $sce.trustAsHtml( "<img src='/images/lorempixel-1.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+            content: $sce.trustAsHtml( "<img src='images/lorempixel-1.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
         }, {
             header: "Two",
             index: "2",
-            content: $sce.trustAsHtml( "<img src='/images/lorempixel-2.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+            content: $sce.trustAsHtml( "<img src='images/lorempixel-2.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
         }, {
             header: "Three",
             index: "3",
-            content: $sce.trustAsHtml( "<img src='/images/lorempixel.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+            content: $sce.trustAsHtml( "<img src='images/lorempixel.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
         }, {
             header: "Ajax - 1",
             index: "4",
-            page: "/src/demo/tab/tab4.html"
+            page: "src/demo/tab/tab4.html"
         }, {
             header: "Ajax - 2",
             index: "5",
-            page: "/src/demo/tab/error.html"
+            page: "src/demo/tab/error.html"
         } ];
 
         last = $scope.tabs.length;

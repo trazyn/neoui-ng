@@ -14,7 +14,7 @@ define( [ "ui/modal/modal-ng" ], function() {
 			$modal.open( {
 				controller: "modalController",
 				animate: animate,
-				templateUrl: "/src/demo/modal/page.html",
+				templateUrl: "src/demo/modal/page.html",
 				title: "Instagram Handbook for Brands",
 				class4modal: "demo"
 			} );
