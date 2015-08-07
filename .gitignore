@@ -1,6 +1,10 @@
 .DS_Store
-dist
 test
 nohup.out
 node_modules
 bower_components
+.jshintrc
+.editorconfig
+license.md
+README.md
+
