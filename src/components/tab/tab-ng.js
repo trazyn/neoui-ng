@@ -22,7 +22,9 @@ angular.module( "$ui.tab", [] )
             options = args( $scope, $attrs, { "ripple": "boolean", "lavalamp": "boolean" } ),
             instance = $( $element ).tab( angular.extend( options, {
 
-                onSelect: function( tab, settings ) {
+                ripple      : { duration: 1300 },
+
+                onSelect    : function( tab, settings ) {
 
                     var self = this;
 

@@ -76,8 +76,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
         if ( settings.ripple ) {
             this.$navs.each( function() {
-
-                $( this ).addClass( "ui ripple" ).ripple();
+                $( this ).addClass( "ui ripple" ).ripple( settings.ripple );
             } );
         }
 
@@ -297,7 +296,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					navs = this.$navs = navs.add( nav );
 
                     /** Add ink ripple effect */
-					settings.ripple && nav.ripple();
+					settings.ripple && nav.ripple( settings.ripple );
 
                     /** Set the default selected */
 					if ( settings.selected == item.index ) {
@@ -425,7 +424,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 		if ( !instance ) {
 
-			instance = new Tab( this, $.extend( {}, $.fn.tab.defaults, options || {} ) );
+			instance = new Tab( this, $.extend( {}, true, $.fn.tab.defaults, options || {} ) );
 			this.data( namespace, instance );
 		}
 		return instance;
@@ -440,10 +439,10 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 		selected        : 0,
 
-		ripple          : true,
+		ripple          : {
+		    duration    : 300
+		},
 		vertical 	    : false,
-		lavalamp 	    : true,
-
-		duration 	    : 300
+		lavalamp 	    : true
 	};
 } );

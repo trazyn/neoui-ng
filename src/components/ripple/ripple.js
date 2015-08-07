@@ -11,7 +11,7 @@
 		self = this,
 
 		ripple = target.find( "span.ripple" ),
-		max = Math.max( target.height(), target.width() );
+		max = Math.max( target.innerHeight(), target.innerWidth() );
 
 		this.$node = target.css( "position", "relative" );
 		this.settings = settings;
@@ -25,15 +25,23 @@
 				.appendTo( target );
 		}
 
-		if ( settings.type ) {
+		if ( settings.autoBind ) {
 
-		    target.on( settings.type, function( e ) {
-
+		    target.on( "click", function( e ) {
                 !self.$node.is( "[disabled]" ) && self.show( e );
 		    } );
 		}
 
-		this.$icon = ripple;
+		settings.duration = settings.duration + "ms";
+
+		ripple.css( {
+
+		    "-webkit-animation-duration": settings.duration,
+		    "-moz-animation-duration": settings.duration,
+		    "-ms-animation-duration": settings.duration,
+		    "-o-animation-duration": settings.duration,
+		    "animation-duration": settings.duration,
+		} );
 	};
 
 	Ripple.prototype = {
@@ -65,7 +73,7 @@
 				left: X - rect.left - ripple[0].offsetWidth / 2 - doc.scrollLeft(),
 			};
 
-			settings.speed && self.disabled().$node.addClass( settings.class4loading );
+			settings.speed && self.disabled().$node.addClass( settings.class4progress );
 
 			(function f( self, ripple, speed, position ) {
 
@@ -99,21 +107,25 @@
 			return this;
 		},
 
-		hide: function( success ) {
+		hide: function( status ) {
 
-			var self = this, $node = this.$node, settings = this.settings, clazz;
+			var
+			self = this,
+			$node = this.$node,
+			settings = this.settings,
+			clazz;
 
 			settings.speed = 0;
 
 			clearTimeout( self.timer );
 
-			$node.removeClass( settings.class4loading );
-			clazz = (success === true || undefined === success) ? settings.class4success : settings.class4error;
+			$node.removeClass( settings.class4progress );
+			clazz = (status === true || undefined === status) ? settings.class4done : settings.class4fail;
 			$node.addClass( clazz ) ;
 			setTimeout( function() {
 				self.enabled();
 				$node.removeClass( clazz );
-			}, settings.stateDelay );
+			}, settings.delay );
 		}
 	};
 
@@ -134,14 +146,15 @@
 		speed 		    : 0,
 		random 		    : false,
 
-		delay 		    : 300,
+		delay 		    : 200,
+		duration        : 300,
 
 		color           : false,
-		type            : "click",
+        autoBind        : true,
 
-		class4loading 	: "ripple-loading",
-		class4success 	: "ripple-success",
-		class4error 	: "ripple-error"
+		class4progress 	: "ripple-progress",
+		class4done 	    : "ripple-done",
+		class4fail 	    : "ripple-fail"
 	};
 
 })( window.jQuery );

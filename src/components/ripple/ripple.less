@@ -10,9 +10,11 @@
 		border-radius: 100%;
 		transform: scale(0);
 		pointer-events: none;
+        animation-duration: .3s;
 
 		&.show {
-			animation: ripple-icon .3s ease-out;
+			animation-name: ripple-icon;
+			animation-timing-function: ease-out;
 		}
 	}
 }
