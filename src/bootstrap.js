@@ -23,6 +23,7 @@ require( [
         "demo/sidenav/index",
         "demo/dateutil/index",
         "demo/tree/index",
+        "demo/rate/index",
         "demo/progress/index",
         "demo/calendar/index",
         "demo/dropdown/index",
@@ -44,6 +45,7 @@ require( [
 	        "demo.sidenav",
 	        "demo.dateutil",
 	        "demo.tree",
+	        "demo.rate",
 	        "demo.dropdown",
 	        "demo.progress",
 	        "demo.calendar" ] )
@@ -95,6 +97,9 @@ require( [
 		    } )
 		    .when( "/calendar", {
 		        templateUrl: "src/demo/calendar/index.html"
+		    } )
+		    .when( "/rate", {
+		        templateUrl: "src/demo/rate/index.html"
 		    } )
 		    .when( "/progress", {
 		        templateUrl: "src/demo/progress/index.html"
