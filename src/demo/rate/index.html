@@ -23,47 +23,89 @@
 
 <section id="rate" ng-controller="rateController">
 
-    <header data-anchor="example">Example</header>
+    <header data-anchor="simple">Simple</header>
 
     <section>
 
         <div class="wrap">
-            <div class="ui rate">
+
+            <div class="box">
+
                 <span>
-                    <i></i>
+                    <s-rate
+                        ng-model="star"
+                        ng-disabled="false">
+                    </s-rate>
                 </span>
+
+                <br>
+
                 <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
+                    <s-rate class="heart"
+                        ng-model="heart">
+                    </s-rate>
                 </span>
             </div>
+
         </div>
 
         <div class="wrap">
-            <div class="ui rate heart">
-                <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
-                </span>
-                <span>
-                    <i></i>
-                </span>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+
+    <header data-anchor="simple">Suicide Squad</header>
+
+    <section>
+        <div class="movie">
+            <div class="cover">
+                <div class="skew">
+                    <img src="images/574e7726de7c25a6ec1b72e026fa2eab.jpg">
+
+                    <div class="meta">
+                        <p class="subhead">
+                            Suicide Squad
+                        </p>
+                        <p>
+                            <span>PG-13</span>
+                            <span>9.0</span>
+                        </p>
+                        <s-rate ng-model="4.5"></s-rate>
+                        <span>
+                            <i class="icon favorite"></i>
+                            1,475,098 likes
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="info">
+                <div class="tags">
+                    <div class="min">
+                        <img src="images/MV5BMjMzMTM4MzM1OV5BMl5BanBnXkFtZTgwODAwMzE2NTE@._V1_SY317_CR91,0,214,317_AL_.jpg">
+                        <i class="icon play"></i>
+                    </div>
+                </div>
+
+                <div class="desc">
+                    <p>A secret government agency recruits imprisoned supervillains to execute dangerous black ops missions in exchange for clemency.</p>
+                    <p class="director"><b>Director:</b> <a href="">David Ayer</a></p>
+                    <p class="writers"><b>Writers:</b> <a href="">David Ayer</a>, <a href="">John Ostrander (comic book)</a></p>
+                    <p class="stars"><b>Stars:</b> <a href="">Cara Delevingne</a>, <a href="">Margot Robbie</a>, <a href="">Scott Eastwood</a> | <a href="">See full cast and crew</a>
+
+                    <div class="action">
+                        <button class="ui button mint transition">
+                            <i class="icon add"></i>
+                            Watchlist
+                        </button>
+
+                        <button class="ui button coral transition">
+                            Watch Trailer
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

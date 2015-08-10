@@ -22,7 +22,10 @@ define( function() {
 
 			if ( !enabled ) { return; }
 
-            stars.removeClass( settings.class4selected );
+            stars
+            .removeClass( settings.class4selected )
+            .find( "i[style]" )
+            .removeAttr( "style" );
 
             star = $( star );
             star.prevAll().add( star ).addClass( settings.class4highlight );

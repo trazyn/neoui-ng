@@ -3,19 +3,20 @@
 
 .ui.rate {
     display: inline-block;
-    height: 48px;
-    line-height: 48px;
+    height: 32px;
+    line-height: 32px;
     box-sizing: content-box;
     >span {
 
-        width: 48px;
-        height: 48px;
-        line-height: 48px;
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        font-size: 18px;
         display: inline-block;
         position: relative;
-        font-size: 48px;
-        color: @lightGray;
+        color: rgba(0, 135, 211, .4);
         cursor: pointer;
+        margin-left: 10px;
 
         >i:before, &:after {
             transition: .2s;
@@ -41,14 +42,14 @@
         }
 
         &:hover:after, &.highlight {
-            color: @sunflower;
+            color: rgba(0, 135, 211, .6);
         }
 
         &.selected {
             >i {
                 width: 100%;
                 &:before {
-                    color: @grape;
+                    color: rgb(0, 135, 211);
                 }
             }
         }
@@ -61,15 +62,17 @@
                 content: "\e649";
             }
 
+            color: rgba(233, 54, 40, .4);
+
             &:hover:after, &.highlight {
-                color: @grape;
+                color: rgba(233, 54, 40, .6);
             }
 
             &.selected {
                 >i {
                     width: 100%;
                     &:before {
-                        color: @error;
+                        color: rgb(233, 54, 40);
                     }
                 }
             }
