@@ -192,7 +192,8 @@ define( [ "ui/ripple/ripple" ], function() {
 				for ( var i = value.length; --i >= 0; ) {
 
 					var
-					item = this.$node.find( "ul li[data-value='" + value[ i ][ settings.valueKey ] + "']" );
+					index = settings.data.indexOf( value[i] ),
+					item = this.$node.find( "ul li[data-index='" + index + "']" );
 
 					if ( item.length ) {
 						item.trigger( "select.dropdown" );

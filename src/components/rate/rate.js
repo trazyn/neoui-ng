@@ -69,6 +69,10 @@ define( function() {
 
 		this.$node = target;
 		this.settings = settings;
+
+		if ( settings.defaultValue ) {
+		    self.val( settings.defaultValue );
+		}
 	};
 
 	Rate.prototype = {
@@ -129,7 +133,8 @@ define( function() {
 	    onClick         : $.noop,
 	    selector4star   : ">span",
 	    class4highlight : "highlight",
-	    class4selected  : "selected"
+	    class4selected  : "selected",
+	    defaultValue    : 0
 	};
 } );
 

@@ -11,6 +11,8 @@ define( [ "ui/rate/rate" ], function() {
             $( document.body ).anchor( { offset: 0 } );
         };
 
-        $( ".ui.rate" ).rate();
+        $( ".ui.rate" ).each( function() {
+            $( this ).rate();
+        } );
     } ] );
 } );
