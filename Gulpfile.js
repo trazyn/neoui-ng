@@ -87,7 +87,7 @@ bs, gulp = require( "gulp" )
 
 					fs.stat( file, function( err, stat ) {
 
-                        if ( !/(node_modules|\.git|\.DS_Store|dist)/i.test( file ) ) {
+                        if ( !/(node_modules|\.git|\.svn|\.DS_Store|dist)/i.test( file ) ) {
 
                             result.push( {
                                 id: file,

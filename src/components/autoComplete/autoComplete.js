@@ -406,6 +406,10 @@
 				values = fg.value ? fg.value.split( settings.delimiter ) : 0,
 				valid = [];
 
+				if ( self.list.is( ":hover" ) ) {
+				    return;
+				}
+
 				e.preventDefault();
 				e.stopPropagation();
 
@@ -521,9 +525,9 @@
 		  deferred,
 
 		  regexs = {
-			"^": "^${text}",
-			"$": "${text}$",
-			"*": "${text}"
+              "^": "^${text}",
+              "$": "${text}$",
+              "*": "${text}"
 		  },
 
 		  ajax = settings.ajax,
@@ -605,7 +609,6 @@
 			var settings = this.settings;
 
 			clearTimeout( settings.timer );
-
 			settings.ajax && settings.ajax.request
 				&& settings.ajax.request.abort();
 			return this;

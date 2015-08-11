@@ -57,7 +57,6 @@
 				current = item.anchor.addClass( "active" );
 
 				args === undefined && $( target ).animate( {
-
 					"scrollTop": item.offsetTop
 				}, 400 );
 
@@ -82,9 +81,9 @@
 			var
 			/** Shortcuts */
 			mappings = e.data.mappings,
-		      	offset = e.data.offset,
-		      	containerOffsetTop = document.body.scrollTop,
-		      	sort = [];
+            offset = e.data.offset,
+            containerOffsetTop = document.body.scrollTop,
+            sort = [];
 
 			for ( var i in mappings ) {
 
