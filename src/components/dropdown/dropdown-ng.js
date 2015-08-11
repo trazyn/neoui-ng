@@ -87,11 +87,18 @@ angular.module( "$ui.dropdown", [] )
             options = dropdown.settings;
 
             $scope.$watch( "value", function( value ) {
+<<<<<<< HEAD
                 dropdown.val( value );
             } );
 
             $scope.$watch( "data", function( data ) {
                 dropdown.render( data );
+=======
+
+                if ( !$rootScope.$$phase ) {
+                    dropdown.val( value );
+                }
+>>>>>>> 8eab719e1867b82dece1983290c352a07521a484
             } );
 
             $scope.$watch( "multiple", function( value ) {

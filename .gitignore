@@ -3,3 +3,11 @@ test
 nohup.out
 node_modules
 bower_components
+<<<<<<< HEAD
+=======
+.jshintrc
+.editorconfig
+license.md
+README.md
+
+>>>>>>> 8eab719e1867b82dece1983290c352a07521a484

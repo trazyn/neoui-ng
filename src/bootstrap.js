@@ -23,7 +23,10 @@ require( [
         "demo/sidenav/index",
         "demo/dateutil/index",
         "demo/tree/index",
+<<<<<<< HEAD
         "demo/rate/index",
+=======
+>>>>>>> 8eab719e1867b82dece1983290c352a07521a484
         "demo/progress/index",
         "demo/calendar/index",
         "demo/dropdown/index",
@@ -45,7 +48,10 @@ require( [
 	        "demo.sidenav",
 	        "demo.dateutil",
 	        "demo.tree",
+<<<<<<< HEAD
 	        "demo.rate",
+=======
+>>>>>>> 8eab719e1867b82dece1983290c352a07521a484
 	        "demo.dropdown",
 	        "demo.progress",
 	        "demo.calendar" ] )
@@ -98,9 +104,12 @@ require( [
 		    .when( "/calendar", {
 		        templateUrl: "src/demo/calendar/index.html"
 		    } )
+<<<<<<< HEAD
 		    .when( "/rate", {
 		        templateUrl: "src/demo/rate/index.html"
 		    } )
+=======
+>>>>>>> 8eab719e1867b82dece1983290c352a07521a484
 		    .when( "/progress", {
 		        templateUrl: "src/demo/progress/index.html"
 		    } )
