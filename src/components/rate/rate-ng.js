@@ -19,12 +19,12 @@ angular.module( "$ui.rate", [] )
         function link( $scope, $element, $attrs ) {
 
             var rate = $( $element ).rate( {
-                onClick     : function( value ) {
+                onSelect    : function( value ) {
                     $scope.value = value;
                     $scope.$apply();
 
-                    if ( "function" === typeof $scope.onClick ) {
-                        $scope.onClick.apply( this, arguments );
+                    if ( "function" === typeof $scope.onSelect ) {
+                        $scope.onSelect.apply( this, arguments );
                     }
                 }
             } );
@@ -43,7 +43,7 @@ angular.module( "$ui.rate", [] )
             scope           : {
                 value       : "=ngModel",
                 disabled    : "=ngDisabled",
-                onClick     : "&"
+                onSelect    : "&"
             },
 
             restric         : "E",

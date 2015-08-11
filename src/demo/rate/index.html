@@ -21,9 +21,9 @@
     </li>
 </ul>
 
-<section id="rate" ng-controller="rateController">
+<section id="rate" ng-controller="rateController" ng-init="init()">
 
-    <header data-anchor="simple">Simple</header>
+    <header data-anchor="example">Example</header>
 
     <section>
 
@@ -32,34 +32,18 @@
             <div class="box">
 
                 <span>
-                    <s-rate
-                        ng-model="star"
-                        ng-disabled="false">
-                    </s-rate>
+                    <s-rate ng-model="star" ng-init="star = 4.6"></s-rate>
                 </span>
 
                 <br>
 
                 <span>
-                    <s-rate class="heart"
-                        ng-model="heart">
-                    </s-rate>
+                    <s-rate class="heart" ng-model="heart"></s-rate>
                 </span>
             </div>
 
         </div>
 
-        <div class="wrap">
-        </div>
-    </section>
-
-    <br>
-    <br>
-
-
-    <header data-anchor="simple">Suicide Squad</header>
-
-    <section>
         <div class="movie">
             <div class="cover">
                 <div class="skew">
@@ -73,7 +57,7 @@
                             <span>PG-13</span>
                             <span>9.0</span>
                         </p>
-                        <s-rate ng-model="4.5"></s-rate>
+                        <s-rate ng-model="rate" ng-init="rate = 4.5"></s-rate>
                         <span>
                             <i class="icon favorite"></i>
                             1,475,098 likes
@@ -82,7 +66,7 @@
                 </div>
             </div>
             <div class="info">
-                <div class="tags">
+                <div class="preview">
                     <div class="min">
                         <img src="images/MV5BMjMzMTM4MzM1OV5BMl5BanBnXkFtZTgwODAwMzE2NTE@._V1_SY317_CR91,0,214,317_AL_.jpg">
                         <i class="icon play"></i>
@@ -121,13 +105,19 @@
                 <span>Markup</span>
             </div>
 
-            <xmp>
-            <s-tab-set selected="selected" on-select="onSelected">
-                <s-tab ng-repeat="tab in tabs" index="tab.index" header="\{\{ tab.title \}\}">
-                <div ng-bind-html="\{\{ tab.content \}\}"></div>
-                </s-tab>
-            </ng-tab-set>
-            </xmp>
+            <div class="wrap">
+                <label><i class="icon star"></i></label>
+                <xmp>
+                <s-rate ng-model="star" ng-init="star = 4.6"></s-rate>
+                </xmp>
+            </div>
+
+            <div class="wrap">
+                <label><i class="icon favorite"></i></label>
+                <xmp>
+                    <s-rate class="heart" ng-model="heart"></s-rate>
+                </xmp>
+            </div>
         </section>
 
         <section>
@@ -137,94 +127,37 @@
 
             <xmp>
             angular
-            .module( "app", [ "$ui.tab" ] )
-            .controller( "tabController", [ "$scope", function( $scope ) {
-
-                /** Set the default selected */
-                $scope.selected = "1";
-
-                $scope.tabs = [ {
-                    header: "Tab 1",
-                    content: "Content 1",
-                    index: "1",
-                    disabled: true
-                }, {
-
-                    header: "Tab 2",
-                    content: "Content 2",
-                    index: "2"
-                } ];
-
-                $scope.onSelect = function( scope ) {
-                    console.log( "Current selected: " + scope.index );
-                };
+            .module( "demo.rate", [ "$ui.rate" ] )
+            .controller( "rateController", [ "$scope", function( $scope ) {
+                $scope.heart = 2.3;
             } ] );
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sTabSet">
-                <span>Directive * s-tab-set</span>
+            <div class="ui ribbon" data-anchor="sRate">
+                <span>Directive * s-rate</span>
             </div>
 
             <blockquote>
-                <p><code>=selected</code> - <code>"0"</code></p>
+                <p><code>=ngModel</code> - <code>0</code></p>
             </blockquote>
-            <p>默认选中项</p>
+            <p>评分值, <code>0 - 5</code></p>
             <br>
 
             <blockquote>
-            <p><code>@ripple</code> - <code>true</code></p>
+            <p><code>=ng-disabled</code> - <code>false</code></p>
             </blockquote>
-            <p>If present, disable ink ripple effects</p>
-            <br>
-
-            <blockquote>
-                <p><code>@lavalamp</code> - <code>true</code>
-                </p>
-            </blockquote>
-            <p>设置<code>true</code>后取消滑动效果</p>
+            <p>是否禁用</p>
             <br>
 
             <blockquote>
                 <p><code>&on-select</code> - <code>null</code>
                 </p>
             </blockquote>
-            <p>选中后执行回调</p>
+            <p>选中后回调</p>
             <br>
-        </section>
-
-        <section>
-            <div class="ui ribbon" data-anchor="sTab">
-                <span>Directive * s-tab</span>
-            </div>
-
-            <blockquote>
-                <p><code>=ng-disable</code> - <code>false</code></p>
-            </blockquote>
-            <p>禁用页签</p>
-            <br>
-
-            <blockquote>
-                <p><code>@index</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>页签索引, 不可为空或重复</p>
-            <br>
-
-            <blockquote>
-                <p><code>@header</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>页签标题</p>
-            <br/>
-
-            <blockquote>
-            <p><code>@template-url</code> - <code>null</code></p>
-            </blockquote>
-            <p>通过指定URL加载内容</p>
-
         </section>
     </div>
 
@@ -240,23 +173,10 @@
             </div>
 
             <xmp>
-            <div class="ui tab" style="min-height: 300px;">
-                <div class="nav">
-                    <div class="item selected" data-index="github">Github</div>
-                    <div class="item selected" data-index="dribbble">Dribbble</div>
-                    <div class="item selected" data-index="twitter">Twitter</div>
-                </div>
-
-                <div class="content">
-                    <div data-index="github"></div>
-                    <div data-index="dribbble"></div>
-                    <div data-index="twitter"></div>
-                </div>
+            <div class="ui rate">
+                <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span>
             </div>
             </xmp>
-            <blockquote>
-                <p><code>Ajax</code>页面的加载, 添加<code>data-page="url"</code>属性</p>
-            </blockquote>
         </section>
 
         <section>
@@ -264,7 +184,7 @@
                 <span>Constructor</span>
             </div>
 
-            <p><code>$( selector ).tab( options )</code>
+            <p><code>$( selector ).rate( options )</code>
             </p>
 
             <blockquote>
@@ -274,7 +194,7 @@
             </blockquote>
 
             <xmp>
-            $( ".ui.tab" ).tab( { duration: 500 } );
+            $( ".ui.rate" ).rate();
             </xmp>
 
         </section>
@@ -285,54 +205,40 @@
             </div>
 
             <blockquote>
-                <p><code>rule</code> - <code>"data-index"</code></p>
+                <p><code>defaultValue</code> - <code>0</code></p>
             </blockquote>
-            <p>页签和内容映射</p>
+            <p>默认值, 取值<code>0 - 5</code></p>
             <br>
 
             <blockquote>
-            <p><code>class4loading</code> - <code>"loading"</code></p>
-            </blockquote>
-            <p><code>Ajax</code>加载内容时作用于页签样式</p>
-            <br>
-
-            <blockquote>
-                <p><code>class4error</code> - <code>"error"</code>
+                <p><code>selector4star</code> - <code>">span"</code>
                 </p>
             </blockquote>
-            <p><code>Ajax</code>加载失败时作用于页签样式</p>
+            <p>Selector of the symbol</p>
             <br>
 
             <blockquote>
-                <p><code>ripple</code> - <code>true</code>
+                <p><code>class4highlight</code> - <code>"highlight"</code>
                 </p>
             </blockquote>
-            <p>If present, enable ink ripple effects</p>
+            <p>鼠标悬浮高亮样式</p>
             <br>
 
             <blockquote>
-                <p><code>duration</code> - <code>300</code>
+                <p><code>class4selected</code> - <code>"selected"</code>
                 </p>
             </blockquote>
-            <p>设置<code>lavalamp</code>后, 动画时间, 单位毫秒</p>
+            <p>选中后样式</p>
             <br>
 
             <blockquote>
-                <p><code>onSelect</code> - <code>null</code>
-                </p>
+            <p><code>onSelect</code> - <code>null</code></p>
             </blockquote>
-            <p>取值为<code>function</code>时, 页签选中后执行该方法, 取值为<code>Hash</code>对象时, 通过<code>data-index</code>执行对应回调</p>
+            <p>选中后执行</p>
             <xmp>
-            $( ".ui.tab" ).tab( {
-                onSelect: {
-
-                    "github": function( tab, settings ) {
-                        console.log( "Github" );
-                    },
-
-                    "dribbble": function( tab, settings ) {
-                        console.log( "Dribbble" );
-                    }
+            $( ".ui.rate" ).rate( {
+                onSelect: function( value ) {
+                    console.log( value );
                 }
             } );
             </xmp>
@@ -343,76 +249,20 @@
                 <span>Method</span>
             </div>
 
-            <p><code>tab.add( items )</code>
+            <p><code>rate.val( [value] )</code>
             </p>
-
             <blockquote>
-                <p><code>items</code> - Object/Array</p>
+                <p><code>value</code> - Number</p>
             </blockquote>
-            <p>新增一个或多个<code>tab</code></p>
-            <xmp>
-            {
-                name - 新增页签显示(HTML)
-                index - 页签索引值
-                render - 内容渲染, 返回内容
-                immediate - render不为空时, 是否立即加载内容, 默认 false
-                page - 通过指定URL加载内容
-            }
-            </xmp>
+            <p>不为空时设置为指定值(取值<code>0 - 5</code>), 为空时获取当前值</p>
             <br>
             <br>
 
-            <p><code>tab.remove( index )</code>
-            </p>
-            <blockquote>
-                <p><code>index</code> - String</p>
-            </blockquote>
-            <p>移除指定<code>tab</code></p>
+            <p><code>rate.disabled()</code> - 禁用控件</p>
             <br>
             <br>
 
-            <p><code>tab.getTab( index )</code>
-            </p>
-            <blockquote>
-                <p><code>index</code> - String</p>
-            </blockquote>
-            <p>获取指定<code>tab</code>的DOM</p>
-            <br>
-            <br>
-
-            <p><code>tab.active( index )</code>
-            </p>
-            <blockquote>
-                <p><code>index</code> - String</p>
-            </blockquote>
-            <p>选中对应<code>tab</code></p>
-            <br>
-            <br>
-
-            <p><code>tab.isActive( index )</code>
-            </p>
-            <blockquote>
-                <p><code>index</code> - String</p>
-            </blockquote>
-            <p>判断对应<code>tab</code>是否被选中</p>
-            <br>
-            <br>
-
-            <p><code>tab.disabled( [index] )</code>
-            </p>
-            <blockquote>
-                <p><code>index</code> - String/Array</p>
-            </blockquote>
-            <p>禁用<code>tab</code>, 参数空时禁用所有<code>tab</code></p>
-            <br>
-            <br>
-
-            <p><code>tab.enabled( [index] )</code>
-            </p>
-            <blockquote>
-                <p><code>index</code> - String/Array</p>
-            </blockquote>
-            <p>取消禁用, 参数空时取消所有已禁用<code>tab</code></p>
+            <p><code>rate.enabled()</code> - 启用控件</p>
         </section>
     </div>
 </section>

@@ -25,6 +25,7 @@
 
     .movie {
         width: 900px;
+        margin-top: 100px;
         overflow: hidden;
         box-shadow: 0 1px 24px rgba(0,0,0,.24),0 5px #ddd,0 9px 6px -3px #999;
 
@@ -87,15 +88,14 @@
         .info {
             font-family: initial;
             padding: 30px 60px 20px;
-            .tags, .desc {
+            .preview, .desc {
                 display: inline-block;
                 vertical-align: top;
             }
-            .tags {
+            .preview {
                 width: 35%;
                 position: relative;
                 padding-top: 120px;
-
             }
 
             .min {
@@ -104,6 +104,17 @@
                 box-shadow: 0 1px 24px rgba(0,0,0,.24);
                 width: 214px;
                 height: 317px;
+                overflow: hidden;
+
+                img {
+                    transition: .2s;
+                }
+
+                &:hover {
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
             }
 
             i.icon.play {
@@ -187,6 +198,18 @@
                     margin-left: 0px;
                 }
             }
+        }
+    }
+
+    .markdown {
+        i.icon.star {
+            font-size: 18px;
+            color: @sunflower;
+        }
+
+        i.icon.favorite {
+            font-size: 18px;
+            color: @error;
         }
     }
 }

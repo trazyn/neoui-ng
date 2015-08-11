@@ -52,7 +52,7 @@ define( function() {
 			if ( enabled ) {
 
                 value = stars.index( star ) + 1;
-                settings.onClick.call( star, value );
+                settings.onSelect.call( star, value );
 
                 /** Hack the firefox event bubbles */
                 self.disabled().val( value );
@@ -133,7 +133,7 @@ define( function() {
 	};
 
 	$.fn.rate.defaults = {
-	    onClick         : $.noop,
+	    onSelect        : $.noop,
 	    selector4star   : ">span",
 	    class4highlight : "highlight",
 	    class4selected  : "selected",

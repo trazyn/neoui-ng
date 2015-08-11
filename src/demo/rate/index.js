@@ -8,10 +8,9 @@ define( [ "ui/rate/rate-ng" ], function() {
     .controller( "rateController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 0 } );
+            $( document.body ).anchor( { offset: -60 } );
         };
 
-        $scope.star = 4.6;
         $scope.heart = 2.3;
     } ] );
 } );
