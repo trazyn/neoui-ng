@@ -8,7 +8,7 @@ define( [], function() {
     .controller( "tooltipController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 0 } );
+            $.anchor( { offset: 0 } );
         };
     } ] );
 } );

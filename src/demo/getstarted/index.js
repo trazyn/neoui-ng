@@ -8,7 +8,7 @@ define( [], function() {
     .controller( "getstartedController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 20 } );
+            $.anchor( { offset: 20 } );
         };
     } ] );
 } );

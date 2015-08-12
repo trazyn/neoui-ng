@@ -1,0 +1,190 @@
+
+<ul id="anchors" class="ui anchor">
+    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
+    <li class="item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="item">Markup</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="sRate" class="item">Directive * s-ripple</li>
+        </ul>
+    </li>
+    <li class="item">jQuery
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="ripple" ng-init="init()">
+
+	<header data-anchor="styles">
+		Styles
+	</header>
+
+	<section>
+
+		<div class="ui ribbon">
+			<span>Normal</span>
+		</div>
+
+		<div class="wrap">
+			<button class="ui button transition ripple" name="normal">
+				Press Me
+			</button>
+		</div>
+
+		<div class="view-code tooltip top" data-tooltip="View The Code">
+			<i class="icon code"></i>
+		</div>
+	</section>
+
+	<section>
+		<div class="ui ribbon">
+			<span>Pulse</span>
+		</div>
+
+		<div class="wrap">
+			<button class="ui button transition ripple" name="pulse">
+				Press Me
+			</button>
+
+			<a class="circle transition rotate">
+				<i class="icon play" name="pulse"></i>
+			</a>
+
+			<a class="circle transition rotate">
+				<i class="icon stop" name="pulse"></i>
+			</a>
+		</div>
+
+		<div class="view-code tooltip top" data-tooltip="View The Code">
+			<i class="icon code"></i>
+		</div>
+	</section>
+
+	<section>
+		<div class="ui ribbon">
+			<span>Random</span>
+		</div>
+
+		<div class="wrap">
+			<button class="ui button transition ripple" name="random">
+				Random Ripple
+			</button>
+
+			<a class="circle transition rotate">
+				<i class="icon play" name="random"></i>
+			</a>
+
+			<a class="circle transition rotate">
+				<i class="icon stop" name="random"></i>
+			</a>
+		</div>
+
+		<div class="view-code tooltip top" data-tooltip="View The Code">
+			<i class="icon code"></i>
+		</div>
+	</section>
+
+	<br>
+	<br>
+
+	<header data-anchor="anything">
+		Ripple Anything
+	</header>
+
+	<section>
+		<div class="example-div ui ripple"></div>
+
+		<div class="example-icon">
+			<a class="ui circle twitter transition ripple">
+				<i class="icon twitter"></i>
+			</a>
+		</div>
+
+		<div class="example-select">
+			<label class="ui select ripple">
+				<select name="template">
+					<option value="">Please select</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="view-code tooltip top" data-tooltip="View The Code">
+			<i class="icon code"></i>
+		</div>
+	</section>
+
+	<header data-anchor="api">
+		API
+	</header>
+
+	<section>
+		<div class="ui ribbon">
+			<span>HTML</span>
+		</div>
+
+		<pre>
+		<xmp class="html">
+		<button class="ui button ripple">Ripple Example</button>
+		</xmp>
+		</pre>
+
+		<div class="note">
+			.ui.ripple 必须
+		</div>
+	</section>
+
+	<section>
+		<div class="ui ribbon">
+			<span>Javascript</span>
+		</div>
+
+		<pre>
+		<code class="html">
+		$( selector ).ripple( options );
+		</code>
+		</pre>
+
+		<div class="note">
+			默认绑定点击事件，用户点击触发动画
+		</div>
+
+		<pre>
+		<code class="javascrip">
+
+		Default options:
+
+		{
+			/** 大于0时为持续性行为，间隔为该值，直到调用hide()结束，单位毫秒 */
+			speed 		: 0,
+
+			/** 看上面例子 */
+			random 		: false,
+
+			/** 调用hide()结束状态默认为success，该值为状态变更时所对应样式的持续时间 */
+			delay 		: 300,
+
+			/** show() 到 hide() 之间所对应的附加样式 */
+			class4loading 	: "ripple-loading",
+			/** hide( true ) 时候对应的附加样式 */
+			class4lsuccess 	: "ripple-success",
+			/** hide( false ) 时候对应的附加样式 */
+			class4error 		: "ripple-error"
+		}
+
+		Methods:
+
+		show() 				- 开始动画
+		hide( [success] ) 		- 作用于附加样式，默认为true
+
+		</code>
+		</pre>
+	</section>
+
+</section>
+
+<script id="pjax-init" data-module="views/ripple"></script>

@@ -8,7 +8,7 @@ define( [ "ui/tree/tree-ng" ], function() {
     .controller( "treeController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: -60 } );
+            $.anchor( { offset: -60 } );
         };
 
         /** Simple */

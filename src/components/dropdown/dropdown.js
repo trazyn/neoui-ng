@@ -60,7 +60,7 @@ define( [ "ui/ripple/ripple" ], function() {
 		} )
 
 		/** Show the content */
-		.delegate( settings.selector4title, settings.type, function( e ) {
+		.on( settings.type, function( e ) {
 
             var
             deferred,

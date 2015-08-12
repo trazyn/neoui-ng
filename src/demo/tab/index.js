@@ -100,7 +100,7 @@ define( [ "ui/tab/tab-ng" ], function() {
         };
 
 	    $scope.init = function() {
-            $( document.body ).anchor( { offset: 200 } );
+            $.anchor( { offset: 190 } );
 	    };
     } );
 } );

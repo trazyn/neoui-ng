@@ -2,8 +2,6 @@
 (function( $ ) {
 
 	var
-	namespace = "$ui.anchor",
-
 	Anchor = function( target, settings ) {
 
 		var
@@ -65,7 +63,7 @@
 			}
 		} );
 
-		$( document )
+        target
 		.off( "scroll", autoAnchor )
 		.on( "scroll", { mappings: mappings, offset: settings.offset }, autoAnchor );
 	},
@@ -118,14 +116,12 @@
 		}, 400 );
 	}
 
-	$.fn.anchor = function( options ) {
+	$.anchor = function( options ) {
 
-		this.each( function() {
-			new Anchor( $( this ), $.extend( {}, $.fn.anchor.defaults, options || {} ) );
-		} );
+        new Anchor( $( "html, body" ), $.extend( {}, $.anchor.defaults, options || {} ) );
 	};
 
-	$.fn.anchor.defaults = {
+	$.anchor.defaults = {
 
 		symbol 			    : "data-anchor",
 		offset 			    : 0,

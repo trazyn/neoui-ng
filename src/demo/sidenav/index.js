@@ -8,7 +8,7 @@ define( [ "ui/sidenav/sidenav-ng" ], function() {
     .controller( "sidenavController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: -60 } );
+            $.anchor( { offset: -60 } );
         };
 
         $scope.showProfile = function( sidenav ) {

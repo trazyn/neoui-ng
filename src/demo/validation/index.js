@@ -16,7 +16,7 @@ define( [ "ui/validation/validation-ng" ], function() {
         };
 
 	    $scope.init = function() {
-            $( document.body ).anchor( { offset: 310 } );
+            $.anchor( { offset: 310 } );
 	    };
     } ] );
 } );

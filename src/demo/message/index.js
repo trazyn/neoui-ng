@@ -8,7 +8,7 @@ define( [ "ui/message/message-ng" ], function() {
     .controller( "messageController", [ "$scope", "$message", function( $scope, $message ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: 20 } );
+            $.anchor( { offset: 20 } );
         };
 
         angular.extend( $scope, {

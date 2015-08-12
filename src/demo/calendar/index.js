@@ -8,7 +8,7 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
     .controller( "calendarController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $( document.body ).anchor( { offset: -60 } );
+            $.anchor( { offset: -60 } );
         };
 
         var now = new Date();

@@ -21,7 +21,7 @@ define( [ "ui/modal/modal-ng" ], function() {
 		};
 
 	    $scope.init = function() {
-            $( document.body ).anchor( { offset: -80 } );
+            $.anchor( { offset: -80 } );
 	    };
 	} ] );
 } );

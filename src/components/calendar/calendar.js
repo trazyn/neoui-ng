@@ -463,7 +463,6 @@ define( [ "util/dateutil" ], function() {
 			instance = new Calendar( this, settings );
 			this.data( namespace, instance );
 		}
-
 		return instance;
 	};
 
@@ -473,6 +472,7 @@ define( [ "util/dateutil" ], function() {
 		daysOfTheWeek   : [ "S", "M", "T", "W", "T", "F", "S" ],
 
 		format          : "%Y-%m-%d",
+		formatter4cell  : $.noop(),
 
 		onSelect        : $.noop,
 
