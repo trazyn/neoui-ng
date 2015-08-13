@@ -65,7 +65,7 @@
                     width: 100%;
                 }
                 &:hover:after {
-                    background-color: @google;
+                    background-color: @coral;
                 }
             }
 
@@ -74,6 +74,50 @@
                 word-spacing: 6px;
                 font-size: 1.2rem;
                 letter-spacing: 1px;
+            }
+        }
+
+        &.various {
+            position: relative;
+            width: 100%;
+            padding: 0;
+            text-align: center;
+
+            .box {
+                width: 180px;
+                height: 180px;
+                vertical-align: top;
+                margin: 40px;
+                background-color: white;
+                display: inline-block;
+                box-shadow: 0 1px 24px rgba(0,0,0,.24);
+                position: relative;
+            }
+
+            button {
+                width: auto;
+                margin: 110px 20px;
+            }
+
+            a {
+                width: 38px;
+                height: 38px;
+                border: 38px;
+                background-color: @twitter;
+                display: block;
+                border-radius: 38px;
+                line-height: 38px;
+                color: white;
+                cursor: pointer;
+                transition: .2s;
+                left: 50%;
+                top: 50%;
+                margin-top: -19px;
+                margin-left: -19px;
+                position: absolute;
+                &:hover {
+                    box-shadow: 0 1px 24px rgba(0,0,0,.24);
+                }
             }
         }
 
