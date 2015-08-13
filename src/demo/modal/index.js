@@ -16,7 +16,8 @@ define( [ "ui/modal/modal-ng" ], function() {
 				animate: animate,
 				templateUrl: "src/demo/modal/page.html",
 				title: "Instagram Handbook for Brands",
-				class4modal: "demo"
+				class4modal: "demo",
+				scope: $scope
 			} );
 		};
 

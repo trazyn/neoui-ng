@@ -4,9 +4,9 @@ define( [ "ui/modal/modal" ], function( undefined ) {
 "use strict";
 
 angular.module( "$ui.modal", [] )
-	.factory( "$modal", [ "$rootScope", "$controller", "$q", "$http", "$templateCache", "$compile",
+	.factory( "$modal", [ "$rootScope", "$compile",
 
-function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
+function( $rootScope, $compile ) {
 
 	var
 	defaults = {
@@ -21,10 +21,9 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
 
 		var
 		$modal,
-		scope,
         settings,
 		html,
-		deferred;
+		waiting;
 
 		if ( !options.template && !options.templateUrl ) {
 			throw new Error( "Expected modal to have exacly one of either 'template' or 'templateUrl'" );
@@ -34,7 +33,7 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
             html = options.template;
 		} else {
 
-            deferred = $.Deferred();
+            waiting = $.Deferred();
 
             html = function( deferred, loading, close ) {
                 var
@@ -47,9 +46,17 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
                 .done( function( data ) {
                     self.html( data );
                     deferred.resolve();
+
+                    waiting.resolve();
                 } );
             };
 		}
+
+        $.when( waiting )
+        .done( function() {
+            $compile( $modal.$node[0] )( options.scope || $rootScope.$new() );
+            options.scope.$apply();
+        } );
 
         settings = angular.extend( {}, defaults, options, {
 
@@ -59,10 +66,6 @@ function( $rootScope, $controller, $q, $http, $templateCache, $compile ) {
         } );
 
         $modal = $.modal( settings );
-
-        $.when( deferred ).done( function() {
-            $compile( $modal.$node )( scope );
-        } );
 
         return $modal;
 	};
