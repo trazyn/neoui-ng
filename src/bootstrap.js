@@ -28,6 +28,7 @@ require( [
         "demo/calendar/index",
         "demo/dropdown/index",
         "demo/ripple/index",
+        "demo/button/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
@@ -49,6 +50,7 @@ require( [
 	        "demo.rate",
 	        "demo.dropdown",
 	        "demo.ripple",
+	        "demo.button",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -108,6 +110,9 @@ require( [
 		    } )
 		    .when( "/progress", {
 		        templateUrl: "src/demo/progress/index.html"
+		    } )
+		    .when( "/button", {
+		        templateUrl: "src/demo/button/index.html"
 		    } )
 		    .when( "/dropdown", {
 		        templateUrl: "src/demo/dropdown/index.html"
