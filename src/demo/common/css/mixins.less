@@ -1,0 +1,106 @@
+
+@import (reference) "../../../style/main.less";
+
+#themes {
+
+    .item {
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        margin: 10px;
+        border: 2px transparent solid;
+        cursor: pointer;
+        transition: .2s;
+        position: relative;
+
+        &:hover {
+            box-shadow: 0 1px 24px rgba(0,0,0,.24);
+        }
+
+        &.active {
+            border: 2px solid @google;
+            &:after {
+                content: "";
+                width: 8px;
+                background-color: @coral;
+                height: 8px;
+                display: block;
+                position: absolute;
+                right: -4px;
+                top: -4px;
+            }
+        }
+
+        #apply( @bg: rgba(0,0,0,.8), @fg: #fff ) {
+            background-color: @bg;
+            color: @fg;
+        }
+        &.default {
+            #apply();
+        }
+
+        &.grape {
+            #apply( @grape );
+        }
+
+        &.bittersweet {
+            #apply( @bittersweet );
+        }
+
+        &.sunflower {
+            #apply( @sunflower );
+        }
+
+        &.grass {
+            #apply( @grass );
+        }
+
+        &.mint {
+            #apply( @mint );
+        }
+
+        &.aqua {
+            #apply( @aqua );
+        }
+
+        &.blueJeans {
+            #apply( @blueJeans );
+        }
+
+        &.lavender {
+            #apply( @lavender );
+        }
+
+        &.pinkRose {
+            #apply( @pinkRose );
+        }
+
+        &.lightGray {
+            #apply( @lightGray );
+        }
+
+        &.mediumGray {
+            #apply( @mediumGray );
+        }
+
+        &.darkGray {
+            #apply( @darkGray );
+        }
+
+        &.success {
+            #apply( @success );
+        }
+
+        &.error {
+            #apply( @error );
+        }
+
+        &.warn {
+            #apply( @warn );
+        }
+
+        &.info {
+            #apply( @info );
+        }
+    }
+}

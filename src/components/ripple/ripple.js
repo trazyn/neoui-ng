@@ -73,6 +73,7 @@
 				left: X - rect.left - ripple[0].offsetWidth / 2 - doc.scrollLeft(),
 			};
 
+			settings.speed = settings.speed || settings.originalSpeed;
 			settings.speed && self.disabled().$node.addClass( settings.class4progress );
 
 			(function f( self, ripple, speed, position ) {
@@ -115,6 +116,9 @@
 			settings = this.settings,
 			clazz;
 
+            if ( settings.originalSpeed === void 0 ) {
+                settings.originalSpeed = settings.speed;
+            }
 			settings.speed = 0;
 
 			clearTimeout( self.timer );
@@ -125,7 +129,9 @@
 			setTimeout( function() {
 				self.enabled();
 				$node.removeClass( clazz );
-			}, settings.delay );
+			}, settings.speed );
+
+			return this;
 		}
 	};
 
@@ -144,11 +150,9 @@
 	$.fn.ripple.defaults = {
 
 		speed 		    : 0,
-		random 		    : false,
-
-		delay 		    : 200,
 		duration        : 300,
 
+		random 		    : false,
 		color           : false,
         autoBind        : true,
 
