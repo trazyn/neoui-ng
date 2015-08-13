@@ -63,7 +63,7 @@
 			}
 		} );
 
-        target
+        $( document )
 		.off( "scroll", autoAnchor )
 		.on( "scroll", { mappings: mappings, offset: settings.offset }, autoAnchor );
 	},

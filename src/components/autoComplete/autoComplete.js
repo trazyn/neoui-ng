@@ -69,33 +69,7 @@
 
 		function suggest( force ) {
 
-			var keyCode;
-
-			self.stopSuggest();
-
-			if ( window.event ) {
-				keyCode = window.event.keyCode;
-			}
-
-			if ( settings.delimiter &&
-				(keyCode === undefined
-					? fg.value && settings.delimiter === fg.value.substr( -1 )
-					: keyCode === settings.delimiter.charCodeAt()) ) {
-
-				if ( data && data.length === 1 ) {
-
-					var
-					  match = new RegExp( settings.delimiter + "?([^" + settings.delimiter + "]*)" + settings.delimiter + "$" ).exec( fg.value ),
-					  value = match && match[ 1 ];
-
-					if ( value && value.toLowerCase() === data[ 0 ][ settings.textKey ][ "toLowerCase" ]() ) {
-						setupCache( value, data );
-					}
-				}
-				return;
-			}
-
-			settings.timer = setTimeout( function post() {
+			settings.timer = setTimeout( function() {
 
 				var
 				  value = fg.value,
@@ -242,7 +216,6 @@
 				ele.data( "data-value", valid );
 			}
 
-            /** When the input just focused, don't invoke the callbacks */
 			if ( multiple || multiple === undefined ) {
 
 				settings.set.call( ele, valid, settings );
