@@ -84,6 +84,7 @@
     text-decoration: none;
     background: #ddd;
     display: inline-block;
+    vertical-align: middle;
 
     &.grape {
         background-color: @grape;
@@ -249,20 +250,13 @@
     &.file {
         transition: .2s;
         display: inline-block;
-        padding: 0;
-
-        i.icon {
-            margin: 0 -20px 0 20px;
-        }
-
-        .ui.button {
-            margin: 0;
-            padding: 6.5px 30px;
-        }
+        padding: 5.5px 30px;
 
         label {
             margin: 0;
             background: none;
+            display: inline-block;
+            cursor: pointer;
             &:hover {
                 box-shadow: none;
             }
