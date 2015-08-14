@@ -6,7 +6,7 @@
     <li data-anchor="html" data-forceAnchor="700" class="item">HTML</li>
 </ul>
 
-<section id="tooltip" ng-controller="tooltipController" ng-init="init()">
+<section id="checkbox">
 
     <header data-anchor="example">Example</header>
 
@@ -14,7 +14,7 @@
         <div class="wrap">
             <div class="ui checkbox">
                 <input type="checkbox">
-                <div class="checkbox"></div>
+                <div></div>
             </div>
         </div>
 
@@ -32,10 +32,10 @@
 
     <section>
         <xmp class="html">
-        <a class="ui tooltip top">Top</a>
-        <a class="ui tooltip right">Right</a>
-        <a class="ui tooltip left">Left</a>
-        <a class="ui tooltip bottom">Bottom</a>
+        <div class="ui checkbox">
+            <input type="checkbox" ng-click="console.log( 'test' )">
+            <div></div>
+        </div>
         </xmp>
     </section>
 </section>

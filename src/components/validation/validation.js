@@ -123,7 +123,7 @@
                     var
                     /** Use the first validator, ignore others */
                     key = Object.keys( validator )[0],
-                    parameter = validator[ key ];
+                    parameter = validator[ key ],
                     validator = settings.validators[ key ],
                     message = messages[ key ];
 
@@ -182,7 +182,6 @@
                 validators = ele.attr( "validators" );
 
                 try {
-
                     with ( settings.custom ) {
                         validators = eval( validators );
                     }
@@ -243,7 +242,12 @@
 
             var parent = target.parent();
 
-            if ( target.is( "select, :checkbox, :radio" ) && parent.is( ".ui.select, .ui.switch, .ui.radioes" ) ) {
+            if ( target.is( "select, :checkbox, :radio" ) && parent.is( ".ui.select, .ui.switch, .ui.radio" ) ) {
+
+                if ( target.is( ":radio" ) && parent.parent().is( ".ui.radioes" ) ) {
+                    return parent.parent();
+                }
+
                 return parent;
             } else if ( target.is( ":checkbox" ) && (parent = target.parents( ".ui.checkboxes:first" ), parent.length) ) {
                 return parent;
@@ -260,7 +264,6 @@
                 if ( target.is( ":checkbox" ) ) {
                     return target.is( ":checked" );
                 } else if ( target.is( ":radio" ) ) {
-
                     var name = target.attr( "name" );
                     return !!instance.$node.find( ":radio[name='" + name + "']:checked" ).length;
                 }
@@ -327,7 +330,6 @@
 
             /** Check if the value is a date that's after the specified date(defaults to now) */
             after: function( value, comparison ) {
-
                 return +new Date( value ) > new Date( comparison );
             },
 

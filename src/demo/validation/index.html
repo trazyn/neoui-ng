@@ -37,78 +37,92 @@
 
         <div class="wrap">
             <s-validation class="ui form">
-                <p class="row">
-                <label>Name:</label>
-                <input class="ui text" ng-model="info.name"
-                                       validators="[ 'required', { unique: uniqueName }, { minLength: 6 }, { maxLength: 12 } ]"
-                                       messages="[ { required: 'This field is required' }, { unique: 'This name has exists' } ]"
-                                       placeholder="Please enter your name" />
-                </p>
+                <div class="row">
+                    <label>Name:</label>
+                    <input class="ui text" ng-model="info.name"
+                                           validators="[ 'required', { unique: uniqueName }, { minLength: 6 }, { maxLength: 12 } ]"
+                                           messages="[ { required: 'This field is required' }, { unique: 'This name has exists' } ]"
+                                           placeholder="Please enter your name" />
+                </div>
 
-                <p class="row">
-                <label>Age:</label>
-                <label class="ui select">
-                    <select ng-model="info.age"
-                            validators="[ 'required' ]" >
-                            <option value="">Choose your age</option>
-                            <option ng-repeat="i in [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]" value="{{ i }}">{{ i }}</option>
-                    </select>
-                </label>
-                </p>
+                <div class="row">
+                    <label>Age:</label>
+                    <label class="ui select">
+                        <select ng-model="info.age"
+                                validators="[ 'required' ]" >
+                                <option value="">Choose your age</option>
+                                <option ng-repeat="i in [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]" value="{{ i }}">{{ i }}</option>
+                        </select>
+                    </label>
+                </div>
 
-                <p class="row">
-                <label>Gender:</label>
-                <span class="ui radioes">
-                    <input name="sex" class="ui radio" ng-model="info.sex" value="1" validators="[ 'required' ]" type="radio" /> Female
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <input name="sex" class="ui radio" ng-model="info.sex" value="0" type="radio" /> Male
-                </span>
-                </p>
+                <div class="row">
+                    <label>Gender:</label>
+                    <span class="ui radioes">
+                        <div class="ui radio">
+                            <input name="sex" type="radio" ng-model="info.sex" value="1" validators="[ 'required' ]" />
+                            <div></div>
+                        </div>
+                        Female
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <div class="ui radio">
+                            <input name="sex" type="radio" ng-model="info.sex" value="0" validators="[ 'required' ]" />
+                            <div></div>
+                        </div>
+                        Male
+                    </span>
+                </div>
 
-                <p class="row">
-                <label>Email:</label>
-                <input class="ui text" ng-model="info.email" validators="[ 'email' ]" placeholder="Yours email?" />
-                </p>
+                <div class="row">
+                    <label>Email:</label>
+                    <input class="ui text" ng-model="info.email" validators="[ 'email' ]" placeholder="Yours email?" />
+                </div>
 
-                <p class="row">
-                <label>Phone:</label>
-                <input class="ui text" ng-model="info.phone" validators="[ 'phone' ]" placeholder="Phone number?" />
-                </p>
+                <div class="row">
+                    <label>Phone:</label>
+                    <input class="ui text" ng-model="info.phone" validators="[ 'phone' ]" placeholder="Phone number?" />
+                </div>
 
-                <p class="row">
-                <label>Colors:</label>
-                <span class="ui checkboxes">
-                     <label class="ui checkbox">
-                         <input name="colors" type="checkbox" value="black" validators="[ { minLength: 1 } ]" />
-                         <label>Black</label>
-                     </label>
+                <div class="row">
+                    <label>Colors:</label>
+                    <span class="ui checkboxes">
 
-                     <label class="ui checkbox">
-                         <input name="colors" type="checkbox" value="white" />
-                         <label>White</label>
-                     </label>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="color" value="black" validators="[ { minLength: 1 } ]" />
+                            <div></div>
+                        </div>
+                        <label>Black</label>
 
-                     <label class="ui checkbox">
-                         <input name="colors" type="checkbox" value="red" />
-                         <label>Red</label>
-                     </label>
-                </span>
-                </p>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="color" value="white" />
+                            <div></div>
+                        </div>
+                        <label>White</label>
 
-                <p class="row">
-                <label>Seed feedback:</label>
-                <label class="ui switch">
-                    <input type="checkbox" ng-model="info.feedback" value="Y" validators="[ 'required' ]" />
-                </label>
-                </p>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="color" value="red" />
+                            <div></div>
+                        </div>
+                        <label>Red</label>
+                    </span>
+                </div>
 
-                <p>
-                <input class="ui button transition" type="reset">
-                <input class="ui button transition primary" type="submit" ng-click="push( info )" value="Submit Information" >
-                </p>
+                <div class="row">
+                    <label>Seed feedback:</label>
+
+                    <div class="ui switch">
+                        <input type="checkbox" ng-model="info.feedback" value="Y" validators="[ 'required' ]" />
+                        <div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <input class="ui button transition" type="reset">
+                    <input class="ui button transition primary" type="submit" ng-click="push( info )" value="Submit Information" >
+                </div>
 
             </s-validation>
         </div>
@@ -127,78 +141,92 @@
 
             <xmp>
             <s-validation class="ui form">
-                <p class="row">
-                <label>Name:</label>
-                <input class="ui text" ng-model="info.name"
-                                       validators="[ 'required', { unique: uniqueName }, { minLength: 6 }, { maxLength: 12 } ]"
-                                       messages="[ { required: 'This field is required' }, { unique: 'This name has exists' } ]"
-                                       placeholder="Please enter your name" />
-                </p>
+                <div class="row">
+                    <label>Name:</label>
+                    <input class="ui text" ng-model="info.name"
+                                           validators="[ 'required', { unique: uniqueName }, { minLength: 6 }, { maxLength: 12 } ]"
+                                           messages="[ { required: 'This field is required' }, { unique: 'This name has exists' } ]"
+                                           placeholder="Please enter your name" />
+                </div>
 
-                <p class="row">
-                <label>Age:</label>
-                <label class="ui select">
-                    <select ng-model="info.age"
-                            validators="[ 'required' ]" >
-                            <option value="">Choose your age</option>
-                            <option ng-repeat="i in [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]" value="\{\{ i \}\}">\{\{ i \}\}</option>
-                    </select>
-                </label>
-                </p>
+                <div class="row">
+                    <label>Age:</label>
+                    <label class="ui select">
+                        <select ng-model="info.age"
+                                validators="[ 'required' ]" >
+                                <option value="">Choose your age</option>
+                                <option ng-repeat="i in [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]" value="{{ i }}">{{ i }}</option>
+                        </select>
+                    </label>
+                </div>
 
-                <p class="row">
-                <label>Gender:</label>
-                <span class="ui radioes">
-                    <input name="sex" class="ui radio" ng-model="info.sex" value="1" validators="[ 'required' ]" type="radio" /> Female
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <input name="sex" class="ui radio" ng-model="info.sex" value="0" type="radio" /> Male
-                </span>
-                </p>
+                <div class="row">
+                    <label>Gender:</label>
+                    <span class="ui radioes">
+                        <div class="ui radio">
+                            <input name="sex" type="radio" ng-model="info.sex" value="1" validators="[ 'required' ]" />
+                            <div></div>
+                        </div>
+                        Female
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <div class="ui radio">
+                            <input name="sex" type="radio" ng-model="info.sex" value="0" validators="[ 'required' ]" />
+                            <div></div>
+                        </div>
+                        Male
+                    </span>
+                </div>
 
-                <p class="row">
-                <label>Email:</label>
-                <input class="ui text" ng-model="info.email" validators="[ 'email' ]" placeholder="Yours email?" />
-                </p>
+                <div class="row">
+                    <label>Email:</label>
+                    <input class="ui text" ng-model="info.email" validators="[ 'email' ]" placeholder="Yours email?" />
+                </div>
 
-                <p class="row">
-                <label>Phone:</label>
-                <input class="ui text" ng-model="info.phone" validators="[ 'phone' ]" placeholder="Phone number?" />
-                </p>
+                <div class="row">
+                    <label>Phone:</label>
+                    <input class="ui text" ng-model="info.phone" validators="[ 'phone' ]" placeholder="Phone number?" />
+                </div>
 
-                <p class="row">
-                <label>Colors:</label>
-                <span class="ui checkboxes">
-                     <label class="ui checkbox">
-                         <input name="colors" type="checkbox" value="black" validators="[ { minLength: 1 } ]" />
-                         <label>Black</label>
-                     </label>
+                <div class="row">
+                    <label>Colors:</label>
+                    <span class="ui checkboxes">
 
-                     <label class="ui checkbox">
-                         <input name="colors" type="checkbox" value="white" />
-                         <label>White</label>
-                     </label>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="color" value="black" validators="[ { minLength: 1 } ]" />
+                            <div></div>
+                        </div>
+                        <label>Black</label>
 
-                     <label class="ui checkbox">
-                         <input name="colors" type="checkbox" value="red" />
-                         <label>Red</label>
-                     </label>
-                </span>
-                </p>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="color" value="white" />
+                            <div></div>
+                        </div>
+                        <label>White</label>
 
-                <p class="row">
-                <label>Seed feedback:</label>
-                <label class="ui switch">
-                    <input type="checkbox" ng-model="info.feedback" value="Y" validators="[ 'required' ]" />
-                </label>
-                </p>
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="color" value="red" />
+                            <div></div>
+                        </div>
+                        <label>Red</label>
+                    </span>
+                </div>
 
-                <p>
-                <input class="ui button transition" type="reset">
-                <input class="ui button transition primary" type="submit" ng-click="push( info )" value="Submit Information">
-                </p>
+                <div class="row">
+                    <label>Seed feedback:</label>
+
+                    <div class="ui switch">
+                        <input type="checkbox" ng-model="info.feedback" value="Y" validators="[ 'required' ]" />
+                        <div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <input class="ui button transition" type="reset">
+                    <input class="ui button transition primary" type="submit" ng-click="push( info )" value="Submit Information" >
+                </div>
 
             </s-validation>
             </xmp>

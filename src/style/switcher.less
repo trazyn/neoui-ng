@@ -1,19 +1,42 @@
 
-
 .ui.switch {
-	input {
 
-		outline: 0;
-		display: inline-block;
+    display: inline-block;
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    cursor: pointer;
+
+    input {
+        opacity: 0;
+        outline: 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        z-index: 1;
+
+        &:checked + div {
+            background-color: rgba(0,150,136,.5);
+            &:before {
+                left: 20px;
+                background-color: #009688
+            }
+        }
+    }
+
+	>div {
 		position: relative;
+		pointer-events: none;
+        transition: all .3s cubic-bezier(0.4,0,.2,1);
 		width: 40px;
 		height: 16px;
-		border-radius: 8px;
-		background-color: rgba(0,0,0,.026);
-		transition: all .3s cubic-bezier(0.4,0,.2,1);
-		vertical-align: middle;
-		cursor: pointer;
-
+        border-radius: 8px;
+        background-color: rgba(0,0,0,.026);
+        vertical-align: middle;
+        display: inline-block;
 		&:before {
 			content: "";
 			position: absolute;
@@ -24,20 +47,7 @@
 			background-color: #fafafa;
 			box-shadow: 0 2px 8px rgba(0,0,0,.28);
 			border-radius: 50%;
-			transition: all .3s cubic-bezier(.4,0,.2,1);
-		}
-
-		-webkit-appearance: inherit;
-		-ms-appearance: inherit;
-		-moz-appearance: inherit;
-	}
-
-	input:checked {
-		background-color: rgba(0,150,136,.5);
-
-		&:before {
-			left: 20px;
-			background-color: #009688
+			transition: .3s cubic-bezier(.4,0,.2,1);
 		}
 	}
 }

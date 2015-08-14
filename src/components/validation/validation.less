@@ -21,18 +21,20 @@
         border-color: @error;
     }
 
-    .ui.switch.error input:before {
-        background-color: @error;
+    .ui.switch.error {
+        div:before {
+            background-color: @error;
+        }
     }
 
     .ui.radioes.error {
-        .ui.radio:before {
+        .ui.radio div:before {
             border-color: @error;
         }
     }
 
     .ui.checkboxes.error {
-        .ui.checkbox input:before {
+        .ui.checkbox div:before {
             border-color: @error;
         }
     }

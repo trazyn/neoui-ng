@@ -114,6 +114,9 @@ require( [
 		    .when( "/button", {
 		        templateUrl: "src/demo/button/index.html"
 		    } )
+		    .when( "/checkbox", {
+		        templateUrl: "src/demo/checkbox/index.html"
+		    } )
 		    .when( "/dropdown", {
 		        templateUrl: "src/demo/dropdown/index.html"
 		    } )
