@@ -1,0 +1,41 @@
+
+<title>Checkbox - Neoui-ng</title>
+
+<ul id="anchors" class="ui anchor">
+    <li data-anchor="example" class="item active">Example</li>
+    <li data-anchor="html" data-forceAnchor="700" class="item">HTML</li>
+</ul>
+
+<section id="tooltip" ng-controller="tooltipController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="wrap">
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <div class="checkbox"></div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <span class="ui tooltip top" data-tooltip="Ultima foto (di archivio) prima di partire per le vacanze (Eolie e nord-est sicilia, incluso Etna)....una barca che taglia il mare in un mare di nuvole.">
+                <img src="images/19768242656_0752948444_b.jpg" alt="">
+            </span>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="html">Html</header>
+
+    <section>
+        <xmp class="html">
+        <a class="ui tooltip top">Top</a>
+        <a class="ui tooltip right">Right</a>
+        <a class="ui tooltip left">Left</a>
+        <a class="ui tooltip bottom">Bottom</a>
+        </xmp>
+    </section>
+</section>
