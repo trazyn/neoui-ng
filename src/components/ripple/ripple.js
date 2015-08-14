@@ -150,7 +150,7 @@
 	$.fn.ripple.defaults = {
 
 		speed 		    : 0,
-		duration        : 300,
+		duration        : 400,
 
 		random 		    : false,
 		color           : false,

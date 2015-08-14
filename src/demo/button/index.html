@@ -5,7 +5,6 @@
     <li data-anchor="styles" class="item active">Styles</li>
     <li data-anchor="sizes" class="item">Sizes</li>
     <li data-anchor="iconButton" class="item">Icon Button</li>
-    <li data-anchor="variation" class="item">File Upload</li>
 </ul>
 
 <section id="buttons" ng-controller="buttonController" ng-init="init()">
@@ -240,32 +239,59 @@
     <section>
 
         <div class="wrap">
-            <button class="ui button transition success">
+            <button class="ui button transition success" s-ripple>
                 <i class="icon ok"></i> Success
             </button>
 
-            <button class="ui button transition error">
+            <button class="ui button transition error" s-ripple>
                 <i class="icon close"></i> Error
             </button>
 
-            <button class="ui button icon">
+            <div class="ui button file" s-ripple>
+                <i class="icon add"></i>
+                <label for="upload" class="ui button">Choice a file</label>
+                <input id="upload" type="file">
+            </div>
+
+            <button class="ui button aqua icon" s-ripple>
+                <i class="icon twitter"></i>
+            </button>
+
+            <button class="ui button flat icon" s-ripple>
                 <i class="icon github2"></i>
+            </button>
+
+            <button class="ui button coral outline icon" s-ripple>
+                <i class="icon dribbble"></i>
             </button>
         </div>
 
         <xmp>
-            <button class="ui button transition success">
+            <button class="ui button transition success" s-ripple>
                 <i class="icon ok"></i> Success
             </button>
 
-            <button class="ui button transition error">
+            <button class="ui button transition error" s-ripple>
                 <i class="icon close"></i> Error
             </button>
 
-            <button class="ui button icon">
+            <button class="ui button aqua icon" s-ripple>
+                <i class="icon twitter"></i>
+            </button>
+
+            <button class="ui button flat icon" s-ripple>
                 <i class="icon github2"></i>
             </button>
 
+            <button class="ui button coral outline icon" s-ripple>
+                <i class="icon dribbble"></i>
+            </button>
+
+            <div class="ui button file">
+                <i class="icon add"></i>
+                <label for="upload" class="ui button">Choice a file</label>
+                <input id="upload" type="file">
+            </div>
         </xmp>
     </section>
 
