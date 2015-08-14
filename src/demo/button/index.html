@@ -247,10 +247,12 @@
                 <i class="icon close"></i> Error
             </button>
 
-            <div class="ui button file" s-ripple>
-                <i class="icon add"></i>
-                <label for="upload">Choice a file</label>
-                <input id="upload" type="file">
+            <div class="ui button primary file" s-ripple>
+                <label for="upload">
+                    <i class="icon add"></i>
+                    {{ filename || "Choice a file" }}
+                </label>
+                <input id="upload" type="file" ng-model="filename" onchange="$(this).scope().filename=this.value;$(this).scope().$apply();">
             </div>
 
             <button class="ui button aqua icon" s-ripple>
@@ -275,10 +277,12 @@
                 <i class="icon close"></i> Error
             </button>
 
-            <div class="ui button file" s-ripple>
-                <i class="icon add"></i>
-                <label for="upload">Choice a file</label>
-                <input id="upload" type="file">
+            <div class="ui button primary file" s-ripple>
+                <label for="upload">
+                    <i class="icon add"></i>
+                    \{\{ filename || "Choice a file" }}
+                </label>
+                <input id="upload" type="file" ng-model="filename" onchange="$(this).scope().filename=this.value;$(this).scope().$apply();">
             </div>
 
             <button class="ui button aqua icon" s-ripple>
