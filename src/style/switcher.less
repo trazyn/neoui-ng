@@ -1,4 +1,6 @@
 
+@import (less) "base/colors.less";
+
 .ui.switch {
 
     display: inline-block;
@@ -7,6 +9,7 @@
     line-height: 32px;
     cursor: pointer;
     overflow: visible !important;
+    margin-right: 10px;
 
     input {
         opacity: 0;
@@ -58,5 +61,14 @@
 	    top: 50% !important;
 	    left: 50% !important;
 	    margin: -16px 0 0 -16px;
+	}
+
+	&.error {
+	    >div:before {
+	        background-color: @error;
+	    }
+	    input:checked + div:before {
+	        background-color: @error;
+	    }
 	}
 }

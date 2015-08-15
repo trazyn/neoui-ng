@@ -28,6 +28,8 @@ require( [
         "demo/calendar/index",
         "demo/dropdown/index",
         "demo/ripple/index",
+        "demo/checkbox/index",
+        "demo/switcher/index",
         "demo/button/index",
         "demo/validation/index" ], function() {
 
@@ -47,6 +49,8 @@ require( [
 	        "demo.sidenav",
 	        "demo.dateutil",
 	        "demo.tree",
+	        "demo.checkbox",
+	        "demo.switcher",
 	        "demo.rate",
 	        "demo.dropdown",
 	        "demo.ripple",
@@ -116,6 +120,9 @@ require( [
 		    } )
 		    .when( "/checkbox", {
 		        templateUrl: "src/demo/checkbox/index.html"
+		    } )
+		    .when( "/switcher", {
+		        templateUrl: "src/demo/switcher/index.html"
 		    } )
 		    .when( "/dropdown", {
 		        templateUrl: "src/demo/dropdown/index.html"

@@ -1,4 +1,6 @@
 
+@import (less) "base/colors.less";
+
 .ui.checkbox {
 
     height: 32px;
@@ -65,5 +67,15 @@
 	    top: 50% !important;
 	    left: 50% !important;
 	    margin: -10px 0 0 -10px;
+	}
+
+	&.error {
+	    >div:before {
+	        border-color: @error;
+	    }
+
+	    input:checked + div:before {
+	        border-color: @error;
+	    }
 	}
 }
