@@ -54,7 +54,6 @@ angular.module( "$ui.ripple", [] )
             },
 
             restric         : "A",
-
             link            : link
         };
     } );

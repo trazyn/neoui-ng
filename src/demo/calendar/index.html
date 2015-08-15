@@ -41,7 +41,7 @@
                 ng-disabled="isDisabled"
                 ng-model="date"
                 placeholder="Year-Month-Day"
-                double="twoMonths"
+                double="double"
                 show-time="showTime"
                 min-date="minDate"
                 max-date="maxDate"
@@ -55,22 +55,22 @@
             <ul class="options">
                 <li>
                     <label>是否禁用?</label>
-                    <div class="ui checkbox">
+                    <div class="ui checkbox" s-ripple>
                         <input type="checkbox" ng-click="isDisabled = !isDisabled" />
                         <div></div>
                     </div>
                 </li>
                 <li>
                     <label>显示双月</label>
-                    <div class="ui switch">
-                        <input type="checkbox" ng-model="twoMonths" />
+                    <div class="ui switch" s-ripple>
+                        <input type="checkbox" ng-model="double" />
                         <div></div>
                     </div>
                 </li>
 
                 <li>
                     <label>显示时间</label>
-                    <div class="ui switch">
+                    <div class="ui switch" s-ripple>
                         <input type="checkbox" ng-model="showTime" />
                         <div></div>
                     </div>

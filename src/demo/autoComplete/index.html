@@ -60,28 +60,28 @@
              <ul class="options">
                  <li>
                      <label>是否禁用?</label>
-                     <div class="ui checkbox">
+                     <div class="ui checkbox" s-ripple>
                          <input type="checkbox" ng-click="isDisabled = !isDisabled" />
                          <div></div>
                      </div>
                  </li>
                  <li>
                      <label>文本全文匹配</label>
-                     <div class="ui radio">
+                     <div class="ui radio" s-ripple>
                          <input name="radio" type="radio" ng-model="localMatch" value="*" />
                          <div></div>
                      </div>
                  </li>
                  <li>
                      <label>匹配文本开头</label>
-                     <div class="ui radio">
+                     <div class="ui radio" s-ripple>
                          <input name="radio" type="radio" ng-model="localMatch" value="^" />
                          <div></div>
                      </div>
                  </li>
                  <li>
                      <label>匹配文本结尾</label>
-                     <div class="ui radio">
+                     <div class="ui radio" s-ripple>
                          <input name="radio" type="radio" ng-model="localMatch" value="$" />
                          <div></div>
                      </div>
@@ -89,7 +89,7 @@
 
                  <li>
                      <label>高亮搜索结果</label>
-                     <div class="ui switch">
+                     <div class="ui switch" s-ripple>
                          <input type="checkbox" ng-model="highlight" checked />
                          <div></div>
                      </div>
@@ -97,7 +97,7 @@
 
                  <li>
                      <label>不区分大小写</label>
-                     <div class="ui switch">
+                     <div class="ui switch" s-ripple>
                          <input type="checkbox" ng-model="fuzzy" checked />
                          <div></div>
                      </div>
@@ -105,7 +105,7 @@
 
                  <li>
                      <label>Press <kbd>Tab</kbd> select the first result</label>
-                     <div class="ui switch">
+                     <div class="ui switch" s-ripple>
                          <input type="checkbox" ng-model="tabComplete" checked />
                          <div></div>
                      </div>

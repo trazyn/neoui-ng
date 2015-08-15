@@ -9,14 +9,13 @@
 
 		var
 		self = this,
-
-		ripple = target.find( "span.ripple" ),
-		max = Math.max( target.innerHeight(), target.innerWidth() );
+		ripple = target.find( "span.ripple" );
 
 		this.$node = target.css( "position", "relative" );
 		this.settings = settings;
 
 		if ( !ripple.length ) {
+            var max = Math.max( target.innerHeight(), target.innerWidth() );
 			ripple = $( "<span class='ripple'>" )
 				.css( {
 					width: max,
