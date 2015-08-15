@@ -60,42 +60,55 @@
              <ul class="options">
                  <li>
                      <label>是否禁用?</label>
-                     <label class="ui checkbox">
+                     <div class="ui checkbox">
                          <input type="checkbox" ng-click="isDisabled = !isDisabled" />
-                     </label>
+                         <div></div>
+                     </div>
                  </li>
                  <li>
                      <label>文本全文匹配</label>
-                     <input name="radio" class="ui radio" ng-model="localMatch" value="*" type="radio" />
+                     <div class="ui radio">
+                         <input name="radio" type="radio" ng-model="localMatch" value="*" />
+                         <div></div>
+                     </div>
                  </li>
                  <li>
                      <label>匹配文本开头</label>
-                     <input name="radio" class="ui radio" type="radio" ng-model="localMatch" value="^" />
+                     <div class="ui radio">
+                         <input name="radio" type="radio" ng-model="localMatch" value="^" />
+                         <div></div>
+                     </div>
                  </li>
                  <li>
                      <label>匹配文本结尾</label>
-                     <input name="radio" class="ui radio" ng-model="localMatch" value="$" type="radio" />
+                     <div class="ui radio">
+                         <input name="radio" type="radio" ng-model="localMatch" value="$" />
+                         <div></div>
+                     </div>
                  </li>
 
                  <li>
                      <label>高亮搜索结果</label>
-                     <label class="ui switch">
+                     <div class="ui switch">
                          <input type="checkbox" ng-model="highlight" checked />
-                     </label>
+                         <div></div>
+                     </div>
                  </li>
 
                  <li>
                      <label>不区分大小写</label>
-                     <label class="ui switch">
-                         <input type="checkbox" ng-model="fuzzy" />
-                     </label>
+                     <div class="ui switch">
+                         <input type="checkbox" ng-model="fuzzy" checked />
+                         <div></div>
+                     </div>
                  </li>
 
                  <li>
                      <label>Press <kbd>Tab</kbd> select the first result</label>
-                     <label class="ui switch">
+                     <div class="ui switch">
                          <input type="checkbox" ng-model="tabComplete" checked />
-                     </label>
+                         <div></div>
+                     </div>
                  </li>
              </ul>
 
