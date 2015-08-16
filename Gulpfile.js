@@ -47,7 +47,7 @@ bs, gulp = require( "gulp" )
 		var
 		dest = pkg.dest,
 		minifyCSS = require( "gulp-minify-css" ),
-        cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true } ),
+        cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
         autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
 
 		return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "src/demo/**/*.less" ] )
