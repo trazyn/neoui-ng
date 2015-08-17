@@ -1,4 +1,6 @@
 
+@import (less) "base/colors.less";
+
 .ui.radio {
 
     display: inline-block;
@@ -77,5 +79,20 @@
 	    top: 50% !important;
 	    left: 50% !important;
 	    margin: -10px 0 0 -10px;
+	}
+
+	&.error {
+
+        >div:before {
+            border-color: @error;
+        }
+        input:checked + div {
+            &:before {
+                border-color: @error;
+            }
+            &:after {
+                background: @error;
+            }
+        }
 	}
 }

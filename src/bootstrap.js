@@ -31,6 +31,7 @@ require( [
         "demo/checkbox/index",
         "demo/switcher/index",
         "demo/button/index",
+        "demo/radio/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
@@ -51,6 +52,7 @@ require( [
 	        "demo.tree",
 	        "demo.checkbox",
 	        "demo.switcher",
+	        "demo.radio",
 	        "demo.rate",
 	        "demo.dropdown",
 	        "demo.ripple",
@@ -123,6 +125,9 @@ require( [
 		    } )
 		    .when( "/switcher", {
 		        templateUrl: "src/demo/switcher/index.html"
+		    } )
+		    .when( "/radio", {
+		        templateUrl: "src/demo/radio/index.html"
 		    } )
 		    .when( "/dropdown", {
 		        templateUrl: "src/demo/dropdown/index.html"
