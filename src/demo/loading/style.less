@@ -1,0 +1,238 @@
+
+@import (reference) "../../style/main.less";
+@import (reference) "../common/css/mixins.less";
+
+#loading {
+
+    h1 {
+        font-weight: 200;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        color: white;
+        text-shadow: 0 0 40px #fff;
+        font-weight: 600;
+        word-spacing: 2px;
+    }
+
+    xmp {
+        display: block;
+        font-family: Georgia,"Times New Roman","Microsoft YaHei","微软雅黑",STXihei,"华文细黑",serif;
+        font-size: .9rem;
+        color: rgba(0,0,0,.55);
+        margin: 30px 0 0 0;
+        background-color: #fff;
+        box-shadow: 0 1px 24px rgba(0,0,0,.24);
+    }
+
+    .action {
+        margin: 120px 0 0;
+    }
+
+    .block {
+        text-align: center;
+        padding: 0 100px 40px;
+        overflow: hidden;
+
+        &.example {
+            padding: 50px 0 100px;
+
+            h1 {
+                color: @coral;
+                position: relative;
+                display: inline-block;
+                cursor: pointer;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    transition: .2s;
+                    left: 0;
+                    bottom: 0;
+                    height: 4px;
+                    background-color: @lightGray;
+                    width: 100%;
+                }
+                &:hover:after {
+                    background-color: @coral;
+                }
+            }
+
+            p {
+                font-weight: 800;
+                word-spacing: 6px;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        &.aqua {
+            background-color: @aqua;
+            padding: 50px 0 100px;
+        }
+
+        &.yellow {
+            background-color: #ddca9a;
+            padding-top: 50px;
+        }
+
+        .content {
+            width: 900px;
+            margin: auto;
+            text-align: left;
+        }
+
+        .box {
+            margin: 100px;
+            width: 800px;
+            height: 400px;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0,0,0,.2);
+        }
+    }
+
+    .code {
+        position: relative;
+
+        > label {
+            transition: .2s;
+            position: absolute;
+            display: block;
+            right: 0;
+            background: @coral;
+            padding: 4px 14px;
+            font-size: 12px;
+            color: white;
+            text-align: center;
+            width: 80px;
+            font-weight: 800;
+            &:hover {
+                box-shadow: 0 1px 24px rgba(0,0,0,.24);
+            }
+        }
+    }
+
+    .prop, .clazz {
+        font-size: 14px;
+        transition: .2s;
+        font-weight: 100;
+        margin: 20px 0 55px;
+        color: rgba(0,0,0,.55);
+        font-family: Roboto,Sans-serif;
+        background-color: white;
+        padding: 30px 40px;
+        border-left: 8px solid @lavender;
+        position: relative;
+
+        &:hover {
+            border-left: 40px solid @dribbble;
+        }
+
+        > .name, > .desc {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        > .name {
+            width: 30%;
+
+            &:after {
+                content: "";
+                width: .25rem;
+                height: 50%;
+                left: 25%;
+                top: 30px;
+                position: absolute;
+                background-color: #f5f7fa;
+            }
+        }
+
+        p {
+            height: 2rem;
+            line-height: 2rem;
+        }
+
+        & + xmp {
+            display: block;
+            background: #232e34;
+            color: #CDD3DE;
+            text-align: left;
+            margin: -55px 0 100px;
+            box-shadow: none;
+        }
+    }
+
+    .clazz {
+
+        > .name:after {
+            content: none;
+        }
+
+        > .desc {
+
+            &:after {
+                content: "";
+                transition: .2s;
+                width: 66%;
+                height: .1rem;
+                bottom: 20px;
+                left: 32%;
+                position: absolute;
+                background-color: @lightGray;
+            }
+        }
+
+        &:hover {
+            > .desc:after {
+                background-color: @darkGray;
+            }
+        }
+    }
+
+    .method {
+        position: relative;
+        font-size: 14px;
+        transition: .2s;
+        font-weight: 100;
+        margin: 20px 0 55px;
+        color: rgba(0,0,0,.55);
+        font-family: Roboto,Sans-serif;
+        background-color: white;
+        padding: 36px 0 0 0px;
+        position: relative;
+        box-shadow: 0 1px 24px rgba(0,0,0,.24);
+
+        > .name {
+            height: 32px;
+            line-height: 32px;
+            text-indent: 40px;
+            position: absolute;
+            display: block;
+            background-color: @dribbble;
+            color: white;
+            top: 0;
+            left: 0;
+            text-indent: 0;
+            padding: 0 16px;
+        }
+
+        > .desc {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            text-indent: 40px;
+        }
+    }
+
+    .example .wrap {
+        width: 900px;
+        height: 100px;
+        margin: 100px auto 0;
+        position: relative;
+        overflow: hidden;
+        padding: 0 30px;
+    }
+}

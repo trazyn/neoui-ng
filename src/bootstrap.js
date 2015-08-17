@@ -32,6 +32,7 @@ require( [
         "demo/switcher/index",
         "demo/button/index",
         "demo/radio/index",
+        "demo/loading/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
@@ -57,6 +58,7 @@ require( [
 	        "demo.dropdown",
 	        "demo.ripple",
 	        "demo.button",
+	        "demo.loading",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -116,6 +118,9 @@ require( [
 		    } )
 		    .when( "/tree", {
 		        templateUrl: "src/demo/tree/index.html"
+		    } )
+		    .when( "/loading", {
+		        templateUrl: "src/demo/loading/index.html"
 		    } )
 		    .when( "/sidenav", {
 		        templateUrl: "src/demo/sidenav/index.html"
