@@ -36,7 +36,7 @@ require( [
 
 	"use strict";
 
-	angular
+	var app = angular
 
 	.module( "neoui", [ "ngRoute", "$ui.sidenav",
 	        "demo.modal",
@@ -59,6 +59,25 @@ require( [
 	        "demo.button",
 	        "demo.progress",
 	        "demo.calendar" ] )
+
+    .config( [ "$httpProvider", function( $httpProvider ) {
+
+        var progress;
+
+        setTimeout( function() {
+
+            progress = $( ".ui.progress:first" ).progress();
+
+            $httpProvider.defaults.transformResponse.push( function( data, headers ) {
+                $( ".ui.progress:first" ).progress().done();
+                return data;
+            } );
+            $httpProvider.defaults.transformRequest.push( function( data, headers ) {
+                progress.start();
+                return data;
+            } );
+        } );
+    } ] )
 
 	.config( [ "$routeProvider", function( $routeProvider ) {
 
