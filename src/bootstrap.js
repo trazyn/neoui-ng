@@ -181,7 +181,6 @@ require( [
         setTimeout( function() {
             $( ".ui.loading.global" ).loading().hide();
         } );
-        $( document ).removeClass( "out" );
     } );
 
 	angular.bootstrap( document, [ "neoui" ] );
