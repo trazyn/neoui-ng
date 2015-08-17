@@ -69,7 +69,9 @@ require( [
             progress = $( ".ui.progress:first" ).progress();
 
             $httpProvider.defaults.transformResponse.push( function( data, headers ) {
-                $( ".ui.progress:first" ).progress().done();
+                setTimeout( function() {
+                    progress.done();
+                }, 1000 );
                 return data;
             } );
             $httpProvider.defaults.transformRequest.push( function( data, headers ) {
