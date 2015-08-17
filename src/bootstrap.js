@@ -81,82 +81,82 @@ require( [
         } );
     } ] )
 
-	.config( [ "$routeProvider", function( $routeProvider ) {
+    .config( [ "$routeProvider", function( $routeProvider ) {
 
-		$routeProvider
-		    .when( "/home", {
-		        templateUrl: "src/demo/home/index.html"
-		    } )
-			.when( "/color", {
-				templateUrl: "src/demo/color/index.html"
-			} )
-			.when( "/getstarted", {
-				templateUrl: "src/demo/getstarted/index.html"
-			} )
-			.when( "/tooltip", {
-				templateUrl: "src/demo/tooltip/index.html"
-			} )
-			.when( "/modal", {
-				templateUrl: "src/demo/modal/index.html"
-			} )
-		    .when( "/tab", {
-		        templateUrl: "src/demo/tab/index.html"
-		    } )
-		    .when( "/message", {
-		        templateUrl: "src/demo/message/index.html"
-		    } )
-		    .when( "/autoComplete", {
-		        templateUrl: "src/demo/autoComplete/index.html"
-		    } )
-		    .when( "/validation", {
-		        templateUrl: "src/demo/validation/index.html"
-		    } )
-		    .when( "/toast", {
-		        templateUrl: "src/demo/toast/index.html"
-		    } )
-		    .when( "/tree", {
-		        templateUrl: "src/demo/tree/index.html"
-		    } )
-		    .when( "/sidenav", {
-		        templateUrl: "src/demo/sidenav/index.html"
-		    } )
-		    .when( "/dateutil", {
-		        templateUrl: "src/demo/dateutil/index.html"
-		    } )
-		    .when( "/editor", {
-		        templateUrl: "src/demo/editor/index.html"
-		    } )
-		    .when( "/calendar", {
-		        templateUrl: "src/demo/calendar/index.html"
-		    } )
-		    .when( "/rate", {
-		        templateUrl: "src/demo/rate/index.html"
-		    } )
-		    .when( "/ripple", {
-		        templateUrl: "src/demo/ripple/index.html"
-		    } )
-		    .when( "/progress", {
-		        templateUrl: "src/demo/progress/index.html"
-		    } )
-		    .when( "/button", {
-		        templateUrl: "src/demo/button/index.html"
-		    } )
-		    .when( "/checkbox", {
-		        templateUrl: "src/demo/checkbox/index.html"
-		    } )
-		    .when( "/switcher", {
-		        templateUrl: "src/demo/switcher/index.html"
-		    } )
-		    .when( "/radio", {
-		        templateUrl: "src/demo/radio/index.html"
-		    } )
-		    .when( "/dropdown", {
-		        templateUrl: "src/demo/dropdown/index.html"
-		    } )
-			.otherwise( {
-				redirectTo: "/home"
-			} );
-	} ] )
+        $routeProvider
+            .when( "/home", {
+                templateUrl: "src/demo/home/index.html"
+            } )
+            .when( "/color", {
+                templateUrl: "src/demo/color/index.html"
+            } )
+            .when( "/getstarted", {
+                templateUrl: "src/demo/getstarted/index.html"
+            } )
+            .when( "/tooltip", {
+                templateUrl: "src/demo/tooltip/index.html"
+            } )
+            .when( "/modal", {
+                templateUrl: "src/demo/modal/index.html"
+            } )
+            .when( "/tab", {
+                templateUrl: "src/demo/tab/index.html"
+            } )
+            .when( "/message", {
+                templateUrl: "src/demo/message/index.html"
+            } )
+            .when( "/autoComplete", {
+                templateUrl: "src/demo/autoComplete/index.html"
+            } )
+            .when( "/validation", {
+                templateUrl: "src/demo/validation/index.html"
+            } )
+            .when( "/toast", {
+                templateUrl: "src/demo/toast/index.html"
+            } )
+            .when( "/tree", {
+                templateUrl: "src/demo/tree/index.html"
+            } )
+            .when( "/sidenav", {
+                templateUrl: "src/demo/sidenav/index.html"
+            } )
+            .when( "/dateutil", {
+                templateUrl: "src/demo/dateutil/index.html"
+            } )
+            .when( "/editor", {
+                templateUrl: "src/demo/editor/index.html"
+            } )
+            .when( "/calendar", {
+                templateUrl: "src/demo/calendar/index.html"
+            } )
+            .when( "/rate", {
+                templateUrl: "src/demo/rate/index.html"
+            } )
+            .when( "/ripple", {
+                templateUrl: "src/demo/ripple/index.html"
+            } )
+            .when( "/progress", {
+                templateUrl: "src/demo/progress/index.html"
+            } )
+            .when( "/button", {
+                templateUrl: "src/demo/button/index.html"
+            } )
+            .when( "/checkbox", {
+                templateUrl: "src/demo/checkbox/index.html"
+            } )
+            .when( "/switcher", {
+                templateUrl: "src/demo/switcher/index.html"
+            } )
+            .when( "/radio", {
+                templateUrl: "src/demo/radio/index.html"
+            } )
+            .when( "/dropdown", {
+                templateUrl: "src/demo/dropdown/index.html"
+            } )
+            .otherwise( {
+                redirectTo: "/home"
+            } );
+    } ] )
 
     .controller( "mainController", [ "$scope", "$location", function( $scope, $location ) {
 
