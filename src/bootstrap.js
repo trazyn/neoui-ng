@@ -170,13 +170,11 @@ require( [
             .delegate( "[data-url]", "click", function( e ) {
 
                 $location.path( "/" + this.getAttribute( "data-url" ) );
-                document.body.scrollTop = 0;
                 menu.close();
                 $scope.$apply();
+                $( "html, body" ).scrollTop( 0 );
             } );
         };
-
-        $scope.menu;
     } ] );
 
 	angular.bootstrap( document, [ "neoui" ] );
