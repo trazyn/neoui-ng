@@ -180,7 +180,7 @@ require( [
     $( function() {
         setTimeout( function() {
             $( ".ui.loading.global" ).loading().hide();
-        } );
+        }, 1000 );
     } );
 
 	angular.bootstrap( document, [ "neoui" ] );

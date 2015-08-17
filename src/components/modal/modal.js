@@ -34,16 +34,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			$( e.target ).hasClass( "overlay" ) && close();
 		},
 
-		loading = modal.find( ".ui.loading:first" ).loading( {
-
-			before: function() {
-				this.css( "z-index", 10000 );
-			},
-			after: function() {
-				this.css( "z-index", -999 );
-			}
-		} ),
-
+		loading = modal.find( ".ui.loading:first" ).loading(),
 		progress = modal.find( ".ui.progress:first" ).progress(),
 
 		deferred = $.Deferred(),
@@ -139,6 +130,8 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		return {
 			open: show,
 			close: close,
+			loading: loading,
+			progress: progress,
 			$node: modal
 		};
 	};

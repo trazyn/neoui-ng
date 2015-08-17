@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "homepage": "https://github.com/trazyn/neoui-ng",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "authors": [
     "fs3kuu <tn.razy@gmail.com>"
   ],
@@ -20,6 +19,7 @@
     "jquery": "~2.1.4",
     "angular": "~1.4.1",
     "angular-route": "~1.4.1",
-    "requirejs": "~2.1.18"
+    "requirejs": "~2.1.18",
+    "jquery.event.drag-new": "*"
   }
 }

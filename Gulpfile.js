@@ -24,6 +24,7 @@ bs, gulp = require( "gulp" )
 				"bower_components/angular-route/angular-route.js",
 				"bower_components/requirejs/require.js" ] )
 
+			.pipe( debug() )
             .pipe( concat( "vendor.js" ) )
 			.pipe( gulp.dest( pkg.dest ) )
 			.pipe( uglify() )

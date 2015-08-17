@@ -36,6 +36,12 @@
         <button class="ui button coral raised transition" ng-click="open( 'vertical' )">VERTICAL</button>
         <button class="ui button coral raised transition" ng-click="open( 'sign' )">SIGN</button>
         </p>
+
+        <p>
+        <button style="width: auto;" class="ui button primary transition" ng-click="open( 'scale' ).loading.show()">Show Loading</button>
+        <button style="width: auto;" class="ui button primary transition" ng-click="showProgress()">Show Progress</button>
+        <button style="width: auto;" class="ui button primary transition" ng-click="dragMe()">Drag Me</button>
+        </p>
     </section>
 
     <br>
@@ -63,6 +69,20 @@
                         template: "{{ name }}<br/><p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
                         animate: animate
                     } );
+                };
+
+                $scope.showProgress = function() {
+
+                    $modal.open( {
+                        controller: "modalController",
+                        showProgress: false,
+                        templateUrl: "src/demo/modal/page.html",
+                        title: "Instagram Handbook for Brands",
+                        class4modal: "demo",
+                        scope: $scope
+                    } )
+
+                    .progress.start();
                 };
             } ] );
             </xmp>
@@ -235,9 +255,21 @@
             <p><code>modal.open()</code> - 打开弹出框
             </p>
             <br>
+            <br>
 
             <p><code>modal.close()</code> - 关闭弹出框
             </p>
+            <br>
+            <br>
+
+            <p><code>modal.progress</code> - <a href="#/progress">See Progress.js</a>
+            </p>
+            <br>
+            <br>
+
+            <p><code>modal.loading</code> - <a href="#/progress">See Loading.js</a>
+            </p>
+            <br>
             <br>
 
         </section>

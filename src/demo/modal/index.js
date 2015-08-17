@@ -11,9 +11,36 @@ define( [ "ui/modal/modal-ng" ], function() {
 
 		$scope.open = function( animate ) {
 
-			$modal.open( {
+			return $modal.open( {
 				controller: "modalController",
 				animate: animate,
+				templateUrl: "src/demo/modal/page.html",
+				title: "Instagram Handbook for Brands",
+				class4modal: "demo",
+				scope: $scope
+			} );
+		};
+
+		$scope.showProgress = function() {
+
+			$modal.open( {
+				controller: "modalController",
+				showProgress: false,
+				templateUrl: "src/demo/modal/page.html",
+				title: "Instagram Handbook for Brands",
+				class4modal: "demo",
+				scope: $scope
+			} )
+
+			.progress.start();
+		};
+
+		$scope.dragMe = function() {
+
+			$modal.open( {
+				controller: "modalController",
+				selector4drag: true,
+				showProgress: false,
 				templateUrl: "src/demo/modal/page.html",
 				title: "Instagram Handbook for Brands",
 				class4modal: "demo",
