@@ -177,7 +177,11 @@ require( [
         };
     } ] );
 
-    $( function() { $( ".ui.loading.global" ).loading().hide(); } );
+    $( function() {
+        setTimeout( function() {
+            $( ".ui.loading.global" ).loading().hide();
+        }, 1000 );
+    } );
 
 	angular.bootstrap( document, [ "neoui" ] );
 } );
