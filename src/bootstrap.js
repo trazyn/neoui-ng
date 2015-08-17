@@ -177,5 +177,5 @@ require( [
         };
     } ] );
 
-	angular.bootstrap( document, [ "neoui" ] );
+    angular.bootstrap( document, [ "neoui" ] );
 } );
