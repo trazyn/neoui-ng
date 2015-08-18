@@ -30,6 +30,8 @@ define( [ "ui/modal/modal" ], function() {
 
                 this
                 .html( template )
+                .parent()
+                .css( "height", "" )
                 .delegate( "i.icon.close", "click", close );
 
                 setTimeout( close, delay || 3000 );
