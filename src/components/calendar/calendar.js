@@ -312,7 +312,7 @@ define( [ "util/dateutil" ], function() {
 
                 .on( "focusout", function( e ) {
 
-                    if ( $( e.relatedTarget ).is( "input[name='hour'], input[name='minute'], input[name='second'], .container" ) ) {
+                    if ( calendar.is( ":hover" ) ) {
                         return;
                     }
 
