@@ -22,7 +22,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
         /**
          * Set current tab
-         * Priorty:
+         * Priority:
          *  .selected > settings.selected > :first
          * */
 		currentNav = this.$navs.filter( ".selected:first" );
