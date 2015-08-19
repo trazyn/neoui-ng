@@ -440,7 +440,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		selected        : 0,
 
 		ripple          : {
-		    duration    : 300
+		    duration    : 800
 		},
 		vertical 	    : false,
 		lavalamp 	    : true

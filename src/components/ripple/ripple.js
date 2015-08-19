@@ -57,7 +57,7 @@
 		show: function( e ) {
 
 			var
-			self = this.hide(),
+			self = this,
 
 			settings = self.settings,
 			offset = this.$node.offset(),
@@ -70,6 +70,8 @@
 				top: Y - rect.top - ripple[0].offsetHeight / 2 - doc.scrollTop(),
 				left: X - rect.left - ripple[0].offsetWidth / 2 - doc.scrollLeft(),
 			};
+
+			clearTimeout( self.timer );
 
 			settings.speed = settings.speed || settings.originalSpeed;
 			settings.speed && self.disabled().$node.addClass( settings.class4progress );
