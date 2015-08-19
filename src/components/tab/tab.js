@@ -104,6 +104,19 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 				}
 			},
 
+			focus = function() {
+
+			    var
+			    scroller = self.parent(),
+			    offset = self.offset().left - scroller.width();
+
+                scroller.scrollLeft( offset );
+
+                if ( offset > 0 ) {
+
+                }
+			},
+
 			/** Shortcuts */
 			navs = instance.$navs,
 			tabs = instance.$tabs,
@@ -133,9 +146,12 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						currentTab.removeClass( "selected" );
 					}
 
+                    /** Set animation direction */
 					if ( currentTab.nextAll().index( tab ) !== -1 ) {
 					    tab.removeClass( "right" ).addClass( "left" );
 					} else tab.removeClass( "left" ).addClass( "right" );
+
+                    focus();
 
 					currentTab = tab.addClass( "selected" );
                     settings.lavalamp && instance.lavalamp && instance.lavalamp.hold( self );
@@ -164,24 +180,17 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						startup = index;
 					} else {
 
-						var callbacks = (instance[ "deferreds" ] || {}) [ index ] || {};
-
-						/** Delete the references */
-						delete (instance[ "deferreds" ] || {})[ index ];
-
 						$.ajax( {
 							url: page,
 							dataType: "html"
 						} )
-						.always( callbacks.always )
 						.done( function( responseText ) {
 
 							tab = $( "<div class='item'>" ).attr( settings.rule, index ).html( responseText );
 							self.removeClass( class4loading ).addClass( class4success );
-							(callbacks.done || $.noop)( tab );
                             finish();
 						} )
-						.fail( callbacks.fail, function( xhr ) {
+						.fail( function( xhr ) {
 							self.removeClass( [ class4loading, class4success ].join( " " ) ).addClass( class4error );
 							tab = $( "<div class='item error'>" ).attr( settings.rule, index ).html(
 							        "<h5>Faild to load: </h5>'" + page + "'" +
@@ -260,7 +269,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					/** Render the content by an ajax call */
 					else if ( item.page ) {
 						nav.attr( "data-page", item.page );
-						(this.deferreds = this.deferreds || {})[ item.name ] = item.deferred;
 					}
 
 					/** Update index */
@@ -312,7 +320,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
                 tabs.splice( index, 1 );
 
                 this.render && (delete this.render[ index ]);
-                this.deferreds && (delete this.deferreds[ index ]);
                 this.active( navs.last().attr( settings.rule ) );
             }
 

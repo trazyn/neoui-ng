@@ -2,9 +2,13 @@
 @import (reference) "../../style/main.less";
 
 .ui.tab {
-
     position: relative;
+    overflow: hidden;
     >.nav {
+        width: 100%;
+        overflow: hidden;
+        height: 40px;
+        white-space: nowrap;
         .item {
             display: inline-block;
             transition: all .3s linear;
@@ -48,7 +52,6 @@
         }
 
         .indicator {
-
             position: absolute;
             border-bottom: 3px solid @dribbble;
             display: inline-block;
@@ -99,6 +102,25 @@
                 color: #777;
             }
         }
+    }
 
+    >.menu {
+        height: 40px;
+        line-height: 40px;
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: right;
+        background-color: white;
+        z-index: 1;
+        cursor: pointer;
+
+        i.icon {
+            font-size: 24px;
+            &:before {
+                content: "\e6a2";
+            }
+        }
     }
 }

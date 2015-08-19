@@ -9,8 +9,6 @@ define( [ "ui/tab/tab-ng" ], function() {
 
         var last;
 
-        $scope.canAddTab = true;
-
         $scope.selected = "2";
 
         $scope.tabs = [ {
@@ -43,16 +41,11 @@ define( [ "ui/tab/tab-ng" ], function() {
 
             var index = ++last + "";
 
-            if ( $scope.tabs.length < 8 ) {
-
-                $scope.tabs.push( {
-                    header: "Tab - " + last,
-                    index: index,
-                    content: $sce.trustAsHtml( "Tab: " + index ),
-                } );
-            }
-
-            $scope.canAddTab = $scope.tabs.length < 8;
+            $scope.tabs.push( {
+                header: "Tab - " + last,
+                index: index,
+                content: $sce.trustAsHtml( "Tab: " + index ),
+            } );
         };
 
         $scope.removeTab = function() {
@@ -70,8 +63,6 @@ define( [ "ui/tab/tab-ng" ], function() {
                     break;
                 }
             }
-
-            $scope.canAddTab = tabs.length < 8;
 
             tabs.splice( index, 1 );
         };
