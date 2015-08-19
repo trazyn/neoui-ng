@@ -27,7 +27,7 @@ define( [ "ui/sidenav/sidenav" ], function() {
  * */
 
 angular.module( "$ui.sidenav", [] )
-    .directive( "sSidenav", [ "$rootScope", function( $rootScope ) {
+    .directive( "sSidenav", [ "$rootScope", "$compile", function( $rootScope, $compile ) {
 
         function link( $scope, $element, $attrs ) {
 
@@ -35,7 +35,8 @@ angular.module( "$ui.sidenav", [] )
             sidenav,
             render = function( deferred, loading, close ) {
 
-                this.html( $element );
+                $compile( this.html( $element ) )( $scope );
+                $scope.$apply();
                 deferred.resolve();
             };
 
@@ -51,6 +52,8 @@ angular.module( "$ui.sidenav", [] )
                     } )
                     .done( function( data ) {
                         self.html( data );
+                        $compile( self )( $scope );
+                        $scope.$apply();
                     } )
                     .always( function() {
                         deferred.resolve();
@@ -66,12 +69,8 @@ angular.module( "$ui.sidenav", [] )
                 unload  : $scope.unload
             } );
 
-            if ( "object" === typeof $scope.instance ) {
-                angular.extend( $scope.instance, sidenav );
-            } else {
-                $scope.instance = sidenav;
-                $rootScope.$$phase || $scope.$apply();
-            }
+            $scope.instance = sidenav;
+            $rootScope.$$phase || $scope.$apply();
         }
 
         return {

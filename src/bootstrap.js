@@ -169,22 +169,29 @@ require( [
 
             $scope.title = location.hash.split( "/" )[1];
 
+            setTimeout( function() {
+
             menu
             .left()
             .$node
             .delegate( "[data-url]", "click", function( e ) {
 
                 $location.path( "/" + this.getAttribute( "data-url" ) );
-                menu.close();
                 $scope.$apply();
+
+                setTimeout( function() {
+
+                menu.close();
                 $( "html, body" ).scrollTop( 0 );
+                }, 500 );
             } );
+            }, 500 );
         };
     } ] );
 
     $( function() {
         setTimeout( function() {
-            $( ".ui.loading.global" ).loading().hide();
+            $( ".ui.loading.global:first" ).loading().hide();
         }, 1000 );
     } );
 
