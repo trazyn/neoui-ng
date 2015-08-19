@@ -22,19 +22,17 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
         /**
          * Set current tab
-         * Priorty:
+         * Priority:
          *  .selected > settings.selected > :first
          * */
 		currentNav = this.$navs.filter( ".selected:first" );
 		if ( currentNav.length ) {
 
 		    if ( settings.selected !== undefined ) {
-
 		        currentNav = this.$navs.filter( "[" + settings.rule + "=" + settings.selected + "]" );
 		    } else {
                 currentNav = this.$navs.first();
 		    }
-
 		    currentNav.addClass( "selected" );
 		}
 
@@ -53,25 +51,9 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
                 animation       : settings.duration
             };
 
-            if ( settings.vertical ) {
-
-                options.properties = function( position, ele ) {
-
-                    ele = ele[0];
-
-                    return {
-                        left    : position.left + "px",
-                        top     : ele[ "offsetTop" ] + "px",
-                        width   : ele.innerWidth() + "px",
-                        height  : ele[ "offsetHeight" ] + "px"
-                    };
-                };
-            }
-
             if ( settings.lavalamp ) {
                 instance.lavalamp = target.find( "> div.nav" ).lavalamp( options );
             }
-
         }, 300 );
 
         if ( settings.ripple ) {
@@ -85,12 +67,10 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 			var
 			self = $( this ),
-
 			tab,
 
 			/** Show page after the ajax has been completed */
 			startup,
-
 			index = self.attr( settings.rule ),
 
 			/** Loaded page via ajax */
@@ -133,7 +113,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
                 e.stopImmediatePropagation();
                 e.preventDefault();
-
                 return;
             }
 
@@ -151,9 +130,12 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					currentNav = self.removeClass( class4success ).addClass( "selected" );
 
 					if ( currentTab ) {
-						/** Disable slidedown */
 						currentTab.removeClass( "selected" );
 					}
+
+					if ( currentTab.nextAll().index( tab ) !== -1 ) {
+					    tab.removeClass( "right" ).addClass( "left" );
+					} else tab.removeClass( "left" ).addClass( "right" );
 
 					currentTab = tab.addClass( "selected" );
                     settings.lavalamp && instance.lavalamp && instance.lavalamp.hold( self );
@@ -161,13 +143,13 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					return;
 				}
 
+                /** Lazy load */
 				if ( instance.render && instance.render[ index ] ) {
 
 					var
 					render = instance.render[ index ];
 
 					startup = index;
-
 					delete instance[ "render" ][ "index" ];
 
 					tab = $( "<div class='item' " + settings.rule + "='" + index + "'>" )
@@ -182,10 +164,10 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						startup = index;
 					} else {
 
-						var callbacks = (instance[ "callbacks" ] || {}) [ index ] || {};
+						var callbacks = (instance[ "deferreds" ] || {}) [ index ] || {};
 
 						/** Delete the references */
-						delete (instance[ "callbacks" ] || {})[ index ];
+						delete (instance[ "deferreds" ] || {})[ index ];
 
 						$.ajax( {
 							url: page,
@@ -194,13 +176,10 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						.always( callbacks.always )
 						.done( function( responseText ) {
 
-                            /** For test */
-                            setTimeout( function() {
 							tab = $( "<div class='item'>" ).attr( settings.rule, index ).html( responseText );
 							self.removeClass( class4loading ).addClass( class4success );
-							"function" === typeof callbacks.done && callbacks.done( tab );
+							(callbacks.done || $.noop)( tab );
                             finish();
-                            }, 6000 );
 						} )
 						.fail( callbacks.fail, function( xhr ) {
 							self.removeClass( [ class4loading, class4success ].join( " " ) ).addClass( class4error );
@@ -230,7 +209,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 			var
 
 			navs = this.$navs, tabs = this.$tabs,
-
 			settings = this.settings,
 
 			/** Active the tab */
@@ -282,8 +260,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					/** Render the content by an ajax call */
 					else if ( item.page ) {
 						nav.attr( "data-page", item.page );
-
-						(this.callbacks = this.callbacks || {})[ item.name ] = item.callbacks;
+						(this.deferreds = this.deferreds || {})[ item.name ] = item.deferred;
 					}
 
 					/** Update index */
@@ -330,11 +307,12 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
                 index = navs.index( navs.filter( selector ) );
                 navs.splice( index, 1 );
-                /** Maybe the content generate by ajax */
+                /** Content can be lazy load, so they have different index value */
                 index = tabs.index( tabs.filter( selector ) );
                 tabs.splice( index, 1 );
 
-                this.callbacks && (delete this.callbacks[ index ]);
+                this.render && (delete this.render[ index ]);
+                this.deferreds && (delete this.deferreds[ index ]);
                 this.active( navs.last().attr( settings.rule ) );
             }
 
@@ -375,9 +353,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		    settings = this.settings;
 
 		    if ( indexes ) {
-
 		        indexes = indexes instanceof Array ? indexes : [ indexes ];
-
 		        while ( indexes.length ) {
 		            navs.filter( "[" + settings.rule + "=" + indexes.pop() + "]" ).attr( "disabled", true );
 		        }
@@ -403,9 +379,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		        while ( indexes.length ) {
 
                     i = indexes.pop();
-
 		            nav = navs.filter( "[" + settings.rule + "=" + i + "]" );
-
 		            if ( nav.is( "[disabled]" ) ) {
 		                nav.removeAttr( "disabled" );
                         this.active( i );
@@ -423,7 +397,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		var instance = this.data( namespace );
 
 		if ( !instance ) {
-
 			instance = new Tab( this, $.extend( {}, true, $.fn.tab.defaults, options || {} ) );
 			this.data( namespace, instance );
 		}
@@ -442,7 +415,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		ripple          : {
 		    duration    : 800
 		},
-		vertical 	    : false,
 		lavalamp 	    : true
 	};
 } );

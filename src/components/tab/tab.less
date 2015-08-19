@@ -3,6 +3,7 @@
 
 .ui.tab {
 
+    position: relative;
     >.nav {
         .item {
             display: inline-block;
@@ -56,54 +57,48 @@
         }
     }
 
-    >.content .item {
-        display: none;
-        border: 0;
-        margin-bottom: 0;
-        padding: 10px 8px 5px;
+    >.content {
+        min-height: 0;
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        overflow: hidden;
 
-        &.selected {
-            display: block;
-        }
+        .item {
+            border: 0;
+            margin-bottom: 0;
+            padding: 10px 8px 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform .5s cubic-bezier(.35,0,.25,1);
+            transform: translateX(-100%);
 
-        &.error blockquote {
-            border-left: 4px solid #ddd;
-            padding: 0 15px;
-            color: #777;
-        }
-    }
+            &.right {
+                transform: translateX(100%);
+            }
 
-    &.vertical {
-        >.nav {
-            vertical-align: top;
-            width: 14%;
-            display: inline-block;
+            &.left {
+                transform: translateX(-100%);
+            }
 
-            .item {
-                display: block;
-                border-bottom: none;
-                z-index: 1;
-                text-align: center;
-                margin-left: 0px;
-                margin-bottom: 35px;
-                border: 1px solid #ddd;
-                &.selected, &:hover {
-                    color: #fff;
-                }
+            &.selected {
+                opacity: 1;
+                position: relative;
+                visibility: visible;
+                transform: translateX(0);
+            }
+
+            &.error blockquote {
+                border-left: 4px solid #ddd;
+                padding: 0 15px;
+                color: #777;
             }
         }
 
-        >.content {
-
-            vertical-align: top;
-            width: 85%;
-            display: inline-block;
-        }
-
-        .indicator {
-            background-color: @dribbble;
-            border-bottom: none;
-            margin-left: 0px;
-        }
     }
 }
