@@ -51,17 +51,20 @@ xmp {
     z-index: 9;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 
+    a.hamburger, a:last-child {
+        overflow: initial !important;
+        position: absolute !important;
+    }
+
     a.hamburger {
-        display: block;
-        position: relative;
+        display: inline-block;
         top: 17px;
         left: 32px;
-        overflow: initial !important;
     }
 
     a:last-child {
+        display: inline-block;
         cursor: pointer;
-        position: absolute;
         top: 19px;
         right: 32px;
         color: #fff;
@@ -162,6 +165,11 @@ xmp {
         &.active {
             color: @coral;
         }
+    }
+
+    .ui.ripple .ripple {
+        width: 180px !important;
+        height: 180px !important;
     }
 }
 

@@ -29,14 +29,14 @@ define( [ "ui/sidenav/sidenav" ], function() {
 angular.module( "$ui.sidenav", [] )
     .directive( "sSidenav", [ "$rootScope", "$compile", function( $rootScope, $compile ) {
 
-        function link( $scope, $element, $attrs ) {
+        function link( $scope, $element, $attrs, undefined, link ) {
 
             var
             sidenav,
             render = function( deferred, loading, close ) {
 
-                $compile( this.html( $element ) )( $scope );
-                $scope.$apply();
+                this.html( $element );
+                $compile( this.find( ".ui.sidenav >*" ) )( $scope );
                 deferred.resolve();
             };
 

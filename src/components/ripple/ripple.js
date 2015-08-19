@@ -9,6 +9,7 @@
 
 		var
 		self = this,
+		duration = settings.duration + "ms",
 		ripple = target.find( "span.ripple" );
 
 		this.$node = target.css( "position", "relative" );
@@ -31,15 +32,13 @@
 		    } );
 		}
 
-		settings.duration = settings.duration + "ms";
-
 		ripple.css( {
 
-		    "-webkit-animation-duration": settings.duration,
-		    "-moz-animation-duration": settings.duration,
-		    "-ms-animation-duration": settings.duration,
-		    "-o-animation-duration": settings.duration,
-		    "animation-duration": settings.duration,
+		    "-webkit-animation-duration": duration,
+		    "-moz-animation-duration": duration,
+		    "-ms-animation-duration": duration,
+		    "-o-animation-duration": duration,
+		    "animation-duration": duration
 		} );
 	};
 
@@ -58,7 +57,7 @@
 		show: function( e ) {
 
 			var
-			self = this,
+			self = this.hide(),
 
 			settings = self.settings,
 			offset = this.$node.offset(),
@@ -88,7 +87,12 @@
 
 					setTimeout( function() {
                         ripple.addClass( "show" );
-                        speed && f( self, ripple, speed, position );
+
+                        speed
+                            ? f( self, ripple, speed, position )
+                            : setTimeout( function() {
+                                ripple.removeClass( "show" );
+                            }, settings.duration << 1 );
 					}, 100 );
 				}, self.settings.speed );
 
