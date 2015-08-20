@@ -323,7 +323,7 @@ define( [ "ui/ripple/ripple" ], function() {
         ripple          : true,
 		autoWidth       : false,
 		closeOnSelect 	: true,
-		onSelect        : undefined,
+		onSelect        : $.noop,
 
 		formatter: function( item, settings ) {
 			return "<span>" + (item[ settings.textKey ] || item[ settings.valueKey ]) + "</span>";

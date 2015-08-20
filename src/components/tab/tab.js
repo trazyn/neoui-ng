@@ -63,6 +63,24 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
         }
 
         target
+        .delegate( ".menu.ui.dropdown.icon", "click", function() {
+
+            var
+            dropdown = $( this ).dropdown( { closeOnSelect: false } ),
+            list = [];
+
+            instance.$navs.each( function() {
+
+                var text = $( this ).text().trim();
+
+                list.push( {
+                    text: text,
+                    value: text
+                } );
+            } );
+
+            dropdown.render( list );
+        } )
 		.delegate( ".nav > .item", "click", function( e ) {
 
 			var
@@ -111,10 +129,6 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 			    offset = self.offset().left - scroller.width();
 
                 scroller.scrollLeft( offset );
-
-                if ( offset > 0 ) {
-
-                }
 			},
 
 			/** Shortcuts */

@@ -63,7 +63,7 @@ angular.module( "$ui.tab", [] )
             template        : '<div class="ui tab" style="min-height: 300px;">' +
                                 '<div class="nav"></div>' +
                                 '<div class="content" ng-transclude></div>' +
-                                '<span class="menu"><i class="icon more"></i></span>' +
+                                '<div class="menu ui dropdown icon left"><i class="icon more"></i><div class="content"/></div>' +
                               '</div>',
 
             controller      : controller

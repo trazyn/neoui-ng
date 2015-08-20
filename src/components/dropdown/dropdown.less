@@ -43,7 +43,7 @@
         text-overflow: ellipsis;
     }
 
-    > i.icon {
+    > i.icon.status {
         transition: .2s;
         position: absolute;
         top: 0px;
@@ -125,6 +125,61 @@
             visibility: visible;
             transform: scale(1);
             z-index: 9;
+        }
+    }
+
+    &.icon {
+        display: inline-block;
+        height: 48px;
+        width: 48px;
+        line-height: 48px;
+        border-radius: 48px;
+        border: none;
+        text-align: center;
+        background-color: @lightGray;
+
+        &:hover {
+            background-color: @lightGray2;
+        }
+
+        .content {
+            min-width: 140px;
+        }
+
+        li {
+            text-indent: 0;
+        }
+
+        &.left {
+            .content {
+                left: auto;
+                right: 0;
+            }
+        }
+
+        &.right {
+            .content {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        &.bottom-left {
+            .content {
+                top: auto;
+                bottom: 0;
+                left: auto;
+                right: 0;
+            }
+        }
+
+        &.bottom-right {
+            .content {
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: auto;
+            }
         }
     }
 }

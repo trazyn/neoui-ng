@@ -55,6 +55,11 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
 			text: "Angola"
 		} ];
 
+        $( ".ui.dropdown.icon" ).each( function() {
+
+            $( this ).dropdown( { data: $scope.data } );
+        } );
+
         angular.extend( $scope, {
 
             ajax: function() {
