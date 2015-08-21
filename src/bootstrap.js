@@ -33,6 +33,7 @@ require( [
         "demo/button/index",
         "demo/radio/index",
         "demo/loading/index",
+        "demo/pagination/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
@@ -59,6 +60,7 @@ require( [
 	        "demo.ripple",
 	        "demo.button",
 	        "demo.loading",
+	        "demo.pagination",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -157,6 +159,9 @@ require( [
 		    } )
 		    .when( "/dropdown", {
 		        templateUrl: "src/demo/dropdown/index.html"
+		    } )
+		    .when( "/pagination", {
+		        templateUrl: "src/demo/pagination/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

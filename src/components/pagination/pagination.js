@@ -1,120 +1,156 @@
 
 define( function() {
 
-	return function( target, index, max, callback ) {
+    var
+    namespace = "$ui.pagination",
 
-		var
-		page = [],
+    Pagination = function( target, settings ) {
 
-		head = "",
-		tail = "",
+        var
+        index = settings.index,
+        max = settings.max;
 
-		self = arguments.callee,
-
-		goPage = function( idx ) {
-
-			if ( (idx = +idx) > 0 && idx !== index && idx <= max ) {
-				return self( target, idx, max, callback ), true;
-			}
-
-			return false;
-		},
-
-		render = function() {
-
-			page = [];
-
-			if ( max <= 7 ) {
-
-				for ( var i = 1; i <= max; page += " " + i++ );
-			} else {
-
-				/** Need a head? */
-				index - 3 > 2 && ( head = "1 2 ..." );
-
-				/** Has tail? */
-				index + 3 < max && ( tail = "..." );
-
-				if ( head ) {
-					max - index > 3 && page.push( index - 2, index - 1, index );
-				} else
-					for ( var i = index < 3 ? 6 : index + 3; --i >= 1; page.unshift( i ) );
-
-				if ( tail ) {
-					index > 5 && page.push( index + 1, index + 2 );
-				} else
-					for ( var i = max - (3 === max - index ? 6 : 5); ++i <= max; page.push( i ) );
-
-				page.unshift( head );
-				page.push( tail );
-			}
-
-			/** Trim the blank item */
-			page = ($.isArray( page ) ? page : [page]).join( " " ).replace( /^\s+|\s$/g, "" ).split( " " );
-
-			for ( var i = 0, length = page.length; i < length; ++i ) {
-
-				if ( +page[i] ) {
-					page[i] = page[i] == index ? "<span class=current>" + index + "</span>" :
-
-						$( "<a>" ).html( page[i] ).click( function() { goPage( this.innerHTML ); } );
-				} else
-					page[i] = "<span class='normal'>...</span>";
-			}
-
-			/** Show PREV */
-			index > 1 && page.unshift( $( "<a>" ).html( "«" ).click( function() { goPage( index - 1 ); } ) );
-
-			/** Show NEXT */
-			index < max && page.push( $( "<a>" ).html( "»" ).click( function() { goPage( index + 1 ); } ) );
-
-			page.push( "<span class='normal'>跳转至</span> <input maxleng=4 type='text' /><span name='go'>GO</span>" );
-			target.html( page ).find( ":text:first" ).val( index );
-		};
-
-		if ( !target || 0 === (target = $( target )).length ) {
-			return;
-		}
-
-		if ( "function" === typeof index ) {
-
-			callback = index;
-			index = 1;
-			total = 1;
-		}
-
-		index = +index || 1;
-		max = +max || index;
+        index = +index || 0;
+        max = +max || index;
 
 		/** Swap index and max */
 		index > max && ( index ^= max, max ^= index, index ^= max );
 
-		render();
+        settings.index = index;
+        settings.max = max;
 
-		target
-		.undelegate( ":text", "keydown" )
-		.delegate( ":text", "keydown focusout", function( e ) {
+        this.$node = target;
+        this.settings = settings;
 
-			var value = this.value;
+        render( target, settings );
 
-			if ( isNaN( value ) || value < 0 ) {
-				return this.select();
-			}
+        target
+        .delegate( "[data-index]:not(.current)", "click", function( e ) {
 
-			13 === e.keyCode && goPage( value );
-		} )
-		.undelegate( "span[name=go]", "click" )
-		.delegate( "span[name=go]", "click", function( e ) {
-			goPage( $( this ).prev( ":text" ).val() );
-		} );
+            e.stopPropagation();
+            e.preventDefault();
 
-		/** After draw the pagination, invoke the callback */
-		"function" === typeof callback
-			&& callback.call( {
-				setPageCount: function( pageCount, refresh ) {
-					max = pageCount;
-					!!refresh && render();
-				}
-			}, index, max );
-	};
+            settings.index = +this.getAttribute( "data-index" );
+            settings.onPageChange( settings.index, settings );
+            render( target, settings );
+        } )
+
+        .delegate( settings.selector4input, "keydown", function( e ) {
+
+            if ( e.keyCode === 13 ) {
+                $( this ).next().trigger( "click" );
+            }
+        } )
+
+        .delegate( settings.selector4button, "click", function( e ) {
+
+            var
+            input = $( this ).prev(),
+            value = +input.val();
+
+            if ( value >= 1 && value <= settings.max ) {
+                settings.index = value;
+                settings.onPageChange( value, settings );
+                render( target, settings );
+            } else {
+                input.select();
+            }
+        } );
+    };
+
+    function render( target, settings ) {
+
+        var
+        index = settings.index,
+        max = settings.max,
+		head = "",
+		tail = "",
+        page = [],
+        content = target.find( settings.selector4content );
+
+        if ( max <= 7 ) {
+            for ( var i = 1; i <= max; page += " " + i++ );
+        } else {
+
+            /** Need a head? */
+            index - 3 > 2 && ( head = "1 2 ..." );
+
+            /** Has tail? */
+            index + 3 < max && ( tail = "..." );
+
+            if ( head ) {
+                max - index > 3 && page.push( index - 2, index - 1, index );
+            } else
+                for ( var i = index < 3 ? 6 : index + 3; --i >= 1; page.unshift( i ) );
+
+            if ( tail ) {
+                index > 5 && page.push( index + 1, index + 2 );
+            } else
+                for ( var i = max - (3 === max - index ? 6 : 5); ++i <= max; page.push( i ) );
+
+            page.unshift( head );
+            page.push( tail );
+        }
+
+        /** Trim the blank item */
+        page = ($.isArray( page ) ? page : [page]).join( " " ).replace( /^\s+|\s$/g, "" ).split( " " );
+
+        for ( var i = 0, length = page.length; i < length; ++i ) {
+
+            if ( +page[i] ) {
+
+                page[i] = page[i] == index
+
+                        ? "<span class=current>" + index + "</span>"
+                        : "<a data-index='" + page[i] + "'>" + page[i] + "</a>"
+                        ;
+            } else
+                page[i] = "<span class='normal'>...</span>";
+        }
+
+        /** Show PREV */
+        index > 1 && page.unshift( $( "<a class='icon prev' data-index='" + (index - 1) + "'></a>" ) );
+
+        /** Show NEXT */
+        index < max && page.push( $( "<a class='icon next' data-index='" + (index + 1) + "'></a>" ) );
+
+        content.html( page );
+        target.find( settings.selector4input ).val( index );
+    }
+
+    Pagination.prototype = {
+        val: function( value ) {
+
+            var settings = this.settings;
+
+            if ( !value ) {
+                return settings.index;
+            } else {
+                settings.index = value;
+                render( this.$node, settings );
+            }
+            return this;
+        }
+    };
+
+    $.fn.pagination = function( options ) {
+
+        var instance = this.data( namespace );
+
+        if ( !instance ) {
+            instance = new Pagination( this, $.extend( {}, $.fn.pagination.defaults, options ) );
+            this.data( namespace, instance );
+        }
+        return instance;
+    };
+
+    $.fn.pagination.defaults = {
+        index               : 1,
+        max                 : 1,
+        onPageChange        : $.noop,
+
+        selector4content    : ".content",
+        selector4input      : "input:text",
+        selector4button     : "[name=go]"
+    };
 } );

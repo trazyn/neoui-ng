@@ -56,7 +56,6 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
 		} ];
 
         $( ".ui.dropdown.icon" ).each( function() {
-
             $( this ).dropdown( { data: $scope.data } );
         } );
 
@@ -67,7 +66,8 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
                 var deferred = $.Deferred();
 
                 $.ajax( {
-                    url: "https://api.github.com/search/repositories?q=" + "an" + "&sort=stars&order=desc"
+                    url: "src/demo/dropdown/result.json",
+                    dataType: "json"
                 } )
 
                 .done( function( data ) {

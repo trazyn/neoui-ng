@@ -1,0 +1,76 @@
+
+@import (reference) "../../style/main.less";
+
+.ui.pagination {
+
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+	font-size: 1rem;
+	height: 32px;
+	line-height: 32px;
+	font-size: .8rem;
+
+	a, span, input {
+		text-decoration: none;
+		cursor: pointer;
+		display: inline-block;
+		line-height: 35px;
+		height: 35px;
+		border: 1px solid @lightGray2;
+		color: #3e3e3e;
+		width: 35px;
+		background-color: white;
+		margin: 5px;
+		transition: .2s;
+		font-size: 14px;
+		outline: 0;
+        vertical-align: middle;
+	}
+
+	a:hover, a:focus, input:focus, input:hover {
+		border: 1px solid @primary;
+		color: @primary;
+	}
+
+	input, input + span {
+		text-align: center;
+		color: @darkGray2;
+	}
+
+	span {
+		font-size: 14px;
+
+		&:hover {
+			border: 1px solid @primary;
+			color: @primary;
+		}
+
+		&.current {
+			background-color: @primary;
+			color: white;
+			font-weight: bold;
+			border-color: @primary;
+		}
+
+		&.normal {
+			width: initial;
+			background: inherit;
+			border: auto;
+			margin: 0 20px;
+			border: 1px solid transparent;
+			width: auto;
+			cursor: default;
+			color: @darkGray;
+
+			&:hover {
+				border: 1px solid transparent;
+			}
+		}
+	}
+
+	>.content {
+	    display: inline-block;
+	}
+}
+

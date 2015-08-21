@@ -1,0 +1,202 @@
+
+<title>Pagination - Neoui-ng</title>
+
+<ul id="anchors" class="ui anchor">
+    <li data-anchor="example" class="item active">Example</li>
+
+    <li class="item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="item">Markup</li>
+            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="sCalendar" class="item">Directive * s-calendar</li>
+        </ul>
+    </li>
+
+    <li class="item">jQuery
+        <ul>
+            <li data-anchor="html" class="item">Html</li>
+            <li data-anchor="constructor" class="item">Constructor</li>
+            <li data-anchor="options" class="item">Options</li>
+            <li data-anchor="method" class="item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="pagination" ng-controller="paginationController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="box">
+            {{ index }}
+        </div>
+
+        <s-pagination index="index" max="20"></s-pagination>
+    </section>
+
+    <br>
+    <br>
+
+    <div class="markdown">
+
+        <header>AngularJS</header>
+        <div class="markdown">
+            <section>
+                <div class="ui ribbon" data-anchor="markup">
+                    <span>Markup</span>
+                </div>
+
+                <div class="wrap">
+                <xmp>
+                <s-pagination index="index" max="20"></s-pagination>
+                </xmp>
+                </div>
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="javascript">
+                    <span>Javascript</span>
+                </div>
+
+                <xmp>
+                angular
+                .module( "demo.pagination", [ "$ui.pagination" ] )
+                .controller( "paginationController", [ "$scope", function( $scope ) {
+                    $scope.index = 7;
+                } ] );
+                </xmp>
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="sCalendar">
+                    <span>Directive * s-pagination</span>
+                </div>
+
+                <blockquote>
+                    <p><code>=index</code> - <code>1</code>
+                    </p>
+                </blockquote>
+                <p>当前页数</p>
+                <br>
+
+                <blockquote>
+                    <p><code>=max</code> - <code>1</code>
+                    </p>
+                </blockquote>
+                <p>最大页数</p>
+                <br>
+            </section>
+        </div>
+
+        <header data-anchor="api">API</header>
+
+        <section>
+            <div class="ui ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+            <div class="ui pagination">
+                <div class="content"></div>
+                <span class="normal">跳转至</span>
+                <input type="text" maxleng="4">
+                <span name="go">GO</span>
+            </div>
+            </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).pagination( [options] )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+        <xmp>
+        $( ".ui.pagination" ).calendar();
+        </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>max</code> - <code>1</code>
+                </p>
+            </blockquote>
+            <p>最大页数</p>
+            <br>
+
+            <blockquote>
+                <p><code>index</code> - <code>1</code>
+                </p>
+            </blockquote>
+            <p>当前页数</p>
+            <br>
+
+            <blockquote>
+                <p><code>onPageChange</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>页数变动时触发
+            </p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4content</code> - <code>".content"</code>
+                </p>
+            </blockquote>
+            <p>Selector of the pagination container</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4input</code> - <code>"input:text"</code>
+                </p>
+            </blockquote>
+            <p>Selector of the input box</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4button</code> - <code>"[name=go]"</code>
+                </p>
+            </blockquote>
+            <p>Selector of the button</p>
+            <br>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="ui ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <blockquote>
+                <p><code>pagination.val( [ value ] )</code>
+                </p>
+                <blockquote>
+                    <p><code>value</code> - Number</p>
+                </blockquote>
+            </blockquote>
+            <p>设置/取值 当前页数</p>
+            <br>
+        </section>
+    </div>
+
+</section>
