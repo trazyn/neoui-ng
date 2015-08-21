@@ -160,6 +160,9 @@ define( [ "ui/ripple/ripple" ], function() {
                 if ( settings.closeOnSelect ) {
                     target.trigger( "focusout", "Force close the dropdown~" );
                 }
+
+                e.preventDefault();
+                e.stopPropagation();
             }
 		} );
 
@@ -173,10 +176,10 @@ define( [ "ui/ripple/ripple" ], function() {
             var settings = this.settings;
 
             settings.data = data;
-
             if ( settings.data instanceof Array ) {
                 renderList( this.$node.find( settings.selector4content ), settings );
             }
+            return this;
         },
 
 		val: function( value ) {
@@ -207,9 +210,10 @@ define( [ "ui/ripple/ripple" ], function() {
 					.each( function() {
 						res.push( settings.valueKey ? this.getAttribute( "data-value" ) : settings.data[ this.getAttribute( "data-index" ) ] );
 					} );
-			}
 
-			return res;
+				return res;
+			}
+			return this;
 		},
 
 		add: function( data ) {
@@ -253,6 +257,14 @@ define( [ "ui/ripple/ripple" ], function() {
 		enabled: function() {
 			this.$node.removeAttr( "disabled" );
 			return this;
+		},
+
+		open: function() {
+		    this.$node.addClass( "open" );
+		},
+
+		close: function() {
+		    this.$node.removeClass( "open" );
 		}
 	};
 
@@ -268,7 +280,11 @@ define( [ "ui/ripple/ripple" ], function() {
 
                 var
                 item = data[ i ],
-				li = "<li data-value='" + item[ settings.valueKey ] + "' data-index='" + i + "' title='" + item[ settings.textKey ] + "'>" +
+				li = "<li " +
+				        (item.disabled ? " disabled='disabled' " : "") +
+				        "data-value='" + item[ settings.valueKey ] + "' " +
+				        "data-index='" + i + "' " +
+				        "title='" + item[ settings.textKey ] + "'>" +
                         settings.formatter( item, settings ) +
                      "</li>";
 

@@ -63,23 +63,38 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
         }
 
         target
-        .delegate( ".menu.ui.dropdown.icon", "click", function() {
+        .delegate( ".menu.ui.dropdown.icon", "click", function( e ) {
 
             var
-            dropdown = $( this ).dropdown( { closeOnSelect: false } ),
-            list = [];
+            dropdown = $( this ).dropdown( {
+                onSelect: function( item ) {
+                    instance.active( item.value );
+                }
+            } ),
+            list = [],
+            selected;
 
             instance.$navs.each( function() {
 
-                var text = $( this ).text().trim();
+                var
+                self = $( this ),
+                text = self.text().trim();
 
                 list.push( {
                     text: text,
-                    value: text
+                    value: self.attr( "data-index" ),
+                    disabled: self.is( "[disabled]" )
                 } );
+
+                if ( self.hasClass( "selected" ) ) {
+                    selected = list[ list.length - 1 ];
+                }
             } );
 
-            dropdown.render( list );
+            dropdown
+            .render( list )
+            .val( selected )
+            .open();
         } )
 		.delegate( ".nav > .item", "click", function( e ) {
 
@@ -357,7 +372,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 			nav,
 			settings = this.settings;
 
-            nav = this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).trigger( "click" );
+            nav = this.$navs.filter( "[" + settings.rule + "='" + index + "']" ).trigger( "click" );
 			return this;
 		},
 
