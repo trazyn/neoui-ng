@@ -72,5 +72,30 @@
 	>.content {
 	    display: inline-block;
 	}
+
+	&.flat {
+	    a, span, input {
+	        border: none;
+	        border-bottom: 2px solid @primary;
+	        &:hover {
+	            background-color: @lightGray;
+	        }
+	    }
+
+	    .current {
+	        background-color: white;
+            border-color: @coral;
+	        font-weight: normal;
+	        color: @coral;
+	    }
+
+	    .normal {
+	        border: none;
+	        &:hover {
+	            border: none;
+	            background-color: inherit;
+	        }
+        }
+	}
 }
 

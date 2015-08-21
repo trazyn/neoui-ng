@@ -12,6 +12,11 @@ define( [ "ui/pagination/pagination-ng" ], function() {
         };
 
         $scope.index = 7;
+
+        $( ".ui.pagination:last" ).pagination( {
+            max: 20,
+            index: 1
+        } );
     } ] );
 } );
 

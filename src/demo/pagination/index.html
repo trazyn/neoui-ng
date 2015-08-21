@@ -3,6 +3,7 @@
 
 <ul id="anchors" class="ui anchor">
     <li data-anchor="example" class="item active">Example</li>
+    <li data-anchor="flat" class="item">Flat</li>
 
     <li class="item">AngularJS
         <ul>
@@ -37,6 +38,17 @@
     <br>
     <br>
 
+    <header data-anchor="flat">Flat</header>
+
+    <section>
+        <div class="ui pagination flat">
+            <div class="content"></div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
     <div class="markdown">
 
         <header>AngularJS</header>
@@ -47,8 +59,18 @@
                 </div>
 
                 <div class="wrap">
+                <label>Normal</label>
                 <xmp>
                 <s-pagination index="index" max="20"></s-pagination>
+                </xmp>
+                </div>
+
+                <div class="wrap">
+                <label>Flat</label>
+                <xmp>
+                <div class="ui pagination flat">
+                    <div class="content"></div>
+                </div>
                 </xmp>
                 </div>
             </section>
