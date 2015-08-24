@@ -1,0 +1,64 @@
+
+@import (reference) "../../style/main.less";
+
+.ui.accordion {
+
+    .pane {
+        transition: .2s;
+        position: relative;
+        overflow: hidden;
+
+        .head {
+            width: 100%;
+            border-bottom: 2px solid @lightGray;
+            cursor: pointer;
+            padding: 15px 5px 5px;
+            transition: .2s color, .5s border-color;
+            font-size: 1rem;
+        }
+
+        .content {
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            font-size: 1rem;
+            transition: .5s opacity;
+        }
+
+        &:hover {
+            .head {
+                color: @primary;
+            }
+        }
+
+        &:after {
+            font-family: icomoon;
+            content: "\e603";
+            transition: .5s;
+            color: #6496f0;
+            position: absolute;
+            top: 16px;
+            right: 0;
+            font-size: 16px;
+        }
+
+        &.open {
+
+            .head {
+                color: @primary;
+                border-color: @primary;
+            }
+
+            .content {
+                height: auto;
+                visibility: visible;
+                padding: 16px 5px 10px;
+                opacity: 1;
+            }
+
+            &:after {
+                transform: rotate(405deg);
+            }
+        }
+    }
+}
