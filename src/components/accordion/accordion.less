@@ -3,32 +3,29 @@
 
 .ui.accordion {
 
-    .pane {
+    >.pane {
         transition: .2s;
         position: relative;
         overflow: hidden;
 
-        .head {
+        >.head {
             width: 100%;
             border-bottom: 2px solid @lightGray;
             cursor: pointer;
             padding: 15px 5px 5px;
             transition: .2s color, .5s border-color;
             font-size: 1rem;
+            &:hover {
+                color: @primary;
+            }
         }
 
-        .content {
+        >.content {
             opacity: 0;
             visibility: hidden;
             height: 0;
             font-size: 1rem;
             transition: .5s opacity;
-        }
-
-        &:hover {
-            .head {
-                color: @primary;
-            }
         }
 
         &:after {
@@ -44,12 +41,12 @@
 
         &.open {
 
-            .head {
+            >.head {
                 color: @primary;
                 border-color: @primary;
             }
 
-            .content {
+            >.content {
                 height: auto;
                 visibility: visible;
                 padding: 16px 5px 10px;
@@ -60,5 +57,9 @@
                 transform: rotate(405deg);
             }
         }
+    }
+
+    .ui.accordion {
+        padding-left: 10px;
     }
 }
