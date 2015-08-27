@@ -34,6 +34,7 @@ require( [
         "demo/radio/index",
         "demo/loading/index",
         "demo/pagination/index",
+        "demo/accordion/index",
         "demo/validation/index" ], function() {
 
 	"use strict";
@@ -61,6 +62,7 @@ require( [
 	        "demo.button",
 	        "demo.loading",
 	        "demo.pagination",
+	        "demo.accordion",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -159,6 +161,9 @@ require( [
 		    } )
 		    .when( "/dropdown", {
 		        templateUrl: "src/demo/dropdown/index.html"
+		    } )
+		    .when( "/accordion", {
+		        templateUrl: "src/demo/accordion/index.html"
 		    } )
 		    .when( "/pagination", {
 		        templateUrl: "src/demo/pagination/index.html"

@@ -56,7 +56,7 @@ angular.module( "$ui.tab", [] )
                 onSelect    : "&"
             },
 
-            restrict        : "E",
+            restric         : "EA",
 
             transclude      : true,
             replace         : true,
@@ -127,7 +127,7 @@ angular.module( "$ui.tab", [] )
             template        : "<div style='display: none;' ng-transclude></div>",
             replace         : true,
 
-            restric         : "E",
+            restric         : "EA",
 
             require         : "^sTabSet",
             link            : link
