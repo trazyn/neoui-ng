@@ -2,13 +2,17 @@
 <title>Accordion - Neoui-ng</title>
 
 <ul id="anchors" class="ui anchor">
-    <li data-anchor="example" class="item active">Example</li>
+    <li data-anchor="simple" data-forceanchor="-80" class="item active">Simple</li>
+    <li data-anchor="advance" data-forceanchor="-80" class="item">Advance</li>
 
     <li class="item">AngularJS
         <ul>
             <li data-anchor="markup" class="item">Markup</li>
             <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sCalendar" class="item">Directive * s-calendar</li>
+            <li data-anchor="sAccordion" class="item">Directive * s-accordion</li>
+            <li data-anchor="sAccordionPane" class="item">Directive * s-accordion-pane</li>
+            <li data-anchor="sAccordionHead" class="item">Directive * s-accordion-head</li>
+            <li data-anchor="sAccordionContent" class="item">Directive * s-accordion-content</li>
         </ul>
     </li>
 
@@ -22,83 +26,95 @@
     </li>
 </ul>
 
-<section id="pagination" ng-controller="accordionController" ng-init="init()">
+<section id="accordion" ng-controller="accordionController" ng-init="init()">
 
-    <header data-anchor="example">Example</header>
+    <header data-anchor="simple">Simple</header>
 
     <section>
+        <s-accordion>
+            <s-accordion-pane>
+                <s-accordion-head>
+                    Pane 1
+                </s-accordion-head>
+                <s-accordion-content>
+                    Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                </s-accordion-content>
+            </s-accordion-pane>
 
-        <div class="ui accordion">
-            <div class="pane">
-                <div class="head">
-                Pane 1
-                </div>
-                <div class="content">
-                    Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.
-                </div>
-            </div>
+            <s-accordion-pane
+                head="Pane 2"
+                content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+            </s-accordion-pane>
+        </s-accordion>
+    </section>
 
-            <div class="pane">
-                <div class="head">
-                Pane 2
-                </div>
-                <div class="content">
-                    Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
-                </div>
-            </div>
+    <header data-anchor="advance">Advance</header>
 
-            <div class="pane">
-                <div class="head">
-                Pane 3
-                </div>
-                <div class="content">
+    <section>
+        <s-accordion multiple="multiple"
+            on-expand="onExpand"
+            on-collapse="onCollapse"
+            controller="accordion">
+            <s-accordion-pane
+                index="1"
+                is-open="true"
+                head="Pane 1"
+                content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.">
+            </s-accordion-pane>
+
+            <s-accordion-pane
+                index="2"
+                is-open="open2"
+                head="Pane 2"
+                content="Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.">
+            </s-accordion-pane>
+
+            <s-accordion-pane
+                index="3"
+                head="Pane 3">
                     Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
 
-                    <div class="ui accordion">
-                        <div class="pane">
-                            <div class="head">
-                            Subpane 1
-                            </div>
-                            <div class="content">
-                                <div class="content">
-                                    Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                    <s-accordion>
+                        <s-accordion-pane
+                            index="1"
+                            head="Subpane 1">
+                                <s-accordion>
+                                    <s-accordion-pane index="1">
+                                        <s-accordion-head>
+                                            Inner Subpane 1
+                                        </s-accordion-head>
+                                        <s-accordion-content>
+                                            Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                                        </s-accordion-content>
+                                    </s-accordion-pane>
 
-                                    <div class="ui accordion">
-                                        <div class="pane">
-                                            <div class="head">
-                                                Inner Subpane 1
-                                            </div>
-                                            <div class="content">
-                                                Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
-                                            </div>
-                                        </div>
+                                    <s-accordion-pane
+                                        index="2"
+                                        head="Inner Subpane 2"
+                                        content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+                                    </s-accordion-pane>
+                                </s-accordion>
+                        </s-accordion-pane>
 
-                                        <div class="pane">
-                                            <div class="head">
-                                                Inner Subpane 2
-                                            </div>
-                                            <div class="content">
-                                                Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <s-accordion-pane
+                            index="2"
+                            head="Subpane 2"
+                            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+                        </s-accordion-pane>
+                    </s-accordion>
+            </s-accordion-pane>
+        </s-accordion>
 
-                        <div class="pane">
-                            <div class="head">
-                            Subpane 2
-                            </div>
-                            <div class="content">
-                                Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <p>
+        <button class="ui button primary transition" ng-click="accordion.expand(1)">Expand first</button>
+        <button class="ui button primary transition" ng-click="accordion.collapse(1)">Collapse first</button>
+        <button class="ui button primary transition" ng-click="accordion.toggle(1)">Toggle first</button>
 
+        <button class="ui button transition primary" ng-click="accordion.expandAll()">Expand All</button>
+        <button class="ui button transition primary" ng-click="accordion.collapseAll()">Collapse All</button>
+        </p>
+
+        <button class="ui button transition mint" ng-click="multiple = !multiple">{{ !multiple ? "Singleton" : "Allows multiple sections open at once" }}</button>
     </section>
 
     <br>
@@ -114,19 +130,84 @@
                 </div>
 
                 <div class="wrap">
-                <label>Normal</label>
+                <label>Simple</label>
                 <xmp>
-                <s-pagination index="index" max="20"></s-pagination>
+                <s-accordion>
+                    <s-accordion-pane>
+                        <s-accordion-head>
+                            Pane 1
+                        </s-accordion-head>
+                        <s-accordion-content>
+                            Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                        </s-accordion-content>
+                    </s-accordion-pane>
+
+                    <s-accordion-pane
+                     head="Pane 2"
+                     content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+                    </s-accordion-pane>
+                </s-accordion>
                 </xmp>
                 </div>
 
                 <div class="wrap">
-                <label>Flat</label>
-                <xmp>
-                <div class="ui pagination flat">
-                    <div class="content"></div>
-                </div>
-                </xmp>
+                    <label>
+                    Advance
+                    </label>
+                    <xmp>
+                    <s-accordion multiple="multiple"
+                        on-expand="onExpand"
+                        on-collapse="onCollapse"
+                        is-open="isOpen"
+                        controller="accordion">
+                        <s-accordion-pane
+                            index="1"
+                            head="Pane 1"
+                            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.">
+                        </s-accordion-pane>
+
+                        <s-accordion-pane
+                            index="2"
+                            head="Pane 2"
+                            content="Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.">
+                        </s-accordion-pane>
+
+                        <s-accordion-pane
+                            index="3"
+                            head="Pane 3">
+                            Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+
+                            <s-accordion>
+                                <s-accordion-pane
+                                    index="1"
+                                    head="Subpane 1">
+                                    <s-accordion>
+                                        <s-accordion-pane index="1">
+                                            <s-accordion-head>
+                                                Inner Subpane 1
+                                            </s-accordion-head>
+                                            <s-accordion-content>
+                                                Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                                            </s-accordion-content>
+                                        </s-accordion-pane>
+
+                                        <s-accordion-pane
+                                            index="2"
+                                            head="Inner Subpane 2"
+                                            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+                                        </s-accordion-pane>
+                                    </s-accordion>
+                                </s-accordion-pane>
+
+                                <s-accordion-pane
+                                    index="2"
+                                    head="Subpane 2"
+                                    content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+                                </s-accordion-pane>
+                            </s-accordion>
+                        </s-accordion-pane>
+                    </s-accordion>
+                    </xmp>
                 </div>
             </section>
 
@@ -137,30 +218,103 @@
 
                 <xmp>
                 angular
-                .module( "demo.pagination", [ "$ui.pagination" ] )
-                .controller( "paginationController", [ "$scope", function( $scope ) {
-                    $scope.index = 7;
+                .module( "demo.accordion", [ "$ui.accordion" ] )
+                .controller( "accordionController", [ "$scope", function( $scope ) {
+
+                    $scope.multiple = true;
+
+                    $scope.onExpand = function( index ) {
+                        console.log( "Expand: " + index );
+                    };
+
+                    $scope.onCollapse = function( index ) {
+                        console.log( "Collapse: " + index );
+                    };
                 } ] );
                 </xmp>
             </section>
 
             <section>
-                <div class="ui ribbon" data-anchor="sCalendar">
-                    <span>Directive * s-pagination</span>
+                <div class="ui ribbon" data-anchor="sAccordion">
+                    <span>Directive * s-accordion</span>
                 </div>
 
                 <blockquote>
-                    <p><code>=index</code> - <code>1</code>
+                    <p><code>=multiple</code> - <code>false</code>
                     </p>
                 </blockquote>
-                <p>当前页数</p>
+                <p>同时展开多个内容区域</p>
                 <br>
 
                 <blockquote>
-                    <p><code>=max</code> - <code>1</code>
+                    <p><code>=controller</code> - <code>null</code>
                     </p>
                 </blockquote>
-                <p>最大页数</p>
+                <p>Controller of the accordion, <a href data-anchor="method">See Method</a></p>
+                <br>
+
+                <blockquote>
+                    <p><code>&on-expand</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>展开时回调</p>
+                <br>
+
+                <blockquote>
+                    <p><code>&on-collapse</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>收起时回调</p>
+                <br>
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="sAccordionPane">
+                    <span>Directive * s-accordion-pane</span>
+                </div>
+
+                <blockquote>
+                    <p><code>@is-open</code> - <code>false</code>
+                    </p>
+                </blockquote>
+                <p>是否展开</p>
+                <br>
+
+                <blockquote>
+                    <p><code>@head</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>标题, 不为空时覆盖<code>s-accordion-head</code></p>
+                <br>
+
+                <blockquote>
+                    <p><code>@content</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>内容, 不为空时覆盖<code>s-accordion-content</code>, 默认取值<code>s-accordion-pane</code>中<code>raw</code>值</p>
+                <br>
+
+                <blockquote>
+                    <p><code>@index</code> - <code>null</code>
+                    </p>
+                </blockquote>
+                <p>索引, 可选</p>
+                <br>
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="sAccordionHead">
+                    <span>Directive * s-accordion-head</span>
+                </div>
+                <p>自定义标题栏</p>
+                <br>
+            </section>
+
+            <section>
+                <div class="ui ribbon" data-anchor="sAccordionContent">
+                    <span>Directive * s-accordion-content</span>
+                </div>
+                <p>自定义内容</p>
                 <br>
             </section>
         </div>
@@ -173,11 +327,19 @@
             </div>
 
             <xmp>
-            <div class="ui pagination">
-                <div class="content"></div>
-                <span class="normal">跳转至</span>
-                <input type="text" maxleng="4">
-                <span name="go">GO</span>
+            <div class="ui accordion">
+                <div class="pane">
+                    <div class="head">Pane 1</div>
+                    <div class="content">
+                    Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                    </div>
+                </div>
+                <div class="pane">
+                    <div class="head">Pane 2</div>
+                    <div class="content">
+                    Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.
+                    </div>
+                </div>
             </div>
             </xmp>
         </section>
@@ -190,7 +352,7 @@
                 <span>Constructor</span>
             </div>
 
-            <p><code>$( selector ).pagination( [options] )</code>
+            <p><code>$( selector ).accordion( [options] )</code>
             </p>
 
             <blockquote>
@@ -200,7 +362,7 @@
             </blockquote>
 
         <xmp>
-        $( ".ui.pagination" ).calendar();
+        $( ".ui.accordion" ).accordion();
         </xmp>
         </section>
 
@@ -213,46 +375,52 @@
             </div>
 
             <blockquote>
-                <p><code>max</code> - <code>1</code>
+                <p><code>multiple</code> - <code>false</code>
                 </p>
             </blockquote>
-            <p>最大页数</p>
+            <p>同时展开多个内容区域</p>
             <br>
 
             <blockquote>
-                <p><code>index</code> - <code>1</code>
+                <p><code>duration</code> - <code>300</code>
                 </p>
             </blockquote>
-            <p>当前页数</p>
+            <p>动画速度, 单位毫秒<p>
             <br>
 
             <blockquote>
-                <p><code>onPageChange</code> - <code>null</code>
+                <p><code>onExpand</code> - <code>null</code>
                 </p>
             </blockquote>
-            <p>页数变动时触发
-            </p>
+            <p>展开时回调</p>
             <br>
 
             <blockquote>
-                <p><code>selector4content</code> - <code>".content"</code>
+                <p><code>onCollapse</code> - <code>null</code>
                 </p>
             </blockquote>
-            <p>Selector of the pagination container</p>
+            <p>收起时回调</p>
             <br>
 
             <blockquote>
-                <p><code>selector4input</code> - <code>"input:text"</code>
+                <p><code>selector4pane</code> - <code>">.pane"</code>
                 </p>
             </blockquote>
-            <p>Selector of the input box</p>
+            <p>Selector of pane</p>
             <br>
 
             <blockquote>
-                <p><code>selector4button</code> - <code>"[name=go]"</code>
+                <p><code>selector4head</code> - <code>".head:first"</code>
                 </p>
             </blockquote>
-            <p>Selector of the button</p>
+            <p>Selector of the head</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4content</code> - <code>".content:first"</code>
+                </p>
+            </blockquote>
+            <p>Selector of the content</p>
             <br>
         </section>
 
@@ -265,15 +433,44 @@
             </div>
 
             <blockquote>
-                <p><code>pagination.val( [ value ] )</code>
+                <p><code>accordion.expand( index )</code>
                 </p>
                 <blockquote>
-                    <p><code>value</code> - Number</p>
+                    <p><code>index</code> - Number</p>
                 </blockquote>
             </blockquote>
-            <p>设置/取值 当前页数</p>
+            <p>展开指定区域</p>
+            <br>
+
+            <blockquote>
+                <p><code>accordion.collapse( index )</code>
+                </p>
+                <blockquote>
+                    <p><code>index</code> - Number</p>
+                </blockquote>
+            </blockquote>
+            <p>收起指定区域</p>
+            <br>
+
+            <blockquote>
+                <p><code>accordion.toggle( index )</code>
+                </p>
+                <blockquote>
+                    <p><code>index</code> - Number</p>
+                </blockquote>
+            </blockquote>
+            <p>展开/收起指定区域</p>
+            <br>
+
+            <blockquote>
+                <p><code>accordion.expandAll()</code> - 展开所有</p>
+            </blockquote>
+            <br>
+
+            <blockquote>
+                <p><code>accordion.collapseAll()</code> - 收起所有</p>
+            </blockquote>
             <br>
         </section>
     </div>
-
 </section>

@@ -1,19 +1,27 @@
 
-define( [ "ui/accordion/accordion" ], function() {
+define( [ "ui/accordion/accordion-ng" ], function() {
 
     "use strict";
 
     angular
-    .module( "demo.accordion", [] )
+    .module( "demo.accordion", [ "$ui.accordion" ] )
     .controller( "accordionController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $.anchor( { offset: -30 } );
+            $.anchor( { offset: 270 } );
         };
 
-        $( ".ui.accordion" ).each( function() {
-            $( this ).accordion();
-        } );
+        $scope.multiple = true;
+
+        $scope.onExpand = function( index ) {
+            console.log( "Expand: " + index );
+        };
+
+        $scope.onCollapse = function( index ) {
+            console.log( "Collapse: " + index );
+        };
+
+        $scope.isOpen = true;
     } ] );
 } );
 

@@ -8,9 +8,7 @@
 
     Accordion = function( target, settings ) {
 
-        var
-        panes = target.find( settings.selector4pane ),
-        recent;
+        var recent;
 
         target
         .delegate( settings.selector4pane, "click", function( e ) {
@@ -34,6 +32,7 @@
                         height: recent.attr( "data-height" )
                     }, settings.duration, function() {
                         recent.removeClass( "open" );
+                        settings.onCollapse( recent.attr( "index" ) );
                     } );
                 }( recent );
             }
@@ -50,6 +49,7 @@
                     height: height + content.innerHeight()
                 }, settings.duration, function() {
                     self.css( "height", "" );
+                    settings.onExpand( self.attr( "index" ) );
                 } );
 
                 recent = self;
@@ -61,6 +61,7 @@
                     self
                     .css( "height", "" )
                     .removeAttr( "data-height" );
+                    settings.onCollapse( self.attr( "index" ) );
                 } );
             }
         } );
@@ -73,22 +74,49 @@
 
         expandAll: function() {
 
+            this
+            .$node
+            .find( this.settings.selector4pane )
+            .each( function() {
+                var self = $( this );
+                !self.hasClass( "open" ) && self.trigger( "click" );
+            } );
         },
 
         collapseAll: function() {
 
+            this
+            .$node
+            .find( this.settings.selector4pane )
+            .filter( ".open" )
+            .trigger( "click" );
         },
 
         expand: function( index ) {
 
+            this
+            .$node
+            .find( this.settings.selector4pane )
+            .filter( "[index='" + index + "']:not(.open)" )
+            .trigger( "click" );
         },
 
         collapse: function( index ) {
 
+            this
+            .$node
+            .find( this.settings.selector4pane )
+            .filter( ".open[index='" + index + "']" )
+            .trigger( "click" );
         },
 
         toggle: function( index ) {
 
+            this
+            .$node
+            .find( this.settings.selector4pane )
+            .filter( "[index='" + index + "']" )
+            .trigger( "click" );
         }
     };
 
@@ -106,6 +134,8 @@
     $.fn.accordion.defaults = {
         multiple        : false,
         duration        : 300,
+        onExpand        : $.noop,
+        onCollapse      : $.noop,
         selector4pane   : ">.pane",
         selector4content: ".content:first",
         selector4head   : ".head:first"
