@@ -28,6 +28,27 @@
 
 <section id="accordion" ng-controller="accordionController" ng-init="init()">
 
+    <header data-anchor="ngRepeat">Work with ng-repeat</header>
+
+    <section>
+        <s-accordion>
+            <s-accordion-pane
+                ng-repeat="pane in panes"
+                head="{{ pane.head }}"
+                index="$index"
+                content="{{ pane.content }}">
+            </s-accordion-pane>
+        </s-accordion>
+
+        <button class="ui button transition mint" ng-click="addPane()">
+            Add Pane
+        </button>
+
+        <button class="ui button transiton warn" ng-click="removePane()">
+            Remove Last Pane
+        </button>
+    </section>
+
     <header data-anchor="simple">Simple</header>
 
     <section>
@@ -130,6 +151,20 @@
                 </div>
 
                 <div class="wrap">
+                <label>With ng-repeat</label>
+                <xmp>
+                <s-accordion>
+                    <s-accordion-pane
+                     ng-repeat="pane in panes"
+                     head="{{ pane.head }}"
+                     index="$index"
+                     content="{{ pane.content }}">
+                    </s-accordion-pane>
+                </s-accordion>
+                </xmp>
+                </div>
+
+                <div class="wrap">
                 <label>Simple</label>
                 <xmp>
                 <s-accordion>
@@ -229,6 +264,28 @@
 
                     $scope.onCollapse = function( index ) {
                         console.log( "Collapse: " + index );
+                    };
+
+                    $scope.panes = [ {
+                        head: "Pane 1",
+                        content: "Pane - 1"
+                    }, {
+                        head: "Pane 2",
+                        content: "Pane - 2"
+                    } ];
+
+                    $scope.addPane = function() {
+
+                        var index = +new Date();
+
+                        $scope.panes.push( {
+                            head: "Pane " + index,
+                            content: "Pane - " + index
+                        } );
+                    };
+
+                    $scope.removePane = function() {
+                        $scope.panes.splice( -1 );
                     };
                 } ] );
                 </xmp>
