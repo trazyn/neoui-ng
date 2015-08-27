@@ -22,6 +22,28 @@ define( [ "ui/accordion/accordion-ng" ], function() {
         };
 
         $scope.isOpen = true;
+
+        $scope.panes = [ {
+            head: "Pane 1",
+            content: "Pane - 1"
+        }, {
+            head: "Pane 2",
+            content: "Pane - 2"
+        } ];
+
+        $scope.addPane = function() {
+
+            var index = +new Date();
+
+            $scope.panes.push( {
+                head: "Pane " + index,
+                content: "Pane - " + index
+            } );
+        };
+
+        $scope.removePane = function() {
+            $scope.panes.splice( -1 );
+        };
     } ] );
 } );
 
