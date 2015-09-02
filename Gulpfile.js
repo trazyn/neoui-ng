@@ -51,7 +51,27 @@ bs, gulp = require( "gulp" )
         cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
         autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
 
-		return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "src/demo/**/*.less" ] )
+		return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "src/demo/**/*.less",
+                "!src/components/**/*-bs.less" ] )
+			.pipe( debug() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
+			.pipe( concat( "css.css" ) )
+			.pipe( gulp.dest( dest ) )
+			.pipe( minifyCSS() )
+			.pipe( rename( "css.min.css" ) )
+			.pipe( gulp.dest( dest ) );
+	} )
+
+	.task( "css-bs", function() {
+
+		var
+		dest = pkg.dest,
+		minifyCSS = require( "gulp-minify-css" ),
+        cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
+        autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
+
+		return gulp.src( [ "src/style/main.less", "src/components/**/*-bs.less", "src/demo/**/*.less",
+                "!src/components/modal/modal.less" ] )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( "css.css" ) )
