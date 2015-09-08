@@ -45,89 +45,49 @@
             line-height: 30px;
         }
 
-		h3 {
-			margin: 0;
-			padding: 8px;
-			text-align: left;
-			padding-left: 39px;
-			font-size: 17px;
-			font-weight: 300;
-			opacity: 1;
-			color: #FFFFFF;
-			background: #383838;
-		}
-
 		> div {
 			background: #fff;
 			position: relative;
 			overflow: hidden;
 			margin: 0 auto;
-		}
 
-		.content {
-			color: rgba(0,0,0,.75);
-			font-size: .8rem;
-			font-family: "Roboto", Sans-serif;
-			padding: 15px 40px 30px;
-			margin: 0;
-			font-weight: 300;
-			overflow: hidden;
-		}
-
-		.close {
-			font-size: 24px;
-			color: #eee;
-			position: absolute;
-			top: 3px;
-			right: 34px;
-			cursor: pointer;
-			border: none;
-			z-index: 99;
-
-			&:hover {
-				color: @mint;
+			> .title {
+                margin: 0;
+                padding: 8px;
+                text-align: left;
+                padding-left: 39px;
+                font-size: 17px;
+                font-weight: 300;
+                opacity: 1;
+                color: #FFFFFF;
+                background: #383838;
 			}
-		}
 
-        .action {
+			> .content {
 
-            text-align: center;
-            margin: 10px -40px -30px;
-            padding: 10px 0;
-
-            button {
-                padding: 7px 12px;
-                font-size: 12px;
-                margin-left: 10px;
-                width: 80px;
-            }
-        }
-
-		.bubble {
-			min-width: 120px;
-			text-align: center;
-			line-height: 48px;
-			max-width: 200px;
-			padding: 13px 29px;
-			background: lighten( @success, 5% );
-			text-shadow: 0 0 40px #fff;
-			color: white;
-			font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
-			font-size: 1.5rem;
-			font-weight: 100;
-			border-radius: 20px;
-			p {
-			    margin-bottom: 0;
+                color: rgba(0,0,0,.75);
+                font-size: .8rem;
+                font-family: "Roboto", Sans-serif;
+                padding: 0;
+                margin: 0;
+                font-weight: 300;
+                overflow: hidden;
 			}
-			&:after {
-				content: "";
-				background: rgba(0,0,0,0);
-				border: 10px solid rgba(0,0,0,0);
-				position: absolute;
-				margin: 12px 0 0 0;
-				left: 50%;
-				border-top-color: lighten( @success, 5% );
-				margin-left: -10px;
+
+			> .close {
+
+                font-size: 24px;
+                color: #eee;
+                position: absolute;
+                top: 3px;
+                right: 34px;
+                cursor: pointer;
+                border: none;
+                z-index: 99;
+
+                &:hover {
+                    color: @mint;
+                }
 			}
 		}
 

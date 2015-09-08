@@ -103,6 +103,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
                 var handle = options.selector4drag;
 
+                head.css( "cursor", "move" );
 
 				modal.drag( function( ev, dd ) {
 
@@ -146,7 +147,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 		showHead 	    : true,
 		showOverlay 	: true,
-		showProgress 	: true,
+		showProgress 	: false,
 		autoShow 	    : true,
 
 		fadeIn 		    : true,

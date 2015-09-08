@@ -122,6 +122,7 @@ define( [ "ui/modal/modal" ], function() {
 				title: settings.title || "Confirm",
 				showHead: true,
 				showProgress: false,
+				class4modal: "confirm",
 
 				render: function( ready, loading, close ) {
 

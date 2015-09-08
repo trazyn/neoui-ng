@@ -9,6 +9,7 @@ jshint = require( "gulp-jshint" ),
 browserSync = require( "browser-sync" ),
 less = require( "gulp-less" ),
 debug = require( "gulp-debug" ),
+streamqueue = require( "streamqueue" ),
 
 fs = require( "fs" ),
 pkg = require( "./package.json" ),
@@ -51,27 +52,11 @@ bs, gulp = require( "gulp" )
         cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
         autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
 
-		return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "src/demo/**/*.less",
-                "!src/components/**/*-bs.less" ] )
-			.pipe( debug() )
-			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
-			.pipe( concat( "css.css" ) )
-			.pipe( gulp.dest( dest ) )
-			.pipe( minifyCSS() )
-			.pipe( rename( "css.min.css" ) )
-			.pipe( gulp.dest( dest ) );
-	} )
-
-	.task( "css-bs", function() {
-
-		var
-		dest = pkg.dest,
-		minifyCSS = require( "gulp-minify-css" ),
-        cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
-        autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
-
-		return gulp.src( [ "src/style/main.less", "src/components/**/*-bs.less", "src/demo/**/*.less",
-                "!src/components/modal/modal.less" ] )
+        return streamqueue( { objectMode: true },
+                gulp.src( "src/style/main.less" ),
+                gulp.src( [ "src/components/**/*.less", "!src/components/**/*-bs.less"] ),
+                gulp.src( "src/components/**/*-bs.less" ),
+                gulp.src( "src/demo/**/*.less" ) )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( "css.css" ) )
