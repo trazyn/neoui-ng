@@ -55,7 +55,7 @@ bs, gulp = require( "gulp" )
         return streamqueue( { objectMode: true },
                 gulp.src( "src/style/main.less" ),
                 gulp.src( [ "src/components/**/*.less", "!src/components/**/*-bs.less"] ),
-                //gulp.src( "src/components/**/*-bs.less" ),
+                gulp.src( "src/components/**/*-bs.less" ),
                 gulp.src( "src/demo/**/*.less" ) )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )

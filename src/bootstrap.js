@@ -173,6 +173,19 @@ require( [
 			} );
 	} ] )
 
+	.directive( "afterRender", [ "$timeout", function( $timeout ) {
+
+	    return {
+	        restric: "A",
+	        terminal: true,
+	        link: function( $scope, $element, $attrs ) {
+                $timeout( function() {
+                    $scope.$eval( $attrs.afterRender );
+                }, 0 );
+	        }
+	    };
+	} ] )
+
     .controller( "mainController", [ "$scope", "$location", function( $scope, $location ) {
 
         $scope.openMenu = function( menu ) {
@@ -190,7 +203,6 @@ require( [
                 $scope.$apply();
 
                 setTimeout( function() {
-
                 menu.close();
                 $( "html, body" ).scrollTop( 0 );
                 }, 500 );

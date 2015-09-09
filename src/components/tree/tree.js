@@ -18,15 +18,16 @@
         .undelegate( "li[data-level]", "click" )
         .delegate( "li[data-level]", "click", function( e ) {
 
-            var hash = settings.hash;
+            var
+            self = $( this ),
+            hash = settings.hash;
 
             e.stopPropagation();
             e.preventDefault();
 
-            if ( !inHandle ) {
+            if ( !inHandle && !self.is( "[disabled]" ) ) {
 
                 var
-                self = $( this ),
                 level = +self.attr( "data-level" ),
                 duration = settings.duration,
                 operation = self.hasClass( "open" ) ? function() { close( self, duration ); } : function() { open( self, duration ); };
@@ -180,6 +181,38 @@
             return this;
         },
 
+        disabled: function( nodeid ) {
+
+            var
+            $node = this.$node,
+            nodeid = nodeid instanceof Array ? nodeid : [ nodeid ];
+
+            for ( var i = 0, length = nodeid.length; i < length; ++i ) {
+                $node
+                .find( ".node[data-key='" + nodeid[i] + "']" )
+                .attr( "disabled", "disabled" )
+                .find( "li[data-key]" )
+                .attr( "disabled", "disabled" );
+            }
+            return this;
+        },
+
+        enabled: function( nodeid ) {
+
+            var
+            $node = this.$node,
+            nodeid = nodeid instanceof Array ? nodeid : [ nodeid ];
+
+            for ( var key = nodeid.pop(); key; ) {
+                $node
+                .find( ".node[data-key='" + key + "']" )
+                .removeAttr( "disabled" )
+                .find( "li[data-key]" )
+                .removeAttr( "disabled" );
+            }
+            return this;
+        },
+
         filter: function( text ) {
 
             var
@@ -195,7 +228,7 @@
 
                 /** Prevent multiple reflow */
                 node = $node.css( "display", "none" ),
-                lis = node.find( "li[data-filter]" ).css( "display", "" );
+                lis = node.find( "li[data-filter]" ).not( "li[data-key][disabled]" ).css( "display", "" );
 
                 /** Close all parent node */
                 lis.filter( "li.open" ).each( function() {
@@ -239,8 +272,17 @@
         if ( target.hasClass( "open" ) ) {
 
             if ( duration ) {
-                target.find( "ul[style='display: block;']" ).slideToggle( duration, function() {
-                    post.call( this );
+                target.find( "ul[style='display: block;']" )
+
+                .each( function() {
+
+                    var self = $( this );
+
+                    if ( !self.parent().is( "[disabled]" ) ) {
+                        self.slideToggle( duration, function() {
+                            post.call( this );
+                        } );
+                    }
                 } );
             } else {
                 /** Disable animate */

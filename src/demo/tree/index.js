@@ -38,11 +38,26 @@ define( [ "ui/tree/tree-ng" ], function() {
             }
         } );
 
+        $scope.test = function() {
+
+            var deferred = $.Deferred();
+
+            $.ajax( {
+                url: "src/demo/tree/test.json",
+                dataType: "text"
+            } )
+            .done( function( data ) {
+                deferred.resolveWith( eval( "(" + data + ")" ) );
+            } );
+
+            return deferred.promise();
+        };
+
         /** Custom */
         $scope.files = function() {
 
             return $.ajax( {
-                url: "src/demo/tree/files.json",
+                url: "src/demo/tree/files.json"
             } );
         };
 
@@ -57,6 +72,14 @@ define( [ "ui/tree/tree-ng" ], function() {
             item[ settings.textKey ] = "New Branch";
 
             tree.add( item );
+        };
+
+        $scope.afterInit = function( szseTree ) {
+            szseTree
+            .expand( "szse" )
+            .expand( "zhyjs" )
+            .disabled("zhyjs" )
+            .disabled( "szzqjysyyb" );
         };
     } ] );
 } );
