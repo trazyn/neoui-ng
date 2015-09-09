@@ -7,6 +7,8 @@ define( [ "ui/tree/tree-ng" ], function() {
     .module( "demo.tree", [ "$ui.tree" ] )
     .controller( "treeController", [ "$scope", function( $scope ) {
 
+        var deferred = $.Deferred();
+
         $scope.init = function() {
             $.anchor( { offset: -60 } );
         };
@@ -39,8 +41,6 @@ define( [ "ui/tree/tree-ng" ], function() {
         } );
 
         $scope.test = function() {
-
-            var deferred = $.Deferred();
 
             $.ajax( {
                 url: "src/demo/tree/test.json",
@@ -75,11 +75,15 @@ define( [ "ui/tree/tree-ng" ], function() {
         };
 
         $scope.afterInit = function( szseTree ) {
-            szseTree
-            .expand( "szse" )
-            .expand( "zhyjs" )
-            .disabled("zhyjs" )
-            .disabled( "szzqjysyyb" );
+
+            $.when( deferred ).done( function() {
+
+                szseTree
+                .expand( "szse" )
+                .expand( "zhyjs" )
+                .disabled("zhyjs" )
+                .disabled( "szzqjysyyb" );
+            } );
         };
     } ] );
 } );
