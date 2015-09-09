@@ -41,10 +41,11 @@
         transition: .2s;
         position: relative;
         display: block;
-        height: 30px;
-        line-height: 30px;
+        height: 36px;
+        line-height: 36px;
+        white-space: nowrap;
         &:hover {
-            background-color: #ddd;
+            background-color: lighten(@aqua,30%);
         }
     }
 
@@ -113,7 +114,7 @@
 
     .node.close > p .icon, .node.open > p .icon {
         display: inline-block;
-        margin: 0 0 19px 0;
+        margin: 0 0 24px 0;
         color: @google;
     }
 
