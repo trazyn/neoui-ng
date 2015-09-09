@@ -40,11 +40,11 @@
             </s-accordion-pane>
         </s-accordion>
 
-        <button class="ui button transition mint" ng-click="addPane()">
+        <button class="ui button mint" ng-click="addPane()">
             Add Pane
         </button>
 
-        <button class="ui button transition warn" ng-click="removePane()">
+        <button class="ui button warn" ng-click="removePane()">
             Remove Last Pane
         </button>
     </section>
@@ -127,15 +127,15 @@
         </s-accordion>
 
         <p>
-        <button class="ui button primary transition" ng-click="accordion.expand(1)">Expand first</button>
-        <button class="ui button primary transition" ng-click="accordion.collapse(1)">Collapse first</button>
-        <button class="ui button primary transition" ng-click="accordion.toggle(1)">Toggle first</button>
+        <button class="ui button primary" ng-click="accordion.expand(1)">Expand first</button>
+        <button class="ui button primary" ng-click="accordion.collapse(1)">Collapse first</button>
+        <button class="ui button primary" ng-click="accordion.toggle(1)">Toggle first</button>
 
-        <button class="ui button transition primary" ng-click="accordion.expandAll()">Expand All</button>
-        <button class="ui button transition primary" ng-click="accordion.collapseAll()">Collapse All</button>
+        <button class="ui button primary" ng-click="accordion.expandAll()">Expand All</button>
+        <button class="ui button primary" ng-click="accordion.collapseAll()">Collapse All</button>
         </p>
 
-        <button class="ui button transition mint" ng-click="multiple = !multiple">{{ !multiple ? "Singleton" : "Allows multiple sections open at once" }}</button>
+        <button class="ui button mint" ng-click="multiple = !multiple">{{ !multiple ? "Singleton" : "Allows multiple sections open at once" }}</button>
     </section>
 
     <br>

@@ -35,7 +35,7 @@
             </s-tab-set>
         </div>
 
-        <button class="ui button transition primary"
+        <button class="ui button primary"
             ng-click="addTab()">Add new tab</button>
 
         <label class="ui select">
@@ -44,13 +44,13 @@
             </select>
         </label>
 
-        <button class="ui button transition success"
+        <button class="ui button success"
             ng-click="toggleTabState()"
             ng-show="!!tabs[selected - 1]['disabled']">
                 Enable {{ tabs[ selected - 1 ][ 'header' ] }}
         </button>
 
-        <button class="ui button transition error"
+        <button class="ui button error"
             ng-click="toggleTabState()"
             ng-show="!tabs[selected - 1]['disabled']">
                 Disable {{ tabs[ selected - 1 ][ 'header' ] }}

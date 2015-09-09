@@ -51,15 +51,15 @@
             </s-tree>
 
             <div>
-                <p><button class="ui transition button primary" ng-disabled="!treeValue"
+                <p><button class="ui button primary" ng-disabled="!treeValue"
                     ng-click="addBranch( menuTree, treeValue.a03_id )">Add Branch</button></p>
-                <p><button class="ui transition button warn" ng-disabled="!treeValue"
+                <p><button class="ui button warn" ng-disabled="!treeValue"
                     ng-click="menuTree.remove( treeValue.a03_id )">Remove Branch</button></p>
-                <p><button class="ui transition button coral" ng-disabled="!treeValue"
+                <p><button class="ui button coral" ng-disabled="!treeValue"
                     ng-click="menuTree.toggle( treeValue.a03_id )">Toggle</button></p>
-                <p><button class="ui transition button mint" ng-disabled="!treeValue"
+                <p><button class="ui button mint" ng-disabled="!treeValue"
                     ng-click="menuTree.expand( treeValue.a03_id )">Expand</button></p>
-                <p><button class="ui transition button mint" ng-disabled="!treeValue"
+                <p><button class="ui button mint" ng-disabled="!treeValue"
                     ng-click="menuTree.collapse( treeValue.a03_id )">Collapse</button></p>
             </div>
         </div>
@@ -92,15 +92,15 @@
             </s-tree>
 
             <div>
-                <p><button class="ui transition button primary" ng-disabled="!fileValue"
+                <p><button class="ui button primary" ng-disabled="!fileValue"
                     ng-click="addBranch( fileTree, fileValue.id )">Add Branch</button></p>
-                <p><button class="ui transition button warn" ng-disabled="!fileValue"
+                <p><button class="ui button warn" ng-disabled="!fileValue"
                     ng-click="fileTree.remove( fileValue.id )">Remove Branch</button></p>
-                <p><button class="ui transition button coral" ng-disabled="!fileValue"
+                <p><button class="ui button coral" ng-disabled="!fileValue"
                     ng-click="fileTree.toggle( fileValue.id )">Toggle</button></p>
-                <p><button class="ui transition button mint" ng-disabled="!fileValue"
+                <p><button class="ui button mint" ng-disabled="!fileValue"
                     ng-click="fileTree.expand( fileValue.id )">Expand</button></p>
-                <p><button class="ui transition button mint" ng-disabled="!fileValue"
+                <p><button class="ui button mint" ng-disabled="!fileValue"
                     ng-click="fileTree.collapse( fileValue.id )">Collapse</button></p>
 
                 <p><input class="ui text" placeholder="Type for search..." ng-model="filterValue"></p>
