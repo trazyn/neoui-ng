@@ -32,6 +32,10 @@ bs, gulp = require( "gulp" )
 		} );
 	} )
 
+    .task( "clean", function() {
+        gulp.src( "dist" ).pipe( clean() );
+    } )
+
 	.task( "dist", function() {
 
 		var
@@ -39,8 +43,6 @@ bs, gulp = require( "gulp" )
 		minifyCSS = require( "gulp-minify-css" ),
         cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
         autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
-
-        gulp.src( "dist", { read: false } ).pipe( clean() );
 
         streamqueue( { objectMode: true },
                 gulp.src( "src/style/main.less" ),
@@ -52,8 +54,6 @@ bs, gulp = require( "gulp" )
 			.pipe( gulp.dest( dest ) )
 			.pipe( minifyCSS() )
 			.pipe( rename( "css.min.css" ) )
-			.pipe( gulp.dest( dest ) )
-			.pipe( rev() )
 			.pipe( gulp.dest( dest ) );
 
 		gulp.src( [ "bower_components/jquery/dist/jquery.js",
@@ -68,6 +68,18 @@ bs, gulp = require( "gulp" )
 			.pipe( uglify() )
 			.pipe( rename( "vendor.min.js" ) )
 			.pipe( gulp.dest( dest ) );
+
+        rjs.optimize( {
+            baseUrl: "src",
+            paths: {
+                ui: "components"
+            },
+            include: "bundle",
+            out: "dist/neoui-ng-rjs.js",
+            onModuleBundleComplete: function( data ) {
+                fs.writeFileSync( "dist/neoui-ng.js", amdclean.clean( { "filePath": data.path } ) );
+            }
+        } );
 
 		rjs.optimize( {
 		    baseUrl: "src",
@@ -94,18 +106,6 @@ bs, gulp = require( "gulp" )
                 "util/dateutil": "empty:"
             }
 		} );
-
-        rjs.optimize( {
-            baseUrl: "src",
-            paths: {
-                ui: "components"
-            },
-            include: "bundle",
-            out: "dist/neoui-ng-rjs.js",
-            onModuleBundleComplete: function( data ) {
-                fs.writeFileSync( "dist/neoui-ng.js", amdclean.clean( { "filePath": data.path } ) );
-            }
-        } );
 	} )
 
 	.task( "watch", function() {

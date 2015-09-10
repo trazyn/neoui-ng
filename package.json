@@ -7,7 +7,6 @@
     "browser-sync": "^2.6.1",
     "gulp": "^3.9.0",
     "gulp-amdclean": "^1.1.1",
-    "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",
     "gulp-cssmin": "^0.1.7",
     "gulp-debug": "^2.0.1",
