@@ -171,12 +171,11 @@
                 .delegate( "button[name=showProfile]", "click", function() {
 
                     $.sidenav( {
-                        render: function( ready, loading, close ) {
+                        content: function( ready, loading, close ) {
 
                             var self = this;
 
                             $.ajax( {
-
                                 url: "/src/demo/sidenav/profile.html",
                                 dataType: "html"
                             } )
@@ -214,13 +213,13 @@
             </div>
 
             <blockquote>
-                <p><code>render</code> - <code>""</code></p>
+                <p><code>content</code> - <code>""</code></p>
             </blockquote>
             <p><code>function</code>或<code>string</code>, <code>Sidenav</code>中内容</p>
             <br>
 
             <blockquote>
-            <p><code>unload</code> - <code>null</code></p>
+            <p><code>onClose</code> - <code>null</code></p>
             </blockquote>
             <p><code>Sidenav</code>关闭时回调</p>
             <br>

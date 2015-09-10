@@ -9,11 +9,11 @@ define( [ "ui/modal/modal-ng" ], function() {
 
         $scope.name = "test";
 
-		$scope.open = function( animate ) {
+		$scope.open = function( animation ) {
 
 			return $modal.open( {
 				controller: "modalController",
-				animate: animate,
+				animation: animation,
 				templateUrl: "src/demo/modal/page.html",
 				title: "Instagram Handbook for Brands",
 				class4modal: "demo",
@@ -25,7 +25,6 @@ define( [ "ui/modal/modal-ng" ], function() {
 
 			$modal.open( {
 				controller: "modalController",
-				showProgress: false,
 				templateUrl: "src/demo/modal/page1.html",
 				title: "弹出框标题 18PX 加粗 #333",
 				class4modal: "demo",
@@ -39,8 +38,7 @@ define( [ "ui/modal/modal-ng" ], function() {
 
 			$modal.open( {
 				controller: "modalController",
-				selector4drag: true,
-				showProgress: false,
+				draggable: true,
 				templateUrl: "src/demo/modal/page1.html",
 				title: "弹出框标题 18PX 加粗 #333",
 				class4modal: "demo",

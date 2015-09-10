@@ -6,7 +6,6 @@ define( [ "ui/toast/toast" ], function( undefined ) {
     angular.module( "$ui.toast", [] )
 
     .factory( "$toast", function() {
-
         return $.toast;
     } );
 } );

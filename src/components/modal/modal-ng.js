@@ -61,7 +61,7 @@ function( $rootScope, $compile ) {
         settings = angular.extend( {}, defaults, options, {
 
             /** Overwite the jQuery plugin default settings */
-            render 	: html,
+            content: html,
             autoShow: true
         } );
 

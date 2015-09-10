@@ -7,7 +7,6 @@
     <li data-anchor="error" class="item">Error</li>
     <li data-anchor="warn" class="item">Warn</li>
     <li data-anchor="confirm" class="item">Confirm</li>
-    <li data-anchor="bubble" class="item">Bubble</li>
 </ul>
 
 <section id="message" ng-controller="messageController" ng-init="init()">
@@ -343,65 +342,4 @@
         </section>
 
     </section>
-
-    <br>
-    <br>
-
-    <header data-anchor="bubble">Bubble</header>
-
-    <section>
-
-        <section>
-            <div class="ui ribbon">
-                <span>Example</span>
-            </div>
-
-            <p>
-            <button class="ui button outline coral" name="bubble" ng-click="showBubble()">
-                <i class="icon favorite"></i> Show the bubble
-            </button>
-            </p>
-        </section>
-
-        <section>
-            <div class="ui ribbon">
-                <span>AngularJS</span>
-            </div>
-
-            <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
-                $message.bubble( "Thank You~", 3000 );
-            } ] );
-            </xmp>
-        </section>
-
-        <section>
-            <div class="ui ribbon">
-                <span>jQuery</span>
-            </div>
-
-            <xmp>
-            require( [ "ui/message/message" ], function() {
-                $.message.bubble( "Thank You~", 3000 );
-            } );
-            </xmp>
-        </section>
-
-        <section>
-            <div class="ui ribbon">
-                <span>API</span>
-            </div>
-
-            <p>
-            <code> bubble( content, [ delay ] ); </code>
-            </p>
-            <blockquote>
-                <p><code>content</code> - String, 文本内容</p>
-                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
-            </blockquote>
-        </section>
-    </section>
-
 </section>

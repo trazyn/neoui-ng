@@ -8,10 +8,11 @@ define( [ "ui/modal/modal" ], function() {
     function show( options ) {
 
         return $.modal( $.extend( {}, $.extend( {}, $.sidenav.defaults, options ), {
-            showHead    : false,
-            animate     : options.class4nav,
-            class4modal : "sidenav",
-            css         : { "height": "100%" }
+            showTitle       : false,
+            animation       : options.class4nav,
+            class4modal     : "sidenav",
+            closeByDocument : true,
+            css             : { "height": "100%" }
         } ) );
     }
 
@@ -22,12 +23,12 @@ define( [ "ui/modal/modal" ], function() {
         return {
 
             right   : function() {
-                options.animate = "right";
+                options.animation = "right";
                 return (instance = show( options ));
             },
 
             left    : function() {
-                options.animate = "left";
+                options.animation = "left";
                 return (instance = show( options ));
             },
 
@@ -40,8 +41,8 @@ define( [ "ui/modal/modal" ], function() {
     $.sidenav.defaults = {
 
         /** Same to the modal component */
-        render      : "",
-        unload      : $.noop,
+        content     : "",
+        onClose     : $.noop,
         class4nav   : " "
     };
 } );

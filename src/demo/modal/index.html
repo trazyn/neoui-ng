@@ -62,12 +62,12 @@
 
                 $scope.name = "trazyn";
 
-                $scope.open = function( animate ) {
+                $scope.open = function( animation ) {
 
                     $modal.open( {
                         controller: "modalController",
                         template: "{{ name }}<br/><p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
-                        animate: animate
+                        animation: animation
                     } );
                 };
 
@@ -75,7 +75,6 @@
 
                     $modal.open( {
                         controller: "modalController",
-                        showProgress: false,
                         templateUrl: "src/demo/modal/page.html",
                         title: "Instagram Handbook for Brands",
                         class4modal: "demo",
@@ -89,8 +88,7 @@
 
                     $modal.open( {
                         controller: "modalController",
-                        selector4drag: true,
-                        showProgress: false,
+                        draggable: true,
                         templateUrl: "src/demo/modal/page.html",
                         title: "Instagram Handbook for Brands",
                         class4modal: "demo",
@@ -103,7 +101,6 @@
         </section>
 
         <section>
-
             <div class="ui ribbon" data-anchor="ngMethods">
                 <span>Methods</span>
             </div>
@@ -121,7 +118,6 @@
                 <br>
 
                 其他见<a href="" data-anchor="options">Options</a>
-
         </section>
     </div>
 
@@ -144,7 +140,7 @@
             </blockquote>
 
             <xmp>
-            $.modal( { animate: "slide" } );
+            $.modal( { animation: "slide" } );
             </xmp>
 
         </section>
@@ -162,24 +158,31 @@
             <br>
 
             <blockquote>
-                <p><code>render</code> - <code>null</code>
+                <p><code>showTitle</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>显示标题头</p>
+            <br>
+
+            <blockquote>
+                <p><code>modal</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>Modal / Modeless</p>
+            <br>
+
+            <blockquote>
+                <p><code>content</code> - <code>null</code>
                 </p>
             </blockquote>
             <p>弹出框内容, 字符串或<code>function</code></p>
             <br>
 
             <blockquote>
-                <p><code>class4modal</code> - <code>""</code>
+                <p><code>draggable</code> - <code>true</code>
                 </p>
             </blockquote>
-            <p>指定弹出框样式</p>
-            <br>
-
-            <blockquote>
-                <p><code>selector4drag</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>拖拽元素选择器, 为<code>true</code>时, 通过标题栏拖拽</p>
+            <p><code>true</code>时, 通过标题栏拖拽, 做为字符串时作为选择器定位拖拽元素</p>
             <br>
 
             <blockquote>
@@ -190,10 +193,10 @@
             <br>
 
             <blockquote>
-                <p><code>attr</code> - <code>{}</code>
+                <p><code>class4modal</code> - <code>""</code>
                 </p>
             </blockquote>
-            <p>添加属性</p>
+            <p>指定弹出框样式</p>
             <br>
 
             <blockquote>
@@ -201,34 +204,6 @@
                 </p>
             </blockquote>
             <p>初始化后打开弹出框, 不通过实例<code>open</code>方法</p>
-            <br>
-
-            <blockquote>
-                <p><code>showHead</code> - <code>true</code>
-                </p>
-            </blockquote>
-            <p>显示标题头</p>
-            <br>
-
-            <blockquote>
-                <p><code>showOverlay</code> - <code>true</code>
-                </p>
-            </blockquote>
-            <p>显示遮罩层</p>
-            <br>
-
-            <blockquote>
-                <p><code>showProgress</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>Show the progress bar</p>
-            <br>
-
-            <blockquote>
-                <p><code>fadeIn</code> - <code>true</code>
-                </p>
-            </blockquote>
-            <p>内容淡入</p>
             <br>
 
             <blockquote>
@@ -246,14 +221,14 @@
             <br>
 
             <blockquote>
-                <p><code>animate</code> - <code>"slide"</code>
+                <p><code>animation</code> - <code>"slide"</code>
                 </p>
             </blockquote>
-            <p>弹出框样式, <code>slide</code>, <code>stick</code>, <code>bottom</code>, <code>flip</code>, <code>vertical</code>, <code>sign</code>, <code>scale</code>, <code>fadein</code></p>
+            <p>弹出框动画, <code>slide</code>, <code>stick</code>, <code>bottom</code>, <code>flip</code>, <code>vertical</code>, <code>sign</code>, <code>scale</code>, <code>fadein</code></p>
             <br>
 
             <blockquote>
-                <p><code>unload</code> - <code>null</code>
+                <p><code>onClose</code> - <code>null</code>
                 </p>
             </blockquote>
             <p>弹出框卸载触发</p>

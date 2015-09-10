@@ -63,19 +63,6 @@
 		#variation( @warn, "\e6be" );
 	}
 
-	&.confirm .action {
-        text-align: center;
-        margin: 10px -40px -30px;
-        padding: 10px 0;
-
-        button {
-            padding: 7px 12px;
-            font-size: 12px;
-            margin-left: 10px;
-            width: 80px;
-        }
-	}
-
 	/**  Patch*/
 	&.tooltip {
 
@@ -89,4 +76,25 @@
 			left: 0px;
 		}
 	}
+}
+
+.ui.modal.confirm {
+
+    .content {
+        text-align: center;
+        padding: 10px 0 30px;
+    }
+
+    .action {
+        text-align: center;
+        margin: 10px -40px -30px;
+        padding: 10px 0;
+    }
+
+    button {
+        padding: 7px 12px;
+        font-size: 12px;
+        margin-left: 10px;
+        width: 80px;
+    }
 }

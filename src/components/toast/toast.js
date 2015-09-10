@@ -15,15 +15,13 @@ define( [ "ui/modal/modal" ], function() {
         modal && modal.close();
 
         modal = $.modal( {
-            showHead        : false,
-            showOverlay     : false,
-            showProgress    : false,
-            closeByDocument : false,
-            fadeIn          : false,
-            animate         : "scale",
+            showTitle       : false,
+            modal           : false,
+            animation       : "scale",
+            css             : { "min-width": "" },
             class4modal     : "ui toast " + [ position, class4toast || "" ].join( " " ),
 
-            render          : function( ready, loading, close ) {
+            content         : function( ready, loading, close ) {
 
                 var template = "<p class='message'>" + message + "</p>" +
                                 "<i class='icon close transition rotate'></i>";

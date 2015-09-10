@@ -21,7 +21,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		close = function() {
 			$( document ).off( "keyup", closeByESC ).off( "click", closeByDocument );
 
-			options.unload();
+			options.onClose();
 			modal.removeClass( "show" );
 			setTimeout( function() { modal.remove(); }, 300 );
 		},
@@ -47,37 +47,20 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			  overlay = modal.last();
 
 			/** ~Head~ */
-			options.showHead ? head.html( options.title ) : head.hide().next().hide();
+			options.showTitle ? head.html( options.title ) : head.hide().next().hide();
 
 			/** ~Body~ */
-			if ( options.render instanceof Function ) {
-				options.render.call( body, deferred, loading, close );
+			if ( options.content instanceof Function ) {
+				options.content.call( body, deferred, loading, close );
 			} else {
-				body.html( options.render );
+				body.html( options.content );
 				deferred.resolve();
 			}
 
-			modal.delegate( ".close", "click", close );
-
-			/** Set animate */
-			modal.addClass( options.animate ).addClass( options.class4modal );
+			modal.addClass( [ options.animation, options.class4modal || "" ].join( " " ) );
 
 			/** Show the overlay */
-			overlay.addClass( options.showOverlay ? "show" : "blank" );
-
-			/** Show progress */
-			true === options.showProgress && progress.start();
-
-			/** Content fade in */
-			true === options.fadeIn && body.addClass( "fade out" );
-
-			/** Do something for init */
-			deferred
-			.always( function() {
-
-				true === options.fadeIn && setTimeout( function() { body.removeClass( "out" ); } );
-				true === options.showProgress && setTimeout( function() { progress.done(); }, 300 );
-			} );
+			overlay.addClass( options.modal ? "show" : "blank" );
 
 			/** Close the modal */
 			if ( options.closeByESC || options.closeByDocument ) {
@@ -92,16 +75,16 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				}
 			}
 
+			modal.delegate( ".close", "click", close );
 			modal.first().css( options.css ).attr( options.attr );
-			modal.appendTo( document.body );
 
 			setTimeout( function() {
 				modal.first().addClass( "show" );
 			}, 100 );
 
-			if ( options.selector4drag ) {
+			if ( options.draggable ) {
 
-                var handle = options.selector4drag;
+                var handle = options.draggable;
 
                 head.css( "cursor", "move" );
 
@@ -119,6 +102,8 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 					} );
 				}, { handle: handle === true ? ".title" : handle } );
 			}
+
+			modal.appendTo( document.body );
 		};
 
 		options = $.extend( {}, $.fn.modal.defaults, options || {} );
@@ -140,31 +125,25 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 	$.fn.modal.defaults = {
 
 		title 		    : "Modal.JS",
+		showTitle 	    : true,
+		modal        	: true,
+		draggable       : true,
+
+		css 		    : { "min-width": 480 },
+		attr 		    : {},
 		class4modal     : "",
 
-		css 		    : {},
-		attr 		    : {},
-
-		showHead 	    : true,
-		showOverlay 	: true,
-		showProgress 	: false,
-		autoShow 	    : true,
-
-		fadeIn 		    : true,
-
 		closeByESC 	    : true,
-		closeByDocument : true,
+		closeByDocument : false,
 
-		selector4drag	: false,
+		animation 	    : "slide",
+		content 		: "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
 
-		animate 	    : "slide",
-		render 		    : "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
-
-		unload 		    : $.noop,
+		autoShow 	    : true,
+		onClose 		: $.noop,
 	};
 
 	/** Export to $ */
 	$.modal = $.fn.modal;
 } );
-
 
