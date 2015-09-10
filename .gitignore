@@ -1,5 +1,6 @@
 .DS_Store
 test
+dist
 nohup.out
 node_modules
 bower_components
