@@ -2365,13 +2365,13 @@ ui_modal_modal_ng = function (undefined) {
 }(ui_modal_modal);
 ui_pagination_pagination = function () {
   var namespace = '$ui.pagination', Pagination = function (target, settings) {
-      var index = settings.index, max = settings.max;
+      var index = settings.index, total = settings.total;
       index = +index || 0;
-      max = +max || index;
-      /** Swap index and max */
-      index > max && (index ^= max, max ^= index, index ^= max);
+      total = +total || index;
+      /** Swap index and total */
+      index > total && (index ^= total, total ^= index, index ^= total);
       settings.index = index;
-      settings.max = max;
+      settings.total = total;
       this.$node = target;
       this.settings = settings;
       render(target, settings);
@@ -2385,9 +2385,9 @@ ui_pagination_pagination = function () {
         if (e.keyCode === 13) {
           $(this).next().trigger('click');
         }
-      }).delegate(settings.selector4button, 'click', function (e) {
+      }).delegate(settings.selector4jump, 'click', function (e) {
         var input = $(this).prev(), value = +input.val();
-        if (value >= 1 && value <= settings.max) {
+        if (value >= 1 && value <= settings.total) {
           settings.index = value;
           settings.onPageChange(value, settings);
           render(target, settings);
@@ -2397,22 +2397,22 @@ ui_pagination_pagination = function () {
       });
     };
   function render(target, settings) {
-    var index = settings.index, max = settings.max, head = '', tail = '', page = [], content = target.find(settings.selector4content);
-    if (max <= 7) {
-      for (var i = 1; i <= max; page += ' ' + i++);
+    var index = settings.index, total = settings.total, head = '', tail = '', page = [], content = target.find(settings.selector4content);
+    if (total <= 7) {
+      for (var i = 1; i <= total; page += ' ' + i++);
     } else {
       /** Need a head? */
       index - 3 > 2 && (head = '1 2 ...');
       /** Has tail? */
-      index + 3 < max && (tail = '...');
+      index + 3 < total && (tail = '...');
       if (head) {
-        max - index > 3 && page.push(index - 2, index - 1, index);
+        total - index > 3 && page.push(index - 2, index - 1, index);
       } else
         for (var i = index < 3 ? 6 : index + 3; --i >= 1; page.unshift(i));
       if (tail) {
         index > 5 && page.push(index + 1, index + 2);
       } else
-        for (var i = max - (3 === max - index ? 6 : 5); ++i <= max; page.push(i));
+        for (var i = total - (3 === total - index ? 6 : 5); ++i <= total; page.push(i));
       page.unshift(head);
       page.push(tail);
     }
@@ -2427,7 +2427,7 @@ ui_pagination_pagination = function () {
     /** Show PREV */
     index > 1 && page.unshift($('<a class=\'icon prev\' data-index=\'' + (index - 1) + '\'></a>'));
     /** Show NEXT */
-    index < max && page.push($('<a class=\'icon next\' data-index=\'' + (index + 1) + '\'></a>'));
+    index < total && page.push($('<a class=\'icon next\' data-index=\'' + (index + 1) + '\'></a>'));
     content.html(page);
     target.find(settings.selector4input).val(index);
   }
@@ -2453,11 +2453,11 @@ ui_pagination_pagination = function () {
   };
   $.fn.pagination.defaults = {
     index: 1,
-    max: 1,
+    total: 1,
     onPageChange: $.noop,
     selector4content: '.content',
     selector4input: 'input:text',
-    selector4button: '[name=go]'
+    selector4jump: '[name=go]'
   };
 }();
 ui_pagination_pagination_ng = function () {
@@ -2472,7 +2472,7 @@ ui_pagination_pagination_ng = function () {
       function link($scope, $element, $attrs) {
         var pagination = $($element).pagination({
           index: $scope.index,
-          max: $scope.max,
+          total: $scope.total,
           onPageChange: function (index, settings) {
             if (!$rootScope.$$pahse) {
               $scope.index = index;
@@ -2484,15 +2484,15 @@ ui_pagination_pagination_ng = function () {
         $scope.$watch('index', function (value) {
           pagination.val(value);
         });
-        $scope.$watch('max', function (max) {
-          pagination.settings.max = max;
+        $scope.$watch('total', function (total) {
+          pagination.settings.total = total;
           pagination.val(pagination.val());
         });
       }
       return {
         scope: {
           index: '=',
-          max: '=',
+          total: '=',
           onPageChange: '&'
         },
         template: '<div class=\'ui pagination\'>' + '<div class=\'content\'></div>' + '<span class=\'normal\'>跳转至</span>' + '<input type=\'text\' maxleng=\'4\'>' + '<span name=\'go\'>GO</span>' + '</div>',

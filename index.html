@@ -2,7 +2,9 @@
 <html lang="en" data-framework="angularjs">
     <head>
         <meta charset="utf-8">
+        <!-- build:css assets/css.min.css -->
         <link rel="stylesheet" href="dist/css.min.css">
+        <!-- endbuild -->
     </head>
 
     <body ng-controller="mainController">
@@ -88,9 +90,10 @@
             </p>
             <a class="icon github3"></a>
         </footer>
-        <!--<script defer="true" async="true" src="dist/vendor.min.js" data-main="src/bootstrap.js"></script>-->
+        <!-- build:js assets/main.js -->
         <script src="dist/vendor.min.js"></script>
         <script src="dist/neoui-ng-rjs.js"></script>
         <script src="dist/app.js"></script>
+        <!-- endbuild -->
     </body>
 </html>

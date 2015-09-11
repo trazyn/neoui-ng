@@ -8,16 +8,16 @@ define( function() {
 
         var
         index = settings.index,
-        max = settings.max;
+        total = settings.total;
 
         index = +index || 0;
-        max = +max || index;
+        total = +total || index;
 
-		/** Swap index and max */
-		index > max && ( index ^= max, max ^= index, index ^= max );
+		/** Swap index and total */
+		index > total && ( index ^= total, total ^= index, index ^= total );
 
         settings.index = index;
-        settings.max = max;
+        settings.total = total;
 
         this.$node = target;
         this.settings = settings;
@@ -42,13 +42,13 @@ define( function() {
             }
         } )
 
-        .delegate( settings.selector4button, "click", function( e ) {
+        .delegate( settings.selector4jump, "click", function( e ) {
 
             var
             input = $( this ).prev(),
             value = +input.val();
 
-            if ( value >= 1 && value <= settings.max ) {
+            if ( value >= 1 && value <= settings.total ) {
                 settings.index = value;
                 settings.onPageChange( value, settings );
                 render( target, settings );
@@ -62,31 +62,31 @@ define( function() {
 
         var
         index = settings.index,
-        max = settings.max,
+        total = settings.total,
 		head = "",
 		tail = "",
         page = [],
         content = target.find( settings.selector4content );
 
-        if ( max <= 7 ) {
-            for ( var i = 1; i <= max; page += " " + i++ );
+        if ( total <= 7 ) {
+            for ( var i = 1; i <= total; page += " " + i++ );
         } else {
 
             /** Need a head? */
             index - 3 > 2 && ( head = "1 2 ..." );
 
             /** Has tail? */
-            index + 3 < max && ( tail = "..." );
+            index + 3 < total && ( tail = "..." );
 
             if ( head ) {
-                max - index > 3 && page.push( index - 2, index - 1, index );
+                total - index > 3 && page.push( index - 2, index - 1, index );
             } else
                 for ( var i = index < 3 ? 6 : index + 3; --i >= 1; page.unshift( i ) );
 
             if ( tail ) {
                 index > 5 && page.push( index + 1, index + 2 );
             } else
-                for ( var i = max - (3 === max - index ? 6 : 5); ++i <= max; page.push( i ) );
+                for ( var i = total - (3 === total - index ? 6 : 5); ++i <= total; page.push( i ) );
 
             page.unshift( head );
             page.push( tail );
@@ -112,7 +112,7 @@ define( function() {
         index > 1 && page.unshift( $( "<a class='icon prev' data-index='" + (index - 1) + "'></a>" ) );
 
         /** Show NEXT */
-        index < max && page.push( $( "<a class='icon next' data-index='" + (index + 1) + "'></a>" ) );
+        index < total && page.push( $( "<a class='icon next' data-index='" + (index + 1) + "'></a>" ) );
 
         content.html( page );
         target.find( settings.selector4input ).val( index );
@@ -146,11 +146,11 @@ define( function() {
 
     $.fn.pagination.defaults = {
         index               : 1,
-        max                 : 1,
+        total               : 1,
         onPageChange        : $.noop,
 
         selector4content    : ".content",
         selector4input      : "input:text",
-        selector4button     : "[name=go]"
+        selector4jump       : "[name=go]"
     };
 } );

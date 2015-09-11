@@ -10,13 +10,21 @@ browserSync = require( "browser-sync" ),
 less = require( "gulp-less" ),
 debug = require( "gulp-debug" ),
 streamqueue = require( "streamqueue" ),
-clean = require( "gulp-clean" ),
 rev = require( "gulp-rev" ),
+revReplace = require( "gulp-rev-replace" ),
+useref = require( "gulp-useref"),
+gulpif = require( "gulp-if" ),
 rjs = require( "requirejs" ),
 amdclean = require( "amdclean" ),
+csso = require( "gulp-csso" ),
+minifyCSS = require( "gulp-minify-css" ),
+cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
+autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } ),
 
 fs = require( "fs" ),
 pkg = require( "./package.json" ),
+
+dest = pkg.dest,
 
 /** Task definitions */
 bs, gulp = require( "gulp" )
@@ -37,12 +45,6 @@ bs, gulp = require( "gulp" )
     } )
 
 	.task( "dist", function() {
-
-		var
-		dest = pkg.dest,
-		minifyCSS = require( "gulp-minify-css" ),
-        cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
-        autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } );
 
         streamqueue( { objectMode: true },
                 gulp.src( "src/style/main.less" ),
@@ -165,6 +167,20 @@ bs, gulp = require( "gulp" )
 		    if ( err ) throw err;
             fs.writeFile( "./src/demo/tree/files.json", JSON.stringify( result ) );
 		} );
+	} )
+
+	.task( "index", function() {
+
+		var assets = useref.assets();
+
+		return gulp.src( "index.html" )
+			.pipe( assets )
+			.pipe( gulpif( "*.js", uglify() ) )
+			.pipe( gulpif( "*.css", minifyCSS() ) )
+			.pipe( rev() )
+			.pipe( assets.restore() )
+			.pipe( useref() )
+			.pipe( gulp.dest( dest ) );
 	} )
 
 	.task( "jshint", function() {

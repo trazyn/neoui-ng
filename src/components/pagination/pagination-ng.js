@@ -17,7 +17,7 @@ angular.module( "$ui.pagination", [] )
             var
             pagination = $( $element ).pagination( {
                 index       : $scope.index,
-                max         : $scope.max,
+                total       : $scope.total,
                 onPageChange: function( index, settings ) {
 
                     if ( !$rootScope.$$pahse ) {
@@ -33,9 +33,9 @@ angular.module( "$ui.pagination", [] )
                 pagination.val( value );
             } );
 
-            $scope.$watch( "max", function( max ) {
+            $scope.$watch( "total", function( total ) {
 
-                pagination.settings.max = max;
+                pagination.settings.total = total;
                 pagination.val( pagination.val() );
             } );
         }
@@ -44,7 +44,7 @@ angular.module( "$ui.pagination", [] )
 
             scope           : {
                 index       : "=",
-                max         : "=",
+                total       : "=",
                 onPageChange: "&"
             },
 
