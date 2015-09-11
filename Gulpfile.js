@@ -31,7 +31,7 @@ dest = pkg.dest,
 /** Task definitions */
 bs, gulp = require( "gulp" )
 
-	.task( "start", function() {
+	.task( "www", function() {
 
 		bs = browserSync( {
 			files: [ "src/**/*.css", "src/**/*.js", "src/demo/**/*.html" ],
@@ -235,7 +235,7 @@ bs, gulp = require( "gulp" )
 			.pipe( jshint.reporter( "default" ) );
 	} )
 
-	.task( "default", [ "data", "watch", "dist", "start" ] );
+	.task( "default", [ "data", "watch", "dist", "www" ] );
 
 pkg.dest = pkg.dest || "dist";
 fs.existsSync( pkg.dest ) || fs.mkdirSync( pkg.dest );
