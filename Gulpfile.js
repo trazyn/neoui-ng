@@ -31,16 +31,26 @@ dest = pkg.dest,
 /** Task definitions */
 bs, gulp = require( "gulp" )
 
-	.task( "www", function() {
+	.task( "www:dist", function() {
+
+		bs = browserSync( {
+            server: {
+				baseDir: "./dist",
+                middleware: [ compress() ]
+            }
+		} );
+	} )
+
+    .task( "www:dev", function() {
 
 		bs = browserSync( {
 			files: [ "src/**/*.css", "src/**/*.js", "src/demo/**/*.html" ],
             server: {
 				baseDir: "./",
-                middleware: [compress()]
+                index: "index-dev.html"
             }
 		} );
-	} )
+    } )
 
     .task( "clean", function() {
         gulp.src( "dist" ).pipe( clean() );
@@ -235,7 +245,7 @@ bs, gulp = require( "gulp" )
 			.pipe( jshint.reporter( "default" ) );
 	} )
 
-	.task( "default", [ "data", "watch", "dist", "www" ] );
+	.task( "default", [ "data", "watch", "dist", "www:dev" ] );
 
 pkg.dest = pkg.dest || "dist";
 fs.existsSync( pkg.dest ) || fs.mkdirSync( pkg.dest );

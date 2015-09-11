@@ -1,11 +1,10 @@
+
 <!doctype html>
 <html lang="en" data-framework="angularjs">
     <head>
         <meta charset="utf-8">
-        <!-- build:css assets/css.css -->
         <link rel="stylesheet" href="dist/neoui-0.1.0.css">
         <link rel="stylesheet" href="dist/app.css">
-        <!-- endbuild -->
     </head>
 
     <body ng-controller="mainController">
@@ -91,10 +90,6 @@
             </p>
             <a class="icon github3"></a>
         </footer>
-        <!-- build:js assets/js.js async defer -->
-        <script src="dist/vendor.js"></script>
-        <script src="dist/neoui-0.1.0.js"></script>
-        <script src="dist/app.js"></script>
-        <!-- endbuild -->
+        <script src="dist/vendor.js" defer="true" async="true" data-main="src/bootstrap.js"></script>
     </body>
 </html>
