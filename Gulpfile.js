@@ -31,6 +31,7 @@ dest = pkg.dest,
 /** Task definitions */
 bs, gulp = require( "gulp" )
 
+    /** Combine and uglify all js css */
 	.task( "www:dist", function() {
 
 		bs = browserSync( {
@@ -41,6 +42,7 @@ bs, gulp = require( "gulp" )
 		} );
 	} )
 
+    /** Standard file without uglify */
     .task( "www:dev", function() {
 
 		bs = browserSync( {
@@ -56,6 +58,7 @@ bs, gulp = require( "gulp" )
         gulp.src( "dist" ).pipe( clean() );
     } )
 
+    /** Project dependency */
     .task( "dist:vendor", function() {
 
 		return gulp.src( [ "bower_components/jquery/dist/jquery.js",
@@ -72,6 +75,7 @@ bs, gulp = require( "gulp" )
 			.pipe( gulp.dest( dest ) );
     } )
 
+    /** Component js and css */
     .task( "dist:neoui", function() {
 
         rjs.optimize( {
@@ -108,6 +112,7 @@ bs, gulp = require( "gulp" )
 
     } )
 
+    /** Demo page */
     .task( "dist:app", function() {
 
 		rjs.optimize( {
@@ -161,6 +166,7 @@ bs, gulp = require( "gulp" )
 
     } )
 
+    /** Hot deployment */
 	.task( "dist", [ "dist:vendor", "dist:neoui", "dist:app" ], function() {
 
 		var assets = useref.assets();
@@ -179,6 +185,7 @@ bs, gulp = require( "gulp" )
 			.pipe( gulp.dest( dest ) );
 	} )
 
+    /** Auto compile */
 	.task( "watch", function() {
 		gulp.watch( "src/**/*.less", [ "dist" ] );
 	} )
