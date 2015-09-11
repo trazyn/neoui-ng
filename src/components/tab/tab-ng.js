@@ -66,10 +66,10 @@ angular.module( "$ui.tab", [] )
                                 '<div class="menu ui dropdown icon left"><i class="icon more"></i><div class="content"/></div>' +
                               '</div>',
 
-            controller      : controller
+            controller      : [ "$scope", "$element", "$attrs", controller ]
         };
     } ] )
-    .directive( "sTab", [ "$parse", function( $compile ) {
+    .directive( "sTab", function() {
 
         function link( $scope, $element, $attrs, controller ) {
 
@@ -132,6 +132,5 @@ angular.module( "$ui.tab", [] )
             require         : "^sTabSet",
             link            : link
         };
-    } ] );
-
+    } );
 } );

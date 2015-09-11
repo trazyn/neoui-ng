@@ -1,6 +1,8 @@
 
 var
 
+NAME = "neoui-0.1.0",
+
 /** Plugin list */
 rename = require( "gulp-rename" ),
 concat = require( "gulp-concat" ),
@@ -16,7 +18,6 @@ useref = require( "gulp-useref"),
 gulpif = require( "gulp-if" ),
 rjs = require( "requirejs" ),
 amdclean = require( "amdclean" ),
-csso = require( "gulp-csso" ),
 minifyCSS = require( "gulp-minify-css" ),
 cleancss = new (require( "less-plugin-clean-css" ))( { advanced: true, compatibility: "ie8" } ),
 autoprefix = new (require( "less-plugin-autoprefix" ))( { browsers: [ "last 4 versions" ] } ),
@@ -34,7 +35,7 @@ bs, gulp = require( "gulp" )
 		bs = browserSync( {
 			files: [ "**/*.css", "**/*.js", "src/demo/**/*.html" ],
 			server: {
-				baseDir: "./",
+				baseDir: "./dist",
 				index: "index.html"
 			}
 		} );
@@ -45,18 +46,6 @@ bs, gulp = require( "gulp" )
     } )
 
 	.task( "dist", function() {
-
-        streamqueue( { objectMode: true },
-                gulp.src( "src/style/main.less" ),
-                gulp.src( [ "src/components/**/*.less", "!src/components/**/*-bs.less"] ),
-                gulp.src( "src/demo/**/*.less" ) )
-			.pipe( debug() )
-			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
-			.pipe( concat( "css.css" ) )
-			.pipe( gulp.dest( dest ) )
-			.pipe( minifyCSS() )
-			.pipe( rename( "css.min.css" ) )
-			.pipe( gulp.dest( dest ) );
 
 		gulp.src( [ "bower_components/jquery/dist/jquery.js",
 		        "bower_components/jquery.event.drag-new/event.drag/jquery.event.drag.js",
@@ -71,21 +60,41 @@ bs, gulp = require( "gulp" )
 			.pipe( rename( "vendor.min.js" ) )
 			.pipe( gulp.dest( dest ) );
 
+	    gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] )
+			.pipe( debug() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
+			.pipe( concat( NAME + ".css" ) )
+			.pipe( gulp.dest( dest ) )
+			.pipe( minifyCSS() )
+            .pipe( rename( NAME + ".min.css" ) )
+            .pipe( gulp.dest( dest ) );
+
+        gulp.src( [ "src/demo/**/*.less" ] )
+			.pipe( debug() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
+			.pipe( concat( "app.css" ) )
+			.pipe( gulp.dest( dest ) )
+			.pipe( minifyCSS() )
+			.pipe( rename( "app.min.css" ) )
+			.pipe( gulp.dest( dest ) );
+
         rjs.optimize( {
             baseUrl: "src",
             paths: {
                 ui: "components"
             },
+            uglify: "none",
             include: "bundle",
-            out: "dist/neoui-ng-rjs.js",
+            out: "dist/" + NAME + "+rjs.js",
             onModuleBundleComplete: function( data ) {
-                fs.writeFileSync( "dist/neoui-ng.js", amdclean.clean( { "filePath": data.path } ) );
+                fs.writeFileSync( "dist/" + NAME + "+std.js", amdclean.clean( { "filePath": data.path } ) );
             }
         } );
 
 		rjs.optimize( {
 		    baseUrl: "src",
             include: "bootstrap",
+            uglify: "none",
             out: "dist/app.js",
             paths: {
                 "ui": "components",
@@ -108,6 +117,21 @@ bs, gulp = require( "gulp" )
                 "util/dateutil": "empty:"
             }
 		} );
+
+		var assets = useref.assets();
+
+		gulp.src( [ "src/demo/**/*.html", "src/demo/**/*.json", "fonts/**/*", "images/**/*" ], { base: "." } )
+			.pipe( gulp.dest( dest ) );
+
+		gulp.src( "index.html" )
+			.pipe( assets )
+			.pipe( gulpif( "*.js", uglify() ) )
+			.pipe( gulpif( "*.css", minifyCSS() ) )
+			.pipe( rev() )
+			.pipe( assets.restore() )
+			.pipe( useref() )
+			.pipe( revReplace() )
+			.pipe( gulp.dest( dest ) );
 	} )
 
 	.task( "watch", function() {
@@ -167,20 +191,6 @@ bs, gulp = require( "gulp" )
 		    if ( err ) throw err;
             fs.writeFile( "./src/demo/tree/files.json", JSON.stringify( result ) );
 		} );
-	} )
-
-	.task( "index", function() {
-
-		var assets = useref.assets();
-
-		return gulp.src( "index.html" )
-			.pipe( assets )
-			.pipe( gulpif( "*.js", uglify() ) )
-			.pipe( gulpif( "*.css", minifyCSS() ) )
-			.pipe( rev() )
-			.pipe( assets.restore() )
-			.pipe( useref() )
-			.pipe( gulp.dest( dest ) );
 	} )
 
 	.task( "jshint", function() {

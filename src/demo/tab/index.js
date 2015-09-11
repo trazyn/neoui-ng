@@ -5,7 +5,7 @@ define( [ "ui/tab/tab-ng" ], function() {
 
     angular
     .module( "demo.tab", [ "$ui.tab" ] )
-    .controller( "tabController", function( $scope, $sce ) {
+    .controller( "tabController", [ "$scope", "$sce", function( $scope, $sce ) {
 
         var last;
 
@@ -93,5 +93,5 @@ define( [ "ui/tab/tab-ng" ], function() {
 	    $scope.init = function() {
             $.anchor( { offset: 190 } );
 	    };
-    } );
+    } ] );
 } );

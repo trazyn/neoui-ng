@@ -70,7 +70,7 @@ angular.module( "$ui.accordion", [] )
             transclude          : true,
             replace             : true,
             template            : "<div class='ui accordion' ng-transclude></div>",
-            controller          : controller
+            controller          : [ "$scope", "$element", "$attrs", controller ]
         };
     } ] )
 
