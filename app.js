@@ -1,0 +1,1245 @@
+
+(function( $ ) {
+
+	var
+	Anchor = function( target, settings ) {
+
+		var
+		current,
+		mappings = {};
+
+		target
+		.find( settings.selector4anchor + "[" + settings.symbol + "]" )
+		.filter( ".ui.anchor [" + settings.symbol + "]" )
+		.each( function() {
+
+			var
+			name = this.getAttribute( settings.symbol ),
+			self = $( this ),
+			content = target.find( settings.selector4content ).filter( "[" + settings.symbol + "='" + name + "']" );
+
+			if ( content.length ) {
+				if ( !current ) {
+					current = self.addClass( "active" );
+				}
+
+				mappings[ name ] = {
+					offsetTop: content.offset().top - content.height() + settings.offset,
+					anchor: self
+				};
+			}
+		} );
+
+		target
+		.undelegate( settings.selector4delegate + "[" + settings.symbol + "]", "click" )
+		.delegate( settings.selector4delegate + "[" + settings.symbol + "]", "click", function( e, args ) {
+
+			var
+			self = $( this ),
+			name = this.getAttribute( settings.symbol ),
+			item = mappings[ name ];
+
+			if ( self.is( "[data-forceAnchor]" ) ) {
+			    var
+			    offset = +self.attr( "data-forceAnchor" ),
+			    dest = target.find( settings.selector4content ).filter( "[" + settings.symbol + "=" + name + "]" );
+
+			    item.offsetTop = dest.offset().top + offset;
+
+                self.removeAttr( "data-forceAnchor" );
+			}
+
+			if ( item ) {
+
+				current.removeClass( "active" );
+				current = item.anchor.addClass( "active" );
+
+				args === undefined && $( target ).animate( {
+					"scrollTop": item.offsetTop
+				}, 400 );
+
+				e.stopPropagation();
+				e.preventDefault();
+			}
+		} );
+
+        $( document )
+		.off( "scroll", autoAnchor )
+		.on( "scroll", { mappings: mappings, offset: settings.offset }, autoAnchor );
+	},
+
+	timer;
+
+	function autoAnchor( e ) {
+
+		clearTimeout( timer );
+
+		timer = setTimeout( function() {
+
+			var
+			/** Shortcuts */
+			mappings = e.data.mappings,
+            offset = e.data.offset,
+            containerOffsetTop = document.body.scrollTop,
+            sort = [];
+
+			for ( var i in mappings ) {
+
+				var item = mappings[ i ];
+
+				sort.push( {
+					offset: Math.abs( containerOffsetTop - item.offsetTop ),
+					item: item
+				} );
+			}
+
+			sort.sort( function( x, y ) {
+
+				if ( x.offset > y.offset ) {
+					return 1;
+				}
+
+				if ( x.offset === y.offset ) {
+					return 0;
+				}
+
+				return -1;
+			} );
+
+			var destination = sort[ 0 ][ "item" ][ "anchor" ];
+
+			if ( !destination.hasClass( "active" ) ) {
+				e.stopPropagation();
+				e.preventDefault();
+				destination.trigger( "click", { animate: false } );
+			}
+		}, 400 );
+	}
+
+	$.anchor = function( options ) {
+
+        new Anchor( $( "html, body" ), $.extend( {}, $.anchor.defaults, options || {} ) );
+	};
+
+	$.anchor.defaults = {
+
+		symbol 			    : "data-anchor",
+		offset 			    : 0,
+
+		selector4anchor 	: "#anchors li",
+		selector4delegate   : "#anchors li, a",
+		selector4content 	: "#container header, #canvas h3, .ui.ribbon"
+	};
+
+})( window.jQuery );
+
+define("ui/anchor/anchor", function(){});
+
+
+define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
+
+	"use strict";
+
+	angular
+	.module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
+	.controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
+
+        $scope.name = "test";
+
+		$scope.open = function( animation ) {
+
+			return $modal.open( {
+				controller: "modalController",
+				animation: animation,
+				templateUrl: "src/demo/modal/page.html",
+				title: "Instagram Handbook for Brands",
+				class4modal: "demo",
+				scope: $scope
+			} );
+		};
+
+		$scope.showProgress = function() {
+
+			$modal.open( {
+				controller: "modalController",
+				templateUrl: "src/demo/modal/page1.html",
+				title: "弹出框标题 18PX 加粗 #333",
+				class4modal: "demo",
+				scope: $scope
+			} )
+
+			.progress.start();
+		};
+
+		$scope.dragMe = function() {
+
+			$modal.open( {
+				controller: "modalController",
+				draggable: true,
+				templateUrl: "src/demo/modal/page1.html",
+				title: "弹出框标题 18PX 加粗 #333",
+				class4modal: "demo",
+				scope: $scope
+			} );
+		};
+
+	    $scope.init = function() {
+            $.anchor( { offset: -80 } );
+	    };
+	} ] );
+} );
+
+
+
+define( 'demo/tab/index',[ "ui/tab/tab-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.tab", [ "$ui.tab" ] )
+    .controller( "tabController", [ "$scope", "$sce", function( $scope, $sce ) {
+
+        var last;
+
+        $scope.selected = "2";
+
+        $scope.tabs = [ {
+
+            header: "One",
+            index: "1",
+            disabled: true,
+            content: $sce.trustAsHtml( "<img src='images/lorempixel-1.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+        }, {
+            header: "Two",
+            index: "2",
+            content: $sce.trustAsHtml( "<img src='images/lorempixel-2.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+        }, {
+            header: "Three",
+            index: "3",
+            content: $sce.trustAsHtml( "<img src='images/lorempixel.jpg' alt=''><blockquote>'Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem.' <br>— Aliquam Libero</blockquote><p>Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em></p>" )
+        }, {
+            header: "Ajax - 1",
+            index: "4",
+            page: "src/demo/tab/tab4.html"
+        }, {
+            header: "Ajax - 2",
+            index: "5",
+            page: "src/demo/tab/error.html"
+        } ];
+
+        last = $scope.tabs.length;
+
+        $scope.addTab = function() {
+
+            var index = ++last + "";
+
+            $scope.tabs.push( {
+                header: "Tab - " + last,
+                index: index,
+                content: $sce.trustAsHtml( "Tab: " + index ),
+            } );
+        };
+
+        $scope.removeTab = function() {
+
+            var
+            tabs = $scope.tabs,
+            index;
+
+            for ( var i = tabs.length; --i >= 0; ) {
+
+                var tab = tabs[ i ];
+
+                if ( tab.index === $scope.selected ) {
+                    index = i;
+                    break;
+                }
+            }
+
+            tabs.splice( index, 1 );
+        };
+
+        $scope.toggleTabState = function() {
+
+            var
+            tabs = $scope.tabs,
+            index;
+
+            for ( var i = tabs.length; --i >= 0; ) {
+
+                var tab = tabs[ i ];
+
+                if ( tab.index === $scope.selected ) {
+                    index = i;
+                    break;
+                }
+            }
+
+            tabs[ index ][ "disabled" ] = !tabs[ index ][ "disabled" ];
+        };
+
+        $scope.onSelect = function() {
+            console.log( $scope.selected );
+        };
+
+	    $scope.init = function() {
+            $.anchor( { offset: 190 } );
+	    };
+    } ] );
+} );
+
+
+define( 'demo/message/index',[ "ui/message/message-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.message", [ "$ui.message" ] )
+    .controller( "messageController", [ "$scope", "$message", function( $scope, $message ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: 20 } );
+        };
+
+        angular.extend( $scope, {
+
+            showSuccess: function() {
+                $message.success( "This is a message telling you that everything is a-okay" );
+            },
+
+            showError: function() {
+                $message.error( "This is a notification that something is wrong..." );
+            },
+
+            showInfo: function() {
+                $message.info( "This is an 'information message' div." );
+            },
+
+            showWarn: function() {
+                $message.warn( "It warns the users that to expect some changes or limitations." );
+            },
+
+            showConfirm: function() {
+
+                $message.confirm( {
+                    title: "Please confirm",
+                    message: "Exported successfully. Do you want to open the export query page?",
+                    onOk: function() {
+                        window.open( "//www.google.com", "_blank" );
+                    }
+                } );
+            },
+
+            showBubble: function() {
+                $.message.bubble( "Thank You~", 3000 );
+            }
+        } );
+    } ] );
+} );
+
+
+define( 'demo/autoComplete/index',[ "ui/autoComplete/autoComplete-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.autoComplete", [ "$ui.autoComplete" ] )
+    .controller( "autoCompleteController", [ "$scope", function( $scope ) {
+
+        $scope.name = "Test";
+
+        /** AutoComplete options */
+        angular.extend( $scope, {
+
+            isDisabled: false,
+            localMatch: "^",
+            tabComplete: true,
+            highlight: true,
+            fuzzy: true
+        } );
+
+        $scope.data = [ {
+			value: "AD",
+			text: "Andorra"
+		}, {
+			value: "AZ",
+			text: "Azerbaijan"
+		}, {
+			value: "AW",
+			text: "Aruba"
+		}, {
+			value: "BI",
+			text: "Bulgaria"
+		}, {
+			value: "BS",
+			text: "Bahamas"
+		}, {
+			value: "CH",
+			text: "Switzerland"
+		}, {
+			value: "CK",
+			text: "Cook Island"
+		}, {
+			value: "CL",
+			text: "Chile"
+		}, {
+			value: "CN",
+			text: "China"
+		}, {
+			value: "CM",
+			text: "Cambodia"
+		}, {
+			value: "AE",
+			text: "United Arab Emirates"
+		}, {
+			value: "AF",
+			text: "Afghanistan"
+		}, {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+		$scope.address = [ {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+		/** Ajax example */
+		$scope.ajax = {
+		    dataProxy: function( key ) {
+                return $.ajax( {
+                    url: "https://api.github.com/search/repositories?q=" + key + "&sort=stars&order=desc"
+                } );
+		    },
+            enterforce: true,
+            dataFilter: function( data ) {
+                return data.items || [];
+            }
+		};
+
+	    $scope.init = function() {
+            $.anchor( { offset: -60 } );
+	    };
+    } ] );
+} );
+
+
+define( 'demo/toast/index',[ "ui/toast/toast-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.toast", [ "$ui.toast" ] )
+    .controller( "toastController", [ "$scope", "$toast", function( $scope, $toast ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: 0 } );
+        };
+
+        $scope.theme = "default";
+
+        $scope.changeTheme = function( theme ) {
+            $scope.theme = theme;
+        };
+
+        angular.extend( $scope, {
+
+            topLeft: function() {
+                $toast.top( "On the top left!", $scope.theme ).left();
+            },
+
+            topRight: function() {
+                $toast.top( "On the top left!", $scope.theme ).right();
+            },
+
+            bottomLeft: function() {
+                $toast.bottom( "On the bottom left!", $scope.theme ).left();
+            },
+
+            bottomRight: function() {
+                $toast.bottom( "On the bottom right!", $scope.theme ).right();
+            }
+        } );
+    } ] );
+} );
+
+
+define( 'demo/getstarted/index',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.getstarted", [] )
+    .controller( "getstartedController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: 20 } );
+        };
+    } ] );
+} );
+
+
+define( 'demo/tooltip/index',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.tooltip", [] )
+    .controller( "tooltipController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: 0 } );
+        };
+    } ] );
+} );
+
+
+define( 'demo/sidenav/index',[ "ui/sidenav/sidenav-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.sidenav", [ "$ui.sidenav" ] )
+    .controller( "sidenavController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
+
+        $scope.showProfile = function( sidenav ) {
+
+            sidenav
+            .left()
+            .$node
+            .delegate( ".exit", "click", function() {
+                sidenav.close();
+            } );
+        };
+    } ] );
+} );
+
+
+define( 'demo/dateutil/index',[ "util/dateutil" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.dateutil", [] )
+    .controller( "dateutilController", [ "$scope", function( $scope ) {
+
+        var
+        now = new Date(),
+        justAgo = new Date( now - 50 * 1000 ),
+        minuteAgo = new Date( now  - 200 * 1000 ),
+        hourAgo = new Date( now - 3600 * 1000 ),
+        yesterday = new Date( $.dateutil( now ).yesterday() ),
+        morethan = new Date( $.dateutil( now ).day( -31 ) );
+
+        $scope.init = function() {
+            $.anchor();
+        };
+
+        angular.extend( $scope, {
+
+            now: now,
+            now2: $.dateutil( now ).format( "%Y - %m - %d" ),
+            now3: $.dateutil( now ).format( "%B %A, %Y" ),
+            now4: $.dateutil( now ).format( "%x %X" ),
+
+            justAgo: justAgo,
+            justAgo2: $.dateutil( justAgo ).nice(),
+
+            minuteAgo: minuteAgo,
+            minuteAgo2: $.dateutil( minuteAgo ).nice(),
+
+            hourAgo: hourAgo,
+            hourAgo2: $.dateutil( hourAgo ).nice(),
+
+            yesterday: yesterday,
+            yesterday2: $.dateutil( yesterday ).nice(),
+
+            morethan: morethan,
+            morethan2: $.dateutil( morethan ).nice()
+        } );
+    } ] );
+} );
+
+
+define( 'demo/tree/index',[ "ui/tree/tree-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.tree", [ "$ui.tree" ] )
+    .controller( "treeController", [ "$scope", function( $scope ) {
+
+        var deferred = $.Deferred();
+
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
+
+        /** Simple */
+        angular.extend( $scope, {
+
+            rootIds: [ "C000000000481935" ],
+            data: function() {
+
+                var deferred = $.Deferred();
+
+                $.ajax( {
+                    url: "src/demo/tree/tree.json",
+                    dataType: "json"
+                } )
+
+                .done( function( data ) {
+
+                    data = data.result.catalog;
+                    deferred.resolveWith( JSON.parse( data ) );
+                } );
+
+                return deferred.promise();
+            },
+
+            onSelect: function( node ) {
+                console.log( node );
+            }
+        } );
+
+        $scope.test = function() {
+
+            $.ajax( {
+                url: "src/demo/tree/test.json",
+                dataType: "text"
+            } )
+            .done( function( data ) {
+                deferred.resolveWith( eval( "(" + data + ")" ) );
+            } );
+
+            return deferred.promise();
+        };
+
+        /** Custom */
+        $scope.files = function() {
+
+            return $.ajax( {
+                url: "src/demo/tree/files.json"
+            } );
+        };
+
+        $scope.addBranch = function( tree, parentId ) {
+
+            var
+            settings = tree.settings,
+            item = {};
+
+            item[ settings.parentKey ] = parentId;
+            item[ settings.valueKey ] = +new Date();
+            item[ settings.textKey ] = "New Branch";
+
+            tree.add( item );
+        };
+
+        $scope.afterInit = function( szseTree ) {
+
+            $.when( deferred ).done( function() {
+
+                szseTree
+                .expand( "szse" )
+                .expand( "zhyjs" )
+                .disabled("zhyjs" )
+                .disabled( "szzqjysyyb" );
+            } );
+        };
+    } ] );
+} );
+
+
+define( 'demo/rate/index',[ "ui/rate/rate-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.rate", [ "$ui.rate" ] )
+    .controller( "rateController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
+
+        $scope.heart = 2.3;
+    } ] );
+} );
+
+
+define( 'demo/progress/index',[ "ui/progress/progress-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.progress", [ "$ui.progress" ] )
+    .controller( "progressContorller", [ "$scope", function( $scope ) {
+
+        $scope.stop = function() {
+            $scope.progress.done();
+        };
+    } ] );
+} );
+
+
+
+define( 'demo/calendar/index',[ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.calendar", [ "$ui.calendar" ] )
+    .controller( "calendarController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
+
+        var now = new Date();
+
+        angular.extend( $scope, {
+
+            showTime: false,
+            double: true,
+            date: $.dateutil( now ).tomorrow(),
+            isDisabled: false,
+            minDate: $.dateutil( now ).lastWeek(),
+            maxDate: $.dateutil( now ).nextWeek(),
+            onClick: function( value ) {
+                console.log( value );
+            }
+        } );
+    } ] );
+} );
+
+
+define( 'demo/dropdown/index',[ "ui/dropdown/dropdown-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.dropdown", [ "$ui.dropdown" ] )
+    .controller( "dropdownController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: -10 } );
+        };
+
+        $scope.data = [ {
+			value: "AD",
+			text: "Andorra"
+		}, {
+			value: "AZ",
+			text: "Azerbaijan"
+		}, {
+			value: "AW",
+			text: "Aruba"
+		}, {
+			value: "BI",
+			text: "Bulgaria"
+		}, {
+			value: "BS",
+			text: "Bahamas"
+		}, {
+			value: "CH",
+			text: "Switzerland"
+		}, {
+			value: "CK",
+			text: "Cook Island"
+		}, {
+			value: "CL",
+			text: "Chile"
+		}, {
+			value: "CN",
+			text: "China"
+		}, {
+			value: "CM",
+			text: "Cambodia"
+		}, {
+			value: "AE",
+			text: "United Arab Emirates"
+		}, {
+			value: "AF",
+			text: "Afghanistan"
+		}, {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+        $( ".ui.dropdown.icon" ).each( function() {
+            $( this ).dropdown( { data: $scope.data } );
+        } );
+
+        angular.extend( $scope, {
+
+            ajax: function() {
+
+                var deferred = $.Deferred();
+
+                $.ajax( {
+                    url: "src/demo/dropdown/result.json",
+                    dataType: "json"
+                } )
+
+                .done( function( data ) {
+                    data = data.items;
+                    deferred.resolveWith( data );
+                } )
+
+                .fail( deferred.reject );
+
+                return deferred;
+            },
+
+            required: true,
+            multiple: true
+        } );
+    } ] );
+} );
+
+
+define( 'demo/ripple/index',[ "ui/ripple/ripple-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.ripple", [ "$ui.ripple" ] )
+    .controller( "rippleController", [ "$scope", function( $scope ) {
+
+        var colors = {
+            grape: "#ED5565",
+            bittersweet: "#FC6E51",
+            sunflower: "#FFCE54",
+            grass: "#A0D468",
+            mint: "#48CFAD",
+            auqa: "#4FC1E9",
+            blueJeans: "#5D9CEC",
+            lavender: "#AC92EC",
+            pinkRose: "#EC87C0",
+            lightGray: "#F5F7FA",
+            mediumGray: "#CCD1D9",
+            darkGray: "#656D78",
+            success: "#0f9d58",
+            error: "#f44336",
+            info: "#039be5",
+            warn: "#ff5722"
+        };
+
+        $scope.changeColor = function( name ) {
+
+            var color = colors[ $scope.theme = name ];
+
+            if ( $scope.color === color ) {
+                $scope.color = $scope.theme = void color;
+            } else
+                $scope.color = color;
+        };
+    } ] );
+} );
+
+
+define( 'demo/checkbox/index',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.checkbox", [] )
+    .controller( "checkboxController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor();
+        };
+    } ] );
+} );
+
+
+define( 'demo/switcher/index',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.switcher", [] )
+    .controller( "switcherController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor();
+        };
+    } ] );
+} );
+
+
+define( 'demo/button/index',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.button", [] )
+    .controller( "buttonController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: -30 } );
+        };
+    } ] );
+} );
+
+
+define( 'demo/radio/index',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.radio", [] )
+    .controller( "radioController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor();
+        };
+    } ] );
+} );
+
+
+define( 'demo/loading/index',[ "ui/loading/loading-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.loading", [ "$ui.loading" ] )
+    .controller( "loadingController", [ "$scope", function( $scope ) {
+
+    } ] );
+} );
+
+
+define( 'demo/pagination/index',[ "ui/pagination/pagination-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.pagination", [ "$ui.pagination" ] )
+    .controller( "paginationController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
+
+        $scope.index = 7;
+
+        $( ".ui.pagination:last" ).pagination( {
+            total: 20,
+            index: 1
+        } );
+    } ] );
+} );
+
+
+
+define( 'demo/accordion/index',[ "ui/accordion/accordion-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.accordion", [ "$ui.accordion" ] )
+    .controller( "accordionController", [ "$scope", function( $scope ) {
+
+        $scope.init = function() {
+            $.anchor( { offset: 270 } );
+        };
+
+        $scope.multiple = true;
+
+        $scope.onExpand = function( index ) {
+            console.log( "Expand: " + index );
+        };
+
+        $scope.onCollapse = function( index ) {
+            console.log( "Collapse: " + index );
+        };
+
+        $scope.isOpen = true;
+
+        $scope.panes = [ {
+            head: "Pane 1",
+            content: "Pane - 1"
+        }, {
+            head: "Pane 2",
+            content: "Pane - 2"
+        } ];
+
+        $scope.addPane = function() {
+
+            var index = +new Date();
+
+            $scope.panes.push( {
+                head: "Pane " + index,
+                content: "Pane - " + index
+            } );
+        };
+
+        $scope.removePane = function() {
+            $scope.panes.splice( -1 );
+        };
+    } ] );
+} );
+
+
+
+define( 'demo/validation/index',[ "ui/validation/validation-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.validation", [ "$ui.validation" ] )
+    .controller( "validationController", [ "$scope", function( $scope ) {
+
+        $scope.push = function( info ) {
+            console.log( info );
+        };
+
+        $scope.uniqueName = function( name ) {
+            return name !== "abc";
+        };
+
+	    $scope.init = function() {
+            $.anchor( { offset: 310 } );
+	    };
+    } ] );
+} );
+
+
+require.config( {
+
+	baseUrl: "src",
+
+	paths: {
+		ui: "../src/components",
+		util: "../src/util",
+		modules: "../src/modules"
+	}
+} );
+
+require( [
+        "ui/anchor/anchor",
+        "ui/sidenav/sidenav-ng",
+        "demo/modal/index",
+        "demo/tab/index",
+        "demo/message/index",
+        "demo/autoComplete/index",
+        "demo/toast/index",
+        "demo/getstarted/index",
+        "demo/tooltip/index",
+        "demo/sidenav/index",
+        "demo/dateutil/index",
+        "demo/tree/index",
+        "demo/rate/index",
+        "demo/progress/index",
+        "demo/calendar/index",
+        "demo/dropdown/index",
+        "demo/ripple/index",
+        "demo/checkbox/index",
+        "demo/switcher/index",
+        "demo/button/index",
+        "demo/radio/index",
+        "demo/loading/index",
+        "demo/pagination/index",
+        "demo/accordion/index",
+        "demo/validation/index" ], function() {
+
+	"use strict";
+
+	var app = angular
+
+	.module( "neoui", [ "ngRoute", "$ui.sidenav",
+	        "demo.modal",
+	        "demo.tab",
+	        "demo.message",
+	        "demo.autoComplete",
+	        "demo.validation",
+	        "demo.toast",
+	        "demo.getstarted",
+	        "demo.tooltip",
+	        "demo.sidenav",
+	        "demo.dateutil",
+	        "demo.tree",
+	        "demo.checkbox",
+	        "demo.switcher",
+	        "demo.radio",
+	        "demo.rate",
+	        "demo.dropdown",
+	        "demo.ripple",
+	        "demo.button",
+	        "demo.loading",
+	        "demo.pagination",
+	        "demo.accordion",
+	        "demo.progress",
+	        "demo.calendar" ] )
+
+    .config( [ "$httpProvider", function( $httpProvider ) {
+
+        var progress;
+
+        setTimeout( function() {
+
+            progress = $( ".ui.progress:first" ).progress();
+
+            $httpProvider.defaults.transformResponse.push( function( data, headers ) {
+                setTimeout( function() {
+                    progress.done();
+                }, 1000 );
+                return data;
+            } );
+            $httpProvider.defaults.transformRequest.push( function( data, headers ) {
+                progress.start();
+                return data;
+            } );
+        } );
+    } ] )
+
+	.config( [ "$routeProvider", function( $routeProvider ) {
+
+		$routeProvider
+		    .when( "/home", {
+		        templateUrl: "src/demo/home/index.html"
+		    } )
+			.when( "/color", {
+				templateUrl: "src/demo/color/index.html"
+			} )
+			.when( "/getstarted", {
+				templateUrl: "src/demo/getstarted/index.html"
+			} )
+			.when( "/tooltip", {
+				templateUrl: "src/demo/tooltip/index.html"
+			} )
+			.when( "/modal", {
+				templateUrl: "src/demo/modal/index.html"
+			} )
+		    .when( "/tab", {
+		        templateUrl: "src/demo/tab/index.html"
+		    } )
+		    .when( "/message", {
+		        templateUrl: "src/demo/message/index.html"
+		    } )
+		    .when( "/autoComplete", {
+		        templateUrl: "src/demo/autoComplete/index.html"
+		    } )
+		    .when( "/validation", {
+		        templateUrl: "src/demo/validation/index.html"
+		    } )
+		    .when( "/toast", {
+		        templateUrl: "src/demo/toast/index.html"
+		    } )
+		    .when( "/tree", {
+		        templateUrl: "src/demo/tree/index.html"
+		    } )
+		    .when( "/loading", {
+		        templateUrl: "src/demo/loading/index.html"
+		    } )
+		    .when( "/sidenav", {
+		        templateUrl: "src/demo/sidenav/index.html"
+		    } )
+		    .when( "/dateutil", {
+		        templateUrl: "src/demo/dateutil/index.html"
+		    } )
+		    .when( "/editor", {
+		        templateUrl: "src/demo/editor/index.html"
+		    } )
+		    .when( "/calendar", {
+		        templateUrl: "src/demo/calendar/index.html"
+		    } )
+		    .when( "/rate", {
+		        templateUrl: "src/demo/rate/index.html"
+		    } )
+		    .when( "/ripple", {
+		        templateUrl: "src/demo/ripple/index.html"
+		    } )
+		    .when( "/progress", {
+		        templateUrl: "src/demo/progress/index.html"
+		    } )
+		    .when( "/button", {
+		        templateUrl: "src/demo/button/index.html"
+		    } )
+		    .when( "/checkbox", {
+		        templateUrl: "src/demo/checkbox/index.html"
+		    } )
+		    .when( "/switcher", {
+		        templateUrl: "src/demo/switcher/index.html"
+		    } )
+		    .when( "/radio", {
+		        templateUrl: "src/demo/radio/index.html"
+		    } )
+		    .when( "/dropdown", {
+		        templateUrl: "src/demo/dropdown/index.html"
+		    } )
+		    .when( "/accordion", {
+		        templateUrl: "src/demo/accordion/index.html"
+		    } )
+		    .when( "/pagination", {
+		        templateUrl: "src/demo/pagination/index.html"
+		    } )
+			.otherwise( {
+				redirectTo: "/home"
+			} );
+	} ] )
+
+	.directive( "afterRender", [ "$timeout", function( $timeout ) {
+
+	    return {
+	        restric: "A",
+	        terminal: true,
+	        link: function( $scope, $element, $attrs ) {
+                $timeout( function() {
+                    $scope.$eval( $attrs.afterRender );
+                }, 0 );
+	        }
+	    };
+	} ] )
+
+    .controller( "mainController", [ "$scope", "$location", function( $scope, $location ) {
+
+        $scope.openMenu = function( menu ) {
+
+            $scope.title = location.hash.split( "/" )[1];
+
+            setTimeout( function() {
+
+            menu
+            .left()
+            .$node
+            .delegate( "[data-url]", "click", function( e ) {
+
+                $location.path( "/" + this.getAttribute( "data-url" ) );
+                $scope.$apply();
+
+                setTimeout( function() {
+                menu.close();
+                $( "html, body" ).scrollTop( 0 );
+                }, 500 );
+            } );
+            }, 500 );
+        };
+    } ] );
+
+    $( function() {
+        setTimeout( function() {
+            $( ".ui.loading.global:first" ).loading().hide();
+        }, 1000 );
+    } );
+
+	angular.bootstrap( document, [ "neoui" ] );
+} );
+
+define("bootstrap", function(){});
+
