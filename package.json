@@ -5,6 +5,7 @@
   "devDependencies": {
     "amdclean": "^2.7.0",
     "browser-sync": "^2.6.1",
+    "compression": "^1.5.2",
     "gulp": "^3.9.0",
     "gulp-amdclean": "^1.1.1",
     "gulp-concat": "^2.5.2",

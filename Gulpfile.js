@@ -9,6 +9,7 @@ concat = require( "gulp-concat" ),
 uglify = require( "gulp-uglify" ),
 jshint = require( "gulp-jshint" ),
 browserSync = require( "browser-sync" ),
+compress = require( "compression" ),
 less = require( "gulp-less" ),
 debug = require( "gulp-debug" ),
 streamqueue = require( "streamqueue" ),
@@ -33,11 +34,11 @@ bs, gulp = require( "gulp" )
 	.task( "start", function() {
 
 		bs = browserSync( {
-			files: [ "**/*.css", "**/*.js", "src/demo/**/*.html" ],
-			server: {
-				baseDir: "./dist",
-				index: "index.html"
-			}
+			files: [ "src/**/*.css", "src/**/*.js", "src/demo/**/*.html" ],
+            server: {
+				baseDir: "./",
+                middleware: [compress()]
+            }
 		} );
 	} )
 
@@ -45,9 +46,9 @@ bs, gulp = require( "gulp" )
         gulp.src( "dist" ).pipe( clean() );
     } )
 
-	.task( "dist", function() {
+    .task( "dist:vendor", function() {
 
-		gulp.src( [ "bower_components/jquery/dist/jquery.js",
+		return gulp.src( [ "bower_components/jquery/dist/jquery.js",
 		        "bower_components/jquery.event.drag-new/event.drag/jquery.event.drag.js",
 				"bower_components/angular/angular.js",
 				"bower_components/angular-route/angular-route.js",
@@ -59,8 +60,34 @@ bs, gulp = require( "gulp" )
 			.pipe( uglify() )
 			.pipe( rename( "vendor.min.js" ) )
 			.pipe( gulp.dest( dest ) );
+    } )
 
-	    gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] )
+    .task( "dist:neoui", function() {
+
+        rjs.optimize( {
+            baseUrl: "src",
+            paths: {
+                ui: "components"
+            },
+            optimize: "none",
+            include: "bundle",
+            out: "dist/" + NAME + ".js",
+            onModuleBundleComplete: function( data ) {
+                fs.writeFileSync( "dist/" + NAME + "+std.js", amdclean.clean( { "filePath": data.path } ) );
+
+                gulp.src( "dist/" + NAME + ".js" )
+                    .pipe( uglify() )
+                    .pipe( rename( NAME + ".min.js" ) )
+                    .pipe( gulp.dest( dest ) );
+
+                gulp.src( "dist/" + NAME + "+std.js" )
+                    .pipe( uglify() )
+                    .pipe( rename( NAME + "+std.min.js" ) )
+                    .pipe( gulp.dest( dest ) );
+            }
+        } );
+
+	    return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( NAME + ".css" ) )
@@ -69,32 +96,14 @@ bs, gulp = require( "gulp" )
             .pipe( rename( NAME + ".min.css" ) )
             .pipe( gulp.dest( dest ) );
 
-        gulp.src( [ "src/demo/**/*.less" ] )
-			.pipe( debug() )
-			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
-			.pipe( concat( "app.css" ) )
-			.pipe( gulp.dest( dest ) )
-			.pipe( minifyCSS() )
-			.pipe( rename( "app.min.css" ) )
-			.pipe( gulp.dest( dest ) );
+    } )
 
-        rjs.optimize( {
-            baseUrl: "src",
-            paths: {
-                ui: "components"
-            },
-            uglify: "none",
-            include: "bundle",
-            out: "dist/" + NAME + "+rjs.js",
-            onModuleBundleComplete: function( data ) {
-                fs.writeFileSync( "dist/" + NAME + "+std.js", amdclean.clean( { "filePath": data.path } ) );
-            }
-        } );
+    .task( "dist:app", function() {
 
 		rjs.optimize( {
 		    baseUrl: "src",
             include: "bootstrap",
-            uglify: "none",
+            optimize: "none",
             out: "dist/app.js",
             paths: {
                 "ui": "components",
@@ -115,8 +124,34 @@ bs, gulp = require( "gulp" )
                 "ui/tree/tree-ng": "empty:",
                 "ui/validation/validation-ng": "empty:",
                 "util/dateutil": "empty:"
+            },
+            onModuleBundleComplete: function( data ) {
+                fs.writeFileSync( "dist/app+std.js", amdclean.clean( { "filePath": data.path } ) );
+
+                gulp.src( "dist/app.js" )
+                    .pipe( uglify() )
+                    .pipe( rename( "app.min.js" ) )
+                    .pipe( gulp.dest( dest ) );
+
+                gulp.src( "dist/app+std.js" )
+                    .pipe( uglify() )
+                    .pipe( rename( "app+std.min.js" ) )
+                    .pipe( gulp.dest( dest ) );
             }
 		} );
+
+        return gulp.src( [ "src/demo/**/*.less" ] )
+			.pipe( debug() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
+			.pipe( concat( "app.css" ) )
+			.pipe( gulp.dest( dest ) )
+			.pipe( minifyCSS() )
+			.pipe( rename( "app.min.css" ) )
+			.pipe( gulp.dest( dest ) );
+
+    } )
+
+	.task( "dist", [ "dist:vendor", "dist:neoui", "dist:app" ], function() {
 
 		var assets = useref.assets();
 
