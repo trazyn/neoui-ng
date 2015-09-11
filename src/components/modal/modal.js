@@ -76,7 +76,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			}
 
 			modal.delegate( ".close", "click", close );
-			modal.first().css( options.css ).attr( options.attr );
+			modal.first().css( options.css );
 
 			setTimeout( function() {
 				modal.first().addClass( "show" );
@@ -130,7 +130,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		draggable       : true,
 
 		css 		    : { "min-width": 480 },
-		attr 		    : {},
 		class4modal     : "",
 
 		closeByESC 	    : true,

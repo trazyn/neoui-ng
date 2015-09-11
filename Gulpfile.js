@@ -101,7 +101,9 @@ bs, gulp = require( "gulp" )
             }
         } );
 
-	    return gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] )
+	    return streamqueue( { objectMode: true },
+                gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ),
+                gulp.src( "src/components/**/*-bs.less" ) )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( NAME + ".css" ) )
