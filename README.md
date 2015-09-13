@@ -1,2 +1,2 @@
 
-[http://trazyn.github.io/neoui-ng](http://trazyn.github.io/neoui-ng)
+[http://seaweedsoups.github.io//neoui-ng](http://seaweedsoups.github.io/)
