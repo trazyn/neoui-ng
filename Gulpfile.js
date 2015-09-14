@@ -102,8 +102,7 @@ bs, gulp = require( "gulp" )
         } );
 
 	    return streamqueue( { objectMode: true },
-                gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ),
-                gulp.src( "src/components/**/*-bs.less" ) )
+                gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ) )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( NAME + ".css" ) )
@@ -189,7 +188,7 @@ bs, gulp = require( "gulp" )
 
     /** Auto compile */
 	.task( "watch", function() {
-		gulp.watch( "src/**/*.less", [ "dist" ] );
+		gulp.watch( "src/**/*.less", [ "dist:neoui" ] );
 	} )
 
     /** Build the test data */
