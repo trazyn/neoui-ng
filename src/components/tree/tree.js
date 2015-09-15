@@ -376,7 +376,7 @@
 		textKey         : "text",
 		valueKey        : "value",
 
-		onSelect        : $.noop,
+		onSelected      : $.noop,
 
 		/** Start with collapsed menu( only level 1 items visible ) */
 		collapsed       : true,

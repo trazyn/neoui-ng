@@ -18,19 +18,9 @@ define( [ "util/dateutil" ], function() {
 
             var
             container = calendar.find( ".content .dates.current" ),
-            label = [],
             steps = [ step ];
 
             if ( inAnimate ) { return; }
-
-            if ( settings.double ) {
-
-                if ( step instanceof Date ) {
-                    steps.push( new Date( step.getFullYear(), step.getMonth() + 1 ) );
-                } else {
-                    steps.push( step > 0 ? 1 : -1 );
-                }
-            }
 
             for ( var i = 0, length = steps.length; i < length; ++i ) {
 
@@ -80,8 +70,6 @@ define( [ "util/dateutil" ], function() {
                             current = [ step.getFullYear(), step.getMonth() + 1, 1 ];
                     }
 
-                    label.push( settings.months[ current[ 1 ] - 1 ] + " , " + current[ 0 ] );
-
                     html = calc( new Date( current.join( "/" ) ), defaultDate, settings );
 
                     if ( step instanceof Date || steps[0] === void 0 ) {
@@ -101,11 +89,8 @@ define( [ "util/dateutil" ], function() {
                     } );
                 })( container.eq( step > -1 ? i : length - 1 - i ), step );
 
-                if ( step < 0 ) {
-                    label = label.reverse();
-                }
-
-                calendar.find( ".date" ).html( label.join( " - " ) );
+                calendar.find( ".year" ).html( current[0] + "年" );
+                calendar.find( ".month" ).html( current[1] + "月" );
             }
 		},
 
@@ -118,10 +103,14 @@ define( [ "util/dateutil" ], function() {
 					"<div class='control'>" +
 					"<div class='icon first'></div>" +
 					"<div class='icon prev'></div>" +
-					"<div class='date'>Today</div>" +
+					"<div class='year'></div>" +
+					"<div class='month'></div>" +
 					"<div class='icon next'></div>" +
 					"<div class='icon last'></div>" +
 				"</div>" +
+
+				"<div tabindex=-1 class='years'><ul></ul></div>" +
+				"<div tabindex=-1 class='months'><ul></ul></div>" +
 
 				"<div class='content'>" +
 				    "<div class='days'>" +
@@ -142,17 +131,6 @@ define( [ "util/dateutil" ], function() {
 			"name": target.attr( "name" ),
 			"placeholder": settings.placeholder
 		} );
-
-		if ( settings.showTime ) {
-
-            template += "<div class='time'>" +
-
-                "<input name='hour' maxlength=2 value='00' />" +
-                "<input name='minute' maxlength=2 value='00' />" +
-                "<input name='second' maxlength=2 value='00' />" +
-
-                "</div>";
-		}
 
         for ( var i = 0, length = settings.daysOfTheWeek.length; i < length;
                 header.push( "<div>" + settings.daysOfTheWeek[i++] + "</div>" ) );
@@ -177,12 +155,23 @@ define( [ "util/dateutil" ], function() {
                     defaultDate = new Date();
 		}
 
+        var
+        yearsHtml = "",
+        monthsHtml = "";
+
+        for ( var i = 1990; i <= 2055; ++i ) {
+            yearsHtml += "<li value='" + i + "'>" + i + "</li>";
+        }
+        for ( var i = 1; i <= 12; monthsHtml += "<li value='" + i + "'>" + i++ + "</li>" );
+
 		trigger
         .on( "click", function( e ) {
 
             var
             rect,
-            container;
+            container,
+            years,
+            months;
 
             /** Prevent multiple instance */
 			if ( inAnimate
@@ -196,12 +185,10 @@ define( [ "util/dateutil" ], function() {
 
 			calendar = $( template );
 
-            if ( settings.double ) {
-                container = calendar.find( ".content .days" );
-                container.clone().appendTo( calendar.addClass( "double" ).find( ".content" ) );
-            }
-
+            years = calendar.find( ".years > ul" ).html( yearsHtml ).parent();
+            months = calendar.find( ".months > ul" ).html( monthsHtml ).parent();
             calendar.find( ".header" ).html( header.join( "" ) );
+
 			show( defaultDate );
 			calendar.appendTo( target )
 
@@ -225,13 +212,11 @@ define( [ "util/dateutil" ], function() {
 				} )
 
 				.delegate( ".icon.first", "click", function( e ) {
-
 					show( -12 );
 					e.preventDefault();
 				} )
 
 				.delegate( ".icon.last", "click", function( e ) {
-
 					show( 12 );
 					e.preventDefault();
 				} )
@@ -252,62 +237,65 @@ define( [ "util/dateutil" ], function() {
                         value = $.dateutil( date ).format( settings.format );
 
                         input.val( value ).focus();
-                        settings.onSelect( value );
-
+                        settings.onSelected( value );
                         input.trigger( "change" );
-
                         defaultDate = date;
+
                         setTimeout( function() {
-                            calendar.remove();
+                            calendar.removeClass( "show" ).remove();
                         } );
                     }
 				} )
 
-				.delegate( "input", "focusout", function( e ) {
+				.delegate( ".year", "click", function() {
 
-                    var self = $( this );
+				    var
+				    inner = years.addClass( "show" ).scrollTop(0).find( "li[value='" + current[0] + "']" ).addClass( "selected" );
 
-                    switch ( true ) {
+				    $( this ).addClass( "expand" );
 
-                        case this.name === "hour" && (+self.val() || 99) > 23:
-                            self.val( "00" );
-                            break;
-
-                        case (+self.val() || 99) > 59:
-                            self.val( "00" );
-                            break;
-                    }
+                    years
+				    .css( "height", calendar.find( ".content" ).height() - 2 )
+				    .scrollTop( inner.offset().top - years.offset().top )
+				    .focus()
+				    .find( "li" )
+				    .not( inner )
+				    .removeClass( "selected" );
 				} )
 
-				.delegate( "input", "keyup", function( e ) {
+				.delegate( ".years", "focusout", function() {
+                    years.removeClass( "show" );
+                    calendar.find( ".year" ).removeClass( "expand" );
+				} )
 
-				        var self = $( this );
+				.delegate( ".month", "click", function() {
 
-                        if ( e.keyCode !== 38 && e.keyCode !== 40 ) {
-                            return;
-                        }
+				    var
+				    inner = months.addClass( "show" ).scrollTop(0).find( "li[value='" + current[1] + "']" ).addClass( "selected" );
 
-                        if ( isNaN( self.val() ) || +self.val() < 0 ) {
-                            return self.val( "00" );
-                        }
+				    $( this ).addClass( "expand" );
 
-                        /** Handle key down */
-                        if ( e.keyCode === 40 ) {
+                    months
+				    .css( "height", calendar.find( ".content" ).height() - 2 )
+				    .scrollTop( inner.offset().top - months.offset().top )
+				    .focus()
+				    .find( "li" )
+				    .not( inner )
+				    .removeClass( "selected" );
+				} )
 
-                            if ( +self.val() > 0 ) {
-                                self.val( ("0" + (+self.val() - 1)).slice( -2 ) );
-                            } else {
-                                self.val( this.name === "hour" ? "23" : "59" );
-                            }
-                            return;
-                        }
+				.delegate( ".months", "focusout", function() {
+                    months.removeClass( "show" );
+                    calendar.find( ".month" ).removeClass( "expand" );
+				} )
 
-                        /** Handle key up */
-                        if ( (this.name === "hour" && this.value === "23") || +this.value === 59 ) {
-                            return self.val( "00" );
-                        }
+				.delegate( "li[value]", "click", function() {
 
-                        self.val( ("0" + (+self.val() + 1)).slice( -2 ) );
+				    var value = +this.getAttribute( "value" );
+
+                    $( this ).parents( ".years, .months" ).trigger( "focusout" );
+                    current[ +(value <= 12) ] = value;
+                    show( new Date( current.join( "/" ) ) );
 				} )
 
                 .on( "focusout", function( e ) {
@@ -468,16 +456,12 @@ define( [ "util/dateutil" ], function() {
 
 	$.fn.calendar.defaults = {
 
-		months          : [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
-		daysOfTheWeek   : [ "S", "M", "T", "W", "T", "F", "S" ],
+		daysOfTheWeek   : [ "日", "一", "二", "三", "四", "五", "六" ],
 
 		format          : "%Y-%m-%d",
-		formatter4cell  : $.noop(),
+		formatter4day   : $.noop(),
 
-		onSelect        : $.noop,
-
-		showTime        : false,
-		double          : false,
+		onSelected      : $.noop,
 
 		minDate         : undefined,
 		maxDate         : undefined,

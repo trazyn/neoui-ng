@@ -33,6 +33,11 @@
 
     .container {
         width: 251px;
+        border-radius: 4px;
+    }
+
+    .content {
+        border-radius: 4px;
     }
 
     .header {
@@ -42,10 +47,6 @@
             height: 27px;
             width: 35px;
         }
-    }
-
-    .content {
-        border-radius: 0 0 4px 4px;
     }
 
     .date {
@@ -58,6 +59,7 @@
 
     .days {
         width: 251px;
+        border-radius: 0 0 4px 4px;
     }
 
     .day {
@@ -85,6 +87,65 @@
         }
         &.valid:after {
             content: none;
+        }
+    }
+
+    .year, .month {
+        width: 70px;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        &:after {
+            font-family: "icomoon";
+            content: "\e643";
+            color: #468cc8;
+            display: inline-block;
+            visibility: hidden;
+        }
+        &:hover, &.expand {
+            background-color: #dcebff;
+            &:after {
+                visibility: visible;
+            }
+        }
+    }
+
+    .year {
+        margin-left: 58px;
+        margin-right: 10px;
+    }
+
+    .years, .months {
+        position: absolute;
+        width: 70px;
+        z-index: 9;
+        background-color: #fff;
+        border: 1px solid #eaeaea;
+        left: 57px;
+        text-indent: 7px;
+        display: none;
+        overflow-y: auto;
+        outline: 0;
+        &.show {
+            display: block;
+        }
+    }
+
+    .months {
+        left: 137px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    li {
+        height: 27px;
+        line-height: 27px;
+        cursor: pointer;
+        &:hover, &.selected {
+            background-color: #468cc8;
+            color: #fff;
         }
     }
 }
