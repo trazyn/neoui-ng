@@ -187,9 +187,23 @@ bs, gulp = require( "gulp" )
 			.pipe( gulp.dest( dest ) );
 	} )
 
+    .task( "css", function() {
+
+	    return streamqueue( { objectMode: true },
+                gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ),
+                gulp.src( "src/components/**/*-bs.less" ) )
+			.pipe( debug() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
+			.pipe( concat( NAME + ".css" ) )
+			.pipe( gulp.dest( dest ) )
+			.pipe( minifyCSS() )
+            .pipe( rename( NAME + ".min.css" ) )
+            .pipe( gulp.dest( dest ) );
+    } )
+
     /** Auto compile */
 	.task( "watch", function() {
-		gulp.watch( "src/**/*.less", [ "dist:neoui" ] );
+		gulp.watch( "src/**/*.less", [ "css" ] );
 	} )
 
     /** Build the test data */

@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-bcqvaw');
-	src:url('fonts/icomoon.eot?#iefix-bcqvaw') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?-bcqvaw') format('truetype'),
-		url('fonts/icomoon.woff?-bcqvaw') format('woff'),
-		url('fonts/icomoon.svg?-bcqvaw#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?sql8rm');
+	src:url('fonts/icomoon.eot?#iefixsql8rm') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?sql8rm') format('truetype'),
+		url('fonts/icomoon.woff?sql8rm') format('woff'),
+		url('fonts/icomoon.svg?sql8rm#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,48 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-add_box:before {
+	content: "\e06a";
+}
+.icon-indeterminate_check_box:before {
+	content: "\e319";
+}
+.icon-pause:before {
+	content: "\e709";
+}
+.icon-play-arrow:before {
+	content: "\e70a";
+}
+.icon-repeat:before {
+	content: "\e70b";
+}
+.icon-repeat-one:before {
+	content: "\e70c";
+}
+.icon-skip-next:before {
+	content: "\e70d";
+}
+.icon-skip-previous:before {
+	content: "\e70e";
+}
+.icon-stop:before {
+	content: "\e70f";
+}
+.icon-bug-report:before {
+	content: "\e710";
+}
+.icon-local-cafe:before {
+	content: "\e711";
+}
+.icon-restaurant-menu:before {
+	content: "\e712";
+}
+.icon-call:before {
+	content: "\e713";
+}
+.icon-stay-current-portrait:before {
+	content: "\e714";
+}
 .icon-add-circle-outline:before {
 	content: "\e600";
 }
@@ -868,40 +910,4 @@
 }
 .icon-uniE61F:before {
 	content: "\e725";
-}
-.icon-pause:before {
-	content: "\e709";
-}
-.icon-play-arrow:before {
-	content: "\e70a";
-}
-.icon-repeat:before {
-	content: "\e70b";
-}
-.icon-repeat-one:before {
-	content: "\e70c";
-}
-.icon-skip-next:before {
-	content: "\e70d";
-}
-.icon-skip-previous:before {
-	content: "\e70e";
-}
-.icon-stop:before {
-	content: "\e70f";
-}
-.icon-bug-report:before {
-	content: "\e710";
-}
-.icon-local-cafe:before {
-	content: "\e711";
-}
-.icon-restaurant-menu:before {
-	content: "\e712";
-}
-.icon-call:before {
-	content: "\e713";
-}
-.icon-stay-current-portrait:before {
-	content: "\e714";
 }

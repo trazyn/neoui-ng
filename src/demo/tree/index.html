@@ -29,15 +29,19 @@
     <section>
 
         <div>
-            <s-tree style="height: 430px; width: 320px;"
-                data="test"
-                controller="szseTree"
-                root-ids="0"
-                parent-key="parent"
-                text-key="name"
-                value-key="id"
-                after-render="afterInit( szseTree )">
-            </s-tree>
+            <div>
+                <input class="ui text" type="" placeholder="Type for search..." style="width: 322px;" ng-model="szseFilter">
+                <s-tree style="height: 430px; width: 320px;"
+                    data="test"
+                    filter-value="szseFilter"
+                    controller="szseTree"
+                    root-ids="0"
+                    parent-key="parent"
+                    text-key="name"
+                    value-key="id"
+                    after-render="afterInit( szseTree )">
+                </s-tree>
+            </div>
         </div>
 
         <br>

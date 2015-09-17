@@ -64,12 +64,6 @@
             }
 		} );
 
-		target
-		.find( settings.selector4filter )
-		.on( "keyup", function( e ) {
-            self.filter( this.value );
-		} );
-
         self.$node = target;
 		self.settings = settings;
 		self.render( settings.data );
@@ -105,7 +99,7 @@
                     /** Use '[].concat()' get data copy, used by text filter */
                     settings.data = ([].concat( data ));
                     renderTree( node, data, settings, true );
-                    self.$node.find( settings.selector4content ).html( node.html() );
+                    self.$node.html( node.html() );
                 }
             } );
 
@@ -386,9 +380,6 @@
 
 		/** Animation duration should be tweaked according to easing */
 		duration        : 150,
-
-		selector4content: ".content",
-		selector4filter : "input[name=filter]",
 
         /** Local array or return a promise */
 		data            : undefined,

@@ -126,10 +126,6 @@ angular.module( "$ui.tree", [] )
             transclude          : true,
             replace             : true,
             template            : '<div class="ui tree">' +
-                                    '<div class="icon">' +
-                                        '<input type="text" class="ui text" name="filter" placeholder="Type to search..." value="">' +
-                                    '</div>' +
-                                    '<div class="content"></div>' +
                                   '</div>',
             link                : link
         };
