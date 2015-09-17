@@ -136,7 +136,619 @@
 define("ui/anchor/anchor", function(){});
 
 
-define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
+(function( $ ) {
+
+	"use strict";
+
+	var
+
+	namespace = "$ui.loading",
+
+	Loading = function( target, settings ) {
+
+		this.$node = target = $( target );
+		this.settings = settings;
+		target.parent().css( "position", "relative" );
+	};
+
+	Loading.prototype = {
+
+		show: function() {
+
+            this.$node.addClass( "show" );
+			return this;
+		},
+
+		hide: function( callback ) {
+
+            this.$node.removeClass( "show" );
+			return this;
+		}
+	};
+
+	$.fn.loading = function( options ) {
+
+		var instance = this.data( namespace );
+
+		if ( !instance ) {
+			instance = new Loading( this, options || {} );
+			this.data( namespace, instance );
+		}
+
+		return instance;
+	};
+
+})( window.jQuery );
+
+
+define("ui/loading/loading", function(){});
+
+
+(function( factory ) {
+
+	if ( "function" === typeof define && define.amd ) {
+		define( 'util/poll',factory );
+	} else {
+		
+		var exports = window || this;
+
+		exports.Poll = factory();
+	}
+})( function() {
+
+	"use strict";
+
+	var 
+	tasks = {},
+
+	config = {
+
+		interval: 5000,
+		delay: false
+
+		/** TODO: */
+	},
+
+	create = function( task ) {
+
+		var 
+		deferred = $.Deferred(),
+
+		wait = function() {
+
+			task.action( deferred );
+
+			return deferred.promise();
+		},
+		
+		runner = function() {
+		
+			return setTimeout( function() {
+
+				$.when( wait() )
+
+				.done( function() {
+
+					/** Already removed */
+					if ( void 0 === tasks[ task.name ] ) {
+
+						/** Force to clean the queue of tasks */
+						destory( task.name );
+
+						return;
+					}
+
+					delete task.delay;
+
+					/** Update the task */
+					create( task );
+				} )
+
+				.fail( function() {
+
+					destory( task.name );
+				} );
+
+			}, task.interval );
+		};
+
+		/** Apply the default configuration */
+		task = $.extend( {}, config, task );
+
+		task.name = task.name || "Task$" + Math.random().toString( 16 ).replace( /^0\./, "" );
+
+		tasks[ task.name ] = {
+
+			deferred: deferred,
+
+			value: true === task.delay ? runner : runner()
+		};
+
+		return task.name;
+	},
+
+	destory = function( id ) {
+
+		if ( id ) {
+
+			var instance = tasks[ id ];
+
+			if ( instance ) {
+			
+				clearTimeout( instance.value );
+
+				delete tasks[ id ];
+			}
+
+		} else tasks = {};
+	};
+
+	return {
+
+		/**
+		 * Add a task and return the task id
+		 *
+		 * @param task 	Array/Object
+		 * */
+		add: function( task ) {
+
+			var 
+			register = function( task ) {
+
+				return "function" === typeof task.action && create( task );
+			},
+
+			id, ids = [];
+
+			if ( $.isArray( task ) ) {
+
+				for ( var i = task.length; --i >= 0; ) {
+
+					id = register( task[ i ] );
+
+					id && ids.push( id );
+				}
+
+			} else (id = register( task )) && ids.push( id );
+
+			return ids;
+		},
+
+		/**
+		 * Start a task
+		 *
+		 * @param taskid 	String
+		 * */
+		start: function( taskid ) {
+		
+			var task = tasks[ taskid ];
+
+			if ( task && "function" === typeof task.value ) {
+				
+				return task.value = task.value();
+			}
+
+			return 0;
+		},
+
+		/**
+		 * Remove task
+		 *
+		 * @param [id] String, Without id will be remove all
+		 * */
+		remove: destory
+	};
+} );
+
+
+define( 'ui/progress/progress',[ "util/poll" ], function( poll ) {
+
+	"use strict";
+
+	var
+	namespace = "$ui.progress",
+
+	Progress = function( target, settings ) {
+
+		var self = this;
+
+		this.$node = target;
+		this.settings = settings;
+
+		if ( settings.template ) {
+			this.$node.html( settings.template );
+		}
+	};
+
+	Progress.prototype = {
+
+		start: function() {
+
+			var settings = this.settings;
+
+			this.set( 0 );
+			this.runner && poll.remove( this.runner );
+			this.runner = runner.call( this, settings );
+
+			/** Fadein */
+			this.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
+
+				"opacity": 1,
+				"visibility": "visible",
+				"display": ""
+			} );
+
+			poll.start( this.runner );
+			return this;
+		},
+
+		set: function( status ) {
+
+			this.status = status;
+			this.settings.render.call( this, status );
+
+			return this;
+		},
+
+		done: function() {
+
+			var self = this, settings = this.settings;
+
+			self.set( 1 );
+
+			setTimeout( function() {
+
+				self.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
+					"opacity": 0,
+					"visibility": "hidden"
+				} );
+
+				setTimeout( function() {
+					self.set( 0 );
+					self.$node.find( settings.selector4icon ).css( "display", "none" );
+				}, 800 );
+			}, 400 );
+
+			poll.remove( self.runner );
+
+			return this;
+		},
+
+		inc: function() {
+
+            var
+            status = this.status,
+            settings = this.settings;
+
+		    status += Math.random() * settings.seed;
+            status = status > settings.max ? settings.max : status;
+            this.status = status;
+            return this;
+		},
+
+		dec: function() {
+
+            var
+            status = this.status,
+            settings = this.settings,
+            value = Math.random() * settings.seed;
+
+		    status -= value;
+            status = status < 0.02 ? value : status;
+            this.status = status;
+            return this;
+		}
+	};
+
+	function runner( settings ) {
+
+		var self = this;
+
+		return poll.add( {
+
+			action: function( deferred ) {
+
+				var status = +self.status || 0;
+
+				status += Math.random() * settings.seed;
+				status = status > settings.max ? settings.max : status;
+				self.set( status );
+				deferred.resolve();
+			},
+
+            delay: true,
+            interval: settings.speed
+		} );
+	}
+
+	$.fn.progress = function( options ) {
+
+		var
+		settings,
+		instance = this.data( namespace );
+
+		if ( !instance ) {
+
+			settings = $.extend( {}, $.fn.progress.defaults, options || {} );
+			settings.max = settings.max > 1 ? 0.99123 : settings.max;
+			instance = new Progress( this, settings );
+			this.data( namespace, instance );
+		}
+
+		return instance;
+	};
+
+	$.fn.progress.defaults = {
+
+		seed 		    : 0.05,
+		speed 		    : 800,
+
+		max 		    : 0.99123,
+
+		template 	    : "<div class='bar'><div></div></div><div class='spinner'><div></div></div>",
+
+		selector4bar 	: ".bar",
+		selector4icon 	: ".spinner",
+
+		render          : function( status ) {
+
+            this
+            .$node
+            .find( this.settings.selector4bar )
+            .css( {
+                "width": status * 100 + "%",
+                "-webkit-transition": "all .2s ease-out",
+                "-moz-transition": "all .2s ease-out",
+                "-ms-transition": "all .2s ease-out",
+                "-o-transition": "all .2s ease-out",
+                "transition": "all .2s ease-out",
+            } );
+		}
+	};
+} );
+
+
+
+define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], function() {
+
+	$.fn.modal = function( options ) {
+
+		var
+
+        template = [ "<div class='ui modal animate'>",
+                    "<div style='height: 100%;'>",
+                        "<h3 class='title'></h3><div class='icon close transition rotate'></div>",
+                        "<div class='ui loading'></div>",
+                        "<div class='ui progress'></div>",
+                        "<div class='content'></div>",
+                    "</div>",
+
+                "</div>",
+                "<div class='ui overlay'></div>" ].join( "" ),
+
+		modal = $( template ),
+
+		close = function() {
+			$( document ).off( "keyup", closeByESC ).off( "click", closeByDocument );
+
+			options.onClose();
+			modal.removeClass( "show" );
+			setTimeout( function() { modal.remove(); }, 300 );
+		},
+
+		closeByESC = function( e ) {
+			27 === e.keyCode && close();
+		},
+
+		closeByDocument = function( e ) {
+			$( e.target ).hasClass( "overlay" ) && close();
+		},
+
+		loading = modal.find( ".ui.loading:first" ).loading(),
+		progress = modal.find( ".ui.progress:first" ).progress(),
+
+		deferred = $.Deferred(),
+
+		show = function() {
+
+			var
+			  head = modal.find( ".title" ),
+			  body = modal.find( ".content" ),
+			  overlay = modal.last();
+
+			/** ~Head~ */
+			options.showTitle ? head.html( options.title ) : head.hide().next().hide();
+
+			/** ~Body~ */
+			if ( options.content instanceof Function ) {
+				options.content.call( body, deferred, loading, close );
+			} else {
+				body.html( options.content );
+				deferred.resolve();
+			}
+
+			modal.addClass( [ options.animation, options.class4modal || "" ].join( " " ) );
+
+			/** Show the overlay */
+			overlay.addClass( options.modal ? "show" : "blank" );
+
+			/** Close the modal */
+			if ( options.closeByESC || options.closeByDocument ) {
+
+				var trigger = $( document ).add( modal );
+
+				true === options.closeByDocument
+					&& modal.off( "click", closeByDocument ).on( "click", closeByDocument );
+
+				if ( "boolean" === typeof options.closeByESC ) {
+					trigger.off( "keyup", closeByESC ).on( "keyup", closeByESC );
+				}
+			}
+
+			modal.delegate( ".close", "click", close );
+			modal.first().css( options.css );
+
+			setTimeout( function() {
+				modal.first().addClass( "show" );
+			}, 100 );
+
+			if ( options.draggable ) {
+
+                var handle = options.draggable;
+
+                head.css( "cursor", "move" );
+
+				modal.drag( function( ev, dd ) {
+
+					$( this ).css( {
+                        "width": modal.width(),
+                        "height": modal.height(),
+						top: dd.offsetY,
+						left: dd.offsetX,
+						"-webkit-transform": "none",
+						"-moz-transform": "none",
+						"-ms-transform": "none",
+						"transform": "none",
+					} );
+				}, { handle: handle === true ? ".title" : handle } );
+			}
+
+			modal.appendTo( document.body );
+		};
+
+		options = $.extend( {}, $.fn.modal.defaults, options || {} );
+
+		if ( this === $ ) {
+			options.target ? $( options.target ).on( "click", show ) : (options.autoShow && show());
+		/** Use a dom as trigger */
+		} else this.on( "click", show );
+
+		return {
+			open: show,
+			close: close,
+			loading: loading,
+			progress: progress,
+			$node: modal
+		};
+	};
+
+	$.fn.modal.defaults = {
+
+		title 		    : "Modal.JS",
+		showTitle 	    : true,
+		modal        	: true,
+		draggable       : true,
+
+		css 		    : { "min-width": 480 },
+		class4modal     : "",
+
+		closeByESC 	    : true,
+		closeByDocument : false,
+
+		animation 	    : "slide",
+		content 		: "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
+
+		autoShow 	    : true,
+		onClose 		: $.noop,
+	};
+
+	/** Export to $ */
+	$.modal = $.fn.modal;
+} );
+
+
+
+define( 'ui/dialog/dialog',[ "ui/modal/modal" ], function() {
+
+    $.dialog = function( options ) {
+
+        var
+        modal,
+        deferred,
+        settings,
+        events = {},
+        buttons = "",
+        body = "";
+
+        modal = $.modal( settings = $.extend( {
+            css: {
+                width: options.width || $.dialog.defaults.width,
+                height: options.height || $.dialog.defaults.height
+            }
+        },
+        $.dialog.defaults,
+        options, {
+            content: "<div class='dialog'>" +
+                    "<div class='dialog-content'><div></div></div>" +
+                    "<div class='dialog-action'></div>" +
+                    "</div>"
+        } ) );
+
+        if ( "string" === typeof options.content ) {
+            body = options.content;
+        } else if ( "function" === typeof options.content ) {
+
+            deferred = $.Deferred();
+            options.content().done( function( data ) {
+                body = data;
+                deferred.resolve();
+            } );
+        }
+
+        for ( var key in settings.buttons ) {
+
+            var button = settings.buttons[ key ];
+            buttons += "<button name='" + key + "'>" + button.label + "</button>";
+            events[ key ] = button.onClick;
+        }
+
+        $.when( deferred ).done( function() {
+            modal.$node.find( ".dialog-content > div" ).html( body );
+        } );
+
+        modal
+        .$node
+        .find( ".dialog-action" )
+        .html( buttons )
+        .delegate( "button", "click", function() {
+            (events[ this.getAttribute( name ) ] || $.noop).apply( this, arguments );
+        } );
+    };
+
+    $.dialog.defaults = {
+
+        width: 600,
+        height: 400,
+        title: "Dialog",
+
+        buttons: {
+            "ok": {
+                label: "确定",
+                onClick: $.noop
+            },
+
+            "cancel": {
+                label: "取消",
+                onClick: $.noop
+            }
+        }
+    };
+} );
+
+
+define( 'ui/dialog/dialog-ng',[ "ui/dialog/dialog" ], function() {
+
+    "use strict";
+
+    angular.module( "$ui.dialog", [] )
+
+    .factory( "$dialog", function() {
+        return $.dialog;
+    } );
+} );
+
+
+define( 'demo/modal/index',[ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], function() {
 
 	"use strict";
 
