@@ -139,8 +139,7 @@ define( [ "util/dateutil" ], function() {
 
 
 		input.attr( {
-			"name": target.attr( "name" ),
-			"placeholder": settings.placeholder
+			"name": target.attr( "name" )
 		} );
 
 		if ( settings.showTime ) {
@@ -252,7 +251,7 @@ define( [ "util/dateutil" ], function() {
                         value = $.dateutil( date ).format( settings.format );
 
                         input.val( value ).focus();
-                        settings.onSelect( value );
+                        settings.onSelected( value );
 
                         input.trigger( "change" );
 
@@ -356,6 +355,16 @@ define( [ "util/dateutil" ], function() {
             maxDate = settings.maxDate && new Date( settings.maxDate ),
 
             date = new Date( date.getFullYear(), date.getMonth(), start );
+
+            if ( "function" === typeof settings.selectable
+                    && !settings.selectable( date ) ) {
+                return " invalid";
+            }
+
+            if ( settings.selectableDOW instanceof Array
+                    && settings.selectableDOW.indexOf( date.getDay() ) ) {
+                return " invalid";
+            }
 
             if ( minDate || maxDate ) {
 
@@ -474,7 +483,7 @@ define( [ "util/dateutil" ], function() {
 		format          : "%Y-%m-%d",
 		formatter4cell  : $.noop(),
 
-		onSelect        : $.noop,
+		onSelected      : $.noop,
 
 		showTime        : false,
 		double          : false,
@@ -482,7 +491,10 @@ define( [ "util/dateutil" ], function() {
 		minDate         : undefined,
 		maxDate         : undefined,
 
-		placeholder     : "Year - Month - Day",
+        selectable      : undefined,
+
+        /** List of selectable days of the week, 0 is Sunday, 1 is Monday, and so on. */
+        selectableDOW   : [ 1, 2, 3, 4, 5 ],
 
 		defaultDate     : new Date(),
 
