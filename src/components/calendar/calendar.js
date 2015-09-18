@@ -128,8 +128,7 @@ define( [ "util/dateutil" ], function() {
 
 
 		input.attr( {
-			"name": target.attr( "name" ),
-			"placeholder": settings.placeholder
+			"name": target.attr( "name" )
 		} );
 
         for ( var i = 0, length = settings.daysOfTheWeek.length; i < length;
@@ -345,6 +344,16 @@ define( [ "util/dateutil" ], function() {
 
             date = new Date( date.getFullYear(), date.getMonth(), start );
 
+            if ( "function" === typeof settings.selectable
+                    && !settings.selectable( date ) ) {
+                return " invalid";
+            }
+
+            if ( settings.selectableDOW
+                    && settings.selectableDOW.indexOf( date.getDay() ) === -1 ) {
+                return " invalid";
+            }
+
             if ( minDate || maxDate ) {
 
                 if ( (date >= minDate && date <= maxDate)
@@ -465,8 +474,10 @@ define( [ "util/dateutil" ], function() {
 
 		minDate         : undefined,
 		maxDate         : undefined,
+        selectable      : undefined,
 
-		placeholder     : "Year - Month - Day",
+        /** List of selectable days of the week, 0 is Sunday, 1 is Monday, and so on. */
+        selectableDOW   : [ 1, 2, 3, 4, 5 ],
 
 		defaultDate     : new Date(),
 

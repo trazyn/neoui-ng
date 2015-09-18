@@ -62,6 +62,8 @@ angular.module( "$ui.calendar", [] )
                 calendar[ value ? "disabled" : "enabled" ]();
             } );
 
+            $element.find( $.fn.selector4input ).attr( placeholder, $scope.placeholder );
+
             calendar = $( $element ).calendar( options ),
             settings = calendar.settings;
         }
@@ -84,7 +86,7 @@ angular.module( "$ui.calendar", [] )
             restric         : "E",
             replace         : true,
             template        : '<div class="ui calendar">' +
-                                '<input class="ui text" type="text" readonly="readonly" />' +
+                                '<input class="ui text" type="text" readonly="readonly" placeholder="Year - Month - Day" />' +
                                 '<i class="icon calendar"></i>' +
                               '</div>',
             link            : link

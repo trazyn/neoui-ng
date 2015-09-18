@@ -722,13 +722,14 @@ define( 'ui/dialog/dialog',[ "ui/modal/modal" ], function() {
         title: "Dialog",
 
         buttons: {
-            "ok": {
-                label: "确定",
-                onClick: $.noop
-            },
-
             "cancel": {
                 label: "取消",
+                onClick: function( modal ) {
+                    modal.close();
+                }
+            },
+            "ok": {
+                label: "确定",
                 onClick: $.noop
             }
         }
