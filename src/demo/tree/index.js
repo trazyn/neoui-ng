@@ -35,7 +35,7 @@ define( [ "ui/tree/tree-ng" ], function() {
                 return deferred.promise();
             },
 
-            onSelect: function( node ) {
+            onSelected: function( node ) {
                 console.log( node );
             }
         } );
