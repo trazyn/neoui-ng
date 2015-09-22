@@ -5,6 +5,7 @@
 
     display: block;
     border: 1px solid #DDD;
+    font-size: 14px;
     color: rgba(0,0,0,.8);
     overflow-y: auto;
     overflow-x: hidden;
@@ -18,82 +19,54 @@
         position: relative;
         margin: 0;
         &.selected > p {
-            & > .icon, & > span {
-                color: #E9573F !important;
-            }
+            & > .md-icon,
+            & > span { color: #e9573f !important; }
         }
 
         &[disabled] {
             color: #999;
             cursor: not-allowed;
             > p {
-                > .icon, > span {
-                    color: #999 !important;
-                }
+                > .md-icon,
+                > span { color: #999 !important; }
             }
-            p:hover {
-                background-color: inherit;
-            }
+            p:hover { background-color: inherit; }
         }
     }
 
     p {
-        transition: .2s;
         position: relative;
         display: block;
         height: 36px;
         line-height: 36px;
         white-space: nowrap;
-        &:hover {
-            background-color: lighten(@aqua,30%);
-        }
+        transition: .2s;
+        &:hover { background-color: lighten(@aqua,30%); }
     }
 
-    > .icon {
+    > .md-icon {
         position: relative;
         &:before {
-            content: "\e6c4";
             position: absolute;
             left: 12px;
             top: 6px;
+            content: "\e6c4";
         }
     }
 }
-
-.md-tree-content > ul > li { margin-left: 0; }
 
 .md-tree-node {
     cursor: pointer;
     margin-left: 0;
 
-    &.open > p > .icon {
-        &:before {
-            content: "\e6b9";
-            margin-right: .5rem;
-            font-style: normal;
-        }
-        &:after { content: none !important; }
-    }
+    &.md-tree-open > ul { display: block; }
+    &.md-tree-close > ul { display: none; }
 
-    &.close > p > .icon:before {
-        content: "\e603";
-        margin-right: .5rem;
-        font-style: normal;
-    }
-
-    &.open > ul {
-        display: block;
-    }
-
-    &.close > ul {
-        display: none;
-    }
-
-    .icon {
+    .md-icon {
         position: relative;
         &:before {
             position: absolute;
-            top: -7px;
+            top: -23px;
             left: 14px;
         }
         & + span {
@@ -104,9 +77,55 @@
     }
 }
 
-.md-tree-node.close > p .icon, .md-tree-node.open > p .icon {
+.md-tree-open > p > .md-icon {
+    &:before {
+        margin-right: .5rem;
+        font-style: normal;
+        content: "\e6b9";
+    }
+    &:after { content: none !important; }
+}
+
+.md-tree-close > p > .md-icon:before {
+    margin-right: .5rem;
+    font-style: normal;
+    content: "\e603";
+}
+
+.md-tree-close > p .md-icon,
+.md-tree-open > p .md-icon {
     display: inline-block;
-    margin: 0 0 24px 0;
     color: @google;
 }
 
+/** Customize tree */
+.md-tree-file {
+
+    li p {
+        display: block;
+        height: 48px;
+        line-height: 48px;
+        transition: .2s;
+
+        &:hover { background-color: #ddd; }
+    }
+
+    .md-icon {
+        position: relative;
+        display: inline-block;
+        &:after {
+            position: absolute;
+            top: -29px;
+            left: 10px;
+            font-size: 18px;
+        }
+
+        &:before { top: -29px; }
+
+        & + span {
+            margin-left: 32px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}

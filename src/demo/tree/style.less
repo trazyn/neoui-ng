@@ -8,20 +8,8 @@
     .example.wrap {
         position: relative;
         margin: 10px 120px 0 10px;
-        > label {
-            position: absolute;
-            top: 40px;
-            left: 11px;
-            display: block;
-            background-color: #FFF;
-            z-index: 1;
-            padding: 0 10px;
-            font-size: 12px;
-            font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
-            letter-spacing: 2px;
-        }
 
-        .ui.tree {
+        .md-tree {
             margin: 0 120px 0 0;
             display: inline-block;
 
@@ -36,40 +24,7 @@
             }
         }
 
-        code {
-            display: inline-block;
-        }
+        code { display: inline-block; }
     }
 
-    .ui.tree.file {
-
-        li p {
-            transition: .2s;
-            transition: .2s;
-            display: block;
-            height: 48px;
-            line-height: 48px;
-
-            &:hover {
-                background-color: #ddd;
-            }
-        }
-
-        li .icon {
-            position: relative;
-            display: inline-block;
-            margin: 0 0 36px;
-            &:after {
-                position: absolute;
-                top: -7px;
-                left: 14px;
-            }
-
-            & + span {
-                margin-left: 32px;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-        }
-    }
 }

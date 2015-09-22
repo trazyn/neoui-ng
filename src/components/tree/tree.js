@@ -30,7 +30,7 @@
                 var
                 level = +self.attr( "data-level" ),
                 duration = settings.duration,
-                operation = self.hasClass( "open" ) ? function() { close( self, duration ); } : function() { open( self, duration ); };
+                operation = self.hasClass( "md-tree-open" ) ? function() { close( self, duration ); } : function() { open( self, duration ); };
 
                 inHandle = 1;
 
@@ -123,7 +123,7 @@
                 renderTree( node, item, settings, false );
 
                 /** Add child to sington node */
-                node.hasClass( "md-tree-node" ) || node.addClass( "md-tree-node close" );
+                node.hasClass( "md-tree-node" ) || node.addClass( "md-tree-node md-tree-close" );
 
                 /** Sington node */
                 node.find( "[data-key='" + item[ settings.valueKey ] + "']" ).removeClass( "md-tree-node" );
@@ -148,7 +148,7 @@
 
             node.remove();
             if ( !parentNode.find( "[data-key]" ).length ) {
-                parentNode.removeClass( "md-tree-node open close" );
+                parentNode.removeClass( "md-tree-node md-tree-open md-tree-close" );
             }
 
             return this;
@@ -160,7 +160,7 @@
             duration = this.settings.duration,
             node = this.$node.find( ".md-tree-node[data-key='" + nodeid + "']" );
 
-            (node.hasClass( "open" ) ? close : open)( node, duration );
+            (node.hasClass( "md-tree-open" ) ? close : open)( node, duration );
 
             return this;
         },
@@ -225,7 +225,7 @@
                 lis = node.find( "li[data-filter]" ).not( "li[data-key][disabled]" ).css( "display", "" );
 
                 /** Close all parent node */
-                lis.filter( "li.open" ).each( function() {
+                lis.filter( "li.md-tree-open" ).each( function() {
                     close( $( this ) );
                 } );
 
@@ -259,11 +259,11 @@
 	function close( target, duration ) {
 
         var post = function() {
-            $( this ).css( "display", "" ).parent().removeClass( "open" ).addClass( "close" ).css( "display", "" );
+            $( this ).css( "display", "" ).parent().removeClass( "md-tree-open" ).addClass( "md-tree-close" ).css( "display", "" );
         };
 
         /** Close all the children */
-        if ( target.hasClass( "open" ) ) {
+        if ( target.hasClass( "md-tree-open" ) ) {
 
             if ( duration ) {
                 target.find( "ul[style='display: block;']" )
@@ -289,10 +289,10 @@
 
     function open( target, duration ) {
 
-        if ( target.hasClass( "close" ) ) {
+        if ( target.hasClass( "md-tree-close" ) ) {
 
             target.find( "ul:first" ).slideToggle( duration || 0, function() {
-                target.removeClass( "close" ).addClass( "open" );
+                target.removeClass( "md-tree-close" ).addClass( "md-tree-open" );
             } );
         }
     }
@@ -325,7 +325,7 @@
 
                 if ( filter( item ) ) {
 
-                    html += "<li class='md-tree-node " + (settings.collapsed ? "close" : "open") +
+                    html += "<li class='md-tree-node " + (settings.collapsed ? "md-tree-close" : "md-tree-open") +
                             "' value='" + item[ settings.valueKey ] +
                             "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
                             "' data-level=" + (level + 1) + " data-key='" + item[ settings.valueKey ] +
@@ -346,7 +346,7 @@
 
             node.append( "<ul>" + html.html() + "</ul>" );
         } else {
-            node.removeClass( "md-tree-node open close" );
+            node.removeClass( "md-tree-node md-tree-open md-tree-close" );
 		}
 	}
 
@@ -387,7 +387,7 @@
 		filter          : {},
 
 		formatter       : function( item, level, settings ) {
-			return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
+			return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='md-icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
 		}
 	};
 } )( window.jQuery );

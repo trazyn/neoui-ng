@@ -26,7 +26,7 @@ angular.module( "$ui.tree", [] )
         function link( $scope, $element, $attrs, undefined, link ) {
 
             var
-            options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean", "showFilterBar": "boolean" } ),
+            options = args( $scope, $attrs, { "collapsed": "boolean", "closeSameLevel": "boolean" } ),
             tree,
             filterBar,
             transclude,
@@ -65,13 +65,6 @@ angular.module( "$ui.tree", [] )
                     $scope.$apply();
                 }
             };
-
-            filterBar = $element.find( $.fn.tree.defaults.selector4filter );
-            if ( options.showFilterBar ) {
-                filterBar.attr( "placeholder", options.placeholder );
-            } else {
-                filterBar.parent().remove();
-            }
 
             tree = $( $element ).tree( options );
 
@@ -113,7 +106,6 @@ angular.module( "$ui.tree", [] )
                 collapsed       : "@",
                 closeSameLevel  : "@",
                 placeholder     : "@",
-                showFilterBar   : "@",
                 data            : "=",
                 onSelect        : "&",
                 controller      : "=",

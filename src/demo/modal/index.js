@@ -34,20 +34,8 @@ define( [ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], function() {
 			.progress.start();
 		};
 
-		$scope.dragMe = function() {
-
-			$modal.open( {
-				controller: "modalController",
-				draggable: true,
-				templateUrl: "src/demo/modal/page1.html",
-				title: "弹出框标题 18PX 加粗 #333",
-				class4modal: "demo",
-				scope: $scope
-			} );
-		};
-
 	    $scope.init = function() {
-            $.anchor( { offset: -80 } );
+            $.anchor( { offset: -60 } );
 	    };
 	} ] );
 } );

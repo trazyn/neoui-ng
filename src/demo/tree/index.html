@@ -28,37 +28,41 @@
 
     <section>
 
-        <div>
-            <div>
-                <input class="ui text" type="" placeholder="Type for search..." style="width: 322px;" ng-model="szseFilter">
-                <s-tree style="height: 430px; width: 320px;"
-                    data="test"
-                    filter-value="szseFilter"
-                    controller="szseTree"
-                    root-ids="0"
-                    parent-key="parent"
-                    text-key="name"
-                    value-key="id"
-                    after-render="afterInit( szseTree )">
-                </s-tree>
-            </div>
+        <code>
+            {{ value || {} | json }}
+        </code>
+
+        <br>
+        <br>
+
+        <div class="wrap">
+            <label>Simple</label>
+            <s-tree style="height: 480px; width: 320px;"
+                data="test"
+                ng-model="value"
+                filter-value="szseFilter"
+                controller="szseTree"
+                root-ids="0"
+                parent-key="parent"
+                text-key="name"
+                value-key="id"
+                after-render="afterInit( szseTree )">
+            </s-tree>
         </div>
 
         <br>
         <br>
 
+        <code>
+            {{ fileValue || {} | json }}
+        </code>
+
+        <br>
+        <br>
+
         <div class="wrap example">
-
-            <code>
-                <label>Value:</label>
-                {{ fileValue || {} | json }}
-            </code>
-
-            <br>
-            <br>
-
             <label>Custome</label>
-            <s-tree class="file" style="height: 430px; width: 320px;"
+            <s-tree class="md-tree-file" style="height: 600px; width: 320px;"
                 data="files"
                 ng-model="fileValue"
                 filter-value="filterValue"
@@ -68,19 +72,19 @@
                 parent-key="parent"
                 text-key="name"
                 value-key="id">
-                <i class="icon {{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
+                <i class="md-icon md-icon-{{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
             </s-tree>
 
             <div>
-                <p><button class="ui button primary" ng-disabled="!fileValue"
+                <p><button class="md-btn md-btn-primary" ng-disabled="!fileValue"
                     ng-click="addBranch( fileTree, fileValue.id )">Add Branch</button></p>
-                <p><button class="ui button warn" ng-disabled="!fileValue"
+                <p><button class="md-btn md-btn-danger" ng-disabled="!fileValue"
                     ng-click="fileTree.remove( fileValue.id )">Remove Branch</button></p>
-                <p><button class="ui button coral" ng-disabled="!fileValue"
+                <p><button class="md-btn md-btn-coral" ng-disabled="!fileValue"
                     ng-click="fileTree.toggle( fileValue.id )">Toggle</button></p>
-                <p><button class="ui button mint" ng-disabled="!fileValue"
+                <p><button class="md-btn md-btn-mint" ng-disabled="!fileValue"
                     ng-click="fileTree.expand( fileValue.id )">Expand</button></p>
-                <p><button class="ui button mint" ng-disabled="!fileValue"
+                <p><button class="md-btn md-btn-mint" ng-disabled="!fileValue"
                     ng-click="fileTree.collapse( fileValue.id )">Collapse</button></p>
 
                 <p><input class="ui text" placeholder="Type for search..." ng-model="filterValue"></p>
@@ -92,309 +96,294 @@
     <br>
 
     <header>AngularJS</header>
-    <div class="markdown">
-        <section>
-            <div class="ui ribbon" data-anchor="markup">
-                <span>Markup</span>
-            </div>
+    <section>
+        <div class="md-ribbon" data-anchor="markup">
+            <span>Markup</span>
+        </div>
 
-            <div class="wrap">
-                <label>Simple</label>
-                <xmp>
-                <s-tree style="height: 430px; width: 270px;"
-                    data="data"
-                    show-filter-bar="true"
-                    ng-model="treeValue"
-                    on-select="onSelect"
-                    root-ids="rootIds"
-                    parent-key="a03_parent_id"
-                    text-key="a03_name"
-                    controller="menuTree"
-                    value-key="a03_id">
-                </s-tree>
-                </xmp>
-            </div>
-
-            <div class="wrap">
-            <label>Custom template</label>
+        <div class="wrap">
+            <label>Simple</label>
             <xmp>
-            <s-tree class="file" style="height: 430px; width: 270px;"
-                data="files"
-                ng-model="fileValue"
-                controller="fileTree"
-                root-ids="[ './' ]"
+            <s-tree style="height: 480px; width: 320px;"
+                data="test"
+                ng-model="value"
+                filter-value="szseFilter"
+                controller="szseTree"
+                root-ids="0"
                 parent-key="parent"
-                filter-value="filterValue"
-                close-same-level="true"
                 text-key="name"
-                value-key="id">
-                <i class="icon \{\{ name.substr( name.lastIndexOf( '.' ) + 1 ) \}\}"></i><span>\{\{ name \}\}</span>
+                value-key="id"
+                after-render="afterInit( szseTree )">
             </s-tree>
             </xmp>
-            <code>内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></code>
-            </div>
-        </section>
+        </div>
 
-        <section>
-            <div class="ui ribbon" data-anchor="javascript">
-                <span>Javascript</span>
-            </div>
+        <div class="wrap">
+        <label>Custom template</label>
+        <xmp>
+        <s-tree class="md-tree-file" style="height: 600px; width: 320px;"
+            data="files"
+            ng-model="fileValue"
+            filter-value="filterValue"
+            close-same-level="true"
+            controller="fileTree"
+            root-ids="[ './' ]"
+            parent-key="parent"
+            text-key="name"
+            value-key="id">
+            <i class="md-icon md-icon-{{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
+        </s-tree>
+        </xmp>
+        <p class="note">内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></p>
+        </div>
+    </section>
 
-            <xmp>
-            angular
-            .module( "demo.tree", [ "$ui.tree" ] )
-            .controller( "treeController", [ "$scope", function( $scope ) {
-
-                /** Simple */
-                angular.extend( $scope, {
-
-                    rootIds: [ "C000000000481935" ],
-                    data: function() {
-
-                        var deferred = $.Deferred();
-
-                        $.ajax( {
-                            url: "/src/demo/tree/tree.json",
-                            dataType: "json"
-                        } )
-
-                        .done( function( data ) {
-
-                            data = data.result.catalog;
-                            deferred.resolveWith( JSON.parse( data ) );
-                        } );
-
-                        return deferred.promise();
-                    },
-
-                    onSelect: function( node ) {
-                        console.log( node );
-                    }
-                } );
-
-                /** Custom */
-                $scope.files = function() {
-
-                    var deferred = $.Deferred();
-
-                    $.ajax( {
-                        url: "/src/demo/tree/files.json",
-                    } )
-
-                    .done( function( data ) {
-                        deferred.resolveWith( data );
-                    } );
-
-                    return deferred;
-                };
-
-                $scope.addBranch = function( tree, parentId ) {
-
-                    var
-                    settings = tree.settings,
-                    item = {};
-
-                    item[ settings.parentKey ] = parentId;
-                    item[ settings.valueKey ] = +new Date();
-                    item[ settings.textKey ] = "New Branch";
-
-                    tree.add( item );
-                };
-            } ] );
-            </xmp>
-
-        </section>
-
-        <section>
-            <div class="ui ribbon" data-anchor="sTree">
-                <span>Directive * s-tree</span>
-            </div>
-
-            <blockquote class="required">
-                <p><code>=root-ids</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p><code>Root</code>节点<code>ID</code></p>
-            <br>
-
-            <blockquote class="required">
-                <p><code>@parent-key</code> - <code>"parentId"</code>
-                </p>
-            </blockquote>
-            <p>关联键</p>
-            <br>
-
-            <blockquote class="required">
-                <p><code>@text-key</code> - <code>"text"</code></p>
-            </blockquote>
-            <p><code>text</code>取值</p>
-            <br>
-
-            <blockquote class="required">
-            <p><code>@value-key</code> - <code>"value"</code></p>
-            </blockquote>
-            <p><code>text</code>取值</p>
-            <br>
-
-            <blockquote class="required">
-                <p><code>=data</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
-            <br>
-
-            <blockquote>
-                <p><code>=filter-value</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>通过该值过滤树</p>
-            <br>
-
-            <blockquote>
-                <p><code>@collapsed</code> - <code>true</code>
-                </p>
-            </blockquote>
-            <p>为<code>false</code>时展开所有节点</p>
-            <br>
-
-            <blockquote>
-                <p><code>@closeSameLevel</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>展开节点时关闭同一级的节点</p>
-            <br>
-
-            <blockquote>
-                <p><code>@placeholder</code> - <code>"Type to search..."</code>
-                </p>
-            </blockquote>
-            <p>The same to input placeholder</p>
-            <br>
-
-            <blockquote>
-                <p><code>@show-filter-bar</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>显示过滤栏</p>
-            <br>
-
-            <blockquote>
-                <p><code>&onSelect</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>选中节点时回调</p>
-            <br>
-
-            <blockquote>
-                <p><code>=controller</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>Tree's controller, <a href="" data-anchor="method">See Method</a></p>
-            <br>
-        </section>
-    </div>
-
-    <header data-anchor="api">API</header>
-
-    <div class="markdown">
-
-        <section>
-            <div class="ui ribbon" data-anchor="html">
-                <span>HTML</span>
-            </div>
-
-            <xmp>
-            <div class="ui tree" style="height: 430px; width: 270px;">
-                <div class="icon">
-                    <input type="text" class="ui text" name="filter" value="" placeholder="Type for search..">
-                </div>
-                <div class="content"></div>
-            </div>
-            </xmp>
-        </section>
-
-        <br>
-        <br>
-
-        <section>
-            <div class="ui ribbon" data-anchor="constructor">
-                <span>Constructor</span>
-            </div>
-
-            <p><code>$( selector ).tree( [options] )</code>
-            </p>
-
-            <blockquote>
-                <p><code>selector</code> - 选择器或 DOM 元素</p>
-
-                <p><code>options</code> - 参数设置</p>
-            </blockquote>
+    <section>
+        <div class="md-ribbon" data-anchor="javascript">
+            <span>Javascript</span>
+        </div>
 
         <xmp>
-        $( ".ui.tree" ).tree( {
+    angular
+    .module( "demo.tree", [ "$ui.tree" ] )
+    .controller( "treeController", [ "$scope", function( $scope ) {
 
-            data: function() {
+        var deferred = $.Deferred();
 
-                var deferred = $.Deferred();
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
 
-                $.ajax( {
-                    url: "/src/demo/tree/tree.json",
-                    dataType: "json"
-                } )
-                .done( function( data ) {
-                    data = data.result.catalog;
-                    deferred.resolveWith( JSON.parse( data ) );
-                } );
+        $scope.test = function() {
 
-                return deferred.promise();
-            },
+            $.ajax( {
+                url: "src/demo/tree/test.json",
+                dataType: "text"
+            } )
+            .done( function( data ) {
+                deferred.resolveWith( eval( "(" + data + ")" ) );
+            } );
 
-            parentKey: "a03_parent_id",
-            textKey: "a03_name",
-            valueKey: "a03_id",
-            rootIds: [ "C000000000481935" ]
-        } );
+            return deferred.promise();
+        };
+
+        /** Custom */
+        $scope.files = function() {
+
+            return $.ajax( {
+                url: "src/demo/tree/files.json"
+            } );
+        };
+
+        $scope.addBranch = function( tree, parentId ) {
+
+            var
+            settings = tree.settings,
+            item = {};
+
+            item[ settings.parentKey ] = parentId;
+            item[ settings.valueKey ] = +new Date();
+            item[ settings.textKey ] = "New Branch";
+
+            tree.add( item );
+        };
+
+        $scope.afterInit = function( szseTree ) {
+
+            $.when( deferred ).done( function() {
+
+                szseTree
+                .expand( "szse" )
+                .expand( "zhyjs" )
+                .disabled("zhyjs" )
+                .disabled( "szzqjysyyb" );
+            } );
+        };
+    } ] );
         </xmp>
-        </section>
 
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="sTree">
+            <span>Directive * s-tree</span>
+        </div>
+
+        <blockquote class="required">
+            <p><code>=root-ids</code> - null</p>
+            <footer>
+                <mark>Root</mark>节点<mark>ID</mark>
+            </footer>
+        </blockquote>
         <br>
+
+        <blockquote class="required">
+            <p><code>@parent-key</code> - "parentId"</p>
+            <footer> 关联键 </footer>
+        </blockquote>
         <br>
 
-        <section>
-            <div class="ui ribbon" data-anchor="options">
-                <span>Options</span>
-            </div>
+        <blockquote class="required">
+            <p><code>@text-key</code> - "text"</p>
+            <footer> <mark>text</mark>取值 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote class="required">
-                <p><code>rootIds</code> - <code>null</code></p>
-            </blockquote>
-            <p><code>Root</code>节点<code>ID</code></p>
-            <br>
+        <blockquote class="required">
+            <p><code>@value-key</code> - "value"</p>
+            <footer>
+                <mark>text</mark>取值
+            </footer>
+        </blockquote>
+        <br>
 
-            <blockquote class="required">
-                <p><code>parentKey</code> - <code>"parentId"</code></p>
-            </blockquote>
-            <p>关联键</p>
-            <br>
+        <blockquote class="required">
+            <p><code>=data</code> - null</p>
+            <footer>
+                为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code>
+            </footer>
+        </blockquote>
+        <br>
 
-            <blockquote class="required">
-                <p><code>textKey</code> - <code>"text"</code></p>
-            </blockquote>
-            <p><code>text</code>取值</p>
-            <br>
+        <blockquote>
+            <p><code>=filter-value</code> - null</p>
+            <footer> 通过该值过滤树 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote class="required">
-                <p><code>value</code> - <code>"value"</code></p>
-            </blockquote>
-            <p><code>text</code>取值</p>
-            <br>
+        <blockquote>
+            <p><code>@collapsed</code> - true</p>
+            <footer> 为<code>false</code>时展开所有节点 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote class="required">
-                <p><code>data</code> - <code>null</code></p>
-            </blockquote>
-            <p>为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
+        <blockquote>
+            <p><code>@closeSameLevel</code> - false</p>
+            <footer> 展开节点时关闭同一级的节点 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>@placeholder</code> - "Type to search..."</p>
+            <footer> The same to input placeholder </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>@show-filter-bar</code> - false</p>
+            <footer> 显示过滤栏 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>&onSelect</code> - null</p>
+            <footer> 选中节点时回调 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>=controller</code> - null</p>
+            <footer>
+                Tree's controller, <a data-anchor="method">See Method</a>
+            </footer>
+        </blockquote>
+        <br>
+    </section>
+
+    <header data-anchor="api">API</header>
+    <section>
+        <div class="md-ribbon" data-anchor="html">
+            <span>HTML</span>
+        </div>
+
+        <xmp>
+        <div class="md-tree" style="height: 430px; width: 270px;"></div>
+        </xmp>
+    </section>
+
+    <br>
+    <br>
+
+    <section>
+        <div class="md-ribbon" data-anchor="constructor">
+            <span>Constructor</span>
+        </div>
+
+        <h5><code>$( selector ).tree( [options] )</code></h5>
+        <blockquote>
+            <p><code>selector</code> - 选择器或 DOM 元素</p>
+            <p><code>options</code> - 参数设置</p>
+        </blockquote>
+
+    <xmp>
+    $( ".md-tree" ).tree( {
+
+        data: function() {
+
+            var deferred = $.Deferred();
+
+            $.ajax( {
+                url: "/src/demo/tree/tree.json",
+                dataType: "json"
+            } )
+            .done( function( data ) {
+                data = data.result.catalog;
+                deferred.resolveWith( JSON.parse( data ) );
+            } );
+
+            return deferred.promise();
+        },
+
+        parentKey: "a03_parent_id",
+        textKey: "a03_name",
+        valueKey: "a03_id",
+        rootIds: [ "C000000000481935" ]
+    } );
+    </xmp>
+    </section>
+
+    <br>
+    <br>
+
+    <section>
+        <div class="md-ribbon" data-anchor="options">
+            <span>Options</span>
+        </div>
+
+        <blockquote class="required">
+            <p><code>rootIds</code> - null</p>
+            <footer>
+                <code>Root</code>节点<code>ID</code>
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote class="required">
+            <p><code>parentKey</code> - "parentId"</p>
+            <footer> 关联键 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote class="required">
+            <p><code>textKey</code> - "text"</p>
+            <footer>
+                <mark>text</mark>取值
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote class="required">
+            <p><code>value</code> - "value"</p>
+            <footer>
+                <mark>text</mark>取值
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote class="required">
+            <p><code>data</code> - null</p>
             <xmp>
-            [{
+            [ {
                 "id": "./dist",
                 "parent": "./",
                 "name": "dist"
@@ -430,135 +419,121 @@
                 "id": "./dist/vendor.min.js",
                 "parent": "./dist",
                 "name": "vendor.min.js"
-            }]
+            } ]
             </xmp>
-            <br>
+            <footer>
+                为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code>
+            </footer>
+        </blockquote>
+        <br>
 
-            <blockquote>
-                <p><code>onSelect</code> - <code>null</code></p>
-            </blockquote>
-            <p>选中节点时回调</p>
+        <blockquote>
+            <p><code>onSelect</code> - null</p>
             <xmp>
-            $( ".ui.tree" ).tree( {
-
+            $( ".md-tree" ).tree( {
                 onSelect: function( node ) {
                     console.log( node );
                 }
             } );
             </xmp>
-            <br>
+            <footer> 选中节点时回调 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote>
-                <p><code>closeSameLevel</code> - <code>false</code></p>
-            </blockquote>
-            <p>展开节点时关闭同一级的节点</p>
-            <br>
+        <blockquote>
+            <p><code>closeSameLevel</code> - false</p>
+            <footer> 展开节点时关闭同一级的节点 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote>
-                <p><code>collapsed</code> - <code>true</code></p>
-            </blockquote>
-            <p>为<code>false</code>时展开所有节点</p>
-            <br>
+        <blockquote>
+            <p><code>collapsed</code> - true</p>
+            <footer> 为<mark>false</mark>时展开所有节点 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote>
-                <p><code>formatter</code> - <code></code></p>
-            </blockquote>
-            <p>节点格式化</p>
+        <blockquote>
+            <p><code>formatter</code> - <mark>-</mark></p>
             <xmp>
-            $( ".ui.tree" ).tree( {
+            $( ".md-tree" ).tree( {
                 formatter: function() {
-
                     return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
                 }
             } );
             </xmp>
-            <br>
+            <footer> 节点格式化 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote>
-                <p><code>duration</code> - <code>150</code></p>
-            </blockquote>
-            <p>展开动画速度, 单位毫秒</p>
-            <br>
+        <blockquote>
+            <p><code>duration</code> - 150</p>
+            <footer> 展开动画速度, 单位毫秒 </footer>
+        </blockquote>
+        <br>
 
-            <blockquote>
-                <p><code>selector4content</code> - <code>".content"</code></p>
-            </blockquote>
-            <p>树形节点容器选择器</p>
-            <br>
+        <blockquote>
+            <p><code>filter</code> - null</p>
+            <footer>
+                <code>function</code>或<code>hash</code>对象, 作用于每一级节点的过滤器
+            </footer>
+        </blockquote>
+        <xmp>
+        $( ".md-tree" ).tree( {
 
-            <blockquote>
-                <p><code>selector4filter</code> - <code>"input[name=filter]"</code></p>
-            </blockquote>
-            <p>过滤框选择器</p>
-            <br>
+            filter: {
+                "0": function( item ) {
+                    return !!item.value;
+                },
 
-            <blockquote>
-                <p><code>filter</code> - <code>null</code></p>
-            </blockquote>
-            <p><code>function</code>或<code>hash</code>对象, 作用于每一级节点的过滤器</p>
-            <xmp>
-            $( ".ui.tree" ).tree( {
-
-                filter: {
-                    "0": function( item ) {
-                        return !!item.value;
-                    },
-
-                    "1": function( item ) {
-                        return item.value > 100;
-                    }
+                "1": function( item ) {
+                    return item.value > 100;
                 }
-            } );
-            </xmp>
-            <br>
+            }
+        } );
+        </xmp>
+        <br>
 
-        </section>
+    </section>
 
+    <br>
+    <br>
+
+    <section>
+        <div class="md-ribbon" data-anchor="method">
+            <span>Method</span>
+        </div>
+
+        <h5><code>.toggle( nodeid )</code> - 展开收起指定节点</h5>
+        <blockquote>
+            <code>nodeid</code> - String
+        </blockquote>
         <br>
         <br>
 
-        <section>
-            <div class="ui ribbon" data-anchor="method">
-                <span>Method</span>
-            </div>
+        <h5><code>.expand( nodeid )</code> - 展开指定节点, <mark>nodeid</mark>为空时展开所有节点</h5>
+        <blockquote>
+            <code>nodeid</code> - String
+        </blockquote>
+        <br>
+        <br>
 
-            <p><code>tree.toggle( nodeid )</code></p>
-            <blockquote>
-                <p><code>nodeid</code> - <code>String</code></p>
-            </blockquote>
-            <p>展开收起指定节点</p>
-            <br>
-            <br>
+        <h5><code>.collapse( nodeid )</code> - 收起指定节点, <mark>nodeid</mark>为空时收起所有节点</h5>
+        <blockquote>
+            <code>nodeid</code> - String
+        </blockquote>
+        <br>
+        <br>
 
-            <p><code>tree.expand( nodeid )</code></p>
-            <blockquote>
-                <p><code>nodeid</code> - <code>String</code></p>
-            </blockquote>
-            <p>展开指定节点, <code>nodeid</code>为空时展开所有节点</p>
-            <br>
-            <br>
+        <h5><code>.render( data )</code> - 渲染树节点, 为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></h5>
+        <blockquote>
+            <code>data</code> - Array/Function
+        </blockquote>
+        <br>
+        <br>
 
-            <p><code>tree.collapse( nodeid )</code></p>
-            <blockquote>
-                <p><code>nodeid</code> - <code>String</code></p>
-            </blockquote>
-            <p>关闭指定节点, <code>nodeid</code>为空时收起所有节点</p>
-            <br>
-            <br>
-
-            <p><code>tree.render( data )</code></p>
-            <blockquote>
-                <p><code>data</code> - <code>Array/Function</code></p>
-            </blockquote>
-            <p>渲染树节点, 为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code></p>
-            <br>
-            <br>
-
-            <p><code>tree.add( item )</code></p>
-            <blockquote>
-                <p><code>item</code> - <code>Object</code></p>
-            </blockquote>
-            <p>添加节点</p>
+        <h5><code>.add( node )</code> - 添加节点</h5>
+        <blockquote>
+            <code>data</code> - Object
             <xmp>
             {
                 text: "Text",
@@ -566,22 +541,22 @@
                 parentId: "0"
             }
             </xmp>
-            <br>
-            <br>
+        </blockquote>
+        <br>
+        <br>
 
-            <p><code>tree.remove( nodeid )</code></p>
-            <blockquote>
-                <p><code>nodeid</code> - <code>String</code></p>
-            </blockquote>
-            <p>移除指定节点</p>
-            <br>
-            <br>
+        <h5><code>.remove( nodeid )</code> - 移除指定节点</h5>
+        <blockquote>
+            <code>nodeid</code> - String
+        </blockquote>
+        <br>
+        <br>
 
-            <p><code>tree.filter( text )</code></p>
-            <blockquote>
-                <p><code>text</code> - <code>String</code></p>
-            </blockquote>
-            <p>过滤节点树</p>
-        </section>
-    </div>
+        <h5><code>.filter( text )</code> - 过滤</h5>
+        <blockquote>
+            <code>text</code> - String
+        </blockquote>
+        <br>
+
+    </section>
 </section>
