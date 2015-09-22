@@ -8,14 +8,48 @@
     font-weight: normal;
     font-style: normal;
 }
-.icon {
+
+.md-icon:before,
+.md-icon:after,
+[class^=md-icon-]:before,
+[class^=md-icon-]:after {
     font-family: "icomoon";
     vertical-align: middle;
-    font-size: 14px;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
+}
+
+.md-icon {
+
+    &-clear:after {
+        content: "\e61e";
+    }
+
+    &-github2:after {
+        content: "\e670";
+    }
+
+    &-github4:after {
+        content: "\e672";
+    }
+
+    &-devices:after {
+        content: "\e631";
+    }
+
+    &-restaurant-menu:after {
+        content: "\e712";
+    }
+
+    &-trending-up:after {
+        content: "\e6ef";
+    }
+
+    &-emebed2:after {
+        content: "\e63a";
+    }
 
     &.ok:after {
         content: "\e636";

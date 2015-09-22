@@ -143,10 +143,10 @@ define( [ "util/poll" ], function( poll ) {
 
 		max 		    : 0.99123,
 
-		template 	    : "<div class='bar'><div></div></div><div class='spinner'><div></div></div>",
+		template 	    : "<div class='md-progress-bar'><div></div></div><div class='md-progress-spinner'><div></div></div>",
 
-		selector4bar 	: ".bar",
-		selector4icon 	: ".spinner",
+		selector4bar 	: ".md-progress-bar",
+		selector4icon 	: ".md-progress-spinner",
 
 		render          : function( status ) {
 

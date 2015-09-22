@@ -36,7 +36,7 @@ angular.module( "$ui.sidenav", [] )
             content = function( deferred, loading, close ) {
 
                 this.html( $element );
-                $compile( this.find( ".ui.sidenav >*" ) )( $scope );
+                $compile( this.find( ".sidenav >*" ) )( $scope );
                 deferred.resolve();
             };
 
@@ -85,7 +85,7 @@ angular.module( "$ui.sidenav", [] )
 
             transclude      : true,
             replace         : true,
-            template        : "<div class='ui sidenav' ng-transclude></div>",
+            template        : "<div class='md-sidenav' ng-transclude></div>",
             link            : link
         };
     } ] );

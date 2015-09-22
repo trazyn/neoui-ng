@@ -10,7 +10,7 @@
 
 		target
 		.find( settings.selector4anchor + "[" + settings.symbol + "]" )
-		.filter( ".ui.anchor [" + settings.symbol + "]" )
+		.filter( ".anchor [" + settings.symbol + "]" )
 		.each( function() {
 
 			var
@@ -128,7 +128,7 @@
 
 		selector4anchor 	: "#anchors li",
 		selector4delegate   : "#anchors li, a",
-		selector4content 	: "#container header, #canvas h3, .ui.ribbon"
+		selector4content 	: "#container header, #canvas h3, .ribbon"
 	};
 
 })( window.jQuery );
@@ -485,10 +485,10 @@ define( 'ui/progress/progress',[ "util/poll" ], function( poll ) {
 
 		max 		    : 0.99123,
 
-		template 	    : "<div class='bar'><div></div></div><div class='spinner'><div></div></div>",
+		template 	    : "<div class='md-progress-bar'><div></div></div><div class='md-progress-spinner'><div></div></div>",
 
-		selector4bar 	: ".bar",
-		selector4icon 	: ".spinner",
+		selector4bar 	: ".md-progress-bar",
+		selector4icon 	: ".md-progress-spinner",
 
 		render          : function( status ) {
 
@@ -515,16 +515,16 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 
 		var
 
-        template = [ "<div class='ui modal animate'>",
+        template = [ "<div class='md-modal'>",
                     "<div style='height: 100%;'>",
-                        "<h3 class='title'></h3><div class='icon close transition rotate'></div>",
-                        "<div class='ui loading'></div>",
-                        "<div class='ui progress'></div>",
-                        "<div class='content'></div>",
+                        "<div class='md-modal-head'></div><div class='md-icon-clear md-modal-close'></div>",
+                        "<div class='md-loading'></div>",
+                        "<div class='md-progress'></div>",
+                        "<div class='md-modal-body'></div>",
                     "</div>",
 
                 "</div>",
-                "<div class='ui overlay'></div>" ].join( "" ),
+                "<div class='md-modal-overlay'></div>" ].join( "" ),
 
 		modal = $( template ),
 
@@ -541,19 +541,19 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 		},
 
 		closeByDocument = function( e ) {
-			$( e.target ).hasClass( "overlay" ) && close();
+			$( e.target ).hasClass( "md-modal-overlay" ) && close();
 		},
 
-		loading = modal.find( ".ui.loading:first" ).loading(),
-		progress = modal.find( ".ui.progress:first" ).progress(),
+		loading = modal.find( ".md-loading:first" ).loading(),
+		progress = modal.find( ".md-progress:first" ).progress(),
 
 		deferred = $.Deferred(),
 
 		show = function() {
 
 			var
-			  head = modal.find( ".title" ),
-			  body = modal.find( ".content" ),
+			  head = modal.find( ".md-modal-head" ),
+			  body = modal.find( ".md-modal-body" ),
 			  overlay = modal.last();
 
 			/** ~Head~ */
@@ -567,7 +567,7 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 				deferred.resolve();
 			}
 
-			modal.addClass( [ options.animation, options.class4modal || "" ].join( " " ) );
+			modal.first().addClass( [ "md-modal-animation-" + options.animation, options.class4modal || "" ].join( " " ) );
 
 			/** Show the overlay */
 			overlay.addClass( options.modal ? "show" : "blank" );
@@ -585,8 +585,7 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 				}
 			}
 
-			modal.delegate( ".close", "click", close );
-			modal.first().css( options.css );
+			modal.delegate( ".md-modal-close", "click", close );
 
 			setTimeout( function() {
 				modal.first().addClass( "show" );
@@ -601,16 +600,16 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 				modal.drag( function( ev, dd ) {
 
 					$( this ).css( {
-                        "width": modal.width(),
-                        "height": modal.height(),
 						top: dd.offsetY,
 						left: dd.offsetX,
+                        "width": modal.width(),
+                        "height": modal.height(),
 						"-webkit-transform": "none",
 						"-moz-transform": "none",
 						"-ms-transform": "none",
 						"transform": "none",
 					} );
-				}, { handle: handle === true ? ".title" : handle } );
+				}, { handle: handle === true ? ".md-modal-head" : handle } );
 			}
 
 			modal.appendTo( document.body );
@@ -634,19 +633,18 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 
 	$.fn.modal.defaults = {
 
-		title 		    : "Modal.JS",
+		title 		    : "Modal",
 		showTitle 	    : true,
 		modal        	: true,
 		draggable       : true,
 
-		css 		    : { "min-width": 480 },
 		class4modal     : "",
 
 		closeByESC 	    : true,
 		closeByDocument : false,
 
 		animation 	    : "slide",
-		content 		: "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
+		content 		: "",
 
 		autoShow 	    : true,
 		onClose 		: $.noop,
@@ -765,7 +763,7 @@ define( 'demo/modal/index',[ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], funct
 				controller: "modalController",
 				animation: animation,
 				templateUrl: "src/demo/modal/page.html",
-				title: "Instagram Handbook for Brands",
+				title: "Mango (Fruit)",
 				class4modal: "demo",
 				scope: $scope
 			} );
@@ -1560,6 +1558,260 @@ define( 'demo/pagination/index',[ "ui/pagination/pagination-ng" ], function() {
 
 
 
+define( 'ui/timepicker/timepicker',[], function() {
+
+    "use strict";
+
+    var
+    namespace = "$ui.timepicker",
+
+    Timepicker = function( target, settings ) {
+
+        var
+        instance = this,
+        hoursHtml = "",
+        mintuesHtml = "";
+
+        this.$node = target;
+        this.settings = settings;
+
+        for ( var i = 0; i <= 23; ++i ) {
+            hoursHtml += "<span>" + i + "</span>";
+        }
+
+        for ( var i = 0; i <= 11; mintuesHtml += "<span>" + (i++ * 5) + "</span>" );
+
+        target
+        .append( "<div tabindex=-1 class='hours'><p>请选择小时</p><div>" + hoursHtml + "</div></div>" )
+        .append( "<div tabindex=-1 class='mintues'><p>请选择分钟</p><div>" + mintuesHtml + "</div></div>" )
+
+        .delegate( "input", "click", function( e ) {
+
+            var self = $( this );
+
+            if ( target.is( "[disabled]" ) ) { return; }
+
+            target
+            .find( self.hasClass( "hour" ) ? ".hours" : ".mintues" )
+            .addClass( "show" )
+            .focus();
+        } )
+
+        .delegate( "input", "focusout", function() {
+
+            var
+            self = $( this ),
+            value = +self.val(),
+            isValid = true,
+            popover = target.find( ".hours" );
+
+            if ( isValid = !isNaN( value ), isValid ) {
+
+                if ( self.hasClass( "mintue" ) ) {
+                    popover = target.find( ".mintues" );
+
+                    if ( settings.strict ) {
+
+                        if ( self.val() !== "00" ) {
+                            popover.find( "span" ).filter( function() {
+                                if ( $( this ).text() == self.val() ) {
+                                    isValid = false;
+                                }
+                            } );
+                        }
+                    } else if ( value > 59 ) {
+                        isValid = false;
+                    }
+                } else {
+
+                    /** Check the hour */
+                    if ( value > 23 ) {
+                        isValid = false;
+                    }
+                }
+            }
+
+            if ( !isValid ) {
+                popover.find( "span" ).removeClass( "selected" );
+                self.click();
+            }
+        } )
+
+        .delegate( ".hours span", "click", function() {
+            target.find( settings.selector4hour ).val( this.innerHTML ).select();
+        } )
+
+        .delegate( ".mintues span", "click", function() {
+            target.find( settings.selector4mintue ).val( this.innerHTML ).select();
+        } )
+
+        .delegate( "span", "click", function() {
+
+            $( this ).addClass( "selected" ).parent().find( "span" ).not( this ).removeClass( "selected" );
+            settings.onApplied.call( instance, instance.val() );
+        } )
+
+        .delegate( ".hours, .mintues", "focusout", function() {
+            $( this ).removeClass( "show" );
+        } );
+    };
+
+    Timepicker.prototype = {
+
+        val: function( value ) {
+
+            var
+            settings = this.settings,
+            hour,
+            mintue;
+
+            if ( value ) {
+
+                value = value.split( ":" );
+                hour = value[0];
+                mintue = value[1];
+
+                hour = hour >= 0 && hour < 24 ? hour : "00";
+                mintue = mintue >= 0 && mintue < 60 ? mintue : "00";
+
+                this.$node.find( settings.selector4hour ).val( hour );
+                this.$node.find( settings.selector4mintue ).val( mintue );
+            } else {
+                return this.$node.find( settings.selector4hour ).val() + ":" + this.$node.find( settings.selector4mintue ).val();
+            }
+
+            return this;
+        },
+
+        disabled: function() {
+
+            var settings = this.settings;
+
+            this
+            .$node
+            .attr( "disabled", true )
+            .find( settings.selector4hour + "," + settings.selector4mintue )
+            .attr( "disabled", true );
+            return this;
+        },
+
+        enabled: function() {
+
+            var settings = this.settings;
+
+            this
+            .$node
+            .removeAttr( "disabled" )
+            .find( settings.selector4hour + "," + settings.selector4mintue )
+            .removeAttr( "disabled" );
+            return this;
+        }
+    };
+
+    $.fn.timepicker = function( options ) {
+
+        var instance = this.data( namespace );
+
+        if ( !instance ) {
+            instance = new Timepicker( this, $.extend( {}, $.fn.timepicker.defaults, options ) );
+            this.data( namespace, instance );
+        }
+
+        return instance;
+    };
+
+    $.fn.timepicker.defaults = {
+        defaultValue        : new Date(),
+        strict              : false,
+        selector4hour       : ".hour",
+        selector4mintue     : ".mintue",
+        onApplied           : $.noop
+    };
+} );
+
+
+
+define( 'ui/timepicker/timepicker-ng',[ "ui/timepicker/timepicker" ], function() {
+
+
+
+/**
+ * example:
+ *
+    <s-time-picker
+        ng-model="value"
+        ng-disabled="isDisabled">
+    </s-time-picker>
+ * */
+
+angular.module( "$ui.timepicker", [] )
+    .directive( "sTimepicker", [ "$rootScope", function( $rootScope ) {
+
+        function link( $scope, $element, $attrs ) {
+
+            var
+            options = {
+                strict      : [ 1, "true" ].indexOf( $scope.strict ) > -1,
+                onApplied   : function( value ) {
+
+                    if ( !$rootScope.$$phase ) {
+
+                        $scope.value = timepicker.val();
+                        $scope.$apply();
+
+                        ($scope.onApplied() || $.noop).apply( this, arguments );
+                    }
+                }
+            },
+
+            timepicker = $( $element ).timepicker( options );
+
+            if ( $scope.value ) {
+                timepicker.val( $scope.value );
+            }
+
+            $scope.$watch( "value", function( value ) {
+
+                timepicker.val( value );
+            } );
+        }
+
+        return {
+            scope           : {
+                disabled    : "=ngDisabled",
+                value       : "=ngModel",
+                strict      : "@",
+                onApplied   : "&"
+            },
+
+            restric         : "EA",
+            transclude      : true,
+            replace         : true,
+            template        : "<div class='ui timepicker'>" +
+                                "<input class='hour' type='text' maxlength='2' value='00'>" +
+                                "<span>:</span>" +
+                                "<input class='mintue' type='text' maxlength='2' value='00'>" +
+                              "</div>",
+
+            link            : link
+        };
+    } ] );
+} );
+
+
+
+define( 'demo/timepicker/index',[ "ui/timepicker/timepicker-ng" ], function() {
+
+    "use strict";
+
+    angular
+    .module( "demo.timepicker", [ "$ui.timepicker" ] )
+    .controller( "timePickerController", [ "$scope", function( $scope ) {
+
+    } ] );
+} );
+
+
 define( 'demo/accordion/index',[ "ui/accordion/accordion-ng" ], function() {
 
     "use strict";
@@ -1668,6 +1920,7 @@ require( [
         "demo/radio/index",
         "demo/loading/index",
         "demo/pagination/index",
+        "demo/timepicker/index",
         "demo/accordion/index",
         "demo/validation/index" ], function() {
 
@@ -1697,6 +1950,7 @@ require( [
 	        "demo.loading",
 	        "demo.pagination",
 	        "demo.accordion",
+	        "demo.timepicker",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -1801,6 +2055,9 @@ require( [
 		    } )
 		    .when( "/pagination", {
 		        templateUrl: "src/demo/pagination/index.html"
+		    } )
+		    .when( "/timepicker", {
+		        templateUrl: "src/demo/timepicker/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

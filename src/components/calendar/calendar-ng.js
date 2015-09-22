@@ -62,7 +62,7 @@ angular.module( "$ui.calendar", [] )
                 calendar[ value ? "disabled" : "enabled" ]();
             } );
 
-            $element.find( $.fn.selector4input ).attr( placeholder, $scope.placeholder );
+            $element.find( $.fn.selector4input ).attr( "placeholder", $scope.placeholder );
 
             calendar = $( $element ).calendar( options ),
             settings = calendar.settings;

@@ -34,6 +34,7 @@ require( [
         "demo/radio/index",
         "demo/loading/index",
         "demo/pagination/index",
+        "demo/timepicker/index",
         "demo/accordion/index",
         "demo/validation/index" ], function() {
 
@@ -63,6 +64,7 @@ require( [
 	        "demo.loading",
 	        "demo.pagination",
 	        "demo.accordion",
+	        "demo.timepicker",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -167,6 +169,9 @@ require( [
 		    } )
 		    .when( "/pagination", {
 		        templateUrl: "src/demo/pagination/index.html"
+		    } )
+		    .when( "/timepicker", {
+		        templateUrl: "src/demo/timepicker/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"

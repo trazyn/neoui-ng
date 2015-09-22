@@ -38,7 +38,7 @@ angular.module( "$ui.progress", [] )
             restric         : "E",
 
             replace         : true,
-            template        : "<div class='ui progress'></div>",
+            template        : "<div class='md-progress'></div>",
 
             link            : link
         };

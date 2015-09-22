@@ -15,7 +15,7 @@ define( [ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], function() {
 				controller: "modalController",
 				animation: animation,
 				templateUrl: "src/demo/modal/page.html",
-				title: "Instagram Handbook for Brands",
+				title: "Mango (Fruit)",
 				class4modal: "demo",
 				scope: $scope
 			} );

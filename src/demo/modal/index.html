@@ -1,19 +1,19 @@
 
 <title>Modal - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
-    <li class="item">AngularJS
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active" data-forceAnchor="-260">Example</li>
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="service" class="item">Service * $ui.modal</li>
-            <li data-anchor="ngMethods" class="item">Methods</li>
+            <li data-anchor="service" class="md-anchor-item">Service * $ui.modal</li>
+            <li data-anchor="ngMethods" class="md-anchor-item">Methods</li>
         </ul>
     </li>
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -23,25 +23,50 @@
     <header data-anchor="example">Example</header>
 
     <section class="example">
-        <p>
-        <button class="ui button coral raised" ng-click="open( 'slide' )">SLIDE</button>
-        <button class="ui button coral raised" ng-click="open( 'stick' )">STICK</button>
-        <button class="ui button coral raised" ng-click="open( 'bottom' )">BOTTOM</button>
-        <button class="ui button coral raised" ng-click="open( 'scale' )">SCALE</button>
-        </p>
 
-        <p>
-        <button class="ui button coral raised" ng-click="open( 'fadein' )">FADEIN</button>
-        <button class="ui button coral raised" ng-click="open( 'flip' )">FLIP</button>
-        <button class="ui button coral raised" ng-click="open( 'vertical' )">VERTICAL</button>
-        <button class="ui button coral raised" ng-click="open( 'sign' )">SIGN</button>
-        </p>
+        <div class="row">
+            <div class="col-md-10">
 
-        <p>
-        <button style="width: auto;" class="ui button primary" ng-click="open( 'scale' ).loading.show()">Show Loading</button>
-        <button style="width: auto;" class="ui button primary" ng-click="showProgress()">Show Progress</button>
-        <button style="width: auto;" class="ui button primary" ng-click="dragMe()">Drag Me</button>
-        </p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'slide' )">SLIDE</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'slide' )">SLIDE</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'bottom' )">BOTTOM</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'scale' )">SCALE</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'fadein' )">FADEIN</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'flip' )">FLIP</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'vertical' )">VERTICAL</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'sign' )">SIGN</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="open( 'scale' ).loading.show()">Show Loading</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="showProgress()">Show Progress</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <br>
@@ -51,7 +76,7 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="service">
+            <div class="md-ribbon" data-anchor="service">
                 <span>Service * $ui.modal</span>
             </div>
 
@@ -101,7 +126,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="ngMethods">
+            <div class="md-ribbon" data-anchor="ngMethods">
                 <span>Methods</span>
             </div>
 
@@ -128,7 +153,7 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="constructor">
+            <div class="md-ribbon" data-anchor="constructor">
                 <span>Constructor</span>
             </div>
 
@@ -146,7 +171,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="options">
+            <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
 
@@ -236,7 +261,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="method">
+            <div class="md-ribbon" data-anchor="method">
                 <span>Methods</span>
             </div>
 

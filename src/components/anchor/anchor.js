@@ -10,7 +10,7 @@
 
 		target
 		.find( settings.selector4anchor + "[" + settings.symbol + "]" )
-		.filter( ".ui.anchor [" + settings.symbol + "]" )
+		.filter( ".md-anchor [" + settings.symbol + "]" )
 		.each( function() {
 
 			var
@@ -128,7 +128,7 @@
 
 		selector4anchor 	: "#anchors li",
 		selector4delegate   : "#anchors li, a",
-		selector4content 	: "#container header, #canvas h3, .ui.ribbon"
+		selector4content 	: "#container header, #canvas h3, .md-ribbon"
 	};
 
 })( window.jQuery );

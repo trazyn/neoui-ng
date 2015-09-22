@@ -4,162 +4,88 @@
 
 
 #brand {
+    margin-top: 100px;
     text-align: center;
 
-    #intro {
-        font-family: "Roboto", Sans-serif;
-        color: rgba(0,0,0,.75);
-        margin: 74px;
-        margin-bottom: 38px;
-
-        h3 {
-            font-weight: 100;
-            font-size: 24px;
-        }
-    }
-
-    .ui.button {
-        width: 45px;
+    .md-btn {
+        display: inline-block;
+        width: 100px;
         height: auto;
         margin-left: 32px;
         font-family: HelveticaNeue-UltraLight,"Helvetica Neue UltraLight",Roboto,Arial,sans-serif;
-        display: inline-block;
-        padding: 6px 30px;
         font-weight: 700;
     }
 }
 
-.feature-wrap, .mate-wrap {
-    position: relative;
-    height: 440px;
-}
+#intro {
+    font-family: "Roboto", Sans-serif;
+    color: rgba(0,0,0,.75);
+    margin: 74px;
+    margin-bottom: 38px;
 
-.mate-wrap {
-    height: 240px;
-}
-
-#feature {
-
-    text-align: center;
-    width: 1200px;
-    position: absolute;
-    margin-left: -600px;
-    left: 50%;
-    .item {
-        display: inline-block;
-        width: 20%;
-        margin: 80px 26px;
-        vertical-align: text-top;
+    h3 {
+        font-weight: 100;
+        font-size: 24px;
     }
+}
 
-    .icon {
-        color: rgba(0,0,0,.7);
+.container.feature {
+
+    margin-top: 100px;
+
+    .col-md-3 { vertical-align: text-top; }
+
+    [class^=md-icon-] {
+        margin: 20px;
         font-size: 100px;
+        color: rgba(0,0,0,.7);
         text-shadow: rgb(233, 233, 233) 0px 0px 0px, rgb(233, 233, 233) 1px 1px 0px, rgb(233, 233, 233) 2px 2px 0px, rgb(233, 233, 233) 3px 3px 0px, rgb(233, 233, 233) 4px 4px 0px, rgb(233, 233, 233) 5px 5px 0px, rgb(233, 233, 233) 6px 6px 0px, rgb(233, 233, 233) 7px 7px 0px, rgb(233, 233, 233) 8px 8px 0px, rgb(234, 234, 234) 9px 9px 0px, rgb(234, 234, 234) 10px 10px 0px, rgb(235, 235, 235) 11px 11px 0px, rgb(236, 236, 236) 12px 12px 0px, rgb(236, 236, 236) 13px 13px 0px, rgb(237, 237, 237) 14px 14px 0px, rgb(238, 238, 238) 15px 15px 0px, rgb(238, 238, 238) 16px 16px 0px, rgb(239, 239, 239) 17px 17px 0px, rgb(240, 240, 240) 18px 18px 0px, rgb(240, 240, 240) 19px 19px 0px, rgb(241, 241, 241) 20px 20px 0px, rgb(242, 242, 242) 21px 21px 0px, rgb(242, 242, 242) 22px 22px 0px, rgb(243, 243, 243) 23px 23px 0px, rgb(244, 244, 244) 24px 24px 0px, rgb(244, 244, 244) 25px 25px 0px, rgb(245, 245, 245) 26px 26px 0px, rgb(245, 245, 245) 27px 27px 0px, rgb(246, 246, 246) 28px 28px 0px, rgb(247, 247, 247) 29px 29px 0px, rgb(247, 247, 247) 30px 30px 0px, rgb(248, 248, 248) 31px 31px 0px, rgb(249, 249, 249) 32px 32px 0px, rgb(249, 249, 249) 33px 33px 0px, rgb(250, 250, 250) 34px 34px 0px, rgb(251, 251, 251) 35px 35px 0px, rgb(251, 251, 251) 36px 36px 0px, rgb(252, 252, 252) 37px 37px 0px, rgb(253, 253, 253) 38px 38px 0px, rgb(253, 253, 253) 39px 39px 0px, rgb(254, 254, 254) 40px 40px 0px, rgb(255, 255, 255) 41px 41px 0px;
     }
-
-    p {
-        text-align: left;
-        font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
-
-        &.title {
-            font-size: 1rem;
-            color: rgba(0,0,0,.7);
-            margin-bottom: 7px;
-        }
-        &.desc {
-            font-size: .8rem;
-            color: rgba(0,0,0,.5);
-        }
-    }
 }
-#mate {
-    width: 1200px;
-    position: absolute;
-    margin-left: -600px;
-    left: 50%;
-    text-align: center;
 
-    .item {
+.container.mate {
+    margin-top: 40px;
+    font-family: HelveticaNeue-UltraLight,'Helvetica Neue UltraLight',Roboto,Arial,Sans-serif;
+
+    a {
         position: relative;
         display: inline-block;
-        width: 49%;
-        vertical-align: text-top;
-        text-align: center;
-        text-indent: 25px;
-        border-top: 1px solid #DDD;
-        padding-top: 50px;
-    }
-
-    .avatar {
-        height: 96px;
-        width: 96px;
-        margin-right: 10px;
-        border-radius: 100%;
+        margin: 6px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 800;
         cursor: pointer;
+        transition: .2s;
 
-        >img:hover {
-            transition: translateZ(360deg);
-        }
-    }
+        &,
+        &:active,
+        &:focus { color: @primary; }
 
-    .title {
-        font-size: 32px;
-        position: absolute;
-        left: 50%;
-        top: -48px;
-        transform: translateX(-50%);
-        z-index: 1;
-        background: #FFF;
-        padding: 20px;
-    }
-
-    .desc {
-        color: rgba(0,0,0,.5);
-        font-size: 1rem;
-        height: 48px;
-        line-height: 48px;
-    }
-
-    .license {
-        width: 400px;
-        padding: 0 130px;
-
-        p {
-            cursor: pointer;
-            text-indent: 32px;
-            position: relative;
+        &:after {
+            position: absolute;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: @lightGray;
+            content: "";
             transition: .2s;
-            letter-spacing: 3px;
-            font-size: 14px;
-            line-height: 32px;
-            padding: 0 14px;
-            text-align: left;
-            line-height: 28px;
-            height: 28px;
-            margin-bottom: 4px;
+        }
+
+        &:hover {
+            color: @coral;
+            &:after { background-color: @coral; }
         }
     }
 
-    .tooltip.top {
-        &:hover:after {
-            margin: 0 0 13px 11px;
-        }
-        &:hover:before {
-            margin: 0 0 1px 22px;
-        }
-    }
+    h1 { margin: 78px 0 48px; }
 }
 
-#checkout {
-    text-align: center;
-    font-size: 12px;
-    font-family: "Roboto", Sans-serif;
-    h3 {
-        font-size: 1.2rem;
-        font-weight: 100;
-        margin-bottom: 32px;
-    }
+.checkout {
+    margin: 80px 0 100px;
 
-    margin-bottom: 100px;
+    h4 {
+        margin-bottom: 48px;
+        font-family: Roboto,Sans-serif;
+    }
 }

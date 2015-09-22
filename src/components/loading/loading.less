@@ -1,97 +1,103 @@
 
 @import (reference) "../../style/main.less";
 
-.ui.loading {
+.md-loading {
 
-    background-color: rgba(0,0,0,.6);
-    z-index: 99;
-    visibility: hidden;
-    opacity: 0;
+    /** POsitioning */
+    position: absolute;
     display: none;
-    transition: .2s;
+
+    /** Box-model */
     width: 100%;
     height: 100%;
-    position: absolute;
+
+    /** Visual */
+    background-color: rgba(0,0,0,.6);
+
+    /** Misc */
+    opacity: 0;
+    visibility: hidden;
+    z-index: 99;
+    transition: .2s;
 
     &:after {
+        position: absolute;
+        left: 50%;
+        top: 50%;
         display: block;
         width: 96px;
         height: 96px;
-        transform: translateX(-50%) translateY(-50%);
-        position: absolute;
-        left: 50%;
-        top: 50%;
         background-color: rgba(0,0,0,.8);
-        content: "";
         border-radius: 4px;
+        content: "";
+        transform: translateX(-50%) translateY(-50%);
     }
 
     &:before {
-        content: "";
         position: absolute;
-        display: block;
         left: 50%;
         top: 50%;
-        transform: translateY(-50%) translateX(-50%);
+        display: block;
         height: 30px;
         width: 30px;
         border: 2px solid @google;
         border-right-color: transparent;
         border-radius: 50%;
-        animation: loading-spinner 1s infinite linear;
         z-index: 999;
+        content: "";
+        transform: translateY(-50%) translateX(-50%);
+        animation: loading-spinner 1s infinite linear;
+    }
+}
+
+.md-loading.md-loading-global {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    &:before {
+        width: auto;
+        height: auto;
+        font-family: "HelveticaNeue-UltraLight", "Open Sans", sans-serif;
+        font-size: 2em;
+        text-shadow: 0 0 40px #fff;
+        border: none;
+        background-color: transparent;
+        content: "Please Wait...";
+        animation: loading-flash 5s infinite linear;
     }
 
-    &.global {
-        background-color: white;
-        position: fixed;
+    &:after {
+        position: absolute;
         top: 0;
         left: 0;
-        &:before {
-            font-family: "HelveticaNeue-UltraLight", "Open Sans", sans-serif;
-            content: "Please Wait...";
-            text-shadow: 0 0 40px #fff;
-            width: auto;
-            height: auto;
-            font-size: 2em;
-            border: none;
-            background-color: transparent;
-            animation: loading-flash 5s infinite linear;
-        }
-
-        &:after {
-            content: "";
-            width: 100%;
-            height: 1px;
-            background: @primary;
-            box-shadow: 0px 1px 8px 0px @primary;
-            transform: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 999;
-            animation: loading-progress 5s infinite;
-        }
-
-        &:before, &:after {
-            position: fixed;
-        }
+        width: 100%;
+        height: 1px;
+        background: @primary;
+        box-shadow: 0px 1px 8px 0px @primary;
+        z-index: 999;
+        content: "";
+        transform: none;
+        animation: loading-progress 5s infinite;
     }
 
+    &:before, &:after { position: fixed; }
+}
+
+.md-loading,
+.md-loading-global {
+
     &.show {
+        display: block;
         visibility: visible;
         opacity: 1;
-        display: block;
     }
 }
 
 @keyframes loading-spinner {
-    0% {
-        transform: translateX(-50%) translateY(-50%) rotate(0deg);
-    }
-    100% {
-        transform: translateX(-50%) translateY(-50%) rotate(360deg);
-    }
+    0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
 }
 
 @keyframes loading-progress {

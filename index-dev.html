@@ -3,38 +3,38 @@
 <html lang="en" data-framework="angularjs">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="dist/neoui-0.1.0.css">
         <link rel="stylesheet" href="dist/app.css">
     </head>
 
-    <body ng-controller="mainController">
+    <body ng-controller="mainController" class="container container-full">
 
-        <div class="ui loading global show"></div>
+        <div class="md-loading-global show"></div>
 
         <s-sidenav id="menu" controller="menu">
-            <div class="logo" s-ripple>
+            <div class="menu-logo" s-ripple>
                 <p class="transition pulse">
                 {{ title || "neoui-ng" }}
                 <p>
             </div>
 
-            <div class="item transition" data-url="home" s-ripple>
+            <div class="menu-item" data-url="home" s-ripple>
                 Home
             </div>
 
-            <div class="item transition" data-url="getstarted" s-ripple>
+            <div class="menu-item" data-url="getstarted" s-ripple>
                 Get Started
             </div>
 
-            <div class="item transition" data-url="design" s-ripple>
-                Layouts(TODO)
-            </div>
-
-            <div class="item transition" data-url="editor" s-ripple>
+            <div class="menu-item" data-url="editor" s-ripple>
                 Editor
             </div>
 
-            <p class="item transition">UI</p>
+            <div class="menu-item">
+                UI
+            </div>
 
             <ul>
                 <li s-ripple data-url="accordion">Accordion</li>
@@ -44,7 +44,7 @@
                 <li s-ripple data-url="checkbox">Checkbox</li>
                 <li s-ripple data-url="calendar">Calendar</li>
                 <li s-ripple data-url="dropdown">Dropdown</li>
-                <li s-ripple data-url="datagrid">Data Grid(jQuery or AngularJS ?)</li>
+                <li s-ripple data-url="datagrid">Data Grid(TODO)</li>
                 <li s-ripple data-url="loading">Loading</li>
                 <li s-ripple data-url="modal">Modal</li>
                 <li s-ripple data-url="message">Message</li>
@@ -57,13 +57,16 @@
                 <li s-ripple data-url="switcher">Switcher</li>
                 <li s-ripple data-url="sidenav">Sidenav</li>
                 <li s-ripple data-url="tab">Tab</li>
+                <li s-ripple data-url="timepicker">TimePicker</li>
                 <li s-ripple data-url="toast">Toast</li>
                 <li s-ripple data-url="tree">Tree</li>
                 <li s-ripple data-url="tooltip">Tooltip</li>
                 <li s-ripple data-url="validation">Validation</li>
             </ul>
 
-            <p class="item">Util</p>
+            <div class="menu-item">
+                Util
+            </div>
             <ul>
                 <li s-ripple data-url="dateutil">Date Util</li>
                 <li s-ripple data-url="storage">Storage(TODO)</li>
@@ -71,14 +74,14 @@
         </s-sidenav>
 
         <header id="nav">
-            <s-progress class="global"></s-progress>
-            <a class="hamburger ui tooltip right" ng-click="openMenu( menu )" data-tooltip="Open Menu" s-ripple>
-                <span class="line line-1"></span>
-                <span class="line line-2"></span>
-                <span class="line line-3"></span>
+            <s-progress class="md-progress-global"></s-progress>
+            <a class="md-hamburger md-tooltip md-tooltip-right" ng-click="openMenu( menu )" data-tooltip="Open Menu" s-ripple>
+                <span class="md-line md-line-1"></span>
+                <span class="md-line md-line-2"></span>
+                <span class="md-line md-line-3"></span>
             </a>
-            <a href="//github.com/trazyn/neoui-ng" class="ui tooltip left" data-tooltip="View On GitHub" s-ripple>
-                <i class="icon github2"></i>
+            <a href="//github.com/trazyn/neoui-ng" class="md-tooltip md-tooltip-left" data-tooltip="View On GitHub" s-ripple>
+                <i class="md-icon-github2"></i>
             </a>
         </header>
 
@@ -86,9 +89,9 @@
 
         <footer id="footer">
             <p>
-            Inspiration from <a>Semantic UI</a> and <a>Material UI</a>
+            Base on <a href="//www.getbootstrap.com">Bootstrap</a>, Inspiration from <a href="//material.angularjs.org">Angular-material</a> and <a href="//material-ui.com">Material UI</a>
             </p>
-            <a class="icon github3"></a>
+            <a class="md-icon-github4"></a>
         </footer>
         <script src="dist/vendor.js" defer="true" async="true" data-main="src/bootstrap.js"></script>
     </body>

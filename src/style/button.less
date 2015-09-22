@@ -1,278 +1,207 @@
 
+@import (reference) "base/bootstrap.less";
 @import (less) "base/colors.less";
 @import (less) "base/mixins.less";
 
-.ui.button {
-    transition: .2s;
-    #shadow( @rgba: rgba(0, 0, 0, 0.2) ) {
-        box-shadow: 0 10px 20px @rgba;
-    }
+.button-shadow(@rgba: rgba(0,0,0,0.2) ) {
+    box-shadow: 0 10px 20px @rgba;
+}
 
-    #raised() {
+.button-raised() {
 
-        &.raised {
-            box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
-            &:hover {
-                #shadow();
-            }
-            &:disabled:hover {
-                box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16) !important;
-            }
+    &.md-btn-raised {
+        box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+        &:hover {
+            .button-shadow();
         }
     }
+}
 
-    #flat( @color ) {
+.button-flat( @color ) {
 
-        &.flat {
-            background: transparent;
-            color: @color;
-            &:hover {
-                background-color: #efefef;
-                box-shadow: none;
-            }
+    &.md-btn-flat {
+        background: transparent;
+        color: @color;
+        &:hover {
+            background-color: #efefef;
+            box-shadow: none;
         }
     }
+}
 
-    #outline( @color: @coral ) {
+.button-outline( @color: rgba(255,255,255,.8) ) {
+
+    &.md-btn-outline {
 
         border: 1px solid @color;
+        background: none;
         color: @color;
         background-color: none;
 
         &:hover {
             background-color: @color;
             color: #fff;
-            #shadow();
-        }
-        &:disabled:hover {
-            background-color: inherit;
+            .button-shadow();
         }
     }
+}
 
-    #disabled( @bgcolor, @fgcolor : white ) {
+.button-variant( @color ) {
 
-        &:disabled {
-            cursor: not-allowed;
-            color: lighten( @fgcolor, 10% );
-            border-color: lighten( @bgcolor, 10% );
-            background-color: lighten( @bgcolor, 10% );
+    .button-raised();
+    .button-flat( @color );
+    .button-outline( @color );
+}
 
-            &:hover {
-                box-shadow: none !important;
-            }
-
-            &.outline, &.flat {
-                color: lighten( @bgcolor, 10% ) !important;
-                background-color: transparent !important;
-            }
-
-            &.flat {
-                color: lighten( @bgcolor, 10% );
-                text-decoration: line-through;
-            }
-        }
-    }
-
-    font-size: .8rem;
-    padding: 8px 30px;
-    border-radius: 1px;
-    color: rgba(255,255,255,.84);
-    cursor: pointer;
-    outline: 0;
-    border: none;
+.md-btn {
     position: relative;
-    margin: 10px;
+    display: inline-block;
+    height: 32px;
+    border: none;
+    padding: 0 30px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: rgba(255,255,255,.84);
+    line-height: 32px;
     text-decoration: none;
     background: #ddd;
-    display: inline-block;
-    vertical-align: middle;
-    height: 32px;
+    border-radius: 1px;
+    touch-action: manipulation;
+    cursor: pointer;
+    outline: 0;
+    white-space: nowrap;
+    transition: .2s;
+    .user-select(none);
 
-    &.grape {
-        background-color: @grape;
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: @cursor-disabled;
+        .opacity(.65);
+        .box-shadow(none);
+    }
+}
+
+.md-btn {
+
+    &,
+    &-default {
+        &:hover {
+            .button-shadow();
+        }
+        .button-variant( rgba(0,0,0,.75) );
     }
 
-    &.bittersweet {
-        background-color: @bittersweet;
+    &-primary {
+        color: rgba(255,255,255,.84);
+        background-color: @primary;
+        .button-variant( @primary );
     }
 
-    &.sunflower {
-        background-color: @sunflower;
+    &-success {
+        color: rgba(255,255,255,.84);
+        background-color: @success;
+        .button-variant( @success );
     }
 
-    &.grass {
-        background-color: @grass;
+    &-info {
+        color: rgba(255,255,255,.84);
+        background-color: @info;
+        .button-variant( @info );
     }
 
-    &.mint {
-        background-color: @mint;
+    &-warning {
+        color: rgba(255,255,255,.84);
+        background-color: @warn;
+        .button-variant( @warn );
     }
 
-    &.aqua {
-        background-color: @aqua;
+    &-danger {
+        color: rgba(255,255,255,.84);
+        background-color: @error;
+        .button-variant( @error );
     }
 
-    &.blueJeans {
-        background-color: @blueJeans;
-    }
+    &-grape { background-color: @grape; }
 
-    &.lavender {
-        background-color: @lavender;
-    }
+    &-bittersweet { background-color: @bittersweet; }
 
-    &.pinkRose {
-        background-color: @pinkRose;
-    }
+    &-sunflower { background-color: @sunflower; }
 
-    &.lightGray {
+    &-grass { background-color: @grass; }
+
+    &-mint { background-color: @mint; }
+
+    &-aqua { background-color: @aqua; }
+
+    &-blueJeans { background-color: @blueJeans; }
+
+    &-lavender { background-color: @lavender; }
+
+    &-pinkRose { background-color: @pinkRose; }
+
+    &-lightGray {
         color: @darkGray;
         background-color: @lightGray;
     }
 
-    &.mediumGray {
+    &-mediumGray {
         color: @darkGray;
         background-color: @mediumGray;
     }
 
-    &.darkGray {
+    &-darkGray {
         color: @lightGray;
         background-color: @darkGray;
     }
 
-    &.coral {
+    &-coral {
         color: rgba(255,255,255,.84);
         background-color: @coral;
-
-        #raised();
-        #flat( @coral );
-        #disabled( @coral );
+        .button-variant( @coral );
     }
 
-    &.primary {
-        color: rgba(255,255,255,.84);
-        background-color: @primary;
-
-        #raised();
-        #flat( @primary );
-        #disabled( @primary );
-    }
-
-    &.success {
-        color: rgba(255,255,255,.84);
-        background-color: @success;
-
-        #raised();
-        #flat( @success );
-        #disabled( @success );
-    }
-
-    &.error {
-        color: rgba(255,255,255,.84);
-        background-color: @error;
-
-        #raised();
-        #flat( @error );
-        #disabled( @error );
-    }
-
-    &.warn {
-        color: rgba(255,255,255,.84);
-        background-color: @warn;
-
-        #raised();
-        #flat( @warn );
-        #disabled( @warn );
-    }
-
-    &.info {
-        color: rgba(255,255,255,.84);
-        background-color: @info;
-
-        #raised();
-        #flat( @info );
-        #disabled( @info );
-    }
-
-    &.outline {
-
-        color: rgba(255,255,255,.84);
-        background: none;
-
-        &.coral {
-            #outline( @coral );
-        }
-
-        &.primary {
-            #outline( @primary );
-        }
-
-        &.success {
-            #outline( @success );
-        }
-
-        &.error {
-            #outline( @error );
-        }
-
-        &.warn {
-            #outline( @warn );
-        }
-
-        &.info {
-            #outline( @info );
-        }
-    }
-
-    .icon {
+    .icon,
+    [class^=icon] {
         line-height: 1px;
     }
 
-    &.icon {
+    &-icon {
 
+        display: inline-block;
         width: 56px;
         height: 56px;
-        display: block;
+        padding: 0;
         border-radius: 56px;
         line-height: 56px;
         color: white;
         cursor: pointer;
         transition: .2s;
-        display: inline-block;
-        padding: 0;
         &:hover {
             box-shadow: 0 1px 24px rgba(0,0,0,.24);
         }
     }
 
-    /** Some default behavior */
-    &:hover {
-        #shadow();
-    }
-
-    #raised();
-    #flat( rgba(0,0,0,.75) );
-    #disabled( #ddd, rgba(0,0,0,0.75) );
-
-    &.file {
-        transition: .2s;
+    &-file {
         display: inline-block;
         padding: 0;
+        transition: .2s;
 
         label {
-            margin: 0;
-            background: 0 0;
             display: inline-block;
-            cursor: pointer;
+            margin: 0;
             padding: 6px 20px;
+            background: 0 0;
+            cursor: pointer;
             &:hover {
                 box-shadow: none;
             }
         }
         input {
             &[type="file"] {
-                opacity: 0;
-                visibility: hidden;
                 display: none;
+                visibility: hidden;
+                .opacity(0);
             }
         }
     }

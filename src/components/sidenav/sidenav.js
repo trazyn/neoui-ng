@@ -10,9 +10,8 @@ define( [ "ui/modal/modal" ], function() {
         return $.modal( $.extend( {}, $.extend( {}, $.sidenav.defaults, options ), {
             showTitle       : false,
             animation       : options.class4nav,
-            class4modal     : "sidenav",
-            closeByDocument : true,
-            css             : { "height": "100%" }
+            class4modal     : "md-modal-sidenav",
+            closeByDocument : true
         } ) );
     }
 
@@ -42,8 +41,8 @@ define( [ "ui/modal/modal" ], function() {
 
         /** Same to the modal component */
         content     : "",
-        onClose     : $.noop,
-        class4nav   : " "
+        class4nav   : " ",
+        onClose     : $.noop
     };
 } );
 

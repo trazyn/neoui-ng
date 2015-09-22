@@ -14,6 +14,7 @@
                 height: 200px;
             }
             #progress text {
+                font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
                 font-size: 2.5rem;
                 fill: url(#mask);
                 text-shadow: 1px 1px 0 rgba(227, 218, 219, 1), 3px 3px 0 rgba(227, 218, 219, 0.9), 5px 5px 0 rgba(227, 218, 219, 0.8), 7px 7px 0 rgba(227, 218, 219, 0.7), 9px 9px 0 rgba(227, 218, 219, 0.6), 11px 11px 0 rgba(227, 218, 219, 0.5), 13px 13px 0 rgba(227, 218, 219, 0.4), 15px 15px 0 rgba(227, 218, 219, 0.3), 17px 17px 0 rgba(227, 218, 219, 0.2), 19px 19px 0 rgba(227, 218, 219, 0.1), 21px 21px 0 rgba(227, 218, 219, 0.08), 22px 22px 0 rgba(227, 218, 219, 0.07);
@@ -35,17 +36,17 @@
 
         <div class="example">
             <div class="wrap">
-                <s-progress class="ios"
+                <s-progress class="md-progress-ios"
                     auto-start="true"
                     controller="progress">
                 </s-progress>
             </div>
 
             <div class="action">
-                <button class="ui button mint" ng-click="progress.start()">.start()</button>
-                <button class="ui button mint" ng-click="progress.dec()">.dec()</button>
-                <button class="ui button mint" ng-click="progress.inc()">.inc()</button>
-                <button class="ui button mint" ng-click="progress.done()">.done()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.start()">.start()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.dec()">.dec()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.inc()">.inc()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.done()">.done()</button>
             </div>
         </div>
     </div>
@@ -128,10 +129,10 @@
         <s-progress controller="normalProgress"></s-progress>
 
         <div class="action">
-            <button class="ui button success" ng-click="normalProgress.start()">
+            <button class="md-btn btn-success" ng-click="normalProgress.start()">
                 <i class="icon play"></i>
             </button>
-            <button class="ui button error" ng-click="normalProgress.done()">
+            <button class="md-btn btn-danger" ng-click="normalProgress.done()">
                 <i class="icon stop"></i>
             </button>
         </div>

@@ -10,14 +10,14 @@
 		var
 		self = this,
 		duration = settings.duration + "ms",
-		ripple = target.find( "span.ripple" );
+		ripple = target.find( "span.md-ripple-ink" );
 
 		this.$node = target.css( "position", "relative" );
 		this.settings = settings;
 
 		if ( !ripple.length ) {
             var max = Math.max( target.innerHeight(), target.innerWidth() );
-			ripple = $( "<span class='ripple'>" )
+			ripple = $( "<span class='md-ripple-ink'>" )
 				.css( {
 					width: max,
 					height: max
@@ -64,7 +64,7 @@
 			X = e ? e.pageX : (offset.left + this.$node.outerWidth() / 2),
 			Y = e ? e.pageY : (offset.top + this.$node.outerHeight() / 2),
 			rect = this.$node[ 0 ].getBoundingClientRect(),
-			ripple = this.$node.find( "span.ripple" ),
+			ripple = this.$node.find( "span.md-ripple-ink" ),
 			doc = $( document ),
 			position = {
 				top: Y - rect.top - ripple[0].offsetHeight / 2 - doc.scrollTop(),
@@ -145,7 +145,7 @@
 		var instance = this.data( namespace );
 
 		if ( !instance ) {
-			instance = new Ripple( this.addClass( "ui ripple" ), $.extend( {}, $.fn.ripple.defaults, options || {} ) );
+			instance = new Ripple( this.addClass( "md-ripple" ), $.extend( {}, $.fn.ripple.defaults, options || {} ) );
 			this.data( namespace, instance );
 		}
 
@@ -161,9 +161,9 @@
 		color           : false,
         autoBind        : true,
 
-		class4progress 	: "ripple-progress",
-		class4done 	    : "ripple-done",
-		class4fail 	    : "ripple-fail"
+		class4progress 	: "md-ripple-progress",
+		class4done 	    : "md-ripple-done",
+		class4fail 	    : "md-ripple-fail"
 	};
 
 })( window.jQuery );

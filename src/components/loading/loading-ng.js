@@ -30,7 +30,7 @@ angular.module( "$ui.loading", [] )
                 autoShow    : "@"
             },
 
-            template        : "<div class='ui loading'></div>",
+            template        : "<div class='md-loading'></div>",
             replace         : true,
             restric         : "E",
             link            : link

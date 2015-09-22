@@ -29,7 +29,7 @@ angular.module( "$ui.ripple", [] )
             } ),
             ripple;
 
-            $scope.controller = ripple = $( $element ).addClass( "ui ripple" ).ripple( options );
+            $scope.controller = ripple = $( $element ).addClass( "md-ripple" ).ripple( options );
 
             $scope.$watch( "color", function( value ) {
                 ripple.hide();

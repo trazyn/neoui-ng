@@ -46,7 +46,7 @@ bs, gulp = require( "gulp" )
     .task( "www:dev", function() {
 
 		bs = browserSync( {
-			files: [ "src/**/*.css", "src/**/*.js", "src/demo/**/*.html" ],
+			files: [ "src/**/*.css", "src/**/*.js", "src/demo/**/*.html", "dist/**/*.css" ],
             server: {
 				baseDir: "./",
                 index: "index-dev.html"
@@ -76,9 +76,9 @@ bs, gulp = require( "gulp" )
     } )
 
     /** Component js and css */
-    .task( "dist:neoui", function() {
+    .task( "dist:neoui", [ "css:neoui" ], function() {
 
-        rjs.optimize( {
+        return rjs.optimize( {
             baseUrl: "src",
             paths: {
                 ui: "components"
@@ -100,24 +100,12 @@ bs, gulp = require( "gulp" )
                     .pipe( gulp.dest( dest ) );
             }
         } );
-
-	    return streamqueue( { objectMode: true },
-                gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ),
-                gulp.src( "src/components/**/*-bs.less" ) )
-			.pipe( debug() )
-			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
-			.pipe( concat( NAME + ".css" ) )
-			.pipe( gulp.dest( dest ) )
-			.pipe( minifyCSS() )
-            .pipe( rename( NAME + ".min.css" ) )
-            .pipe( gulp.dest( dest ) );
-
     } )
 
     /** Demo page */
-    .task( "dist:app", function() {
+    .task( "dist:app", [ "css:app" ], function() {
 
-		rjs.optimize( {
+		return rjs.optimize( {
 		    baseUrl: "src",
             include: "bootstrap",
             optimize: "none",
@@ -156,16 +144,6 @@ bs, gulp = require( "gulp" )
                     .pipe( gulp.dest( dest ) );
             }
 		} );
-
-        return gulp.src( [ "src/demo/**/*.less" ] )
-			.pipe( debug() )
-			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
-			.pipe( concat( "app.css" ) )
-			.pipe( gulp.dest( dest ) )
-			.pipe( minifyCSS() )
-			.pipe( rename( "app.min.css" ) )
-			.pipe( gulp.dest( dest ) );
-
     } )
 
     /** Hot deployment */
@@ -187,9 +165,21 @@ bs, gulp = require( "gulp" )
 			.pipe( gulp.dest( dest ) );
 	} )
 
-    .task( "css", function() {
+    .task( "css:app", function() {
 
-	    return streamqueue( { objectMode: true },
+        gulp.src( [ "src/demo/**/*.less" ] )
+			.pipe( debug() )
+			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
+			.pipe( concat( "app.css" ) )
+			.pipe( gulp.dest( dest ) )
+			.pipe( minifyCSS() )
+			.pipe( rename( "app.min.css" ) )
+			.pipe( gulp.dest( dest ) );
+    } )
+
+    .task( "css:neoui", function() {
+
+	    streamqueue( { objectMode: true },
                 gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ),
                 gulp.src( "src/components/**/*-bs.less" ) )
 			.pipe( debug() )
@@ -201,9 +191,12 @@ bs, gulp = require( "gulp" )
             .pipe( gulp.dest( dest ) );
     } )
 
+    .task( "css", [ "css:app", "css:neoui" ] )
+
     /** Auto compile */
 	.task( "watch", function() {
-		gulp.watch( "src/**/*.less", [ "css" ] );
+		gulp.watch( "src/component/**/*.less", [ "css:neoui" ] );
+		gulp.watch( "src/demo/**/*.less", [ "css:app" ] );
 	} )
 
     /** Build the test data */

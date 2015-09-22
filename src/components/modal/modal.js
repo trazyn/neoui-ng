@@ -5,16 +5,16 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 		var
 
-        template = [ "<div class='ui modal animate'>",
+        template = [ "<div class='md-modal'>",
                     "<div style='height: 100%;'>",
-                        "<h3 class='title'></h3><div class='icon close transition rotate'></div>",
-                        "<div class='ui loading'></div>",
-                        "<div class='ui progress'></div>",
-                        "<div class='content'></div>",
+                        "<div class='md-modal-head'></div><div class='md-icon-clear md-modal-close'></div>",
+                        "<div class='md-loading'></div>",
+                        "<div class='md-progress'></div>",
+                        "<div class='md-modal-body'></div>",
                     "</div>",
 
                 "</div>",
-                "<div class='ui overlay'></div>" ].join( "" ),
+                "<div class='md-modal-overlay'></div>" ].join( "" ),
 
 		modal = $( template ),
 
@@ -31,19 +31,19 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		},
 
 		closeByDocument = function( e ) {
-			$( e.target ).hasClass( "overlay" ) && close();
+			$( e.target ).hasClass( "md-modal-overlay" ) && close();
 		},
 
-		loading = modal.find( ".ui.loading:first" ).loading(),
-		progress = modal.find( ".ui.progress:first" ).progress(),
+		loading = modal.find( ".md-loading:first" ).loading(),
+		progress = modal.find( ".md-progress:first" ).progress(),
 
 		deferred = $.Deferred(),
 
 		show = function() {
 
 			var
-			  head = modal.find( ".title" ),
-			  body = modal.find( ".content" ),
+			  head = modal.find( ".md-modal-head" ),
+			  body = modal.find( ".md-modal-body" ),
 			  overlay = modal.last();
 
 			/** ~Head~ */
@@ -57,7 +57,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				deferred.resolve();
 			}
 
-			modal.addClass( [ options.animation, options.class4modal || "" ].join( " " ) );
+			modal.first().addClass( [ "md-modal-animation-" + options.animation, options.class4modal || "" ].join( " " ) );
 
 			/** Show the overlay */
 			overlay.addClass( options.modal ? "show" : "blank" );
@@ -75,8 +75,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				}
 			}
 
-			modal.delegate( ".close", "click", close );
-			modal.first().css( options.css );
+			modal.delegate( ".md-modal-close", "click", close );
 
 			setTimeout( function() {
 				modal.first().addClass( "show" );
@@ -91,16 +90,16 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 				modal.drag( function( ev, dd ) {
 
 					$( this ).css( {
-                        "width": modal.width(),
-                        "height": modal.height(),
 						top: dd.offsetY,
 						left: dd.offsetX,
+                        "width": modal.width(),
+                        "height": modal.height(),
 						"-webkit-transform": "none",
 						"-moz-transform": "none",
 						"-ms-transform": "none",
 						"transform": "none",
 					} );
-				}, { handle: handle === true ? ".title" : handle } );
+				}, { handle: handle === true ? ".md-modal-head" : handle } );
 			}
 
 			modal.appendTo( document.body );
@@ -124,19 +123,18 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 	$.fn.modal.defaults = {
 
-		title 		    : "Modal.JS",
+		title 		    : "Modal",
 		showTitle 	    : true,
 		modal        	: true,
 		draggable       : true,
 
-		css 		    : { "min-width": 480 },
 		class4modal     : "",
 
 		closeByESC 	    : true,
 		closeByDocument : false,
 
 		animation 	    : "slide",
-		content 		: "<p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
+		content 		: "",
 
 		autoShow 	    : true,
 		onClose 		: $.noop,

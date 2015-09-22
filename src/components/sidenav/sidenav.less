@@ -2,42 +2,38 @@
 s-sidenav {
     display: none;
 }
-.ui.modal {
+.md-modal.md-modal-sidenav {
 
-    &.animate {
-        &.left {
-            opacity: 0;
-            transition: all .3s;
-            top: 0;
+    height: 100%;
+    max-height: 100%;
+
+    &.md-modal-animation-left,
+    &.md-modal-animation-right {
+
+        top: 0;
+        opacity: 0;
+        transition: .2s;
+        transform: translateX(0) translateY(0);
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &.md-modal-animation-left {
             left: -300px;
-            transform: translateX(0) translateY(0);
+            &.show { left: 0; }
+    }
 
-            &.show {
-                left: 0px;
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-
-        &.right {
-            opacity: 0;
-            transition: all .3s;
-            top: 0;
-            left: initial;
-            right: -300px;
-            transform: translateX(0) translateY(0);
-
-            &.show {
-                right: 0px;
-                opacity: 1;
-                visibility: visible;
-            }
-        }
+    &.md-modal-animation-right {
+        left: initial;
+        right: -300px;
+        &.show { right: 0; }
     }
 }
 
-.ui.modal.sidenav .content {
-    overflow-y: auto;
+.md-modal.md-modal-sidenav .md-modal-body {
     height: 100%;
-    padding: 0;
+    overflow: auto;
 }
