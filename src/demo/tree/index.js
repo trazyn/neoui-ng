@@ -13,33 +13,6 @@ define( [ "ui/tree/tree-ng" ], function() {
             $.anchor( { offset: -60 } );
         };
 
-        /** Simple */
-        angular.extend( $scope, {
-
-            rootIds: [ "C000000000481935" ],
-            data: function() {
-
-                var deferred = $.Deferred();
-
-                $.ajax( {
-                    url: "src/demo/tree/tree.json",
-                    dataType: "json"
-                } )
-
-                .done( function( data ) {
-
-                    data = data.result.catalog;
-                    deferred.resolveWith( JSON.parse( data ) );
-                } );
-
-                return deferred.promise();
-            },
-
-            onSelect: function( node ) {
-                console.log( node );
-            }
-        } );
-
         $scope.test = function() {
 
             $.ajax( {

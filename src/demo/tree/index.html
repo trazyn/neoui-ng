@@ -258,7 +258,7 @@
         <br>
 
         <blockquote>
-            <p><code>@closeSameLevel</code> - false</p>
+            <p><code>@close-same-level</code> - false</p>
             <footer> 展开节点时关闭同一级的节点 </footer>
         </blockquote>
         <br>
@@ -270,13 +270,7 @@
         <br>
 
         <blockquote>
-            <p><code>@show-filter-bar</code> - false</p>
-            <footer> 显示过滤栏 </footer>
-        </blockquote>
-        <br>
-
-        <blockquote>
-            <p><code>&onSelect</code> - null</p>
+            <p><code>&on-selected</code> - null</p>
             <footer> 选中节点时回调 </footer>
         </blockquote>
         <br>
@@ -428,10 +422,10 @@
         <br>
 
         <blockquote>
-            <p><code>onSelect</code> - null</p>
+            <p><code>onSelected</code> - null</p>
             <xmp>
             $( ".md-tree" ).tree( {
-                onSelect: function( node ) {
+                onSelected: function( node ) {
                     console.log( node );
                 }
             } );
@@ -510,14 +504,28 @@
         <br>
         <br>
 
-        <h5><code>.expand( nodeid )</code> - 展开指定节点, <mark>nodeid</mark>为空时展开所有节点</h5>
+        <h5><code>.expand( [nodeid] )</code> - 展开指定节点, <mark>nodeid</mark>为空时展开所有节点</h5>
         <blockquote>
             <code>nodeid</code> - String
         </blockquote>
         <br>
         <br>
 
-        <h5><code>.collapse( nodeid )</code> - 收起指定节点, <mark>nodeid</mark>为空时收起所有节点</h5>
+        <h5><code>.collapse( [nodeid] )</code> - 收起指定节点, <mark>nodeid</mark>为空时收起所有节点</h5>
+        <blockquote>
+            <code>nodeid</code> - String
+        </blockquote>
+        <br>
+        <br>
+
+        <h5><code>.disabled( nodeid )</code> - 禁用指定节点</h5>
+        <blockquote>
+            <code>nodeid</code> - String
+        </blockquote>
+        <br>
+        <br>
+
+        <h5><code>.enabled( nodeid )</code> - 启用指定节点</h5>
         <blockquote>
             <code>nodeid</code> - String
         </blockquote>
