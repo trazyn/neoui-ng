@@ -17,6 +17,7 @@
         left: 0;
         height: 100%;
         width: 100%;
+        margin: 0;
         opacity: 0;
         outline: 0;
         z-index: 1;
@@ -24,7 +25,7 @@
 
         &:checked + div:before {
             top: 0;
-            height: .5rem;
+            height: 12px;
             border-color: #009688;
             border-top-style: none;
             border-right-style: none;
@@ -43,8 +44,8 @@
 			position: absolute;
 			left: 0;
 			top: -1px;
-			width: 16px;
-			height: 16px;
+			width: 18px;
+			height: 18px;
 			border: 2px solid #f2f2f2;
 			content: "";
 			z-index: 1;
@@ -53,20 +54,20 @@
 		&:after {
 			position: absolute;
 			left: 0;
-			width: 17rem;
-			height: 17rem;
+			width: 18px;
+			height: 18px;
 			background-color: #fff;
 			content: "";
 			cursor: pointer;
 		}
 	}
 
-	.md-ripple {
+	.md-ripple-ink {
 	    top: 50% !important;
 	    left: 50% !important;
-	    width: 20px !important;
-	    height: 20px !important;
-	    margin: -10px 0 0 -10px;
+	    width: 32px !important;
+	    height: 32px !important;
+	    margin: -16px 0 0 -16px !important;
 	}
 
 	&.error {
