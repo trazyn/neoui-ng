@@ -1,15 +1,14 @@
 
 <title>Get Started - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="deploy" class="item active">Deploy</li>
-    <li data-anchor="contribute" class="item">Contribute</li>
-    <li data-anchor="build" class="item">Build</li>
-    <li data-anchor="joinUs" class="item">Join Us</li>
-    <li class="item">Develop
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="deploy" class="md-anchor-item active">Deploy</li>
+    <li data-anchor="contribute" class="md-anchor-item">Contribute</li>
+    <li data-anchor="build" class="md-anchor-item">Build</li>
+    <li class="md-anchor-item">Develop
         <ul>
-            <li data-anchor="style" class="item">Less/CSS</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
+            <li data-anchor="style" class="md-anchor-item">Less/CSS</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
         </ul>
     </li>
 </ul>
@@ -88,7 +87,6 @@
     <br>
 
     <header data-anchor="contribute">Contribute</header>
-
     <section>
 
         <blockquote>
@@ -106,7 +104,7 @@
         <blockquote>
             <p>Have any issue or idea?</p>
         </blockquote>
-        <p><a href="https://github.com/trazyn/neoui-js/issues/new">Create Issue</a> Or <a href="mailto:tn.razy@google.com">Send Mail To Me</a>
+        <p><a href="https://github.com/trazyn/neoui-ng/issues/new">Create Issue</a> Or <a href="mailto:tn.razy@google.com">Send Mail To Me</a>
         </p>
     </section>
 
@@ -117,47 +115,83 @@
 
     <section>
         <blockquote>
-            <p><code>gulp start</code></p>
+            <p><code>gulp www:dev</code></p>
         </blockquote>
-        <p>启动<code>http</code>服务</p>
+        <p>启动开发环境<code>http</code>服务</p>
         <br>
 
         <blockquote>
-            <p><code>gulp vendor</code></p>
+            <p><code>gulp www:dist</code></p>
         </blockquote>
-        <p>压缩项目<code>JS</code>依赖到<code>dist/vendor.js</code> / <code>dist/vendor.min.js</code>
+        <p>启动部署环境<code>http</code>服务</p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp clean</code></p>
+        </blockquote>
+        <p>移除<code>build</code>目录</p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp dist:vendor</code></p>
+        </blockquote>
+        <p>压缩合并项目依赖<code>JS</code>到<code>dist/vendor.js</code> / <code>vendor.min.js</code>
         </p>
         <br>
 
         <blockquote>
-            <p><code>gulp css</code></p>
+            <p><code>gulp dist:neoui</code></p>
         </blockquote>
-        <p>压缩合并<code>CSS</code>到<code>dist/css.css</code> / <code>css.min.css</code>
-        </p>
+        <p>构建项目<code>JS</code>(<code>dist/neoui.js</code>)和<code>CSS(dist/neoui.css)</code></p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp dist:app</code></p>
+        </blockquote>
+        <p>构建应用程序</p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp dist</code></p>
+        </blockquote>
+        <p>顺序执行<code class="mark">dist:vendor</code>, <code class="mark">dist:neoui</code>, <code class="mark">dist:app</code></p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp css:app</code></p>
+        </blockquote>
+        <p>编译应用样式</p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp css:neoui</code></p>
+        </blockquote>
+        <p>输出<code>dis/neoui.css</code>/<code>dist/neoui.min.css</code></p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp watch</code></p>
+        </blockquote>
+        <p>监听服务</p>
+        <br>
+
+        <blockquote>
+            <p><code>gulp data</code></p>
+        </blockquote>
+        <p>构造测试数据</p>
         <br>
 
         <blockquote>
             <p><code>gulp jshint</code></p>
         </blockquote>
-        <p>执行代码检测
-        </p>
+        <p>执行代码检测</p>
         <br>
 
         <blockquote>
             <p><code>gulp</code></p>
         </blockquote>
-        <p>顺序执行 <code>gulp css</code> <code>start</code>
-        </p>
+        <p>顺序执行<code class="mark">watch</code>, <code class="mark">data</code>, <code class="mark">dist</code>, <code class="mark">www:dev</code></p>
         <br>
-    </section>
-
-    <br>
-    <br>
-
-    <header data-anchor="joinUs">Join Us</header>
-
-    <section>
-        ...
     </section>
 
     <br>
@@ -166,16 +200,13 @@
     <header>Develop</header>
 
     <section>
-        <div class="ui ribbon" data-anchor="style">
+        <div class="md-ribbon" data-anchor="style">
             <span>Less/CSS</span>
         </div>
 
         <h3>Introduction</h3>
-        <p>样式部分由<code>Less</code>编写, 不建议<code>CSS</code>
-        </p>
+        <p>样式部分由<code>Less</code>编写, 不建议<code>CSS</code></p>
         <p>目的样式的复用, 可读可维护</p>
-        <p>原则存在几何形状的组件以<code>ui</code>开头</p>
-        <p>尽可能嵌套进行复用, 命名尽量使用单个单词(从哲学角度讲, 命名越准确, 重用的可能性越小, 比如: <code>.tab-nav-item</code>和<code>.item</code>, 第二个命名就有可能用在<code>tab</code>或者<code>menu</code>等组件中, 所以样式名应尽可能抽象, 为后续重用提供可能)</p>
         <br>
 
         <h3>Style Guide</h3>
@@ -206,7 +237,7 @@
             }
             </xmp>
         </div>
-        <p>4格缩进, 1个空格</p>
+        <p class="note">4格缩进, 1个空格</p>
         <br>
 
         <h3>References</h3>
@@ -216,7 +247,7 @@
     </section>
 
     <section>
-        <div class="ui ribbon" data-anchor="javascript">
+        <div class="md-ribbon" data-anchor="javascript">
             <span>Javascript</span>
         </div>
 
@@ -225,9 +256,9 @@
         <br>
 
         <h3>Style Guide</h3>
-        <p>请参考<a href="">Google Javascript</a>, <a href="//github.com/airbnb/javascript">Airbnb Javascript</a></p>
-        <p>请保持良好的排版和结构, 所有代码4格缩进</p>
-        <p>请使用<a href="//www.jshint.com">Jshint</a>做静态检查, 参考设置</p>
+        <p>参考<a href="">Google Javascript</a>, <a href="//github.com/airbnb/javascript">Airbnb Javascript</a></p>
+        <p>保持良好的排版和结构, 代码4格缩进</p>
+        <p>使用<a href="//www.jshint.com">Jshint</a>做静态检查, 参考设置</p>
         <xmp>
         {
             "laxcomma": true,
