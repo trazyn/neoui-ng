@@ -74,7 +74,7 @@ require( [
 
         setTimeout( function() {
 
-            progress = $( ".ui.progress:first" ).progress();
+            progress = $( ".md-progress:first" ).progress();
 
             $httpProvider.defaults.transformResponse.push( function( data, headers ) {
                 setTimeout( function() {
@@ -218,7 +218,7 @@ require( [
 
     $( function() {
         setTimeout( function() {
-            $( ".ui.loading.global:first" ).loading().hide();
+            $( ".md-loading:first" ).loading().hide();
         }, 1000 );
     } );
 
