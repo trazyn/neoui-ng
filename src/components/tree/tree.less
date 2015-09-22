@@ -1,17 +1,17 @@
 
 @import (reference) "../../style/main.less";
 
-.ui.tree {
+.md-tree {
 
-    border: 1px solid #DDD;
     display: block;
+    border: 1px solid #DDD;
     color: rgba(0,0,0,.8);
     overflow-y: auto;
     overflow-x: hidden;
 
     ul {
         list-style: none !important;
-        padding-left: 0 !important;
+        padding: 0 !important;
     }
 
     li {
@@ -58,65 +58,55 @@
             top: 6px;
         }
     }
+}
 
-    .ui.text {
-        text-indent: 20px;
-        font-family: initial;
-    }
+.md-tree-content > ul > li { margin-left: 0; }
 
-    .content > ul > li {
-        margin-left: 0;
-    }
+.md-tree-node {
+    cursor: pointer;
+    margin-left: 0;
 
-    .node {
-        cursor: pointer;
-        margin-left: 0;
-
-        &.open > p > .icon {
-            &:before {
-                content: "\e6b9";
-                margin-right: .5rem;
-                font-style: normal;
-            }
-            &:after {
-                content: none !important;
-            }
-        }
-
-        &.close > p > .icon:before {
-            content: "\e603";
+    &.open > p > .icon {
+        &:before {
+            content: "\e6b9";
             margin-right: .5rem;
             font-style: normal;
         }
-
-        &.open > ul {
-            display: block;
-        }
-
-        &.close > ul {
-            display: none;
-        }
-
-        .icon {
-            position: relative;
-            &:before {
-                position: absolute;
-                top: -7px;
-                left: 14px;
-            }
-            & + span {
-                margin-left: 32px;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-        }
+        &:after { content: none !important; }
     }
 
-    .node.close > p .icon, .node.open > p .icon {
-        display: inline-block;
-        margin: 0 0 24px 0;
-        color: @google;
+    &.close > p > .icon:before {
+        content: "\e603";
+        margin-right: .5rem;
+        font-style: normal;
     }
 
+    &.open > ul {
+        display: block;
+    }
+
+    &.close > ul {
+        display: none;
+    }
+
+    .icon {
+        position: relative;
+        &:before {
+            position: absolute;
+            top: -7px;
+            left: 14px;
+        }
+        & + span {
+            margin-left: 32px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}
+
+.md-tree-node.close > p .icon, .md-tree-node.open > p .icon {
+    display: inline-block;
+    margin: 0 0 24px 0;
+    color: @google;
 }
 

@@ -125,7 +125,7 @@ angular.module( "$ui.tree", [] )
 
             transclude          : true,
             replace             : true,
-            template            : '<div class="ui tree">' +
+            template            : '<div class="md-tree">' +
                                   '</div>',
             link                : link
         };

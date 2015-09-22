@@ -43,7 +43,7 @@
                     recent && recent.get( 0 ) !== this && close( recent );
                 }
 
-                if ( !self.hasClass( "node" ) || $( e.target ).is( "span" ) ) {
+                if ( !self.hasClass( "md-tree-node" ) || $( e.target ).is( "span" ) ) {
 
                     selected && selected.removeClass( "selected" );
                     selected = self.addClass( "selected" );
@@ -123,10 +123,10 @@
                 renderTree( node, item, settings, false );
 
                 /** Add child to sington node */
-                node.hasClass( "node" ) || node.addClass( "node close" );
+                node.hasClass( "md-tree-node" ) || node.addClass( "md-tree-node close" );
 
                 /** Sington node */
-                node.find( "[data-key='" + item[ settings.valueKey ] + "']" ).removeClass( "node" );
+                node.find( "[data-key='" + item[ settings.valueKey ] + "']" ).removeClass( "md-tree-node" );
 
                 /** Expand the parent */
                 open( node, settings.duration );
@@ -141,14 +141,14 @@
             settings = this.settings,
             index = settings.data.indexOf( settings.hash[ nodeid ] ),
             node = this.$node.find( "[data-key='" + nodeid + "']" ),
-            parentNode = node.parents( ".node:first" );
+            parentNode = node.parents( ".md-tree-node:first" );
 
             settings.data.splice( index, 1 );
             delete this.settings.hash[ nodeid ];
 
             node.remove();
             if ( !parentNode.find( "[data-key]" ).length ) {
-                parentNode.removeClass( "node open close" );
+                parentNode.removeClass( "md-tree-node open close" );
             }
 
             return this;
@@ -158,7 +158,7 @@
 
             var
             duration = this.settings.duration,
-            node = this.$node.find( ".node[data-key='" + nodeid + "']" );
+            node = this.$node.find( ".md-tree-node[data-key='" + nodeid + "']" );
 
             (node.hasClass( "open" ) ? close : open)( node, duration );
 
@@ -166,12 +166,12 @@
         },
 
 		collapse: function( nodeid ) {
-            close( this.$node.find( ".node[data-key='" + nodeid + "']" ), this.settings.duration );
+            close( this.$node.find( ".md-tree-node[data-key='" + nodeid + "']" ), this.settings.duration );
             return this;
 		},
 
         expand: function( nodeid ) {
-            open( this.$node.find( ".node[data-key='" + nodeid + "']" ), this.settings.duration );
+            open( this.$node.find( ".md-tree-node[data-key='" + nodeid + "']" ), this.settings.duration );
             return this;
         },
 
@@ -183,7 +183,7 @@
 
             for ( var i = 0, length = nodeid.length; i < length; ++i ) {
                 $node
-                .find( ".node[data-key='" + nodeid[i] + "']" )
+                .find( ".md-tree-node[data-key='" + nodeid[i] + "']" )
                 .attr( "disabled", "disabled" )
                 .find( "li[data-key]" )
                 .attr( "disabled", "disabled" );
@@ -199,7 +199,7 @@
 
             for ( var key = nodeid.pop(); key; ) {
                 $node
-                .find( ".node[data-key='" + key + "']" )
+                .find( ".md-tree-node[data-key='" + key + "']" )
                 .removeAttr( "disabled" )
                 .find( "li[data-key]" )
                 .removeAttr( "disabled" );
@@ -325,7 +325,7 @@
 
                 if ( filter( item ) ) {
 
-                    html += "<li class='node " + (settings.collapsed ? "close" : "open") +
+                    html += "<li class='md-tree-node " + (settings.collapsed ? "close" : "open") +
                             "' value='" + item[ settings.valueKey ] +
                             "' data-filter='" + item[ settings.textKey ][ "toLowerCase" ]() +
                             "' data-level=" + (level + 1) + " data-key='" + item[ settings.valueKey ] +
@@ -346,7 +346,7 @@
 
             node.append( "<ul>" + html.html() + "</ul>" );
         } else {
-            node.removeClass( "node open close" );
+            node.removeClass( "md-tree-node open close" );
 		}
 	}
 

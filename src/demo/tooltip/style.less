@@ -15,9 +15,7 @@
         line-height: 48px;
         font-family: Georgia, "Times New Roman", Sans-serif;
 
-        &:last-child {
-            margin-top: 100px;
-        }
+        &:last-child { margin-top: 100px; }
     }
 
     .avatar {
@@ -34,44 +32,36 @@
     .social {
 
         a {
-            transition: .2s;
             display: inline-block;
-            height: 32px;
-            width: 32px;
-            line-height: 32px;
+            height: 48px;
+            width: 48px;
             margin-right: 10px;
-            text-align: center;
-            border: 1px solid;
-            border-radius: 32px;
-            cursor: pointer;
             color: rgba(0,0,0,.7);
+            text-align: center;
+            line-height: 46px;
+            border: 1px solid;
+            border-radius: 48px;
+            cursor: pointer;
+            transition: .2s;
 
-            &.dribbble:hover {
-                color: @dribbble;
-            }
-            &.twitter:hover {
-                color: @twitter;
-            }
-            &.github:hover {
-                color: @mint;
-            }
+            &:hover { text-decoration: none; }
+
+            &.dribbble,
+            &.dribbble:hover { color: @dribbble; }
+            &.twitter,
+            &.twitter:hover { color: @twitter; }
+            &.github,
+            &.github:hover { color: @mint; }
         }
 
-        .ui.tooltip.top {
-            &:hover:before {
-                margin-bottom: 0px;
-            }
-            &:hover:after {
-                margin-bottom: 12px;
-            }
+        .md-tooltip.md-tooltip-top {
+            &:hover:before { margin-bottom: 0px; }
+            &:hover:after { margin-bottom: 12px; }
         }
     }
 
     img {
-
         transition: .2s;
-        &:hover {
-            box-shadow: 0 1px 24px rgba(0,0,0,.24);
-        }
+        &:hover { box-shadow: 0 1px 24px rgba(0,0,0,.24); }
     }
 }

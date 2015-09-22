@@ -81,46 +81,53 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.modal" ] )
-            .controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
+	angular
+	.module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
+	.controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
 
-                $scope.name = "trazyn";
+        $scope.name = "test";
 
-                $scope.open = function( animation ) {
+		$scope.open = function( animation ) {
 
-                    $modal.open( {
-                        controller: "modalController",
-                        template: "{{ name }}<br/><p>This is a modal window. You can do the following things with it:</p><ul> <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li> <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li> <li><strong>Close:</strong> click the outside close the modal.</li> </ul>",
-                        animation: animation
-                    } );
-                };
+			return $modal.open( {
+				controller: "modalController",
+				animation: animation,
+				templateUrl: "src/demo/modal/page.html",
+				title: "Mango (Fruit)",
+				class4modal: "demo",
+				scope: $scope
+			} );
+		};
 
-                $scope.showProgress = function() {
+		$scope.showProgress = function() {
 
-                    $modal.open( {
-                        controller: "modalController",
-                        templateUrl: "src/demo/modal/page.html",
-                        title: "Instagram Handbook for Brands",
-                        class4modal: "demo",
-                        scope: $scope
-                    } )
+			$modal.open( {
+				controller: "modalController",
+				templateUrl: "src/demo/modal/page1.html",
+				title: "弹出框标题 18PX 加粗 #333",
+				class4modal: "demo",
+				scope: $scope
+			} )
 
-                    .progress.start();
-                };
+			.progress.start();
+		};
 
-                $scope.dragMe = function() {
+		$scope.dragMe = function() {
 
-                    $modal.open( {
-                        controller: "modalController",
-                        draggable: true,
-                        templateUrl: "src/demo/modal/page.html",
-                        title: "Instagram Handbook for Brands",
-                        class4modal: "demo",
-                        scope: $scope
-                    } );
-                };
-            } ] );
+			$modal.open( {
+				controller: "modalController",
+				draggable: true,
+				templateUrl: "src/demo/modal/page1.html",
+				title: "弹出框标题 18PX 加粗 #333",
+				class4modal: "demo",
+				scope: $scope
+			} );
+		};
+
+	    $scope.init = function() {
+            $.anchor( { offset: -80 } );
+	    };
+	} ] );
             </xmp>
 
         </section>
@@ -130,16 +137,14 @@
                 <span>Methods</span>
             </div>
 
-            <p><code>$modal.open( options )</code> - 打开弹出框
-            </p>
+            <h5><code>$modal.open( options )</code> - 打开弹出框</h5>
             <blockquote>
-                <p><code>options</code> - Object</p>
+                <code>options</code> - Object
 
                 <blockquote>
-                    <p><code>scope</code> - <code>null</code>
-                    </p>
+                    <p><code>scope</code> - null</p>
+                    <footer>指定<mark>scope</mark></footer>
                 </blockquote>
-                <p>指定<code>scope</code></p>
                 <br>
 
                 其他见<a href="" data-anchor="options">Options</a>
@@ -157,11 +162,10 @@
                 <span>Constructor</span>
             </div>
 
-            <p><code>$.modal( options )</code>
-            </p>
+            <h5><code>$.modal( options )</code></h5>
 
             <blockquote>
-                <p><code>options</code> - 参数设置</p>
+                <code>options</code> - 参数设置
             </blockquote>
 
             <xmp>
@@ -176,87 +180,79 @@
             </div>
 
             <blockquote>
-                <p><code>title</code> - <code>"Modal.JS"</code>
-                </p>
+                <p><code>title</code> - "Modal.JS"</p>
+                <footer> 指定<mark>title</mark> </footer>
             </blockquote>
-            <p>指定<code>title</code></p>
             <br>
 
             <blockquote>
-                <p><code>showTitle</code> - <code>true</code>
-                </p>
+                <p><code>showTitle</code> - true</p>
+                <footer> 显示标题头 </footer>
             </blockquote>
-            <p>显示标题头</p>
             <br>
 
             <blockquote>
-                <p><code>modal</code> - <code>true</code>
-                </p>
+                <p><code>modal</code> - true</p>
+                <footer> <mark>Modal</mark> / <mark>Modeless</mark> </footer>
             </blockquote>
-            <p>Modal / Modeless</p>
             <br>
 
             <blockquote>
-                <p><code>content</code> - <code>null</code>
-                </p>
+                <p><code>content</code> - null</p>
+                <footer> 弹出框内容, 字符串或<mark>function</mark> </footer>
             </blockquote>
-            <p>弹出框内容, 字符串或<code>function</code></p>
             <br>
 
             <blockquote>
-                <p><code>draggable</code> - <code>true</code>
-                </p>
+                <p><code>draggable</code> - true</p>
+                <footer>
+                    <mark>true</mark>时, 通过标题栏拖拽, 做为字符串时作为选择器定位拖拽元素
+                </footer>
             </blockquote>
-            <p><code>true</code>时, 通过标题栏拖拽, 做为字符串时作为选择器定位拖拽元素</p>
             <br>
 
             <blockquote>
-                <p><code>css</code> - <code>{}</code>
-                </p>
+                <p><code>class4modal</code> - null</p>
+                <footer> 指定弹出框样式 </footer>
             </blockquote>
-            <p>添加行内样式</p>
             <br>
 
             <blockquote>
-                <p><code>class4modal</code> - <code>""</code>
-                </p>
+                <p><code>autoShow</code> - true</p>
+                <footer>
+                    初始化后打开弹出框, 不通过实例<mark>open</mark>方法
+                </footer>
             </blockquote>
-            <p>指定弹出框样式</p>
             <br>
 
             <blockquote>
-                <p><code>autoShow</code> - <code>true</code>
-                </p>
+                <p><code>closeByESC</code> - true</p>
+                <footer>
+                    Press <kbd>Esc</kbd> close the modal
+                </footer>
             </blockquote>
-            <p>初始化后打开弹出框, 不通过实例<code>open</code>方法</p>
             <br>
 
             <blockquote>
-                <p><code>closeByESC</code> - <code>true</code>
-                </p>
+                <p><code>closeByDocument</code> - true</p>
+                <footer> 点击弹出框外面关闭弹出框 </footer>
             </blockquote>
-            <p>Press the <kbd>Esc</kbd> close the modal</p>
             <br>
 
             <blockquote>
-                <p><code>closeByDocument</code> - <code>true</code>
-                </p>
+                <p><code>animation</code> - "slide"</p>
+                <footer>
+                    弹出框动画, <code>slide</code>, <code>stick</code>, <code>bottom</code>, <code>flip</code>, <code>vertical</code>, <code>sign</code>, <code>scale</code>, <code>fadein</code>
+                </footer>
             </blockquote>
-            <p>点击弹出框外面关闭弹出框</p>
             <br>
 
             <blockquote>
-                <p><code>animation</code> - <code>"slide"</code>
-                </p>
+                <p><code>onClose</code> - null</p>
+                <footer>
+                    弹出框卸载触发
+                </footer>
             </blockquote>
-            <p>弹出框动画, <code>slide</code>, <code>stick</code>, <code>bottom</code>, <code>flip</code>, <code>vertical</code>, <code>sign</code>, <code>scale</code>, <code>fadein</code></p>
-            <br>
-
-            <blockquote>
-                <p><code>onClose</code> - <code>null</code>
-                </p>
-            </blockquote>
-            <p>弹出框卸载触发</p>
             <br>
         </section>
 
@@ -265,26 +261,33 @@
                 <span>Methods</span>
             </div>
 
-            <p><code>modal.open()</code> - 打开弹出框
-            </p>
-            <br>
-            <br>
-
-            <p><code>modal.close()</code> - 关闭弹出框
-            </p>
-            <br>
+            <blockquote>
+                <p><code>.open()</code></p>
+                <footer> 打开弹出框 </footer>
+            </blockquote>
             <br>
 
-            <p><code>modal.progress</code> - <a href="#/progress">See Progress.js</a>
-            </p>
-            <br>
-            <br>
-
-            <p><code>modal.loading</code> - <a href="#/progress">See Loading.js</a>
-            </p>
-            <br>
+            <blockquote>
+                <p><code>.close()</code></p>
+                <footer> 关闭弹出框 </footer>
+            </blockquote>
             <br>
 
+            <blockquote>
+                <p><code>.progress</code></p>
+                <footer>
+                    <a class="mark" href="#/progress">See Progress.js</a>
+                </footer>
+            </blockquote>
+            <br>
+
+            <blockquote>
+                <p><code>.loading</code></p>
+                <footer>
+                    <a class="mark" href="#/progress">See Loading.js</a>
+                </footer>
+            </blockquote>
+            <br>
         </section>
         </div>
 </section>
