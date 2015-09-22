@@ -17,7 +17,7 @@ define( [ "util/dateutil" ], function() {
 		show = function( step ) {
 
             var
-            container = calendar.find( ".content .dates.current" ),
+            container = calendar.find( ".md-calendar-dates-current" ),
             steps = [ step ];
 
             if ( inAnimate ) { return; }
@@ -89,8 +89,8 @@ define( [ "util/dateutil" ], function() {
                     } );
                 })( container.eq( step > -1 ? i : length - 1 - i ), step );
 
-                calendar.find( ".year" ).html( current[0] + "年" );
-                calendar.find( ".month" ).html( current[1] + "月" );
+                calendar.find( ".md-calendar-year" ).html( current[0] + "年" );
+                calendar.find( ".md-calendar-month" ).html( current[1] + "月" );
             }
 		},
 
@@ -99,25 +99,25 @@ define( [ "util/dateutil" ], function() {
 
         header = [],
 
-		template = "<div tabindex=-1 class='container' >" +
-					"<div class='control'>" +
+		template = "<div tabindex=-1 class='md-calendar-container' >" +
+					"<div class='md-calendar-control'>" +
 					"<div class='icon first'></div>" +
 					"<div class='icon prev'></div>" +
-					"<div class='year'></div>" +
-					"<div class='month'></div>" +
+					"<div class='md-calendar-year'></div>" +
+					"<div class='md-calendar-month'></div>" +
 					"<div class='icon next'></div>" +
 					"<div class='icon last'></div>" +
 				"</div>" +
 
-				"<div tabindex=-1 class='years'><ul></ul></div>" +
-				"<div tabindex=-1 class='months'><ul></ul></div>" +
+				"<div tabindex=-1 class='md-calendar-years'><ul></ul></div>" +
+				"<div tabindex=-1 class='md-calendar-months'><ul></ul></div>" +
 
-				"<div class='content'>" +
-				    "<div class='days'>" +
-                        "<div class='header'></div>" +
-                        "<div class='dates prev'></div>" +
-                        "<div class='dates current'></div>" +
-                        "<div class='dates next'></div>" +
+				"<div class='md-calendar-content'>" +
+				    "<div class='md-calendar-days'>" +
+                        "<div class='md-calendar-header'></div>" +
+                        "<div class='md-calendar-dates-prev'></div>" +
+                        "<div class='md-calendar-dates-current'></div>" +
+                        "<div class='md-calendar-dates-next'></div>" +
 				    "</div>" +
                 "</div>",
 
@@ -184,9 +184,9 @@ define( [ "util/dateutil" ], function() {
 
 			calendar = $( template );
 
-            years = calendar.find( ".years > ul" ).html( yearsHtml ).parent();
-            months = calendar.find( ".months > ul" ).html( monthsHtml ).parent();
-            calendar.find( ".header" ).html( header.join( "" ) );
+            years = calendar.find( ".md-calendar-years > ul" ).html( yearsHtml ).parent();
+            months = calendar.find( ".md-calendar-months > ul" ).html( monthsHtml ).parent();
+            calendar.find( ".md-calendar-header" ).html( header.join( "" ) );
 
 			show( defaultDate );
 			calendar.appendTo( target )
@@ -220,7 +220,7 @@ define( [ "util/dateutil" ], function() {
 					e.preventDefault();
 				} )
 
-				.delegate( "div.day", "click", function() {
+				.delegate( ".md-calendar-day", "click", function() {
 
 					var
 					self = $( this ),
@@ -246,7 +246,7 @@ define( [ "util/dateutil" ], function() {
                     }
 				} )
 
-				.delegate( ".year", "click", function() {
+				.delegate( ".md-calendar-year", "click", function() {
 
 				    var
 				    inner = years.addClass( "show" ).scrollTop(0).find( "li[value='" + current[0] + "']" ).addClass( "selected" );
@@ -254,7 +254,7 @@ define( [ "util/dateutil" ], function() {
 				    $( this ).addClass( "expand" );
 
                     years
-				    .css( "height", calendar.find( ".content" ).height() - 2 )
+				    .css( "height", calendar.find( ".md-calendar-content" ).height() )
 				    .scrollTop( inner.offset().top - years.offset().top )
 				    .focus()
 				    .find( "li" )
@@ -262,12 +262,12 @@ define( [ "util/dateutil" ], function() {
 				    .removeClass( "selected" );
 				} )
 
-				.delegate( ".years", "focusout", function() {
+				.delegate( ".md-calendar-years", "focusout", function() {
                     years.removeClass( "show" );
-                    calendar.find( ".year" ).removeClass( "expand" );
+                    calendar.find( ".md-calendar-year" ).removeClass( "expand" );
 				} )
 
-				.delegate( ".month", "click", function() {
+				.delegate( ".md-calendar-month", "click", function() {
 
 				    var
 				    inner = months.addClass( "show" ).scrollTop(0).find( "li[value='" + current[1] + "']" ).addClass( "selected" );
@@ -275,7 +275,7 @@ define( [ "util/dateutil" ], function() {
 				    $( this ).addClass( "expand" );
 
                     months
-				    .css( "height", calendar.find( ".content" ).height() - 2 )
+				    .css( "height", calendar.find( ".md-calendar-content" ).height() )
 				    .scrollTop( inner.offset().top - months.offset().top )
 				    .focus()
 				    .find( "li" )
@@ -283,9 +283,9 @@ define( [ "util/dateutil" ], function() {
 				    .removeClass( "selected" );
 				} )
 
-				.delegate( ".months", "focusout", function() {
+				.delegate( ".md-calendar-months", "focusout", function() {
                     months.removeClass( "show" );
-                    calendar.find( ".month" ).removeClass( "expand" );
+                    calendar.find( ".md-calendar-month" ).removeClass( "expand" );
 				} )
 
 				.delegate( "li[value]", "click", function() {
@@ -373,7 +373,7 @@ define( [ "util/dateutil" ], function() {
 
         for ( var start = range.prev[ 0 ], end = range.prev[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
-            html += "<div class='day " + isValid( prev, start ) + " adjacent prev' " +
+            html += "<div class='md-calendar-day " + isValid( prev, start ) + " adjacent prev' " +
                         "data-date='" + [ prev.getFullYear(), prev.getMonth() + 1, start ].join( "/" ) + "'>" +
                         start +
                     "</div>";
@@ -395,14 +395,14 @@ define( [ "util/dateutil" ], function() {
                 && start ===  now.getDate()
                 && (clazz += " today ");
 
-            html += "<div class='day " + clazz + "' data-date='" + [ date.getFullYear(), date.getMonth() + 1, start ].join( "/" ) + "'>" +
+            html += "<div class='md-calendar-day " + clazz + "' data-date='" + [ date.getFullYear(), date.getMonth() + 1, start ].join( "/" ) + "'>" +
                 start +
                 "</div>";
         }
 
         for ( var start = range.next[ 0 ], end = range.next[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
-            html += "<div class='day " + isValid( next, start ) + " adjacent next' " +
+            html += "<div class='md-calendar-day " + isValid( next, start ) + " adjacent next' " +
                         " data-date='" + [ next.getFullYear(), next.getMonth() + 1, start ].join( "/" ) + "'>" +
                         start +
                     "</div>";
@@ -482,6 +482,6 @@ define( [ "util/dateutil" ], function() {
 		defaultDate     : new Date(),
 
 		selector4input  : ":input",
-		selector4trigger: ".icon.calendar"
+		selector4trigger: ".md-icon-event"
 	};
 } );

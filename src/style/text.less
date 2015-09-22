@@ -1,38 +1,34 @@
 
 @import "base/colors.less";
 
-.ui {
+.md-text {
 
-    &.text {
+    display: block;
+    margin: 0 0 16px 0;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    border: 1px solid #dfdfdf;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+    font-family: inherit;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.75);
+    background-color: #fff;
+    transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+    -webkit-appearance: none;
 
-        -webkit-appearance: none;
-        background-color: #FFF;
-        font-family: inherit;
-        border: 1px solid #dfdfdf;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
-        color: rgba(0, 0, 0, 0.75);
-        display: block;
-        font-size: 0.875rem;
-        margin: 0 0 1rem 0;
-        padding: 0.5rem;
-        box-sizing: border-box;
-        transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
-        width: 100%;
-        margin-bottom: 0;
+    &:focus {
+        background: #fcfcfc;
+        border-color: #1abc9c;
+        box-shadow: 0 0 5px #1abc9c;
+        outline: none;
+    }
 
-        &:focus {
-
-            box-shadow: 0 0 5px #1abc9c;
-            border-color: #1abc9c;
-            background: #fcfcfc;
-            border-color: #1abc9c;
-            outline: none;
-        }
-
-        &:disabled {
-            background-color:#dddddd !important;
-            cursor: not-allowed;
-            border-color: #1abc9c;
-        }
+    &:disabled {
+        background-color:#dddddd !important;
+        cursor: not-allowed;
+        border-color: #1abc9c;
+        opacity: .65;
     }
 }
