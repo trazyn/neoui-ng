@@ -1,7 +1,7 @@
 
 @import (reference) "../../style/main.less";
 
-.ui.tree:not(.file) {
+.md-tree:not(.md-tree-file) {
     border-radius: 4px;
     color: #333;
 
@@ -9,34 +9,28 @@
         margin: 0;
         &.selected > p {
             background-color: #e6f0fb;
-            & > .icon {
-                color: @google !important;
-            }
-            & > span {
-                color: #333 !important;
-            }
+            & > .md-icon { color: @google !important; }
+            & > span { color: #333 !important; }
         }
-    }
-
-    .node.close > p .icon, .node.open > p .icon {
-        margin: 0 4px 28px -4px;
-        font-size: 18px;
-        color: @google;
-    }
-
-    .node.close > p > .icon:before {
-        content: "\e06a";
-    }
-
-    .node.open > p > .icon:before {
-        content: "\e319";
     }
 
     p {
         height: 38px;
         line-height: 38px;
-        &:hover {
-            background-color: #e6f0fb;
-        }
+        &:hover { background-color: #e6f0fb; }
     }
+
+    .md-icon:before {
+        top: -25px;
+        left: 10px;
+    }
+
+    .md-tree-node.md-tree-close > p .md-icon,
+    .md-tree-node.md-tree-open > p .md-icon {
+        font-size: 18px;
+        color: @google;
+    }
+
+    .md-tree-node.md-tree-close > p > .md-icon:before { content: "\e06a"; }
+    .md-tree-node.md-tree-open > p > .md-icon:before { content: "\e319"; }
 }
