@@ -1,0 +1,29 @@
+
+@import (reference) "../../style/main.less";
+@import (reference) "../common/css/markdown.less";
+
+#timepicker {
+    #markdown();
+
+    .md-radio,
+    .md-checkbox { margin-left: 8px; }
+
+    .options {
+        padding: 0;
+        list-style: none;
+
+        li {
+            width: 100%;
+            height: 48px;
+            padding-left: 24px;
+            line-height: 48px;
+            border-left: 4px solid @lightGray2;
+        }
+
+        label:first-child {
+            display: inline-block;
+            width: 90%;
+            text-align: left;
+        }
+    }
+}

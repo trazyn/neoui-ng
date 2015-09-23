@@ -8,5 +8,6 @@ define( [ "ui/timepicker/timepicker-ng" ], function() {
     .module( "demo.timepicker", [ "$ui.timepicker" ] )
     .controller( "timePickerController", [ "$scope", function( $scope ) {
 
+        $scope.time = "11:11";
     } ] );
 } );

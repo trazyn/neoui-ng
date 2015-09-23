@@ -1,21 +1,8 @@
 
 @import (reference) "../../style/main.less";
 
-.ui.timepicker {
+.md-timepicker {
     position: relative;
-    display: block;
-    width: 100%;
-    height: 34px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    text-indent: 8px;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 
     > span {
         font-weight: bold;
@@ -34,61 +21,63 @@
         border-radius: 4px;
         width: 24px;
         text-align: center;
+        background: none;
         outline: 0;
     }
 
     &:after {
-        font-family: "icomoon";
-        content: "\e6b0";
-        color: #66afe9;
         position: absolute;
         right: 8px;
         top: 5px;
+        font-family: "icomoon";
         font-size: 18px;
+        color: #66afe9;
+        content: "\e6b0";
+    }
+}
+
+.md-timepicker-mintues,
+.md-timepicker-hours {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: none;
+    width: 216px;
+    text-indent: 0;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    box-shadow: 0 1px 24px rgba(0,0,0,.24);
+    outline: 0;
+
+    > p {
+        background-color: #eaeaea;
+        color: #666;
+        height: 27px;
+        line-height: 27px;
     }
 
-    .mintues, .hours {
-        position: absolute;
-        top: 40px;
-        left: 0;
-        display: none;
-        width: 216px;
-        text-indent: 0;
-        text-align: center;
-        background-color: #fff;
-        border: 1px solid #eaeaea;
-        border-radius: 4px;
-        box-shadow: 0 1px 24px rgba(0,0,0,.24);
-        outline: 0;
+    span {
+        display: inline-block;
+        width: 35px;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
 
-        > p {
-            background-color: #eaeaea;
-            color: #666;
-            height: 27px;
-            line-height: 27px;
+        &:hover {
+            background-color: #dcebff;
         }
 
-        span {
-            display: inline-block;
-            width: 35px;
-            height: 30px;
-            line-height: 30px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #333;
-
-            &:hover {
-                background-color: #dcebff;
-            }
-
-            &.selected {
-                background-color: #b9def0;
-                font-weight: 800;
-            }
+        &.selected {
+            background-color: #b9def0;
+            font-weight: 800;
         }
+    }
 
-        &.show {
-            display: block;
-        }
+    &.show {
+        display: block;
     }
 }

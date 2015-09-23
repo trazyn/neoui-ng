@@ -11,7 +11,9 @@ define( [], function() {
         var
         instance = this,
         hoursHtml = "",
-        mintuesHtml = "";
+        mintuesHtml = "",
+
+        defaultTime = new Date( settings.defaultTime );
 
         this.$node = target;
         this.settings = settings;
@@ -22,9 +24,14 @@ define( [], function() {
 
         for ( var i = 0; i <= 11; mintuesHtml += "<span>" + (i++ * 5) + "</span>" );
 
+        if ( !isNaN( +defaultTime ) ) {
+            target.find( settings.selector4hour ).val( defaultTime.getHours() );
+            target.find( settings.selector4mintue ).val( defaultTime.getMinutes() );
+        }
+
         target
-        .append( "<div tabindex=-1 class='hours'><p>请选择小时</p><div>" + hoursHtml + "</div></div>" )
-        .append( "<div tabindex=-1 class='mintues'><p>请选择分钟</p><div>" + mintuesHtml + "</div></div>" )
+        .append( "<div tabindex=-1 class='md-timepicker-hours'><p>请选择小时</p><div>" + hoursHtml + "</div></div>" )
+        .append( "<div tabindex=-1 class='md-timepicker-mintues'><p>请选择分钟</p><div>" + mintuesHtml + "</div></div>" )
 
         .delegate( "input", "click", function( e ) {
 
@@ -33,7 +40,7 @@ define( [], function() {
             if ( target.is( "[disabled]" ) ) { return; }
 
             target
-            .find( self.hasClass( "hour" ) ? ".hours" : ".mintues" )
+            .find( self.hasClass( "md-timepicker-hour" ) ? ".md-timepicker-hours" : ".md-timepicker-mintues" )
             .addClass( "show" )
             .focus();
         } )
@@ -44,12 +51,12 @@ define( [], function() {
             self = $( this ),
             value = +self.val(),
             isValid = true,
-            popover = target.find( ".hours" );
+            popover = target.find( ".md-timepicker-hours" );
 
             if ( isValid = !isNaN( value ), isValid ) {
 
-                if ( self.hasClass( "mintue" ) ) {
-                    popover = target.find( ".mintues" );
+                if ( self.hasClass( "md-timepicker-mintue" ) ) {
+                    popover = target.find( ".md-timepicker-mintues" );
 
                     if ( settings.strict ) {
 
@@ -78,11 +85,11 @@ define( [], function() {
             }
         } )
 
-        .delegate( ".hours span", "click", function() {
+        .delegate( ".md-timepicker-hours span", "click", function() {
             target.find( settings.selector4hour ).val( this.innerHTML ).select();
         } )
 
-        .delegate( ".mintues span", "click", function() {
+        .delegate( ".md-timepicker-mintues span", "click", function() {
             target.find( settings.selector4mintue ).val( this.innerHTML ).select();
         } )
 
@@ -92,7 +99,7 @@ define( [], function() {
             settings.onApplied.call( instance, instance.val() );
         } )
 
-        .delegate( ".hours, .mintues", "focusout", function() {
+        .delegate( ".md-timepicker-hours, .md-timepicker-mintues", "focusout", function() {
             $( this ).removeClass( "show" );
         } );
     };
@@ -162,10 +169,10 @@ define( [], function() {
     };
 
     $.fn.timepicker.defaults = {
-        defaultValue        : new Date(),
+        defaultTime         : new Date(),
         strict              : false,
-        selector4hour       : ".hour",
-        selector4mintue     : ".mintue",
+        selector4hour       : ".md-timepicker-hour",
+        selector4mintue     : ".md-timepicker-mintue",
         onApplied           : $.noop
     };
 } );

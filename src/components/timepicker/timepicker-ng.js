@@ -39,7 +39,6 @@ angular.module( "$ui.timepicker", [] )
             }
 
             $scope.$watch( "value", function( value ) {
-
                 timepicker.val( value );
             } );
         }
@@ -55,10 +54,10 @@ angular.module( "$ui.timepicker", [] )
             restric         : "EA",
             transclude      : true,
             replace         : true,
-            template        : "<div class='ui timepicker'>" +
-                                "<input class='hour' type='text' maxlength='2' value='00'>" +
+            template        : "<div class='md-timepicker form-control'>" +
+                                "<input class='md-timepicker-hour' type='text' maxlength='2' value='00'>" +
                                 "<span>:</span>" +
-                                "<input class='mintue' type='text' maxlength='2' value='00'>" +
+                                "<input class='md-timepicker-mintue' type='text' maxlength='2' value='00'>" +
                               "</div>",
 
             link            : link
