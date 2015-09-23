@@ -1,26 +1,26 @@
 
 @import (less) "base/colors.less";
 
-.ui.switch {
+.md-switch {
 
-    display: inline-block;
     position: relative;
+    display: inline-block;
     height: 32px;
+    margin-right: 10px;
     line-height: 32px;
     cursor: pointer;
     overflow: visible !important;
-    margin-right: 10px;
 
     input {
-        opacity: 0;
-        outline: 0;
         position: absolute;
-        height: 100%;
-        width: 100%;
         top: 0;
         left: 0;
-        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        outline: 0;
         z-index: 1;
+        cursor: pointer;
 
         &:checked + div {
             background-color: rgba(0,150,136,.5);
@@ -31,18 +31,17 @@
         }
     }
 
-	>div {
+	> div {
 		position: relative;
-		pointer-events: none;
-        transition: all .3s cubic-bezier(0.4,0,.2,1);
+        display: inline-block;
 		width: 40px;
 		height: 16px;
+        vertical-align: middle;
         border-radius: 8px;
         background-color: rgba(0,0,0,.026);
-        vertical-align: middle;
-        display: inline-block;
+		pointer-events: none;
+        transition: all .3s cubic-bezier(0.4,0,.2,1);
 		&:before {
-			content: "";
 			position: absolute;
 			top: -4px;
 			left: -4px;
@@ -51,24 +50,21 @@
 			background-color: #fafafa;
 			box-shadow: 0 2px 8px rgba(0,0,0,.28);
 			border-radius: 50%;
+			content: "";
 			transition: .3s cubic-bezier(.4,0,.2,1);
 		}
 	}
 
-	.ripple {
+	.md-ripple-ink {
 	    width: 32px !important;
 	    height: 32px !important;
 	    top: 50% !important;
 	    left: 50% !important;
-	    margin: -16px 0 0 -16px;
+	    margin: -16px 0 0 -16px !important;
 	}
 
 	&.error {
-	    >div:before {
-	        background-color: @error;
-	    }
-	    input:checked + div:before {
-	        background-color: @error;
-	    }
+	    > div:before { background-color: @error; }
+	    input:checked + div:before { background-color: @error; }
 	}
 }

@@ -782,20 +782,8 @@ define( 'demo/modal/index',[ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], funct
 			.progress.start();
 		};
 
-		$scope.dragMe = function() {
-
-			$modal.open( {
-				controller: "modalController",
-				draggable: true,
-				templateUrl: "src/demo/modal/page1.html",
-				title: "弹出框标题 18PX 加粗 #333",
-				class4modal: "demo",
-				scope: $scope
-			} );
-		};
-
 	    $scope.init = function() {
-            $.anchor( { offset: -80 } );
+            $.anchor( { offset: -60 } );
 	    };
 	} ] );
 } );
@@ -1090,7 +1078,7 @@ define( 'demo/getstarted/index',[], function() {
     .controller( "getstartedController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $.anchor( { offset: 20 } );
+            $.anchor( { offset: -20 } );
         };
     } ] );
 } );
@@ -1195,33 +1183,6 @@ define( 'demo/tree/index',[ "ui/tree/tree-ng" ], function() {
         $scope.init = function() {
             $.anchor( { offset: -60 } );
         };
-
-        /** Simple */
-        angular.extend( $scope, {
-
-            rootIds: [ "C000000000481935" ],
-            data: function() {
-
-                var deferred = $.Deferred();
-
-                $.ajax( {
-                    url: "src/demo/tree/tree.json",
-                    dataType: "json"
-                } )
-
-                .done( function( data ) {
-
-                    data = data.result.catalog;
-                    deferred.resolveWith( JSON.parse( data ) );
-                } );
-
-                return deferred.promise();
-            },
-
-            onSelect: function( node ) {
-                console.log( node );
-            }
-        } );
 
         $scope.test = function() {
 
@@ -1960,7 +1921,7 @@ require( [
 
         setTimeout( function() {
 
-            progress = $( ".ui.progress:first" ).progress();
+            progress = $( ".md-progress:first" ).progress();
 
             $httpProvider.defaults.transformResponse.push( function( data, headers ) {
                 setTimeout( function() {
@@ -2104,7 +2065,7 @@ require( [
 
     $( function() {
         setTimeout( function() {
-            $( ".ui.loading.global:first" ).loading().hide();
+            $( ".md-loading:first" ).loading().hide();
         }, 1000 );
     } );
 
