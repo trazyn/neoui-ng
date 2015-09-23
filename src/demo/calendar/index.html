@@ -33,18 +33,17 @@
         </code>
 
         <br>
+        <br>
+
         <div class="wrap">
             <s-calendar
                 ng-disabled="isDisabled"
                 ng-model="date"
                 placeholder="Year-Month-Day"
-                double="double"
-                show-time="showTime"
                 min-date="minDate"
                 max-date="maxDate"
-                on-click="onClick"
-                default-date="defaultDate"
-                ng-model="date">
+                on-selected="onSelected"
+                default-date="defaultDate">
             </s-calendar>
 
             <br>
@@ -52,27 +51,11 @@
             <ul class="options">
                 <li>
                     <label>是否禁用?</label>
-                    <div class="ui checkbox" s-ripple>
+                    <div class="md-checkbox" s-ripple>
                         <input type="checkbox" ng-click="isDisabled = !isDisabled" />
                         <div></div>
                     </div>
                 </li>
-                <li>
-                    <label>显示双月</label>
-                    <div class="ui switch" s-ripple>
-                        <input type="checkbox" ng-model="double" />
-                        <div></div>
-                    </div>
-                </li>
-
-                <li>
-                    <label>显示时间</label>
-                    <div class="ui switch" s-ripple>
-                        <input type="checkbox" ng-model="showTime" />
-                        <div></div>
-                    </div>
-                </li>
-
                 <li>
                     <label>最小时间</label>
                     <span>
@@ -84,13 +67,6 @@
                     <label>最大时间</label>
                     <span>
                         {{ maxDate }}
-                    </span>
-                </li>
-
-                <li>
-                    <label>Format</label>
-                    <span>
-                        %Y-%m-%d
                     </span>
                 </li>
             </ul>
@@ -115,13 +91,10 @@
                     ng-disabled="isDisabled"
                     ng-model="date"
                     placeholder="Year-Month-Day"
-                    double="twoMonths"
-                    show-time="showTime"
                     min-date="minDate"
                     max-date="maxDate"
-                    on-click="onClick"
-                    default-date="defaultDate"
-                    ng-model="date">
+                    on-selected="onSelected"
+                    default-date="defaultDate">
                 </s-calendar>
                 </xmp>
                 </div>
@@ -133,29 +106,27 @@
                 </div>
 
                 <xmp>
-                angular
-                .module( "demo.calendar", [ "$ui.calendar" ] )
-                .controller( "calendarController", [ "$scope", function( $scope ) {
+    angular
+    .module( "demo.calendar", [ "$ui.calendar" ] )
+    .controller( "calendarController", [ "$scope", function( $scope ) {
 
-                    $scope.init = function() {
-                        $( document.body ).anchor( { offset: -60 } );
-                    };
+        $scope.init = function() {
+            $.anchor( { offset: -60 } );
+        };
 
-                    var now = new Date();
+        var now = new Date();
 
-                    angular.extend( $scope, {
+        angular.extend( $scope, {
 
-                        showTime: false,
-                        twoMonths: true,
-                        date: $.dateutil( now ).tomorrow(),
-                        isDisabled: false,
-                        minDate: $.dateutil( now ).lastWeek(),
-                        maxDate: $.dateutil( now ).nextWeek(),
-                        onClick: function( value ) {
-                            console.log( value );
-                        }
-                    } );
-                } ] );
+            date: $.dateutil( now ).tomorrow(),
+            isDisabled: false,
+            minDate: $.dateutil( now ).lastWeek(),
+            maxDate: $.dateutil( now ).nextWeek(),
+            onSelected: function( value ) {
+                console.log( value );
+            }
+        } );
+    } ] );
                 </xmp>
 
             </section>
@@ -178,7 +149,7 @@
                 <br>
 
                 <blockquote>
-                    <p><code>&on-click</code> - <code>null</code></p>
+                    <p><code>&on-selected</code> - <code>null</code></p>
                 </blockquote>
                 <p>选中时执行</p>
                 <br>
@@ -187,12 +158,6 @@
                     <p><code>@format</code> - <code>"%Y-%m-%d"</code></p>
                 </blockquote>
                 <p>日期格式化, <a href="/#dateutil">See Dateutil</a></p>
-                <br>
-
-                <blockquote>
-                <p><code>=show-time</code> - <code>false</code></p>
-                </blockquote>
-                <p>显示时间输入框</p>
                 <br>
 
                 <blockquote>
@@ -215,13 +180,6 @@
                 </blockquote>
                 <p>最大可选日期</p>
                 <br>
-
-                <blockquote>
-                    <p><code>=double</code> - <code>false</code>
-                    </p>
-                </blockquote>
-                <p>显示双月</p>
-                <br>
             </section>
         </div>
 
@@ -233,9 +191,9 @@
             </div>
 
             <xmp>
-            <div class="ui calendar">
-                <input class="ui text" type="text" placeholder="Year - Month - Day" readonly />
-                <i class="icon calendar"></i>
+            <div class="md-calendar">
+                <input class="md-text" type="text" placeholder="Year - Month - Day" readonly />
+                <i class="md-icon-calendar"></i>
             </div>
             </xmp>
         </section>
@@ -248,8 +206,7 @@
                 <span>Constructor</span>
             </div>
 
-            <p><code>$( selector ).calendar( [options] )</code>
-            </p>
+            <h5><code>$( selector ).calendar( [options] )</code></h5>
 
             <blockquote>
                 <p><code>selector</code> - 选择器或 DOM 元素</p>
@@ -258,7 +215,7 @@
             </blockquote>
 
         <xmp>
-        $( ".ui.calendar" ).calendar();
+        $( ".md-calendar" ).calendar();
         </xmp>
         </section>
 
@@ -269,13 +226,6 @@
             <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
-
-            <blockquote>
-                <p><code>months</code> - <code>[ "January", "February", "March", "April", "May", "July", "August", "September", "October", "November", "December" ]</code>
-                </p>
-            </blockquote>
-            <p>月份显示名称</p>
-            <br>
 
             <blockquote>
                 <p><code>daysOfTheWeek</code> - <code>[ "S", "M", "T", "W", "T", "F", "S" ]</code>
@@ -290,13 +240,6 @@
             </blockquote>
             <p>日期格式化, <a href="/#dateutil">See Dateutil</a></p>
             </p>
-            <br>
-
-            <blockquote>
-                <p><code>double</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>双月显示</p>
             <br>
 
             <blockquote>
@@ -321,31 +264,17 @@
             <br>
 
             <blockquote>
-                <p><code>onClick</code> - <code>nul</code>
+                <p><code>onSelected</code> - <code>nul</code>
                 </p>
+                <xmp>
+                $( ".md-calendar" ).calendar( {
+                    onSelected: function( value ) {
+                        console.log( "Current: " + value );
+                    }
+                } );
+                </xmp>
             </blockquote>
-            <p>选中时回调, example:</p>
-            <xmp>
-            $( ".ui.calendar" ).calendar( {
-                onClick: function( value ) {
-                    console.log( "Current: " + value );
-                }
-            } );
-            </xmp>
-            <br>
-
-            <blockquote>
-                <p><code>placeholder</code> - <code>"Year - Month - Day"</code>
-                </p>
-            </blockquote>
-            <p>The same to input placeholder</p>
-            <br>
-
-            <blockquote>
-                <p><code>showTime</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>显示时间输入框</p>
+            <p>选中时执行</p>
             <br>
 
             <blockquote>
@@ -371,7 +300,7 @@
             </div>
 
             <blockquote>
-                <p><code>calendar.val( [ value ] )</code>
+                <p><code>.val( [ value ] )</code>
                 </p>
                 <blockquote>
                     <p><code>value</code> - String/Date</p>
@@ -381,14 +310,14 @@
             <br>
 
             <blockquote>
-                <p><code>calendar.disabled()</code>
+                <p><code>.disabled()</code>
                 </p>
             </blockquote>
-            <p>禁用控件, <code>.ui.calendar[disabled]</code>等效</p>
+            <p>禁用控件</p>
             <br>
 
             <blockquote>
-                <p><code>calendar.enabled()</code>
+                <p><code>.enabled()</code>
                 </p>
             </blockquote>
             <p>取消禁用</p>

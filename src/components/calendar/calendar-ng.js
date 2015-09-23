@@ -30,11 +30,11 @@ angular.module( "$ui.calendar", [] )
             calendar,
             settings;
 
-            options.onClick = function( value ) {
+            options.onSelected = function( value ) {
 
                 if ( $rootScope.$$pahse ) { return; }
 
-                ($scope.onClick() || $.noop)( value );
+                ($scope.onSelected() || $.noop)( value );
                 $scope.defaultDate = value;
                 $scope.$apply();
             };
@@ -45,10 +45,6 @@ angular.module( "$ui.calendar", [] )
 
             $scope.$watch( "maxDate", function( value ) {
                 !$rootScope.$$phase && (settings.maxDate = value);
-            } );
-
-            $scope.$watch( "double", function( value ) {
-                settings.double = value;
             } );
 
             $scope.$watch( "defaultValue", function( value ) {
@@ -73,21 +69,19 @@ angular.module( "$ui.calendar", [] )
             scope:  {
 
                 disabled    : "=ngDisabled",
-                showTime    : "=",
                 placeholder : "@",
                 format      : "@",
                 defaultDate : "=ngModel",
                 minDate     : "=",
                 maxDate     : "=",
-                onClick     : "&",
-                double      : "="
+                onSelected  : "&",
             },
 
             restric         : "E",
             replace         : true,
             template        : '<div class="md-calendar">' +
                                 '<input class="md-text" type="text" readonly="readonly" placeholder="Year - Month - Day" />' +
-                                '<i class="md-icon-event"></i>' +
+                                '<i class="md-icon-calendar"></i>' +
                               '</div>',
             link            : link
         };

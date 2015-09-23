@@ -292,9 +292,10 @@ define( [ "util/dateutil" ], function() {
 
 				    var value = +this.getAttribute( "value" );
 
-                    $( this ).parents( ".years, .months" ).trigger( "focusout" );
+                    $( this ).parents( ".md-calendar-years, .md-calendar-months" ).trigger( "focusout" );
                     current[ +(value <= 12) ] = value;
                     show( new Date( current.join( "/" ) ) );
+                    calendar.focus();
 				} )
 
                 .on( "focusout", function( e ) {
@@ -481,6 +482,6 @@ define( [ "util/dateutil" ], function() {
 		defaultDate     : new Date(),
 
 		selector4input  : ":input",
-		selector4trigger: ".md-icon-event"
+		selector4trigger: ".md-icon-calendar"
 	};
 } );
