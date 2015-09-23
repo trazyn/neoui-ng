@@ -38,6 +38,7 @@
         <div class="wrap">
             <s-calendar
                 ng-disabled="isDisabled"
+                double="double"
                 ng-model="date"
                 placeholder="Year-Month-Day"
                 min-date="minDate"
@@ -53,6 +54,13 @@
                     <label>是否禁用?</label>
                     <div class="md-checkbox" s-ripple>
                         <input type="checkbox" ng-click="isDisabled = !isDisabled" />
+                        <div></div>
+                    </div>
+                </li>
+                <li>
+                    <label>显示双月</label>
+                    <div class="md-switch" s-ripple>
+                        <input type="checkbox" ng-model="double" />
                         <div></div>
                     </div>
                 </li>
@@ -90,6 +98,7 @@
                 <s-calendar
                     ng-disabled="isDisabled"
                     ng-model="date"
+                    double="double"
                     placeholder="Year-Month-Day"
                     min-date="minDate"
                     max-date="maxDate"
@@ -158,6 +167,13 @@
                     <p><code>@format</code> - <code>"%Y-%m-%d"</code></p>
                 </blockquote>
                 <p>日期格式化, <a href="/#dateutil">See Dateutil</a></p>
+                <br>
+
+                <blockquote>
+                    <p><code>=double</code> - <code>false</code>
+                    </p>
+                </blockquote>
+                <p>显示双月</p>
                 <br>
 
                 <blockquote>
@@ -239,7 +255,27 @@
                 </p>
             </blockquote>
             <p>日期格式化, <a href="/#dateutil">See Dateutil</a></p>
-            </p>
+            <br>
+
+            <blockquote>
+                <p><code>selectable</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>返回<code>true/false</code>日期是否可选</p>
+            <br>
+
+            <blockquote>
+                <p><code>selectableDOW</code> - <code>[1, 2, 3, 4, 5]</code>
+                </p>
+            </blockquote>
+            <p>每周中可选星期</p>
+            <br>
+
+            <blockquote>
+                <p><code>double</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>双月显示</p>
             <br>
 
             <blockquote>
@@ -278,6 +314,13 @@
             <br>
 
             <blockquote>
+                <p><code>showTime</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>显示时间输入框</p>
+            <br>
+
+            <blockquote>
                 <p><code>selector4input</code> - <code>".input:first"</code>
                 </p>
             </blockquote>
@@ -299,28 +342,16 @@
                 <span>Method</span>
             </div>
 
+            <h5><code>.val( [ value ] )</code> - 设置/取值</h5>
             <blockquote>
-                <p><code>.val( [ value ] )</code>
-                </p>
-                <blockquote>
-                    <p><code>value</code> - String/Date</p>
-                </blockquote>
+                <p><code>value</code> - String/Date</p>
             </blockquote>
-            <p>设置/取值</p>
             <br>
 
-            <blockquote>
-                <p><code>.disabled()</code>
-                </p>
-            </blockquote>
-            <p>禁用控件</p>
+            <h5><code>.disabled()</code> - 禁用控件</h5>
             <br>
+            <h5><code>.enabled()</code> - 取消禁用</h5>
 
-            <blockquote>
-                <p><code>.enabled()</code>
-                </p>
-            </blockquote>
-            <p>取消禁用</p>
         </section>
     </div>
 

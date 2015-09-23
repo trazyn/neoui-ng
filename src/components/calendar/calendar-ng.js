@@ -47,6 +47,10 @@ angular.module( "$ui.calendar", [] )
                 !$rootScope.$$phase && (settings.maxDate = value);
             } );
 
+            $scope.$watch( "double", function( value ) {
+                settings.double = value;
+            } );
+
             $scope.$watch( "defaultValue", function( value ) {
 
                 if ( !$rootScope.$$phase ) {
@@ -58,7 +62,7 @@ angular.module( "$ui.calendar", [] )
                 calendar[ value ? "disabled" : "enabled" ]();
             } );
 
-            $element.find( $.fn.selector4input ).attr( "placeholder", $scope.placeholder );
+            $element.find( $.fn.calendar.defaults.selector4input ).attr( "placeholder", $scope.placeholder );
 
             calendar = $( $element ).calendar( options ),
             settings = calendar.settings;
@@ -69,18 +73,20 @@ angular.module( "$ui.calendar", [] )
             scope:  {
 
                 disabled    : "=ngDisabled",
+                showTime    : "=",
                 placeholder : "@",
                 format      : "@",
                 defaultDate : "=ngModel",
                 minDate     : "=",
                 maxDate     : "=",
                 onSelected  : "&",
+                double      : "="
             },
 
             restric         : "E",
             replace         : true,
             template        : '<div class="md-calendar">' +
-                                '<input class="md-text" type="text" readonly="readonly" placeholder="Year - Month - Day" />' +
+                                '<input class="md-text" type="text" readonly />' +
                                 '<i class="md-icon-calendar"></i>' +
                               '</div>',
             link            : link

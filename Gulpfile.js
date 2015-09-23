@@ -167,7 +167,7 @@ bs, gulp = require( "gulp" )
 
     .task( "css:app", function() {
 
-        gulp.src( [ "src/demo/**/*.less" ] )
+        return gulp.src( [ "src/style/app.less", "src/demo/**/*.less" ] )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( "app.css" ) )
@@ -179,9 +179,7 @@ bs, gulp = require( "gulp" )
 
     .task( "css:neoui", function() {
 
-	    streamqueue( { objectMode: true },
-                gulp.src( [ "src/style/main.less", "src/components/**/*.less", "!src/components/**/*-bs.less" ] ),
-                gulp.src( "src/components/**/*-bs.less" ) )
+        return gulp.src( [ "src/style/neoui.less", "src/components/**/*.less" ] )
 			.pipe( debug() )
 			.pipe( less( { plugins: [ autoprefix, cleancss ] } ) )
 			.pipe( concat( NAME + ".css" ) )

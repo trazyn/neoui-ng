@@ -1,5 +1,4 @@
 
-
 define( [ "util/dateutil" ], function() {
 
     "use strict";
@@ -17,10 +16,20 @@ define( [ "util/dateutil" ], function() {
 		show = function( step ) {
 
             var
-            container = calendar.find( ".md-calendar-dates-current" ),
+            container = calendar.find( ".md-calendar-dates" ),
+            label = [],
             steps = [ step ];
 
             if ( inAnimate ) { return; }
+
+            if ( settings.double ) {
+
+                if ( step instanceof Date ) {
+                    steps.push( new Date( step.getFullYear(), step.getMonth() + 1 ) );
+                } else {
+                    steps.push( step > 0 ? 1 : -1 );
+                }
+            }
 
             for ( var i = 0, length = steps.length; i < length; ++i ) {
 
@@ -70,6 +79,8 @@ define( [ "util/dateutil" ], function() {
                             current = [ step.getFullYear(), step.getMonth() + 1, 1 ];
                     }
 
+                    label.push( settings.months[ current[ 1 ] - 1 ] + " , " + current[ 0 ] );
+
                     html = calc( new Date( current.join( "/" ) ), defaultDate, settings );
 
                     if ( step instanceof Date || steps[0] === void 0 ) {
@@ -89,8 +100,11 @@ define( [ "util/dateutil" ], function() {
                     } );
                 })( container.eq( step > -1 ? i : length - 1 - i ), step );
 
-                calendar.find( ".md-calendar-year" ).html( current[0] + "年" );
-                calendar.find( ".md-calendar-month" ).html( current[1] + "月" );
+                if ( step < 0 ) {
+                    label = label.reverse();
+                }
+
+                calendar.find( ".md-calendar-date" ).html( label.join( " - " ) );
             }
 		},
 
@@ -100,21 +114,19 @@ define( [ "util/dateutil" ], function() {
         header = [],
 
 		template = "<div tabindex=-1 class='md-calendar-container' >" +
-					"<div class='md-calendar-control'>" +
+					"<div class='md-calendar-action'>" +
+					"<div class='md-icon-first'></div>" +
 					"<div class='md-icon-prev'></div>" +
-					"<div class='md-calendar-year'></div>" +
-					"<div class='md-calendar-month'></div>" +
+					"<div class='md-calendar-date'>Today</div>" +
 					"<div class='md-icon-next'></div>" +
+					"<div class='md-icon-last'></div>" +
 				"</div>" +
-
-				"<div tabindex=-1 class='md-calendar-years'><ul></ul></div>" +
-				"<div tabindex=-1 class='md-calendar-months'><ul></ul></div>" +
 
 				"<div class='md-calendar-content'>" +
 				    "<div class='md-calendar-days'>" +
                         "<div class='md-calendar-header'></div>" +
                         "<div class='md-calendar-dates-prev'></div>" +
-                        "<div class='md-calendar-dates-current'></div>" +
+                        "<div class='md-calendar-dates'></div>" +
                         "<div class='md-calendar-dates-next'></div>" +
 				    "</div>" +
                 "</div>",
@@ -128,6 +140,17 @@ define( [ "util/dateutil" ], function() {
 		input.attr( {
 			"name": target.attr( "name" )
 		} );
+
+		if ( settings.showTime ) {
+
+            template += "<div class='time'>" +
+
+                "<input name='hour' maxlength=2 value='00' />" +
+                "<input name='minute' maxlength=2 value='00' />" +
+                "<input name='second' maxlength=2 value='00' />" +
+
+                "</div>";
+		}
 
         for ( var i = 0, length = settings.daysOfTheWeek.length; i < length;
                 header.push( "<div>" + settings.daysOfTheWeek[i++] + "</div>" ) );
@@ -152,23 +175,12 @@ define( [ "util/dateutil" ], function() {
                     defaultDate = new Date();
 		}
 
-        var
-        yearsHtml = "",
-        monthsHtml = "";
-
-        for ( var i = 1990; i <= 2055; ++i ) {
-            yearsHtml += "<li value='" + i + "'>" + i + "</li>";
-        }
-        for ( var i = 1; i <= 12; monthsHtml += "<li value='" + i + "'>" + i++ + "</li>" );
-
 		trigger
         .on( "click", function( e ) {
 
             var
             rect,
-            container,
-            years,
-            months;
+            container;
 
             /** Prevent multiple instance */
 			if ( inAnimate
@@ -182,10 +194,12 @@ define( [ "util/dateutil" ], function() {
 
 			calendar = $( template );
 
-            years = calendar.find( ".md-calendar-years > ul" ).html( yearsHtml ).parent();
-            months = calendar.find( ".md-calendar-months > ul" ).html( monthsHtml ).parent();
-            calendar.find( ".md-calendar-header" ).html( header.join( "" ) );
+            if ( settings.double ) {
+                container = calendar.find( ".md-calendar-days" );
+                container.clone().appendTo( calendar.addClass( "md-calendar-double" ).find( ".md-calendar-content" ) );
+            }
 
+            calendar.find( ".md-calendar-header" ).html( header.join( "" ) );
 			show( defaultDate );
 			calendar.appendTo( target )
 
@@ -204,6 +218,22 @@ define( [ "util/dateutil" ], function() {
 					e.preventDefault();
 				} )
 
+				.delegate( ".md-calendar-date", "click", function() {
+					show();
+				} )
+
+				.delegate( ".md-icon-first", "click", function( e ) {
+
+					show( -12 );
+					e.preventDefault();
+				} )
+
+				.delegate( ".md-icon-last", "click", function( e ) {
+
+					show( 12 );
+					e.preventDefault();
+				} )
+
 				.delegate( ".md-calendar-day", "click", function() {
 
 					var
@@ -211,7 +241,7 @@ define( [ "util/dateutil" ], function() {
                     date,
                     value;
 
-                    if ( !self.hasClass( "invalid" ) ) {
+                    if ( !self.hasClass( "md-calendar-day-invalid" ) ) {
 
                         date = new Date( this.getAttribute( "data-date" ) + " " +
                                 (calendar.find( "input[name=hour]" ).val()   || 0) + ":" +
@@ -221,65 +251,61 @@ define( [ "util/dateutil" ], function() {
 
                         input.val( value ).focus();
                         settings.onSelected( value );
-                        input.trigger( "change" );
-                        defaultDate = date;
 
+                        input.trigger( "change" );
+
+                        defaultDate = date;
                         setTimeout( function() {
-                            calendar.removeClass( "show" ).remove();
+                            calendar.remove();
                         } );
                     }
 				} )
 
-				.delegate( ".md-calendar-year", "click", function() {
+				.delegate( "input", "focusout", function( e ) {
 
-				    var
-				    inner = years.addClass( "show" ).scrollTop(0).find( "li[value='" + current[0] + "']" ).addClass( "selected" );
+                    var self = $( this );
 
-				    $( this ).addClass( "expand" );
+                    switch ( true ) {
 
-                    years
-				    .css( "height", calendar.find( ".md-calendar-content" ).height() )
-				    .scrollTop( inner.offset().top - years.offset().top )
-				    .focus()
-				    .find( "li" )
-				    .not( inner )
-				    .removeClass( "selected" );
+                        case this.name === "hour" && (+self.val() || 99) > 23:
+                            self.val( "00" );
+                            break;
+
+                        case (+self.val() || 99) > 59:
+                            self.val( "00" );
+                            break;
+                    }
 				} )
 
-				.delegate( ".md-calendar-years", "focusout", function() {
-                    years.removeClass( "show" );
-                    calendar.find( ".md-calendar-year" ).removeClass( "expand" );
-				} )
+				.delegate( "input", "keyup", function( e ) {
 
-				.delegate( ".md-calendar-month", "click", function() {
+				        var self = $( this );
 
-				    var
-				    inner = months.addClass( "show" ).scrollTop(0).find( "li[value='" + current[1] + "']" ).addClass( "selected" );
+                        if ( e.keyCode !== 38 && e.keyCode !== 40 ) {
+                            return;
+                        }
 
-				    $( this ).addClass( "expand" );
+                        if ( isNaN( self.val() ) || +self.val() < 0 ) {
+                            return self.val( "00" );
+                        }
 
-                    months
-				    .css( "height", calendar.find( ".md-calendar-content" ).height() )
-				    .scrollTop( inner.offset().top - months.offset().top )
-				    .focus()
-				    .find( "li" )
-				    .not( inner )
-				    .removeClass( "selected" );
-				} )
+                        /** Handle key down */
+                        if ( e.keyCode === 40 ) {
 
-				.delegate( ".md-calendar-months", "focusout", function() {
-                    months.removeClass( "show" );
-                    calendar.find( ".md-calendar-month" ).removeClass( "expand" );
-				} )
+                            if ( +self.val() > 0 ) {
+                                self.val( ("0" + (+self.val() - 1)).slice( -2 ) );
+                            } else {
+                                self.val( this.name === "hour" ? "23" : "59" );
+                            }
+                            return;
+                        }
 
-				.delegate( "li[value]", "click", function() {
+                        /** Handle key up */
+                        if ( (this.name === "hour" && this.value === "23") || +this.value === 59 ) {
+                            return self.val( "00" );
+                        }
 
-				    var value = +this.getAttribute( "value" );
-
-                    $( this ).parents( ".md-calendar-years, .md-calendar-months" ).trigger( "focusout" );
-                    current[ +(value <= 12) ] = value;
-                    show( new Date( current.join( "/" ) ) );
-                    calendar.focus();
+                        self.val( ("0" + (+self.val() + 1)).slice( -2 ) );
 				} )
 
                 .on( "focusout", function( e ) {
@@ -331,12 +357,12 @@ define( [ "util/dateutil" ], function() {
 
             if ( "function" === typeof settings.selectable
                     && !settings.selectable( date ) ) {
-                return " invalid";
+                return " md-calendar-day-invalid";
             }
 
-            if ( settings.selectableDOW
+            if ( settings.selectableDOW instanceof Array
                     && settings.selectableDOW.indexOf( date.getDay() ) === -1 ) {
-                return " invalid";
+                return " md-calendar-day-invalid";
             }
 
             if ( minDate || maxDate ) {
@@ -345,10 +371,10 @@ define( [ "util/dateutil" ], function() {
                         || (!maxDate  && date >= minDate)
                         || (!minDate  && date <= maxDate) ) {
 
-                    return " valid ";
+                    return " md-calendar-day-valid ";
                 }
 
-                return " invalid ";
+                return " md-calendar-day-invalid ";
             }
 
             return " ";
@@ -358,7 +384,7 @@ define( [ "util/dateutil" ], function() {
 
         for ( var start = range.prev[ 0 ], end = range.prev[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
-            html += "<div class='md-calendar-day " + isValid( prev, start ) + " adjacent prev' " +
+            html += "<div class='md-calendar-day " + isValid( prev, start ) + " md-calendar-day-adjacent md-calendar-day-prev' " +
                         "data-date='" + [ prev.getFullYear(), prev.getMonth() + 1, start ].join( "/" ) + "'>" +
                         start +
                     "</div>";
@@ -368,17 +394,17 @@ define( [ "util/dateutil" ], function() {
 
             var clazz = isValid( date, start );
 
-            start < now.getDate() && (clazz += " past ");
+            start < now.getDate() && (clazz += " md-calendar-day-past ");
 
             date.getFullYear() === defaultDate.getFullYear()
                 && date.getMonth() === defaultDate.getMonth()
                 && start === defaultDate.getDate()
-                && (clazz += " current ");
+                && (clazz += " md-calendar-day-current ");
 
             date.getFullYear() === now.getFullYear()
                 && date.getMonth() === now.getMonth()
                 && start ===  now.getDate()
-                && (clazz += " today ");
+                && (clazz += " md-calendar-day-today ");
 
             html += "<div class='md-calendar-day " + clazz + "' data-date='" + [ date.getFullYear(), date.getMonth() + 1, start ].join( "/" ) + "'>" +
                 start +
@@ -387,7 +413,7 @@ define( [ "util/dateutil" ], function() {
 
         for ( var start = range.next[ 0 ], end = range.next[ 1 ]; end - start !== 6 && start <= end; ++start ) {
 
-            html += "<div class='md-calendar-day " + isValid( next, start ) + " adjacent next' " +
+            html += "<div class='md-calendar-day " + isValid( next, start ) + " md-calendar-day-adjacent md-calendar-day-next' " +
                         " data-date='" + [ next.getFullYear(), next.getMonth() + 1, start ].join( "/" ) + "'>" +
                         start +
                     "</div>";
@@ -450,14 +476,20 @@ define( [ "util/dateutil" ], function() {
 
 	$.fn.calendar.defaults = {
 
-		daysOfTheWeek   : [ "日", "一", "二", "三", "四", "五", "六" ],
+		months          : [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
+		daysOfTheWeek   : [ "S", "M", "T", "W", "T", "F", "S" ],
 
 		format          : "%Y-%m-%d",
+		formatter4cell  : $.noop(),
 
 		onSelected      : $.noop,
 
+		showTime        : false,
+		double          : false,
+
 		minDate         : undefined,
 		maxDate         : undefined,
+
         selectable      : undefined,
 
         /** List of selectable days of the week, 0 is Sunday, 1 is Monday, and so on. */
