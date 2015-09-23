@@ -101,12 +101,10 @@ define( [ "util/dateutil" ], function() {
 
 		template = "<div tabindex=-1 class='md-calendar-container' >" +
 					"<div class='md-calendar-control'>" +
-					"<div class='icon first'></div>" +
-					"<div class='icon prev'></div>" +
+					"<div class='md-icon-prev'></div>" +
 					"<div class='md-calendar-year'></div>" +
 					"<div class='md-calendar-month'></div>" +
-					"<div class='icon next'></div>" +
-					"<div class='icon last'></div>" +
+					"<div class='md-icon-next'></div>" +
 				"</div>" +
 
 				"<div tabindex=-1 class='md-calendar-years'><ul></ul></div>" +
@@ -196,27 +194,13 @@ define( [ "util/dateutil" ], function() {
 					"z-index": 999
 				} )
 
-				.delegate( ".icon.prev", "click", function( e ) {
+				.delegate( ".md-icon-prev", "click", function( e ) {
 					show( -1 );
 					e.preventDefault();
 				} )
 
-				.delegate( ".icon.next", "click", function( e ) {
+				.delegate( ".md-icon-next", "click", function( e ) {
 					show( 1 );
-					e.preventDefault();
-				} )
-
-				.delegate( ".date", "click", function() {
-					show();
-				} )
-
-				.delegate( ".icon.first", "click", function( e ) {
-					show( -12 );
-					e.preventDefault();
-				} )
-
-				.delegate( ".icon.last", "click", function( e ) {
-					show( 12 );
 					e.preventDefault();
 				} )
 

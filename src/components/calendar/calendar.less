@@ -10,38 +10,28 @@
         font-size: 16px;
         cursor: pointer;
         transition: .2s;
-        &:hover {
-            color: @mint;
-        }
+        &:hover { color: @mint; }
 
         &[disabled] {
             cursor: not-allowed;
-            &:hover {
-                color: inherit;
-            }
+            &:hover { color: inherit; }
         }
     }
 
-    .icon.first,
-    .icon.prev,
-    .icon.next,
-    .icon.last,
-    .md-calendar-date {
+    .md-icon-prev,
+    .md-icon-next {
         transition: .2s;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
-
-        &:hover {
-            color: @dribbble;
-        }
+        &:hover { color: @dribbble; }
     }
 
-    .icon.first { left: 14px; }
-    .icon.last { right: 14px; }
-    .icon.prev { left: 40px; }
-    .icon.next { right: 40px; }
+    .md-icon-prev:after { content: "\e68b"; }
+    .md-icon-next:after { content: "\e68c"; }
+    .md-icon-prev { left: 40px; }
+    .md-icon-next { right: 40px; }
     ul { padding: 0; }
 }
 
@@ -72,25 +62,6 @@
     background-color: @google;
 }
 
-.md-calendar-date {
-    top: 50%;
-    left: 50%;
-    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    text-shadow: 6px 3px 15px #fff;
-    transform: translateX(-50%) translateY(-50%);
-
-    &.next,
-    &.prev {
-        position: absolute;
-        top: 48px;
-    }
-
-    &.next { left: 100%; }
-    &.prev { left: -100%; }
-}
-
 .md-calendar-content {
     position: relative;
     background-color: #fff;
@@ -107,28 +78,31 @@
     vertical-align: top;
 }
 
-.md-calendar-dates {
+.md-calendar-dates-prev,
+.md-calendar-dates-current,
+.md-calendar-dates-next {
     width: 336px;
     margin: 0 auto;
     padding-bottom: 5px;
-
-    &.next, &.prev {
-        position: absolute;
-        left: 100%;
-        top: 48px;
-        background-color: #fff;
-    }
-
-    &.next {
-        left: 100%;
-        z-index: 1;
-    }
-    &.prev {
-        left: -100%;
-        z-index: 2;
-    }
 }
 
+.md-calendar-dates-next,
+.md-calendar-dates-prev {
+    position: absolute;
+    left: 100%;
+    top: 48px;
+    background-color: #fff;
+}
+
+.md-calendar-dates-next {
+    left: 100%;
+    z-index: 1;
+}
+
+.md-calendar-dates-prev {
+    left: -100%;
+    z-index: 2;
+}
 .md-calendar-header {
     background-color: #eaf4f8;
     & > div {

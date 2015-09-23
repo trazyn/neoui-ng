@@ -25,25 +25,15 @@
     background-color: #fff;
     color: #333;
 
-    .icon {
+    .md-icon-prev,
+    .md-icon-next {
         color: #eaeaea;
         font-size: 18px;
-        &.first, &.last {
-            display: none;
-        }
-
-        &.prev {
-            left: 20px;
-        }
-
-        &.next {
-            right: 20px;
-        }
-
-        &:hover {
-            color: #b9deff;
-        }
+        &:hover { color: #b9deff; }
     }
+
+    .md-icon-prev { left: 20px; }
+    .md-icon-next { right: 20px; }
 }
 
 .md-calendar-container {
@@ -52,9 +42,7 @@
 }
 
 
-.md-calendar-content {
-    border-radius: 4px;
-}
+.md-calendar-content { border-radius: 4px; }
 
 .md-calendar-header {
     background-color: #eaeaea;
@@ -65,13 +53,9 @@
     }
 }
 
-.md-calendar-date {
-    font-size: 14px;
-}
-
-.md-calendar-dates {
-    width: 245px;
-}
+.md-calendar-dates-current,
+.md-calendar-dates-prev,
+.md-calendar-dates-next { width: 245px; }
 
 .md-calendar-days {
     width: 251px;
@@ -91,14 +75,12 @@
         display: inline-block;
         visibility: hidden;
     }
-    &:hover, &.expand {
+    &:hover,
+    &.expand {
         background-color: #dcebff;
-        &:after {
-            visibility: visible;
-        }
+        &:after { visibility: visible; }
     }
 }
-
 
 .md-calendar-years, .md-calendar-months {
     position: absolute;
@@ -116,10 +98,7 @@
     }
 }
 
-.md-calendar-months {
-    left: 137px;
-}
-
+.md-calendar-months { left: 137px; }
 
 .md-calendar-year {
     margin-left: 58px;
@@ -131,13 +110,10 @@
     width: 35px;
     line-height: 30px;
     border-radius: 0;
-    &:hover {
-        background-color: #dcebff;
-    }
+    &:hover { background-color: #dcebff; }
 
-    &:after, &:before {
-        content: none;
-    }
+    &:after,
+    &:before { content: none; }
     &.today {
         color: #333;
         font-weight: bold;
@@ -149,8 +125,6 @@
         font-weight: bold;
         box-shadow: 0px 0 1px #a2c5e3 inset;
     }
-    &.valid:after {
-        content: none;
-    }
+    &.valid:after { content: none; }
 }
 
