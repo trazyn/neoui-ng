@@ -271,7 +271,7 @@
 
             <p>
             <button class="md-btn md-btn-outline md-btn-coral" name="confirm" ng-click="showConfirm()">
-                <i class="icon star"></i> Show Confirm
+                <i class="md-icon-star"></i> Show Confirm
             </button>
             </p>
         </section>
@@ -303,18 +303,16 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
+            require( "ui/message/message", function() {
 
-                $.message.confirm( {
+                $message.confirm( {
                     title: "Please confirm",
                     message: "Exported successfully. Do you want to open the export query page?",
                     onOk: function() {
                         window.open( "//www.google.com", "_blank" );
                     }
                 } );
-            } ] );
+            } )
             </xmp>
         </section>
         <section>
@@ -326,8 +324,8 @@
             <blockquote>
                 <p><code>title</code> - String, 对话框标题</p>
                 <p><code>message</code> - String, 对话框内容</p>
-                <p><code>onOk</code> - Function, 点击 <button class="md-btn md-btn-success">Ok</button> 执行回调</p>
-                <p><code>onClose</code> - Function, 点击 <button class="md-btn md-btn-default">Cancel</button> 执行回调</p>
+                <p><code>onOk</code> - Function, 点击 <button s-ripple class="md-btn md-btn-flat md-btn-success">Ok</button> 执行回调</p>
+                <p><code>onClose</code> - Function, 点击 <button s-ripple class="md-btn md-btn-flat md-btn-default">Cancel</button> 执行回调</p>
             </blockquote>
         </section>
 

@@ -45,7 +45,7 @@
     }
 }
 
-.button-variant( @color ) {
+.button-variation( @color ) {
 
     .button-raised();
     .button-flat( @color );
@@ -87,37 +87,37 @@
         &:hover {
             .button-shadow();
         }
-        .button-variant( rgba(0,0,0,.75) );
+        .button-variation( rgba(0,0,0,.75) );
     }
 
     &-primary {
         color: rgba(255,255,255,.84);
         background-color: @primary;
-        .button-variant( @primary );
+        .button-variation( @primary );
     }
 
     &-success {
         color: rgba(255,255,255,.84);
         background-color: @success;
-        .button-variant( @success );
+        .button-variation( @success );
     }
 
     &-info {
         color: rgba(255,255,255,.84);
         background-color: @info;
-        .button-variant( @info );
+        .button-variation( @info );
     }
 
     &-warning {
         color: rgba(255,255,255,.84);
         background-color: @warn;
-        .button-variant( @warn );
+        .button-variation( @warn );
     }
 
     &-danger {
         color: rgba(255,255,255,.84);
         background-color: @error;
-        .button-variant( @error );
+        .button-variation( @error );
     }
 
     &-grape { background-color: @grape; }
@@ -156,12 +156,7 @@
     &-coral {
         color: rgba(255,255,255,.84);
         background-color: @coral;
-        .button-variant( @coral );
-    }
-
-    .icon,
-    [class^=icon] {
-        line-height: 1px;
+        .button-variation( @coral );
     }
 
     &-icon {
@@ -203,4 +198,11 @@
             }
         }
     }
+
+    .md-icon,
+    [class^=md-icon-] {
+        transform: translateY(-1px);
+        display: inline-block;
+    }
+
 }
