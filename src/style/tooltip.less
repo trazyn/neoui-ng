@@ -2,11 +2,11 @@
 @import "base/colors.less";
 
 .md-tooltip {
-
     position: relative;
     display: inline-block;
 
-    &:before, &:after {
+    &:before,
+    &:after {
         position: absolute;
         line-height: 18px;
         text-indent: 0;
@@ -18,13 +18,11 @@
 
     &:hover {
         opacity: 1;
-        &:after, &:before {
-            opacity: 1;
-        }
+        &:after,
+        &:before { opacity: 1; }
     }
 
     &:before {
-
         position: absolute;
         border: 6px solid transparent;
         background: transparent;
@@ -32,7 +30,6 @@
     }
 
     &:after {
-
         padding: 8px 10px;
         font-size: 12px;
         color: #fff;

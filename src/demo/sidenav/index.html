@@ -1,21 +1,21 @@
 
 <title>Sidenav - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
-    <li class="item">AngularJS
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active" data-forceAnchor="-260">Example</li>
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="markup" class="item">Markup</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sSidenav" class="item">Directive * s-sidenav</li>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sSidenav" class="md-anchor-item">Directive * s-sidenav</li>
         </ul>
     </li>
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="html" class="item">Html</li>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -29,7 +29,7 @@
         <s-sidenav id="profile" controller="profile">
             <ul>
                 <li class="avatar">
-                    <a href="//github.com/trazyn" class="ui tooltip right" data-tooltip="View On GitHub">
+                    <a href="//github.com/trazyn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
                         <img src="images/5271843.jpg" alt="fs3kuu">
                     </a>
                 </li>
@@ -40,14 +40,14 @@
                 <li>Photos</li>
                 <li>Music</li>
                 <li class="exit">
-                    <i class="icon exit"></i>
+                    <i class="md-icon-exit-to-app"></i>
                 </li>
             </ul>
         </s-sidenav>
 
         <p>
-        <button class="ui button coral" ng-click="showProfile( profile )">Show the left Sidenav</button>
-        <button class="ui button coral" ng-click="menu.right()">Right Sidenav</button>
+        <button class="md-btn md-btn-coral" ng-click="showProfile( profile )">Show the left Sidenav</button>
+        <button class="md-btn md-btn-coral" ng-click="menu.right()">Right Sidenav</button>
         </p>
 
         <br>
@@ -58,7 +58,7 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="markup">
+            <div class="md-ribbon" data-anchor="markup">
                 <span>Markup</span>
             </div>
 
@@ -66,7 +66,7 @@
             <s-sidenav id="profile" controller="profile">
                 <ul>
                     <li class="avatar">
-                        <a href="//github.com/trayn" class="ui tooltip right" data-tooltip="View On GitHub">
+                        <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
                             <img src="/images/5271843.jpg" alt="fs3kuu">
                         </a>
                     </li>
@@ -77,7 +77,7 @@
                     <li>Photos</li>
                     <li>Music</li>
                     <li class="exit">
-                        <i class="icon exit"></i>
+                        <i class="md-icon-exit-to-app"></i>
                     </li>
                 </ul>
             </s-sidenav>
@@ -85,7 +85,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="javascript">
+            <div class="md-ribbon" data-anchor="javascript">
                 <span>Javascript</span>
             </div>
 
@@ -108,7 +108,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sSidenav">
+            <div class="md-ribbon" data-anchor="sSidenav">
                 <span>Directive * s-sidenav</span>
             </div>
 
@@ -135,7 +135,7 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="html">
+            <div class="md-ribbon" data-anchor="html">
                 <span>HTML</span>
             </div>
 
@@ -144,7 +144,7 @@
             <div id="profile">
                 <ul>
                     <li class="avatar">
-                        <a href="//github.com/trayn" class="ui tooltip right" data-tooltip="View On GitHub">
+                        <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
                             <img src="/images/5271843.jpg" alt="fs3kuu">
                         </a>
                     </li>
@@ -155,7 +155,7 @@
                     <li>Photos</li>
                     <li>Music</li>
                     <li class="exit">
-                        <i class="icon exit"></i>
+                        <i class="md-icon-exit-to-app"></i>
                     </li>
                 </ul>
             </div>
@@ -195,20 +195,18 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="constructor">
+            <div class="md-ribbon" data-anchor="constructor">
                 <span>Constructor</span>
             </div>
 
-            <p><code>$.sidenav( options )</code>
-            </p>
-
+            <h5><code>$.sidenav( options )</code></h5>
             <blockquote>
                 <p><code>options</code> - 参数设置</p>
             </blockquote>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="options">
+            <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
 
@@ -233,15 +231,15 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="method">
+            <div class="md-ribbon" data-anchor="method">
                 <span>Method</span>
             </div>
 
-            <p><code>sidenav.left()</code> - 左侧展开</p>
+            <h5><code>sidenav.left()</code> - 左侧展开</h5>
             <br>
             <br>
 
-            <p><code>sidenav.right()</code> - 右侧展开</p>
+            <h5><code>sidenav.right()</code> - 右侧展开</h5>
             <br>
             <br>
         </section>

@@ -1,5 +1,5 @@
 
-define( [ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], function() {
+define( [ "ui/modal/modal-ng" ], function() {
 
 	"use strict";
 

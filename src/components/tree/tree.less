@@ -2,7 +2,6 @@
 @import (reference) "../../style/neoui.less";
 
 .md-tree {
-
     display: block;
     border: 1px solid #DDD;
     font-size: 14px;
@@ -22,7 +21,6 @@
             & > .md-icon,
             & > span { color: #e9573f !important; }
         }
-
         &[disabled] {
             color: #999;
             cursor: not-allowed;
@@ -58,10 +56,8 @@
 .md-tree-node {
     cursor: pointer;
     margin-left: 0;
-
     &.md-tree-open > ul { display: block; }
     &.md-tree-close > ul { display: none; }
-
     .md-icon {
         position: relative;
         &:before {
@@ -100,13 +96,11 @@
 
 /** Customize tree */
 .md-tree-file {
-
     li p {
         display: block;
         height: 48px;
         line-height: 48px;
         transition: .2s;
-
         &:hover { background-color: #ddd; }
     }
 

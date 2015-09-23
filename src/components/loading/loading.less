@@ -2,19 +2,11 @@
 @import (reference) "../../style/neoui.less";
 
 .md-loading {
-
-    /** POsitioning */
     position: absolute;
     display: none;
-
-    /** Box-model */
     width: 100%;
     height: 100%;
-
-    /** Visual */
     background-color: rgba(0,0,0,.6);
-
-    /** Misc */
     opacity: 0;
     visibility: hidden;
     z-index: 99;
@@ -51,7 +43,6 @@
 }
 
 .md-loading.md-loading-global {
-
     position: fixed;
     top: 0;
     left: 0;
@@ -87,7 +78,6 @@
 
 .md-loading,
 .md-loading-global {
-
     &.show {
         display: block;
         visibility: visible;

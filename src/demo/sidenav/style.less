@@ -4,6 +4,7 @@
 
 #sidenav {
     #markdown();
+    .md-btn { margin-right: 10px; }
 }
 
 #profile {
@@ -13,54 +14,35 @@
     min-width: 300px;
     overflow: hidden;
 
-    ul {
-        padding: 40% 0;
-    }
-
-    a {
-        text-indent: 0;
-    }
+    ul { padding: 40% 0; }
+    a { text-indent: 0; }
 
     li {
-
-        transition: .2s;
-        font-size: .8rem;
+        height: 48px;
+        font-size: 12px;
         text-indent: 48px;
         line-height: 48px;
-        height: 48px;
-        font-size: .7rem;
-        cursor: pointer;
         color: white;
         text-transform: uppercase;
+        cursor: pointer;
+        transition: .2s;
 
         &:hover {
+            color: @mint;
             background-color: rgba(0, 0, 0, 0.335);
         }
-
-        &.active {
-            color: @coral;
-        }
-
-
-        &.exit {
-            margin-top: 50%;
-        }
+        &.active { color: @coral; }
+        &.exit { margin-top: 50%; }
 
         &.avatar {
-            &:hover {
-                background-color: initial;
-            }
             margin-bottom: 64px;
+            &:hover { background-color: initial; }
             img {
                 width: 32px;
                 height: 32px;
                 border-radius: 32px;
                 vertical-align: middle;
             }
-        }
-
-        &:hover {
-            color: @mint;
         }
     }
 }

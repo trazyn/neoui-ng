@@ -36,7 +36,6 @@
 }
 
 .md-modal > div {
-
     position: relative;
     margin: 0 auto;
     background: #fff;
@@ -44,7 +43,6 @@
 }
 
 .md-modal-head {
-
     margin: 0;
     padding: 16px;
     padding-left: 24px;
@@ -57,14 +55,12 @@
 }
 
 .md-modal-content {
-
     max-height: 480px;
     padding: 24px;
     overflow: auto;
 }
 
 .md-modal-action {
-
     min-height: 52px;
     padding: 0 24px;
     margin-bottom: 0;
@@ -74,7 +70,6 @@
 }
 
 .md-modal-close {
-
     position: absolute;
     top: 11px;
     right: 20px;
@@ -92,7 +87,6 @@
 }
 
 .md-modal-overlay {
-
     position: fixed;
     top: 0;
     left: 0;
@@ -117,35 +111,26 @@
 .md-modal-animation-vertical,
 .md-modal-animation-sign,
 .md-modal-animation-bottom {
-
     > div { .animation-init(); }
-
     &.show > div { .modal-show(); }
 }
 
 .md-modal-animation-slide {
-
     > div { transform: translateY(30%); }
-
     &.show > div { transform: translateY(0); }
 }
 
 .md-modal-animation-scale {
-
     > div { transform: scale(.4); }
-
     &.show > div { transform: scale(1); }
 }
 
 .md-modal-animation-fadein {
-
     overflow: hidden;
-
     > div {
         visibility: hidden;
         opacity: .4;
     }
-
     &.show > div {
         visibility: visible;
         opacity: 1;
@@ -155,56 +140,45 @@
 .md-modal-animation-stick {
     top: 0;
     transform: translateX(-50%);
-
     > div { transform: translateY(-200%); }
-
     &.show > div { transform: translateY(0%); }
 }
 
 .md-modal-animation-flip {
-
     perspective: 1300px;
-
     > div {
         transform-style: preserve-3d;
         transform: rotateY(-70deg);
     }
-
     &.show > div { transform: rotateY(0deg); }
 }
 
 .md-modal-animation-vertical {
-
     perspective: 1300px;
     > div {
         transform-style: preserve-3d;
         transform: rotateX(-70deg);
     }
-
     &.show > div { transform: rotateX(0deg); }
 }
 
 .md-modal-animation-sign {
-
     perspective: 1300px;
     > div {
         transform-style: preserve-3d;
         transform: rotateX(-60deg);
         transform-origin: 50% 0;
     }
-
     &.show > div { transform: rotateX(0deg); }
 }
 
 .md-modal-animation-bottom {
-
     perspective: 1300px;
     > div {
         transform-style: preserve-3d;
         transform: translateY(100%) rotateX(90deg);
         transform-origin: 0 100%;
     }
-
     &.show > div { transform: translateY(0%) rotateX(0deg); }
 }
 
