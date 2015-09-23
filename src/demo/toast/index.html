@@ -1,16 +1,16 @@
 
 <title>Toast - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-	<li data-anchor="example" class="item active">Example</li>
-	<li class="item">Usage
+<ul id="anchors" class="md-anchor">
+	<li data-anchor="example" class="md-anchor-item active">Example</li>
+	<li class="md-anchor-item">Usage
         <ul>
-            <li data-anchor="angular" class="item">AngularJS</li>
-            <li data-anchor="jquery" class="item">jQuery</li>
+            <li data-anchor="angular" class="md-anchor-item">AngularJS</li>
+            <li data-anchor="jquery" class="md-anchor-item">jQuery</li>
         </ul>
     </li>
 
-	<li data-anchor="method" class="item">Method</li>
+	<li data-anchor="method" class="md-anchor-item">Method</li>
 </ul>
 
 <section id="toast" ng-controller="toastController" ng-init="init()">
@@ -20,10 +20,10 @@
     <section>
 
         <p>
-        <button class="ui button coral" ng-click="topLeft()">On the top left</button>
-        <button class="ui button coral" ng-click="topRight()">On the top right</button>
-        <button class="ui button coral" ng-click="bottomLeft()">On the bottom left</button>
-        <button class="ui button coral" ng-click="bottomRight()">On the ottom right</button>
+        <button class="md-btn md-btn-coral" ng-click="topLeft()">On the top left</button>
+        <button class="md-btn md-btn-coral" ng-click="topRight()">On the top right</button>
+        <button class="md-btn md-btn-coral" ng-click="bottomLeft()">On the bottom left</button>
+        <button class="md-btn md-btn-coral" ng-click="bottomRight()">On the ottom right</button>
         </p>
 
         <br>
@@ -32,97 +32,94 @@
 
         <p class="themes">
 
-            <span ng-repeat="color in [ 'default', 'grape', 'bittersweet', 'sunflower', 'grass', 'mint', 'aqua', 'blueJeans', 'lavender', 'pinkRose', 'lightGray', 'mediumGray', 'darkGray', 'success', 'error', 'info', 'warn' ]"
+            <span ng-repeat="color in [ 'default', 'grape', 'bittersweet', 'sunflower', 'grass', 'mint', 'aqua', 'blueJeans', 'lavender', 'pinkRose', 'lightGray', 'mediumGray', 'darkGray', 'success', 'danger', 'info', 'warning' ]"
                   class="item {{ color }}"
                   ng-click="changeTheme( color )"
-                  ng-class="{ 'active': theme === color }"></span>
+                  ng-class="{ 'active': theme === 'md-toast-' + color }"></span>
         </p>
 
     </section>
 
 	<header data-anchor="usage">Usage</header>
 
-	<section>
-        <section>
-            <div class="ui ribbon" data-anchor="angular">
-                <span>AngularJS</span>
-            </div>
+    <section>
+        <div class="md-ribbon" data-anchor="angular">
+            <span>AngularJS</span>
+        </div>
 
-            <p>服务<code>$ui.toast</code></p>
+        <h5>服务<code>$ui.toast</code></h5>
 
-            <xmp>
-            angular
-            .module( "app", [ "$ui.toast" ] )
-            .controller( "toastController", [ "$toast", function( $toast ) {
-                $toast.top( "On the top left!" ).left();
-            } ] );
-            </xmp>
-        </section>
+        <xmp>
+        angular
+        .module( "app", [ "$ui.toast" ] )
+        .controller( "toastController", [ "$toast", function( $toast ) {
+            $toast.top( "On the top left!" ).left();
+        } ] );
+        </xmp>
+    </section>
 
-        <section>
-            <div class="ui ribbon" data-anchor="jquery">
-                <span>jQuery</span>
-            </div>
+    <section>
+        <div class="md-ribbon" data-anchor="jquery">
+            <span>jQuery</span>
+        </div>
 
-            <p>模块<code>ui/toast/toast</code></p>
+        <h5>模块<code>ui/toast/toast</code></h5>
 
-            <xmp>
-            require( [ "ui/toast/toast" ], function() {
-                $.toast.top( "On the top left!" ).left();
-            } );
-            </xmp>
-        </section>
+        <xmp>
+        require( [ "ui/toast/toast" ], function() {
+            $.toast.top( "On the top left!" ).left();
+        } );
+        </xmp>
+    </section>
 
-        <section>
-            <div class="ui ribbon" data-anchor="method">
-                <span>Method</span>
-            </div>
+    <section>
+        <div class="md-ribbon" data-anchor="method">
+            <span>Method</span>
+        </div>
 
-            <p>
-            <code> top( message, [ delay | class4toast ], [ class4toast ] ).left(); </code> - 左上角显示
-            </p>
-            <blockquote>
-                <p><code>message</code> - String, 文本内容</p>
-                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
-                <p><code>class4toast</code> - String, 主题名称p>
-            </blockquote>
-            <br>
-            <br>
+        <h5>
+        <code> .top( message, [ delay | class4toast ], [ class4toast ] ).left() </code> - 左上角显示
+        </h5>
+        <blockquote>
+            <p><code>message</code> - String, 文本内容</p>
+            <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            <p><code>class4toast</code> - String, 主题名称p>
+        </blockquote>
+        <br>
+        <br>
 
-            <p>
-            <code> top( message, [ delay | class4toast ], [ class4toast ] ).right(); </code> - 右上角显示
-            </p>
-            <blockquote>
-                <p><code>message</code> - String, 文本内容</p>
-                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
-                <p><code>class4toast</code> - String, 主题名称p>
-            </blockquote>
-            <br>
-            <br>
+        <h5>
+        <code> .top( message, [ delay | class4toast ], [ class4toast ] ).right() </code> - 右上角显示
+        </h5>
+        <blockquote>
+            <p><code>message</code> - String, 文本内容</p>
+            <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            <p><code>class4toast</code> - String, 主题名称p>
+        </blockquote>
+        <br>
+        <br>
 
-            <p>
-            <code> bottom( message, [ delay | class4toast ], [ class4toast ] ).left(); </code> - 左下角显示
-            </p>
-            <blockquote>
-                <p><code>message</code> - String, 文本内容</p>
-                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
-                <p><code>class4toast</code> - String, 主题名称p>
-            </blockquote>
-            <br>
-            <br>
+        <h5>
+        <code> .bottom( message, [ delay | class4toast ], [ class4toast ] ).left() </code> - 左下角显示
+        </h5>
+        <blockquote>
+            <p><code>message</code> - String, 文本内容</p>
+            <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            <p><code>class4toast</code> - String, 主题名称p>
+        </blockquote>
+        <br>
+        <br>
 
-            <p>
-            <code> bottom( message, [ delay | class4toast ], [ class4toast ] ).right(); </code> - 右下角显示
-            </p>
-            <blockquote>
-                <p><code>message</code> - String, 文本内容</p>
-                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
-                <p><code>class4toast</code> - String, 主题名称p>
-            </blockquote>
-            <br>
-            <br>
-        </section>
-
-	</section>
+        <h5>
+        <code> .bottom( message, [ delay | class4toast ], [ class4toast ] ).right() </code> - 右下角显示
+        </h5>
+        <blockquote>
+            <p><code>message</code> - String, 文本内容</p>
+            <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            <p><code>class4toast</code> - String, 主题名称p>
+        </blockquote>
+        <br>
+        <br>
+    </section>
 
 </section>

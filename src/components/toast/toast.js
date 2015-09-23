@@ -19,18 +19,18 @@ define( [ "ui/modal/modal" ], function() {
             modal           : false,
             animation       : "scale",
             css             : { "min-width": "" },
-            class4modal     : "ui toast " + [ position, class4toast || "" ].join( " " ),
+            class4modal     : "md-toast " + [ position, class4toast || "" ].join( " " ),
 
             content         : function( ready, loading, close ) {
 
-                var template = "<p class='message'>" + message + "</p>" +
-                                "<i class='icon close transition rotate'></i>";
+                var template = "<p class='md-toast-message'>" + message + "</p>" +
+                                "<p class='md-toast-close text-uppercase'>undo</p>";
 
                 this
                 .html( template )
                 .parent()
                 .css( "height", "" )
-                .delegate( "i.icon.close", "click", close );
+                .delegate( ".md-toast-close", "click", close );
 
                 setTimeout( close, delay || 3000 );
             }
@@ -46,11 +46,11 @@ define( [ "ui/modal/modal" ], function() {
             return {
 
                 left: function() {
-                    show( message, "topleft", delay, class4toast );
+                    show( message, "md-toast-topleft", delay, class4toast );
                 },
 
                 right: function() {
-                    show( message, "topright", delay, class4toast );
+                    show( message, "md-toast-topright", delay, class4toast );
                 }
             };
         },
@@ -60,11 +60,11 @@ define( [ "ui/modal/modal" ], function() {
             return {
 
                 left: function() {
-                    show( message, "bottomleft", delay, class4toast );
+                    show( message, "md-toast-bottomleft", delay, class4toast );
                 },
 
                 right: function() {
-                    show( message, "bottomright", delay, class4toast );
+                    show( message, "md-toast-bottomright", delay, class4toast );
                 }
             };
         }

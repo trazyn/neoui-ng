@@ -8,13 +8,13 @@ define( [ "ui/toast/toast-ng" ], function() {
     .controller( "toastController", [ "$scope", "$toast", function( $scope, $toast ) {
 
         $scope.init = function() {
-            $.anchor( { offset: 0 } );
+            $.anchor( { offset: -10 } );
         };
 
-        $scope.theme = "default";
+        $scope.theme = "md-toast-default";
 
         $scope.changeTheme = function( theme ) {
-            $scope.theme = theme;
+            $scope.theme = "md-toast-" + theme;
         };
 
         angular.extend( $scope, {

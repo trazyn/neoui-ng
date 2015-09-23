@@ -468,7 +468,6 @@ define( [ "util/dateutil" ], function() {
 		daysOfTheWeek   : [ "日", "一", "二", "三", "四", "五", "六" ],
 
 		format          : "%Y-%m-%d",
-		formatter4day   : $.noop(),
 
 		onSelected      : $.noop,
 

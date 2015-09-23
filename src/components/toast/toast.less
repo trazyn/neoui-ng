@@ -1,42 +1,42 @@
 
 @import (reference) "../../style/main.less";
 
-.ui.modal.toast {
-    background: none;
-    color: white;
-    padding: 0;
+.theme( @bg: rgba(0,0,0,.8), @fg: white ) {
 
-    #theme( @bg: rgba(0,0,0,.8), @fg: white ) {
-        background-color: @bg;
+    .md-modal-body {
         color: @fg;
+        background-color: @bg;
     }
+}
 
-    > div {
-        box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
-        width: 240px;
-    }
+.md-toast {
+    padding: 0;
+    color: white;
+    background: none;
 
-    &.topleft {
+    > div { box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16); }
+
+    &.md-toast-topleft {
         left: 35px;
         top: 15px;
         transform: none;
     }
 
-    &.topright {
+    &.md-toast-topright {
         right: 35px;
         top: 15px;
         left: auto;
         transform: none;
     }
 
-    &.bottomleft {
+    &.md-toast-bottomleft {
         top: auto;
         left: 35px;
         bottom: 15px;
         transform: none;
     }
 
-    &.bottomright {
+    &.md-toast-bottomright {
         top: auto;
         left: auto;
         right: 35px;
@@ -44,97 +44,104 @@
         transform: none;
     }
 
-    .content {
-        padding: 10px 20px;
-        min-height: 24px;
-        line-height: 24px;
-        max-width: 240px;
-        word-wrap: break-word;
-        #theme();
+    .md-modal-body {
+        height: 48px;
+        min-width: 300px;
+        line-height: 48px;
+        padding: 0 24px;
+        color: #fff;
+        background-color: rgb(50,50,50);
     }
+}
 
-    .message, .close {
-        display: inline-block;
-        margin: 0;
-    }
+.md-toast-message {
+    font-size: 13px;
+    word-wrap: break-word;
+}
 
-    .message {
-        width: 88%;
-    }
+.md-toast-message,
+.md-toast-close {
+    display: inline-block;
+    margin: 0;
+}
 
-    .close {
-        top: 10px;
-        float: right;
-        right: 12px;
-        font-size: 18px;
-        vertical-align: top;
-    }
+.md-toast-close {
+    right: 12px;
+    float: right;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #ff4081;
+    cursor: pointer;
+}
 
-    &.grape .content {
-        #theme( @grape );
-    }
+.md-toast-grape {
+    .theme( @grape );
+}
 
-    &.bittersweet .content {
-        #theme( @bittersweet );
-    }
+.md-toast-bittersweet {
+    .theme( @bittersweet );
+}
 
-    &.sunflower .content {
-        #theme( @sunflower );
-    }
+.md-toast-sunflower {
+    .theme( @sunflower );
+}
 
-    &.grass .content {
-        #theme( @grass );
-    }
+.md-toast-grass {
+    .theme( @grass );
+}
 
-    &.mint .content {
-        #theme( @mint );
-    }
+.md-toast-mint {
+    .theme( @mint );
+}
 
-    &.aqua .content {
-        #theme( @aqua );
-    }
+.md-toast-aqua {
+    .theme( @aqua );
+}
 
-    &.blueJeans .content {
-        #theme( @blueJeans );
-    }
+.md-toast-blueJeans {
+    .theme( @blueJeans );
+}
 
-    &.lavender .content {
-        #theme( @lavender );
-    }
+.md-toast-lavender {
+    .theme( @lavender );
+}
 
-    &.pinkRose .content {
-        #theme( @pinkRose );
-    }
+.md-toast-pinkRose {
+    .theme( @pinkRose );
+}
 
-    &.lightGray {
-        .content {
-            #theme( @lightGray, #7a7a7a );
-        }
-    }
+.md-toast-lightGray {
+    .theme( @lightGray, #7a7a7a );
+}
 
-    &.mediumGray {
-        .content {
-            #theme( @mediumGray, #333 );
-        }
-    }
+.md-toast-mediumGray {
+    .theme( @mediumGray, #333 );
+}
 
-    &.darkGray .content {
-        #theme( @darkGray );
-    }
+.md-toast-darkGray {
+    .theme( @darkGray );
+}
 
-    &.success .content {
-        #theme( @success );
-    }
+.md-toast-success {
+    .theme( @success );
+}
 
-    &.error .content {
-        #theme( @error );
-    }
+.md-toast-danger {
+    .theme( @error );
+}
 
-    &.warn .content {
-        #theme( @warn );
-    }
+.md-toast-warning {
+    .theme( @warn );
+}
 
-    &.info .content {
-        #theme( @info );
-    }
+.md-toast-info {
+    .theme( @info );
+}
+
+.md-toast-warning,
+.md-toast-danger,
+.md-toast-grape,
+.md-toast-bittersweet,
+.md-toast-pinkRose {
+    .md-toast-close { color: #fff; }
 }
