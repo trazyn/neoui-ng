@@ -17,16 +17,16 @@ define( [ "ui/message/message-ng" ], function() {
                 $message.success( "This is a message telling you that everything is a-okay" );
             },
 
-            showError: function() {
-                $message.error( "This is a notification that something is wrong..." );
+            showDanger: function() {
+                $message.danger( "This is a notification that something is wrong..." );
             },
 
             showInfo: function() {
                 $message.info( "This is an 'information message' div." );
             },
 
-            showWarn: function() {
-                $message.warn( "It warns the users that to expect some changes or limitations." );
+            showWarning: function() {
+                $message.warning( "It warns the users that to expect some changes or limitations." );
             },
 
             showConfirm: function() {

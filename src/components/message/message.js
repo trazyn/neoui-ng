@@ -21,9 +21,9 @@ define( [ "ui/modal/modal" ], function() {
 
                 content: function( ready, loading, close ) {
 
-					var template = [ "<div class='ui message ", type," tooltip top' data-tooltip='Close outside close the message'>",
-								"<div class='flag'><i class='icon'></i></div>",
-								"<div class='content'><p>", message, "</p></div>",
+					var template = [ "<div class='md-message ", type," md-tooltip md-tooltip-top' data-tooltip='Close outside close the message'>",
+								"<div class='md-message-flag'><i class='md-icon'></i></div>",
+								"<div class='md-message-content'><p>", message, "</p></div>",
 							"</div>" ];
 					this.parent().css( "overflow", "visible" );
 
@@ -44,20 +44,20 @@ define( [ "ui/modal/modal" ], function() {
 			show( options );
 		},
 
-		error: function( message, delay ) {
-			this.message( "error", message, delay );
+		danger: function( message, delay ) {
+			this.message( "md-message-danger", message, delay );
 		},
 
 		info: function( message, delay ) {
-			this.message( "info", message, delay );
+			this.message( "md-message-info", message, delay );
 		},
 
-		warn: function( message, delay ) {
-			this.message( "warn", message, delay );
+		warning: function( message, delay ) {
+			this.message( "md-message-warning", message, delay );
 		},
 
 		success: function( message, delay ) {
-			this.message( "success", message, delay );
+			this.message( "md-message-success", message, delay );
 		},
 
 		confirm: function( options ) {
@@ -65,27 +65,29 @@ define( [ "ui/modal/modal" ], function() {
 			var
 			noop = function() {},
 			settings = $.extend( {}, {
-				onOk        : noop,
-				onClose     : noop
+				onOk            : noop,
+				onClose         : noop
 			}, options || {} );
 
 			show( {
 
-				title       : settings.title || "Confirm",
-				showTitle   : true,
-				class4modal : "confirm",
+				showTitle       : false,
+				class4modal     : "md-confirm",
+                closeByDocument : false,
 
 				content: function( ready, loading, close ) {
 
 					this
-					.html( "<div style='margin-top: 10px'>" +
-							settings.message +
-						"</div>" +
-						"<div class='action'>" +
-							"<button class='ui transition button success' name='ok'>Ok</button>" +
-							"<button class='ui transition button' name='close'>Cancel</button>" +
-						"</div>" )
-					.parents( ".modal:first" ).css( "max-width", 400 );
+					.html( "<div class='md-modal-content'>" +
+					            "<div class='md-confirm-content'>" +
+                                    "<h2>" + (settings.title || "Confirm") + "</h2>" +
+                                    "<p>" + settings.message + "</p>" +
+                                "</div>" +
+                            "</div>" +
+                            "<div class='md-modal-action text-right'>" +
+                                "<button class='md-btn md-btn-flat md-btn-success text-uppercase' name='ok'>Ok</button>" +
+                                "<button class='md-btn md-btn-flat md-btn-default text-uppercase' name='close'>Cancel</button>" +
+                            "</div>" );
 
 					this
 					.delegate( "button[name=ok]", "click", function( e ) {
