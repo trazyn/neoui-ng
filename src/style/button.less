@@ -183,7 +183,7 @@
         label {
             display: inline-block;
             margin: 0;
-            padding: 6px 20px;
+            padding: 0 20px;
             background: 0 0;
             cursor: pointer;
             &:hover {
@@ -205,4 +205,25 @@
         display: inline-block;
     }
 
+    &.btn-lg,
+    &.btn-sm,
+    &.btn-xs { height: auto; }
+
+    &.btn-lg {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.3333333;
+    }
+
+    &.btn-sm {
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    &.btn-xs {
+        padding: 1px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
 }
