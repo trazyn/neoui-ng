@@ -281,39 +281,113 @@
             </button>
         </div>
 
-        <xmp>
-        <button class="md-btn md-btn-primary" s-ripple>
-            <i class="md-icon-all-done"></i> Success
-        </button>
+        <div class="row">
+            <button disabled class="md-btn md-btn-primary" s-ripple>
+                <i class="md-icon-all-done"></i> Success
+            </button>
 
-        <button class="md-btn md-btn-danger" s-ripple>
-            <i class="md-icon-close"></i> Danger
-        </button>
+            <button disabled class="md-btn md-btn-danger" s-ripple>
+                <i class="md-icon-close"></i> Danger
+            </button>
 
-        <button class="md-btn md-btn-grape" s-ripple>
-            <i class="md-icon-star"></i>
-        </button>
+            <button disabled class="md-btn md-btn-grape" s-ripple>
+                <i class="md-icon-star"></i>
+            </button>
 
-        <div class="md-btn md-btn-primary md-btn-file" s-ripple>
-            <label for="upload">
-                <i class="md-icon-add"></i>
-                {{ filename || "Choice a file" }}
-            </label>
-            <input id="upload" type="file" ng-model="filename" onchange="$(this).scope().filename=this.value;$(this).scope().$apply();">
+            <div disabled class="md-btn md-btn-primary md-btn-file" s-ripple>
+                <label for="upload">
+                    <i class="md-icon-add"></i>
+                    {{ filename || "Choice a file" }}
+                </label>
+                <input id="upload" type="file" ng-model="filename" onchange="$(this).scope().filename=this.value;$(this).scope().$apply();">
+            </div>
+
+            <button disabled class="md-btn md-btn-aqua md-btn-icon" s-ripple>
+                <i class="md-icon-twitter"></i>
+            </button>
+
+            <button disabled class="md-btn md-btn-flat md-btn-default md-btn-icon" s-ripple>
+                <i class="md-icon-github2"></i>
+            </button>
+
+            <button disabled class="md-btn md-btn-outline md-btn-coral md-btn-icon" s-ripple>
+                <i class="md-icon-dribbble"></i>
+            </button>
         </div>
 
-        <button class="md-btn md-btn-aqua md-btn-icon" s-ripple>
-            <i class="md-icon-twitter"></i>
-        </button>
+        <div class="wrap">
+            <label>Normal</label>
+            <xmp>
+            <button class="md-btn md-btn-primary" s-ripple>
+                <i class="md-icon-all-done"></i> Success
+            </button>
 
-        <button class="md-btn md-btn-flat md-btn-default md-btn-icon" s-ripple>
-            <i class="md-icon-github2"></i>
-        </button>
+            <button class="md-btn md-btn-danger" s-ripple>
+                <i class="md-icon-close"></i> Danger
+            </button>
 
-        <button class="md-btn md-btn-outline md-btn-coral md-btn-icon" s-ripple>
-            <i class="md-icon-dribbble"></i>
-        </button>
-        </xmp>
+            <button class="md-btn md-btn-grape" s-ripple>
+                <i class="md-icon-star"></i>
+            </button>
+
+            <div class="md-btn md-btn-primary md-btn-file" s-ripple>
+                <label for="upload">
+                    <i class="md-icon-add"></i>
+                    {{ filename || "Choice a file" }}
+                </label>
+                <input id="upload" type="file" ng-model="filename" onchange="$(this).scope().filename=this.value;$(this).scope().$apply();">
+            </div>
+
+            <button class="md-btn md-btn-aqua md-btn-icon" s-ripple>
+                <i class="md-icon-twitter"></i>
+            </button>
+
+            <button class="md-btn md-btn-flat md-btn-default md-btn-icon" s-ripple>
+                <i class="md-icon-github2"></i>
+            </button>
+
+            <button class="md-btn md-btn-outline md-btn-coral md-btn-icon" s-ripple>
+                <i class="md-icon-dribbble"></i>
+            </button>
+            </xmp>
+        </div>
+
+        <div class="wrap">
+            <label>Disabled</label>
+            <xmp>
+            <button disabled class="md-btn md-btn-primary" s-ripple>
+                <i class="md-icon-all-done"></i> Success
+            </button>
+
+            <button disabled class="md-btn md-btn-danger" s-ripple>
+                <i class="md-icon-close"></i> Danger
+            </button>
+
+            <button disabled class="md-btn md-btn-grape" s-ripple>
+                <i class="md-icon-star"></i>
+            </button>
+
+            <div disabled class="md-btn md-btn-primary md-btn-file" s-ripple>
+                <label for="upload">
+                    <i class="md-icon-add"></i>
+                    {{ filename || "Choice a file" }}
+                </label>
+                <input id="upload" type="file" ng-model="filename" onchange="$(this).scope().filename=this.value;$(this).scope().$apply();">
+            </div>
+
+            <button disabled class="md-btn md-btn-aqua md-btn-icon" s-ripple>
+                <i class="md-icon-twitter"></i>
+            </button>
+
+            <button disabled class="md-btn md-btn-flat md-btn-default md-btn-icon" s-ripple>
+                <i class="md-icon-github2"></i>
+            </button>
+
+            <button disabled class="md-btn md-btn-outline md-btn-coral md-btn-icon" s-ripple>
+                <i class="md-icon-dribbble"></i>
+            </button>
+            </xmp>
+        </div>
     </section>
 
 </section>

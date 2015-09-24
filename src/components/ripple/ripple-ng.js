@@ -32,12 +32,19 @@ angular.module( "$ui.ripple", [] )
             $scope.controller = ripple = $( $element ).addClass( "md-ripple" ).ripple( options );
 
             $scope.$watch( "color", function( value ) {
-                ripple.hide();
-                ripple.settings.color = value;
+
+                if ( value ) {
+                    ripple.hide();
+                    ripple.settings.color = value;
+                }
             } );
 
             $scope.$watch( "disabled", function( value ) {
-                (value ? ripple.disabled : ripple.enabled).call( ripple );
+
+                /** Skip the undefined */
+                if ( !isNaN( +value ) ) {
+                    (value ? ripple.disabled : ripple.enabled).call( ripple );
+                }
             } );
         }
 
