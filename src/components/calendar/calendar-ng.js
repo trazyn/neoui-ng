@@ -86,7 +86,7 @@ angular.module( "$ui.calendar", [] )
             restric         : "E",
             replace         : true,
             template        : '<div class="md-calendar">' +
-                                '<input class="md-text" type="text" readonly />' +
+                                '<input class="md-text" type="text" />' +
                                 '<i class="md-icon-calendar"></i>' +
                               '</div>',
             link            : link

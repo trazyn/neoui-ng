@@ -137,8 +137,13 @@ define( [ "util/dateutil" ], function() {
 		this.settings = settings;
 
 
-		input.attr( {
+		input
+		.attr( {
 			"name": target.attr( "name" )
+		} )
+		.on( "focusout", function() {
+            defaultDate = new Date( this.value );
+            settings.onSelected( this.value );
 		} );
 
 		if ( settings.showTime ) {
