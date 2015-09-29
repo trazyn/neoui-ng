@@ -69,7 +69,7 @@ angular.module( "$ui.accordion", [] )
             restric             : "EA",
             transclude          : true,
             replace             : true,
-            template            : "<div class='ui accordion' ng-transclude></div>",
+            template            : "<div class='md-accordion' ng-transclude></div>",
             controller          : [ "$scope", "$element", "$attrs", controller ]
         };
     } ] )
@@ -80,13 +80,13 @@ angular.module( "$ui.accordion", [] )
 
             var
             accordion = controller["$accordion"],
-            head = $element.find( ">.head" ),
-            content = $element.find( ">.content" );
+            head = $element.find( ".md-accordion-head" ),
+            content = $element.find( ".md-accordion-content" );
 
             if ( $scope.head ) {
                 head.length
                     ? head.html( $scope.head )
-                    : $element.append( $( "<div class='head'>" + $scope.head + "</div>" ) )
+                    : $element.append( $( "<div class='md-accordion-head'>" + $scope.head + "</div>" ) )
                     ;
             }
 
@@ -95,10 +95,10 @@ angular.module( "$ui.accordion", [] )
                 if ( content.length ) {
                     content.html( $scope.content );
                 } else {
-                    $( "<div class='content'>" + $scope.content + "</div>" ).appendTo( $element );
+                    $( "<div class='md-accordion-content'>" + $scope.content + "</div>" ).appendTo( $element );
                 }
             } else {
-                $element.append( $( "<div class='content'></div>" ).html( $element.find( ">:not(.head)" ) ) );
+                $element.append( $( "<div class='md-accordion-content'></div>" ).html( $element.find( ">:not(.md-accordion-head)" ) ) );
             }
 
             $element.attr( "index", $scope.index );
@@ -122,7 +122,7 @@ angular.module( "$ui.accordion", [] )
             require             : "^sAccordion",
             transclude          : true,
             replace             : true,
-            template            : "<div class='pane' ng-transclude></div>",
+            template            : "<div class='md-accordion-pane' ng-transclude></div>",
             link                : link
         };
     } )
@@ -134,7 +134,7 @@ angular.module( "$ui.accordion", [] )
             restric             : "EA",
             transclude          : true,
             replace             : true,
-            template            : "<div class='head' ng-transclude></div>"
+            template            : "<div class='md-accordion-head' ng-transclude></div>"
         };
     } )
 
@@ -145,7 +145,7 @@ angular.module( "$ui.accordion", [] )
             restric             : "EA",
             transclude          : true,
             replace             : true,
-            template            : "<div class='content' ng-transclude></div>"
+            template            : "<div class='md-accordion-content' ng-transclude></div>"
         };
     } );
 } );

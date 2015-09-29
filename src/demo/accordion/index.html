@@ -1,27 +1,27 @@
 
 <title>Accordion - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="simple" data-forceanchor="-80" class="item active">Simple</li>
-    <li data-anchor="advance" data-forceanchor="-80" class="item">Advance</li>
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="simple" data-forceanchor="-80" class="md-anchor-item active">Simple</li>
+    <li data-anchor="advance" data-forceanchor="-80" class="md-anchor-item">Advance</li>
 
-    <li class="item">AngularJS
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="markup" class="item">Markup</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sAccordion" class="item">Directive * s-accordion</li>
-            <li data-anchor="sAccordionPane" class="item">Directive * s-accordion-pane</li>
-            <li data-anchor="sAccordionHead" class="item">Directive * s-accordion-head</li>
-            <li data-anchor="sAccordionContent" class="item">Directive * s-accordion-content</li>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sAccordion" class="md-anchor-item">Directive * s-accordion</li>
+            <li data-anchor="sAccordionPane" class="md-anchor-item">Directive * s-accordion-pane</li>
+            <li data-anchor="sAccordionHead" class="md-anchor-item">Directive * s-accordion-head</li>
+            <li data-anchor="sAccordionContent" class="md-anchor-item">Directive * s-accordion-content</li>
         </ul>
     </li>
 
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="html" class="item">Html</li>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -40,13 +40,19 @@
             </s-accordion-pane>
         </s-accordion>
 
-        <button class="ui button mint" ng-click="addPane()">
-            Add Pane
-        </button>
+        <br>
 
-        <button class="ui button warn" ng-click="removePane()">
-            Remove Last Pane
-        </button>
+        <p>
+
+            <button class="md-btn md-btn-mint" ng-click="addPane()">
+                Add Pane
+            </button>
+
+            <button class="md-btn md-btn-warning" ng-click="removePane()">
+                Remove Last Pane
+            </button>
+        </p>
+
     </section>
 
     <header data-anchor="simple">Simple</header>
@@ -126,16 +132,20 @@
             </s-accordion-pane>
         </s-accordion>
 
-        <p>
-        <button class="ui button primary" ng-click="accordion.expand(1)">Expand first</button>
-        <button class="ui button primary" ng-click="accordion.collapse(1)">Collapse first</button>
-        <button class="ui button primary" ng-click="accordion.toggle(1)">Toggle first</button>
+        <br>
 
-        <button class="ui button primary" ng-click="accordion.expandAll()">Expand All</button>
-        <button class="ui button primary" ng-click="accordion.collapseAll()">Collapse All</button>
+        <p>
+        <button class="md-btn md-btn-primary" ng-click="accordion.expand(1)">Expand first</button>
+        <button class="md-btn md-btn-primary" ng-click="accordion.collapse(1)">Collapse first</button>
+        <button class="md-btn md-btn-primary" ng-click="accordion.toggle(1)">Toggle first</button>
+
+        <button class="md-btn md-btn-primary" ng-click="accordion.expandAll()">Expand All</button>
+        <button class="md-btn md-btn-primary" ng-click="accordion.collapseAll()">Collapse All</button>
         </p>
 
-        <button class="ui button mint" ng-click="multiple = !multiple">{{ !multiple ? "Singleton" : "Allows multiple sections open at once" }}</button>
+        <p>
+        <button class="md-btn md-btn-mint" ng-click="multiple = !multiple">{{ !multiple ? "Singleton" : "Allows multiple sections open at once" }}</button>
+        </p>
     </section>
 
     <br>
@@ -146,7 +156,7 @@
         <header>AngularJS</header>
         <div class="markdown">
             <section>
-                <div class="ui ribbon" data-anchor="markup">
+                <div class="md-ribbon" data-anchor="markup">
                     <span>Markup</span>
                 </div>
 
@@ -247,7 +257,7 @@
             </section>
 
             <section>
-                <div class="ui ribbon" data-anchor="javascript">
+                <div class="md-ribbon" data-anchor="javascript">
                     <span>Javascript</span>
                 </div>
 
@@ -292,7 +302,7 @@
             </section>
 
             <section>
-                <div class="ui ribbon" data-anchor="sAccordion">
+                <div class="md-ribbon" data-anchor="sAccordion">
                     <span>Directive * s-accordion</span>
                 </div>
 
@@ -326,7 +336,7 @@
             </section>
 
             <section>
-                <div class="ui ribbon" data-anchor="sAccordionPane">
+                <div class="md-ribbon" data-anchor="sAccordionPane">
                     <span>Directive * s-accordion-pane</span>
                 </div>
 
@@ -360,7 +370,7 @@
             </section>
 
             <section>
-                <div class="ui ribbon" data-anchor="sAccordionHead">
+                <div class="md-ribbon" data-anchor="sAccordionHead">
                     <span>Directive * s-accordion-head</span>
                 </div>
                 <p>自定义标题栏</p>
@@ -368,7 +378,7 @@
             </section>
 
             <section>
-                <div class="ui ribbon" data-anchor="sAccordionContent">
+                <div class="md-ribbon" data-anchor="sAccordionContent">
                     <span>Directive * s-accordion-content</span>
                 </div>
                 <p>自定义内容</p>
@@ -379,21 +389,21 @@
         <header data-anchor="api">API</header>
 
         <section>
-            <div class="ui ribbon" data-anchor="html">
+            <div class="md-ribbon" data-anchor="html">
                 <span>HTML</span>
             </div>
 
             <xmp>
-            <div class="ui accordion">
-                <div class="pane">
-                    <div class="head">Pane 1</div>
-                    <div class="content">
+            <div class="md-accordion">
+                <div class="md-accordion-pane">
+                    <div class="md-accordion-head">Pane 1</div>
+                    <div class="md-accordion-content">
                     Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
                     </div>
                 </div>
-                <div class="pane">
-                    <div class="head">Pane 2</div>
-                    <div class="content">
+                <div class="md-accordion-pane">
+                    <div class="md-accordion-head">Pane 2</div>
+                    <div class="md-accordion-content">
                     Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.
                     </div>
                 </div>
@@ -405,7 +415,7 @@
         <br>
 
         <section>
-            <div class="ui ribbon" data-anchor="constructor">
+            <div class="md-ribbon" data-anchor="constructor">
                 <span>Constructor</span>
             </div>
 
@@ -427,7 +437,7 @@
         <br>
 
         <section>
-            <div class="ui ribbon" data-anchor="options">
+            <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
 
@@ -485,7 +495,7 @@
         <br>
 
         <section>
-            <div class="ui ribbon" data-anchor="method">
+            <div class="md-ribbon" data-anchor="method">
                 <span>Method</span>
             </div>
 

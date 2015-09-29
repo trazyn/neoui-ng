@@ -31,16 +31,16 @@
                     .animate( {
                         height: recent.attr( "data-height" )
                     }, settings.duration, function() {
-                        recent.removeClass( "open" );
+                        recent.removeClass( "md-accordion-open" );
                         settings.onCollapse( recent.attr( "index" ) );
                     } );
                 }( recent );
             }
 
             self
-            .toggleClass( "open" );
+            .toggleClass( "md-accordion-open" );
 
-            if ( self.hasClass( "open" ) ) {
+            if ( self.hasClass( "md-accordion-open" ) ) {
 
                 self
                 .height( height )
@@ -79,7 +79,7 @@
             .find( this.settings.selector4pane )
             .each( function() {
                 var self = $( this );
-                !self.hasClass( "open" ) && self.trigger( "click" );
+                !self.hasClass( "md-accordion-open" ) && self.trigger( "click" );
             } );
         },
 
@@ -88,7 +88,7 @@
             this
             .$node
             .find( this.settings.selector4pane )
-            .filter( ".open" )
+            .filter( ".md-accordion-open" )
             .trigger( "click" );
         },
 
@@ -97,7 +97,7 @@
             this
             .$node
             .find( this.settings.selector4pane )
-            .filter( "[index='" + index + "']:not(.open)" )
+            .filter( "[index='" + index + "']:not(.md-accordion-open)" )
             .trigger( "click" );
         },
 
@@ -106,7 +106,7 @@
             this
             .$node
             .find( this.settings.selector4pane )
-            .filter( ".open[index='" + index + "']" )
+            .filter( ".md-accordion-open[index='" + index + "']" )
             .trigger( "click" );
         },
 
@@ -136,9 +136,9 @@
         duration        : 300,
         onExpand        : $.noop,
         onCollapse      : $.noop,
-        selector4pane   : ">.pane",
-        selector4content: ".content:first",
-        selector4head   : ".head:first"
+        selector4pane   : ".md-accordion-pane",
+        selector4content: ".md-accordion-content:first",
+        selector4head   : ".md-accordion-head:first"
     };
 
 })( window.jQuery || window.$ );

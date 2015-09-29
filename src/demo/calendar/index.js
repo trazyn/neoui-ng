@@ -15,10 +15,10 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
 
         angular.extend( $scope, {
 
-            date: $.dateutil( now ).tomorrow(),
+            date: $.dateutil( now ).tomorrow().val(),
             isDisabled: false,
-            minDate: $.dateutil( now ).lastWeek(),
-            maxDate: $.dateutil( now ).nextWeek(),
+            minDate: $.dateutil( now ).lastWeek().val(),
+            maxDate: $.dateutil( now ).nextWeek().val(),
             onSelected: function( value ) {
                 console.log( value );
             }

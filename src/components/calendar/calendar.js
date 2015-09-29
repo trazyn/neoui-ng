@@ -259,9 +259,10 @@ define( [ "util/dateutil" ], function() {
                         input.trigger( "change" );
 
                         defaultDate = date;
+                        calendar.removeClass( "show" );
                         setTimeout( function() {
                             calendar.remove();
-                        } );
+                        }, 300 );
                     }
 				} )
 
