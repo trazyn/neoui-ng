@@ -46,9 +46,7 @@
             angular
             .module( "demo.dateutil", [] )
             .controller( "dateutilController", [ "$scope", function( $scope ) {
-
-                var du = $.dateutil( new Date() );
-                console.log( du.format( "%Y - %d / %m" ) );
+                console.log( $.dateutil().val( new Date() ).format( "%Y - %d / %m" ) );
             } ] );
         } );
         </xmp>

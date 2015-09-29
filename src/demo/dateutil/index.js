@@ -12,8 +12,8 @@ define( [ "util/dateutil" ], function() {
         justAgo = new Date( now - 50 * 1000 ),
         minuteAgo = new Date( now  - 200 * 1000 ),
         hourAgo = new Date( now - 3600 * 1000 ),
-        yesterday = new Date( $.dateutil( now ).yesterday() ),
-        morethan = new Date( $.dateutil( now ).day( -31 ) );
+        yesterday = $.dateutil().val( now ).yesterday(),
+        morethan = $.dateutil( now ).day( -31 );
 
         $scope.init = function() {
             $.anchor();
@@ -35,11 +35,11 @@ define( [ "util/dateutil" ], function() {
             hourAgo: hourAgo,
             hourAgo2: $.dateutil( hourAgo ).nice(),
 
-            yesterday: yesterday,
-            yesterday2: $.dateutil( yesterday ).nice(),
+            yesterday: yesterday.val(),
+            yesterday2: yesterday.nice(),
 
-            morethan: morethan,
-            morethan2: $.dateutil( morethan ).nice()
+            morethan: morethan.val(),
+            morethan2: morethan.nice()
         } );
     } ] );
 } );

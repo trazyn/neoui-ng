@@ -194,7 +194,8 @@
         },
 
         day: function( value ) {
-            return new Date( +this.value + value * 3600 * 1000 * 24 );
+            this.value = new Date( +this.value + value * 3600 * 1000 * 24 );
+            return this;
         },
 
         name: function( name, format ) {
@@ -218,52 +219,45 @@
                 offset = -(date.getDay() - mapping[ name ]);
             }
 
-            return this.format.call( {
-                    settings: this.settings,
-                    value: this.day( offset )
-            }, format );
+            this.value = this.day( offset );
+
+            return this;
         },
 
-        monday: function( format ) {
-            return this.name( "monday", format );
+        monday: function() {
+            return this.name( "monday" );
         },
 
-        tuesday: function( format ) {
-            return this.name( "tuesday", format );
+        tuesday: function() {
+            return this.name( "tuesday" );
         },
 
-        wednesday: function( format ) {
-            return this.name( "wednesday", format );
+        wednesday: function() {
+            return this.name( "wednesday" );
         },
 
-        thursday: function( format ) {
-            return this.name( "thursday", format );
+        thursday: function() {
+            return this.name( "thursday" );
         },
 
-        friday: function( format ) {
-            return this.name( "friday", format );
+        friday: function() {
+            return this.name( "friday" );
         },
 
-        saturday: function( format ) {
-            return this.name( "saturday", format );
+        saturday: function() {
+            return this.name( "saturday" );
         },
 
-        sunday: function( format ) {
-            return this.name( "sunday", format );
+        sunday: function() {
+            return this.name( "sunday" );
         },
 
-        yesterday: function( format ) {
-            return this.format.call( {
-                    settings: this.settings,
-                    value: this.day( -1 )
-            }, format );
+        yesterday: function() {
+            return this.day( -1 );
         },
 
-        tomorrow: function( format ) {
-            return this.format.call( {
-                    settings: this.settings,
-                    value: this.day( 1 )
-            }, format );
+        tomorrow: function() {
+            return this.day( 1 );
         },
 
         week: function( value ) {
@@ -271,17 +265,11 @@
         },
 
         lastWeek: function( format ) {
-            return this.format.call( {
-                    settings: this.settings,
-                    value: this.week( -1 )
-            }, format );
+            return this.week( -1 );
         },
 
         nextWeek: function( format ) {
-            return this.format.call( {
-                    settings: this.settings,
-                    value: this.week( 1 )
-            }, format );
+            return this.week( 1 );
         },
 
         month: function( value ) {
@@ -291,11 +279,30 @@
             current = [ date.getFullYear(), date.getMonth() ],
             offset = [ Math.floor( value / 12 ), value % 12 ];
 
-            return new Date( current[ 0 ] + offset[ 0 ], current[ 1 ] + offset[ 1 ]
+            this.value = new Date( current[ 0 ] + offset[ 0 ], current[ 1 ] + offset[ 1 ]
                                 , date.getDay()
                                 , date.getHours()
                                 , date.getMinutes()
                                 , date.getSeconds() );
+
+            return this;
+        },
+
+        val: function( value ) {
+
+            if ( value ) {
+                if ( value instanceof Date ) {
+                    this.value = value;
+                } else if ( "string" === typeof value ) {
+                    this.value = new Date( value );
+                } else {
+                    this.value = new Date();
+                }
+            } else {
+                return this.value;
+            }
+
+            return this;
         }
     };
 

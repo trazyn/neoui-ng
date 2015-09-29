@@ -136,7 +136,6 @@ define( [ "util/dateutil" ], function() {
 		this.$node = target;
 		this.settings = settings;
 
-
 		input
 		.attr( {
 			"name": target.attr( "name" )
