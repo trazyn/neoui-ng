@@ -39,16 +39,16 @@
         </blockquote>
 
         <xmp>
-        define( [ "util/dateutil" ], function() {
+    define( [ "util/dateutil" ], function() {
 
-            "use strict";
+        "use strict";
 
-            angular
-            .module( "demo.dateutil", [] )
-            .controller( "dateutilController", [ "$scope", function( $scope ) {
-                console.log( $.dateutil().val( new Date() ).format( "%Y - %d / %m" ) );
-            } ] );
-        } );
+        angular
+        .module( "demo.dateutil", [] )
+        .controller( "dateutilController", [ "$scope", function( $scope ) {
+            console.log( $.dateutil().val( new Date() ).format( "%Y - %d / %m" ) );
+        } ] );
+    } );
         </xmp>
     </section>
 

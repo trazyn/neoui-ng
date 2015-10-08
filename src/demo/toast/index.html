@@ -50,11 +50,11 @@
         <h5>服务<code>$ui.toast</code></h5>
 
         <xmp>
-        angular
-        .module( "app", [ "$ui.toast" ] )
-        .controller( "toastController", [ "$toast", function( $toast ) {
-            $toast.top( "On the top left!" ).left();
-        } ] );
+    angular
+    .module( "app", [ "$ui.toast" ] )
+    .controller( "toastController", [ "$toast", function( $toast ) {
+        $toast.top( "On the top left!" ).left();
+    } ] );
         </xmp>
     </section>
 
@@ -66,9 +66,9 @@
         <h5>模块<code>ui/toast/toast</code></h5>
 
         <xmp>
-        require( [ "ui/toast/toast" ], function() {
-            $.toast.top( "On the top left!" ).left();
-        } );
+    require( [ "ui/toast/toast" ], function() {
+        $.toast.top( "On the top left!" ).left();
+    } );
         </xmp>
     </section>
 

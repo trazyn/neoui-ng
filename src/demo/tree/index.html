@@ -104,35 +104,35 @@
         <div class="wrap">
             <label>Simple</label>
             <xmp>
-            <s-tree style="height: 480px; width: 320px;"
-                data="test"
-                ng-model="value"
-                filter-value="szseFilter"
-                controller="szseTree"
-                root-ids="0"
-                parent-key="parent"
-                text-key="name"
-                value-key="id"
-                after-render="afterInit( szseTree )">
-            </s-tree>
+    <s-tree style="height: 480px; width: 320px;"
+        data="test"
+        ng-model="value"
+        filter-value="szseFilter"
+        controller="szseTree"
+        root-ids="0"
+        parent-key="parent"
+        text-key="name"
+        value-key="id"
+        after-render="afterInit( szseTree )">
+    </s-tree>
             </xmp>
         </div>
 
         <div class="wrap">
         <label>Custom template</label>
         <xmp>
-        <s-tree class="md-tree-file" style="height: 600px; width: 320px;"
-            data="files"
-            ng-model="fileValue"
-            filter-value="filterValue"
-            close-same-level="true"
-            controller="fileTree"
-            root-ids="[ './' ]"
-            parent-key="parent"
-            text-key="name"
-            value-key="id">
-            <i class="md-icon md-icon-{{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
-        </s-tree>
+    <s-tree class="md-tree-file" style="height: 600px; width: 320px;"
+        data="files"
+        ng-model="fileValue"
+        filter-value="filterValue"
+        close-same-level="true"
+        controller="fileTree"
+        root-ids="[ './' ]"
+        parent-key="parent"
+        text-key="name"
+        value-key="id">
+        <i class="md-icon md-icon-{{ name.substr( name.lastIndexOf( '.' ) + 1 ) }}"></i><span>{{ name }}</span>
+    </s-tree>
         </xmp>
         <p class="note">内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></p>
         </div>
@@ -291,7 +291,7 @@
         </div>
 
         <xmp>
-        <div class="md-tree" style="height: 430px; width: 270px;"></div>
+    <div class="md-tree" style="height: 430px; width: 270px;"></div>
         </xmp>
     </section>
 
@@ -377,43 +377,43 @@
         <blockquote class="required">
             <p><code>data</code> - null</p>
             <xmp>
-            [ {
-                "id": "./dist",
-                "parent": "./",
-                "name": "dist"
-            }, {
-                "id": "./dist/.DS_Store",
-                "parent": "./dist",
-                "name": ".DS_Store"
-            }, {
-                "id": "./dist/css.css",
-                "parent": "./dist",
-                "name": "css.css"
-            }, {
-                "id": "./dist/css.min.css",
-                "parent": "./dist",
-                "name": "css.min.css"
-            }, {
-                "id": "./dist/style",
-                "parent": "./dist",
-                "name": "style"
-            }, {
-                "id": "./dist/style/css.css",
-                "parent": "./dist/style",
-                "name": "css.css"
-            }, {
-                "id": "./dist/style/css.min.css",
-                "parent": "./dist/style",
-                "name": "css.min.css"
-            }, {
-                "id": "./dist/vendor.js",
-                "parent": "./dist",
-                "name": "vendor.js"
-            }, {
-                "id": "./dist/vendor.min.js",
-                "parent": "./dist",
-                "name": "vendor.min.js"
-            } ]
+    [ {
+        "id": "./dist",
+        "parent": "./",
+        "name": "dist"
+    }, {
+        "id": "./dist/.DS_Store",
+        "parent": "./dist",
+        "name": ".DS_Store"
+    }, {
+        "id": "./dist/css.css",
+        "parent": "./dist",
+        "name": "css.css"
+    }, {
+        "id": "./dist/css.min.css",
+        "parent": "./dist",
+        "name": "css.min.css"
+    }, {
+        "id": "./dist/style",
+        "parent": "./dist",
+        "name": "style"
+    }, {
+        "id": "./dist/style/css.css",
+        "parent": "./dist/style",
+        "name": "css.css"
+    }, {
+        "id": "./dist/style/css.min.css",
+        "parent": "./dist/style",
+        "name": "css.min.css"
+    }, {
+        "id": "./dist/vendor.js",
+        "parent": "./dist",
+        "name": "vendor.js"
+    }, {
+        "id": "./dist/vendor.min.js",
+        "parent": "./dist",
+        "name": "vendor.min.js"
+    } ]
             </xmp>
             <footer>
                 为数组时候为本地数据, <code>function</code>时返回<code>$.Deferred</code>
@@ -424,11 +424,11 @@
         <blockquote>
             <p><code>onSelected</code> - null</p>
             <xmp>
-            $( ".md-tree" ).tree( {
-                onSelected: function( node ) {
-                    console.log( node );
-                }
-            } );
+    $( ".md-tree" ).tree( {
+        onSelected: function( node ) {
+            console.log( node );
+        }
+    } );
             </xmp>
             <footer> 选中节点时回调 </footer>
         </blockquote>
@@ -449,11 +449,11 @@
         <blockquote>
             <p><code>formatter</code> - <mark>-</mark></p>
             <xmp>
-            $( ".md-tree" ).tree( {
-                formatter: function() {
-                    return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
-                }
-            } );
+    $( ".md-tree" ).tree( {
+        formatter: function() {
+            return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
+        }
+    } );
             </xmp>
             <footer> 节点格式化 </footer>
         </blockquote>
@@ -472,18 +472,18 @@
             </footer>
         </blockquote>
         <xmp>
-        $( ".md-tree" ).tree( {
+    $( ".md-tree" ).tree( {
 
-            filter: {
-                "0": function( item ) {
-                    return !!item.value;
-                },
+        filter: {
+            "0": function( item ) {
+                return !!item.value;
+            },
 
-                "1": function( item ) {
-                    return item.value > 100;
-                }
+            "1": function( item ) {
+                return item.value > 100;
             }
-        } );
+        }
+    } );
         </xmp>
         <br>
 
@@ -543,11 +543,11 @@
         <blockquote>
             <code>data</code> - Object
             <xmp>
-            {
-                text: "Text",
-                value: "Value",
-                parentId: "0"
-            }
+    {
+        text: "Text",
+        value: "Value",
+        parentId: "0"
+    }
             </xmp>
         </blockquote>
         <br>

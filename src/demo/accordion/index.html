@@ -163,35 +163,35 @@
                 <div class="wrap">
                 <label>With ng-repeat</label>
                 <xmp>
-                <s-accordion>
-                    <s-accordion-pane
-                     ng-repeat="pane in panes"
-                     head="{{ pane.head }}"
-                     index="$index"
-                     content="{{ pane.content }}">
-                    </s-accordion-pane>
-                </s-accordion>
+    <s-accordion>
+        <s-accordion-pane
+         ng-repeat="pane in panes"
+         head="{{ pane.head }}"
+         index="$index"
+         content="{{ pane.content }}">
+        </s-accordion-pane>
+    </s-accordion>
                 </xmp>
                 </div>
 
                 <div class="wrap">
                 <label>Simple</label>
                 <xmp>
-                <s-accordion>
-                    <s-accordion-pane>
-                        <s-accordion-head>
-                            Pane 1
-                        </s-accordion-head>
-                        <s-accordion-content>
-                            Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
-                        </s-accordion-content>
-                    </s-accordion-pane>
+    <s-accordion>
+        <s-accordion-pane>
+            <s-accordion-head>
+                Pane 1
+            </s-accordion-head>
+            <s-accordion-content>
+                Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+            </s-accordion-content>
+        </s-accordion-pane>
 
-                    <s-accordion-pane
-                     head="Pane 2"
-                     content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
-                    </s-accordion-pane>
-                </s-accordion>
+        <s-accordion-pane
+         head="Pane 2"
+         content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+        </s-accordion-pane>
+    </s-accordion>
                 </xmp>
                 </div>
 
@@ -200,58 +200,58 @@
                     Advance
                     </label>
                     <xmp>
-                    <s-accordion multiple="multiple"
-                        on-expand="onExpand"
-                        on-collapse="onCollapse"
-                        is-open="isOpen"
-                        controller="accordion">
-                        <s-accordion-pane
-                            index="1"
-                            head="Pane 1"
-                            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.">
+    <s-accordion multiple="multiple"
+        on-expand="onExpand"
+        on-collapse="onCollapse"
+        is-open="isOpen"
+        controller="accordion">
+        <s-accordion-pane
+            index="1"
+            head="Pane 1"
+            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi.">
+        </s-accordion-pane>
+
+        <s-accordion-pane
+            index="2"
+            head="Pane 2"
+            content="Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.">
+        </s-accordion-pane>
+
+        <s-accordion-pane
+            index="3"
+            head="Pane 3">
+            Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+
+            <s-accordion>
+                <s-accordion-pane
+                    index="1"
+                    head="Subpane 1">
+                    <s-accordion>
+                        <s-accordion-pane index="1">
+                            <s-accordion-head>
+                                Inner Subpane 1
+                            </s-accordion-head>
+                            <s-accordion-content>
+                                Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
+                            </s-accordion-content>
                         </s-accordion-pane>
 
                         <s-accordion-pane
                             index="2"
-                            head="Pane 2"
-                            content="Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.">
-                        </s-accordion-pane>
-
-                        <s-accordion-pane
-                            index="3"
-                            head="Pane 3">
-                            Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
-
-                            <s-accordion>
-                                <s-accordion-pane
-                                    index="1"
-                                    head="Subpane 1">
-                                    <s-accordion>
-                                        <s-accordion-pane index="1">
-                                            <s-accordion-head>
-                                                Inner Subpane 1
-                                            </s-accordion-head>
-                                            <s-accordion-content>
-                                                Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
-                                            </s-accordion-content>
-                                        </s-accordion-pane>
-
-                                        <s-accordion-pane
-                                            index="2"
-                                            head="Inner Subpane 2"
-                                            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
-                                        </s-accordion-pane>
-                                    </s-accordion>
-                                </s-accordion-pane>
-
-                                <s-accordion-pane
-                                    index="2"
-                                    head="Subpane 2"
-                                    content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
-                                </s-accordion-pane>
-                            </s-accordion>
+                            head="Inner Subpane 2"
+                            content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
                         </s-accordion-pane>
                     </s-accordion>
+                </s-accordion-pane>
+
+                <s-accordion-pane
+                    index="2"
+                    head="Subpane 2"
+                    content="Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.">
+                </s-accordion-pane>
+            </s-accordion>
+        </s-accordion-pane>
+    </s-accordion>
                     </xmp>
                 </div>
             </section>
@@ -262,42 +262,42 @@
                 </div>
 
                 <xmp>
-                angular
-                .module( "demo.accordion", [ "$ui.accordion" ] )
-                .controller( "accordionController", [ "$scope", function( $scope ) {
+    angular
+    .module( "demo.accordion", [ "$ui.accordion" ] )
+    .controller( "accordionController", [ "$scope", function( $scope ) {
 
-                    $scope.multiple = true;
+        $scope.multiple = true;
 
-                    $scope.onExpand = function( index ) {
-                        console.log( "Expand: " + index );
-                    };
+        $scope.onExpand = function( index ) {
+            console.log( "Expand: " + index );
+        };
 
-                    $scope.onCollapse = function( index ) {
-                        console.log( "Collapse: " + index );
-                    };
+        $scope.onCollapse = function( index ) {
+            console.log( "Collapse: " + index );
+        };
 
-                    $scope.panes = [ {
-                        head: "Pane 1",
-                        content: "Pane - 1"
-                    }, {
-                        head: "Pane 2",
-                        content: "Pane - 2"
-                    } ];
+        $scope.panes = [ {
+            head: "Pane 1",
+            content: "Pane - 1"
+        }, {
+            head: "Pane 2",
+            content: "Pane - 2"
+        } ];
 
-                    $scope.addPane = function() {
+        $scope.addPane = function() {
 
-                        var index = +new Date();
+            var index = +new Date();
 
-                        $scope.panes.push( {
-                            head: "Pane " + index,
-                            content: "Pane - " + index
-                        } );
-                    };
+            $scope.panes.push( {
+                head: "Pane " + index,
+                content: "Pane - " + index
+            } );
+        };
 
-                    $scope.removePane = function() {
-                        $scope.panes.splice( -1 );
-                    };
-                } ] );
+        $scope.removePane = function() {
+            $scope.panes.splice( -1 );
+        };
+    } ] );
                 </xmp>
             </section>
 
@@ -394,20 +394,20 @@
             </div>
 
             <xmp>
-            <div class="md-accordion">
-                <div class="md-accordion-pane">
-                    <div class="md-accordion-head">Pane 1</div>
-                    <div class="md-accordion-content">
-                    Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
-                    </div>
-                </div>
-                <div class="md-accordion-pane">
-                    <div class="md-accordion-head">Pane 2</div>
-                    <div class="md-accordion-content">
-                    Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.
-                    </div>
-                </div>
+    <div class="md-accordion">
+        <div class="md-accordion-pane">
+            <div class="md-accordion-head">Pane 1</div>
+            <div class="md-accordion-content">
+            Quisque lorem tortor fringilla sed, vestibulum id, eleifend justo vel bibendum sapien massa ac turpis faucibus orci luctus non.
             </div>
+        </div>
+        <div class="md-accordion-pane">
+            <div class="md-accordion-head">Pane 2</div>
+            <div class="md-accordion-content">
+            Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.
+            </div>
+        </div>
+    </div>
             </xmp>
         </section>
 
@@ -429,7 +429,7 @@
             </blockquote>
 
         <xmp>
-        $( ".ui.accordion" ).accordion();
+    $( ".md-accordion" ).accordion();
         </xmp>
         </section>
 
@@ -470,21 +470,21 @@
             <br>
 
             <blockquote>
-                <p><code>selector4pane</code> - <code>">.pane"</code>
+                <p><code>selector4pane</code> - <code>">.md-accordion-pane"</code>
                 </p>
             </blockquote>
             <p>Selector of pane</p>
             <br>
 
             <blockquote>
-                <p><code>selector4head</code> - <code>".head:first"</code>
+                <p><code>selector4head</code> - <code>".md-accordion-head"</code>
                 </p>
             </blockquote>
             <p>Selector of the head</p>
             <br>
 
             <blockquote>
-                <p><code>selector4content</code> - <code>".content:first"</code>
+                <p><code>selector4content</code> - <code>".md-accordion-content"</code>
                 </p>
             </blockquote>
             <p>Selector of the content</p>
@@ -499,44 +499,31 @@
                 <span>Method</span>
             </div>
 
+            <h5><code>.expand( index )</code></h5>
             <blockquote>
-                <p><code>accordion.expand( index )</code>
-                </p>
-                <blockquote>
-                    <p><code>index</code> - Number</p>
-                </blockquote>
-            </blockquote>
-            <p>展开指定区域</p>
-            <br>
-
-            <blockquote>
-                <p><code>accordion.collapse( index )</code>
-                </p>
-                <blockquote>
-                    <p><code>index</code> - Number</p>
-                </blockquote>
-            </blockquote>
-            <p>收起指定区域</p>
-            <br>
-
-            <blockquote>
-                <p><code>accordion.toggle( index )</code>
-                </p>
-                <blockquote>
-                    <p><code>index</code> - Number</p>
-                </blockquote>
-            </blockquote>
-            <p>展开/收起指定区域</p>
-            <br>
-
-            <blockquote>
-                <p><code>accordion.expandAll()</code> - 展开所有</p>
+                <p><code>index</code> - Number</p>
+                <footer>展开指定区域</footer>
             </blockquote>
             <br>
 
+            <h5><code>.collapse( index )</code></h5>
             <blockquote>
-                <p><code>accordion.collapseAll()</code> - 收起所有</p>
+                <p><code>index</code> - Number</p>
+                <footer>收起指定区域</footer>
             </blockquote>
+            <br>
+
+            <h5><code>.toggle( index )</code></h5>
+            <blockquote>
+                <p><code>index</code> - Number</p>
+                <footer>展开/收起指定区域</footer>
+            </blockquote>
+            <br>
+
+            <h5><code>.expandAll()</code> - 展开所有</h5>
+            <br>
+
+            <h5><code>.collapseAll()</code> - 收起所有</h5>
             <br>
         </section>
     </div>

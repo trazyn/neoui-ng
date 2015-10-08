@@ -502,7 +502,7 @@ define( [ "util/dateutil" ], function() {
 
 		defaultDate     : new Date(),
 
-		selector4input  : ":input",
+		selector4input  : ":input:first",
 		selector4trigger: ".md-icon-calendar"
 	};
 } );

@@ -155,40 +155,40 @@
             <div class="wrap">
                 <label>Simple</label>
                 <xmp>
-                <s-autocomplete
-                 data="data"
-                 value-key="value"
-                 text-key="text"
-                 placeholder="Type 'a' or 'b' or 'c'">
-                </s-autocomplete>
+    <s-autocomplete
+     data="data"
+     value-key="value"
+     text-key="text"
+     placeholder="Type 'a' or 'b' or 'c'">
+    </s-autocomplete>
                 </xmp>
             </div>
 
             <div class="wrap">
             <label>Custom template</label>
             <xmp>
-             <s-autocomplete
-                 ng-model="reps"
-                 ajax="ajax"
-                 highlight="true"
-                 value-key="full_name"
-                 text-key="name"
-                 local-match="'*'"
-                 show-hint="false"
-                 placeholder="Search GitHub Repository">
-                 <div class="rep">
-                     {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
-                     <br>
-                     <code><i class="md-icon-github2"></i>  <a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
-                     <p>
-                     <code>{{ watchers.toLocaleString() }} Watchers</code>
-                     <code>{{ forks.toLocaleString() }} Forks</code>
-                     <code>{{ language }}</code>
-                     <code>Last update: {{ updated_at }}</code>
-                     <code class="issue"><i class="md-icon-info-outline"></i>{{ open_issues_count }}</code>
-                     </p>
-                 </div>
-             </s-autocomplete>
+    <s-autocomplete
+         ng-model="reps"
+         ajax="ajax"
+         highlight="true"
+         value-key="full_name"
+         text-key="name"
+         local-match="'*'"
+         show-hint="false"
+         placeholder="Search GitHub Repository">
+        <div class="rep">
+            {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+            <br>
+            <code><i class="md-icon-github2"></i>  <a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+            <p>
+            <code>{{ watchers.toLocaleString() }} Watchers</code>
+            <code>{{ forks.toLocaleString() }} Forks</code>
+            <code>{{ language }}</code>
+            <code>Last update: {{ updated_at }}</code>
+            <code class="issue"><i class="md-icon-info-outline"></i>{{ open_issues_count }}</code>
+            </p>
+        </div>
+    </s-autocomplete>
             </xmp>
             <p class="note">内容不为空时, 用作模板格式化结果, <mark>$text</mark>, <mark>$value</mark> 为当前结果值和显示名称</p>
             </div>
@@ -381,11 +381,11 @@
         </div>
 
         <xmp>
-        <div class="md-autoComplete">
-                <input class="md-text md-autoComplete-front" type="text" placeholder="Type 'a' or 'b' or 'c' or ','" />
-                <input class="md-text md-autoComplete-hint" type="text" tabindex="-1" />
-                <i class="md-icon"></i>
-        </div>
+    <div class="md-autoComplete">
+            <input class="md-text md-autoComplete-front" type="text" placeholder="Type 'a' or 'b' or 'c' or ','" />
+            <input class="md-text md-autoComplete-hint" type="text" tabindex="-1" />
+            <i class="md-icon"></i>
+    </div>
         </xmp>
     </section>
 
@@ -403,17 +403,17 @@
         </blockquote>
 
         <xmp>
-        var lookup = [ {
-            value: "AD",
-            text: "Andorra"
-        }, {
-        ...
-        }, {
-            value: "AO",
-            text: "Angola"
-        } ];
+    var lookup = [ {
+        value: "AD",
+        text: "Andorra"
+    }, {
+    ...
+    }, {
+        value: "AO",
+        text: "Angola"
+    } ];
 
-        $( ".md-autoComplete" ).autoComplete( { lookup: lookup } );
+    $( ".md-autoComplete" ).autoComplete( { lookup: lookup } );
         </xmp>
     </section>
 
@@ -505,11 +505,11 @@
         </blockquote>
         <p><code>Ajax</code> 配置:</p>
         <xmp>
-        {
-            dataProxy   - 返回 Promise
-            dataFilter  - 过滤 dataProxy 所产生的数据
-            enterforce  - 回车键强制查询
-        }
+    {
+        dataProxy   - 返回 Promise
+        dataFilter  - 过滤 dataProxy 所产生的数据
+        enterforce  - 回车键强制查询
+    }
         </xmp>
         <br>
 
@@ -518,13 +518,13 @@
         </blockquote>
         <p>格式化联想记录</p>
         <xmp>
-        formatter: function( value, text, index, highlightText, query, settings ) {
+    formatter: function( value, text, index, highlightText, query, settings ) {
 
-            return settings.highlight
-                ? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
-                : "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
-                ;
-        }
+        return settings.highlight
+            ? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
+            : "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
+            ;
+    }
         </xmp>
         <br>
 
@@ -551,43 +551,43 @@
         <br>
 
         <blockquote>
-        <p><code>class4loading</code> - <code>"sync"</code></p>
+        <p><code>class4loading</code> - <code>"md-autoComplete-sync"</code></p>
         </blockquote>
         <p>Ajax 服务<code>Pending</code>时样式</p>
         <br>
 
         <blockquote>
-        <p><code>class4error</code> - <code>"error"</code></p>
+        <p><code>class4error</code> - <code>"md-autoComplete-error"</code></p>
         </blockquote>
         <p>输入与联想结果不匹配时样式, <code>inputAnything</code>为<code>false</code>时有效</p>
         <br>
 
         <blockquote>
-        <p><code>class4selected</code> - <code>"selected"</code></p>
+        <p><code>class4selected</code> - <code>"md-autoComplete-selected"</code></p>
         </blockquote>
         <p>联想列表内容, 选中样式</p>
         <br>
 
         <blockquote>
-        <p><code>class4highlight</code> - <code>"highlight"</code></p>
+        <p><code>class4highlight</code> - <code>"md-autoComplete-highlight"</code></p>
         </blockquote>
         <p>文本匹配高亮样式</p>
         <br>
 
         <blockquote>
-        <p><code>class4list</code> - <code>"list"</code></p>
+        <p><code>class4list</code> - <code>"md-autoComplete-list"</code></p>
         </blockquote>
         <p>下拉列表样式</p>
         <br>
 
         <blockquote>
-        <p><code>selector4input</code> - <code>"input.front"</code></p>
+        <p><code>selector4input</code> - <code>".md-autoComplete-front"</code></p>
         </blockquote>
         <p>输入框选择器</p>
         <br>
 
         <blockquote>
-        <p><code>selector4indicator</code> - <code>"i.icon"</code></p>
+        <p><code>selector4indicator</code> - <code>".md-icon:first"</code></p>
         </blockquote>
         <p>状态提示选择器<p>
 

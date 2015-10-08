@@ -16,7 +16,7 @@ define( [ "util/dateutil" ], function() {
         morethan = $.dateutil( now ).day( -31 );
 
         $scope.init = function() {
-            $.anchor();
+            $.anchor( { offset: -10 } );
         };
 
         angular.extend( $scope, {

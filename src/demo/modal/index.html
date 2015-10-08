@@ -80,37 +80,37 @@
         </div>
 
         <xmp>
-        angular
-        .module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
-        .controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
+    angular
+    .module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
+    .controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
 
-            $scope.name = "test";
+        $scope.name = "test";
 
-            $scope.open = function( animation ) {
+        $scope.open = function( animation ) {
 
-                return $modal.open( {
-                    controller: "modalController",
-                    animation: animation,
-                    templateUrl: "src/demo/modal/page.html",
-                    title: "Mango (Fruit)",
-                    class4modal: "demo",
-                    scope: $scope
-                } );
-            };
+            return $modal.open( {
+                controller: "modalController",
+                animation: animation,
+                templateUrl: "src/demo/modal/page.html",
+                title: "Mango (Fruit)",
+                class4modal: "demo",
+                scope: $scope
+            } );
+        };
 
-            $scope.showProgress = function() {
+        $scope.showProgress = function() {
 
-                $modal.open( {
-                    controller: "modalController",
-                    templateUrl: "src/demo/modal/page1.html",
-                    title: "弹出框标题 18PX 加粗 #333",
-                    class4modal: "demo",
-                    scope: $scope
-                } )
+            $modal.open( {
+                controller: "modalController",
+                templateUrl: "src/demo/modal/page1.html",
+                title: "弹出框标题 18PX 加粗 #333",
+                class4modal: "demo",
+                scope: $scope
+            } )
 
-                .progress.start();
-            };
-        } ] );
+            .progress.start();
+        };
+    } ] );
         </xmp>
 
     </section>
@@ -151,7 +151,7 @@
         </blockquote>
 
         <xmp>
-        $.modal( { animation: "slide" } );
+    $.modal( { animation: "slide" } );
         </xmp>
 
     </section>
@@ -180,7 +180,7 @@
         <br>
 
         <blockquote>
-            <p><code>content</code> - null</p>
+            <p><code>render</code> - null</p>
             <footer> 弹出框内容, 字符串或<mark>function</mark> </footer>
         </blockquote>
         <br>

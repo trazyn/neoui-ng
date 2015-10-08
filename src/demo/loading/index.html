@@ -26,7 +26,7 @@
             <div class="code">
                 <label>Markup</label>
                 <xmp>
-                <s-loading class="md-loading-global" controller="loading" ng-click="loading.hide()"></s-loading>
+    <s-loading class="md-loading-global" controller="loading" ng-click="loading.hide()"></s-loading>
                 </xmp>
             </div>
 
@@ -34,11 +34,11 @@
             <div class="code">
                 <label>Javascript</label>
                 <xmp>
-                angular
-                .module( "demo.loading", [ "$ui.loading" ] )
-                .controller( "loadingController", [ "$scope", function( $scope ) {
-                    /** Not needed javascript */
-                } ] );
+    angular
+    .module( "demo.loading", [ "$ui.loading" ] )
+    .controller( "loadingController", [ "$scope", function( $scope ) {
+        /** Not needed javascript */
+    } ] );
                 </xmp>
             </div>
 
@@ -92,7 +92,7 @@
             <div class="code">
                 <label>Contructor</label>
                 <xmp>
-                $( selector ).loading();
+    $( selector ).loading();
                 </xmp>
             </div>
             <br>
@@ -100,7 +100,7 @@
             <div class="code">
                 <label>HTML</label>
                 <xmp>
-                <div class="ui loading"></div>
+    <div class="md-loading"></div>
                 </xmp>
             </div>
             <br>
@@ -108,9 +108,9 @@
             <div class="code">
                 <label>Javascript</label>
                 <xmp>
-                require( [ "ui/loading/loading" ], function() {
-                    var loading = $( ".ui.loading" ).loading();
-                } );
+    require( [ "ui/loading/loading" ], function() {
+        var loading = $( ".md-loading" ).loading();
+    } );
                 </xmp>
             </div>
             <br>

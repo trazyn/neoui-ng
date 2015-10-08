@@ -37,11 +37,11 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
-                $message.success( "This is a message telling you that everything is a-okay" );
-            } ] );
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.success( "This is a message telling you that everything is a-okay" );
+    } ] );
             </xmp>
         </section>
 
@@ -51,9 +51,9 @@
             </div>
 
             <xmp>
-            require( [ "ui/message/message" ], function() {
-                $.message.success( "This is a message telling you that everything is a-okay" );
-            } );
+    require( [ "ui/message/message" ], function() {
+        $.message.success( "This is a message telling you that everything is a-okay" );
+    } );
             </xmp>
         </section>
 
@@ -100,11 +100,11 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
-                $message.info( "This is an 'information message' div." );
-            } ] );
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.info( "This is an 'information message' div." );
+    } ] );
             </xmp>
         </section>
 
@@ -114,9 +114,9 @@
             </div>
 
             <xmp>
-            require( [ "ui/message/message" ], function() {
-                $.message.info( "This is an 'information message' div." );
-            } );
+    require( [ "ui/message/message" ], function() {
+        $.message.info( "This is an 'information message' div." );
+    } );
             </xmp>
         </section>
 
@@ -162,11 +162,11 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
-                $message.danger( "This is a notification that something is wrong..." );
-            } ] );
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.danger( "This is a notification that something is wrong..." );
+    } ] );
             </xmp>
         </section>
 
@@ -176,9 +176,9 @@
             </div>
 
             <xmp>
-            require( [ "ui/message/message" ], function() {
-                $.message.danger( "This is a notification that something is wrong..." );
-            } );
+    require( [ "ui/message/message" ], function() {
+        $.message.danger( "This is a notification that something is wrong..." );
+    } );
             </xmp>
         </section>
 
@@ -224,11 +224,11 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
-                $message.warning( "It warns the users that to expect some changes or limitations." );
-            } ] );
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.warning( "It warns the users that to expect some changes or limitations." );
+    } ] );
             </xmp>
         </section>
 
@@ -238,9 +238,9 @@
             </div>
 
             <xmp>
-            require( [ "ui/message/message" ], function() {
-                $.message.warning( "This is a notification that something is wrong..." );
-            } );
+    require( [ "ui/message/message" ], function() {
+        $.message.warning( "This is a notification that something is wrong..." );
+    } );
             </xmp>
         </section>
 
@@ -282,18 +282,18 @@
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.message" ] )
-            .controller( "messageController", [ "$message", function( $message ) {
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
 
-                $message.confirm( {
-                    title: "Please confirm",
-                    message: "Exported successfully. Do you want to open the export query page?",
-                    onOk: function() {
-                        window.open( "//www.google.com", "_blank" );
-                    }
-                } );
-            } ] );
+        $message.confirm( {
+            title: "Please confirm",
+            message: "Exported successfully. Do you want to open the export query page?",
+            onOk: function() {
+                window.open( "//www.google.com", "_blank" );
+            }
+        } );
+    } ] );
             </xmp>
         </section>
 
@@ -303,16 +303,16 @@
             </div>
 
             <xmp>
-            require( "ui/message/message", function() {
+    require( "ui/message/message", function() {
 
-                $message.confirm( {
-                    title: "Please confirm",
-                    message: "Exported successfully. Do you want to open the export query page?",
-                    onOk: function() {
-                        window.open( "//www.google.com", "_blank" );
-                    }
-                } );
-            } )
+        $message.confirm( {
+            title: "Please confirm",
+            message: "Exported successfully. Do you want to open the export query page?",
+            onOk: function() {
+                window.open( "//www.google.com", "_blank" );
+            }
+        } );
+    } )
             </xmp>
         </section>
         <section>

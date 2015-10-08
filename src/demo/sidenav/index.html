@@ -63,24 +63,24 @@
             </div>
 
             <xmp>
-            <s-sidenav id="profile" controller="profile">
-                <ul>
-                    <li class="avatar">
-                        <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
-                            <img src="/images/5271843.jpg" alt="fs3kuu">
-                        </a>
-                    </li>
-                    <li>News</li>
-                    <li>Feeds</li>
-                    <li>Messages</li>
-                    <li>Friends</li>
-                    <li>Photos</li>
-                    <li>Music</li>
-                    <li class="exit">
-                        <i class="md-icon-exit-to-app"></i>
-                    </li>
-                </ul>
-            </s-sidenav>
+    <s-sidenav id="profile" controller="profile">
+        <ul>
+            <li class="avatar">
+                <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
+                    <img src="/images/5271843.jpg" alt="fs3kuu">
+                </a>
+            </li>
+            <li>News</li>
+            <li>Feeds</li>
+            <li>Messages</li>
+            <li>Friends</li>
+            <li>Photos</li>
+            <li>Music</li>
+            <li class="exit">
+                <i class="md-icon-exit-to-app"></i>
+            </li>
+        </ul>
+    </s-sidenav>
             </xmp>
         </section>
 
@@ -90,19 +90,19 @@
             </div>
 
             <xmp>
-            define( [ "ui/sidenav/sidenav-ng" ], function() {
+    define( [ "ui/sidenav/sidenav-ng" ], function() {
 
-                "use strict";
+        "use strict";
 
-                angular
-                .module( "demo.sidenav", [ "$ui.sidenav" ] )
-                .controller( "sidenavController", [ "$scope", function( $scope ) {
+        angular
+        .module( "demo.sidenav", [ "$ui.sidenav" ] )
+        .controller( "sidenavController", [ "$scope", function( $scope ) {
 
-                    $scope.showProfile = function( sidenav ) {
-                        sidenav.left();
-                    };
-                } ] );
-            } );
+            $scope.showProfile = function( sidenav ) {
+                sidenav.left();
+            };
+        } ] );
+    } );
             </xmp>
 
         </section>
@@ -141,56 +141,56 @@
 
             <p class="subhead">profile.html</p>
             <xmp>
-            <div id="profile">
-                <ul>
-                    <li class="avatar">
-                        <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
-                            <img src="/images/5271843.jpg" alt="fs3kuu">
-                        </a>
-                    </li>
-                    <li>News</li>
-                    <li>Feeds</li>
-                    <li>Messages</li>
-                    <li>Friends</li>
-                    <li>Photos</li>
-                    <li>Music</li>
-                    <li class="exit">
-                        <i class="md-icon-exit-to-app"></i>
-                    </li>
-                </ul>
-            </div>
+    <div id="profile">
+        <ul>
+            <li class="avatar">
+                <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
+                    <img src="/images/5271843.jpg" alt="fs3kuu">
+                </a>
+            </li>
+            <li>News</li>
+            <li>Feeds</li>
+            <li>Messages</li>
+            <li>Friends</li>
+            <li>Photos</li>
+            <li>Music</li>
+            <li class="exit">
+                <i class="md-icon-exit-to-app"></i>
+            </li>
+        </ul>
+    </div>
             </xmp>
 
             <p class="subhead">JS</p>
             <xmp>
-            require( [ "ui/sidenav/sidenav" ], function() {
+    require( [ "ui/sidenav/sidenav" ], function() {
 
-                var container = $( "sidenav" );
+        var container = $( "sidenav" );
 
-                container
-                .delegate( "button[name=showProfile]", "click", function() {
+        container
+        .delegate( "button[name=showProfile]", "click", function() {
 
-                    $.sidenav( {
-                        content: function( ready, loading, close ) {
+            $.sidenav( {
+                content: function( ready, loading, close ) {
 
-                            var self = this;
+                    var self = this;
 
-                            $.ajax( {
-                                url: "/src/demo/sidenav/profile.html",
-                                dataType: "html"
-                            } )
+                    $.ajax( {
+                        url: "/src/demo/sidenav/profile.html",
+                        dataType: "html"
+                    } )
 
-                            .done( function( data ) {
-                                self.html( data );
-                                ready.resolve();
-                            } );
-
-                            this
-                            .delegate( ".exit", "click", close );
-                        }
+                    .done( function( data ) {
+                        self.html( data );
+                        ready.resolve();
                     } );
-                } );
+
+                    this
+                    .delegate( ".exit", "click", close );
+                }
             } );
+        } );
+    } );
             </xmp>
         </section>
 
@@ -235,11 +235,11 @@
                 <span>Method</span>
             </div>
 
-            <h5><code>sidenav.left()</code> - 左侧展开</h5>
+            <h5><code>.left()</code> - 左侧展开</h5>
             <br>
             <br>
 
-            <h5><code>sidenav.right()</code> - 右侧展开</h5>
+            <h5><code>.right()</code> - 右侧展开</h5>
             <br>
             <br>
         </section>

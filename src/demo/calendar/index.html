@@ -95,16 +95,16 @@
 
                 <div class="wrap">
                 <xmp>
-                <s-calendar
-                    ng-disabled="isDisabled"
-                    ng-model="date"
-                    double="double"
-                    placeholder="Year-Month-Day"
-                    min-date="minDate"
-                    max-date="maxDate"
-                    on-selected="onSelected"
-                    default-date="defaultDate">
-                </s-calendar>
+    <s-calendar
+        ng-disabled="isDisabled"
+        ng-model="date"
+        double="double"
+        placeholder="Year-Month-Day"
+        min-date="minDate"
+        max-date="maxDate"
+        on-selected="onSelected"
+        default-date="defaultDate">
+    </s-calendar>
                 </xmp>
                 </div>
             </section>
@@ -207,10 +207,10 @@
             </div>
 
             <xmp>
-            <div class="md-calendar">
-                <input class="md-text" type="text" placeholder="Year - Month - Day" readonly />
-                <i class="md-icon-calendar"></i>
-            </div>
+    <div class="md-calendar">
+        <input class="md-text" type="text" placeholder="Year - Month - Day" readonly />
+        <i class="md-icon-calendar"></i>
+    </div>
             </xmp>
         </section>
 
@@ -231,7 +231,7 @@
             </blockquote>
 
         <xmp>
-        $( ".md-calendar" ).calendar();
+    $( ".md-calendar" ).calendar();
         </xmp>
         </section>
 
@@ -303,11 +303,11 @@
                 <p><code>onSelected</code> - <code>nul</code>
                 </p>
                 <xmp>
-                $( ".md-calendar" ).calendar( {
-                    onSelected: function( value ) {
-                        console.log( "Current: " + value );
-                    }
-                } );
+    $( ".md-calendar" ).calendar( {
+        onSelected: function( value ) {
+            console.log( "Current: " + value );
+        }
+    } );
                 </xmp>
             </blockquote>
             <p>选中时执行</p>
@@ -321,14 +321,14 @@
             <br>
 
             <blockquote>
-                <p><code>selector4input</code> - <code>".input:first"</code>
+                <p><code>selector4input</code> - <code>":input:first"</code>
                 </p>
             </blockquote>
             <p>输入框选择器</p>
             <br>
 
             <blockquote>
-                <p><code>selector4trigger</code> - <code>".icon.calendar"</code>
+                <p><code>selector4trigger</code> - <code>".md-icon-calendar"</code>
                 </p>
             </blockquote>
             <p>事件触发节点选择器</p>
