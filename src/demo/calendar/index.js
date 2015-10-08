@@ -17,8 +17,8 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
 
             date: $.dateutil( now ).tomorrow().val(),
             isDisabled: false,
-            minDate: $.dateutil( now ).lastWeek().val(),
-            maxDate: $.dateutil( now ).nextWeek().val(),
+            minDate: $.dateutil( now ).month(-1).format( "%m/%d, %Y" ),
+            maxDate: $.dateutil( now ).month(1).format( "%m/%d, %Y" ),
             onSelected: function( value ) {
                 console.log( value );
             }
