@@ -1,26 +1,27 @@
 
 @import "base/colors.less";
 
-.ui.select {
-    background-color: rgba(0, 150, 136, 0.5);
-    padding: 6px 30px;
-    position: relative;
-    margin: 10px 10px 10px 0;
-    transition: .2s;
+.md-select {
+    background-color: rgba(0,150,136,.5);
     display: inline-block;
+    height: 32px;
+    padding: 0 30px;
+    line-height: 32px;
+    vertical-align: top;
+    position: relative;
+    transition: .2s;
 
     select {
         width: auto;
-        font-size: .8rem;
         margin: 0;
+        font-size: 12px;
+        color: rgba(255,255,255,.84);
         outline: none;
-        cursor: pointer;
         border: none;
         border-radius: 0;
         background-color: transparent;
-        color: rgba(255,255,255,.84);
-        -webkit-appearance: none;
-        -moz-appearance: window;
+        cursor: pointer;
+        appearance: none;
     }
 
     &:after {
@@ -30,10 +31,10 @@
         width: 0;
         height: 0;
         padding: 0;
-        content: '';
-        border-left: .35em solid transparent;
-        border-right: .35em solid transparent;
-        border-top: .375em solid #009688;
+        content: "";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #009688;
         pointer-events: none;
     }
 

@@ -335,8 +335,6 @@ define( 'demo/autoComplete/index',[ "ui/autoComplete/autoComplete-ng" ], functio
     .module( "demo.autoComplete", [ "$ui.autoComplete" ] )
     .controller( "autoCompleteController", [ "$scope", function( $scope ) {
 
-        $scope.name = "Test";
-
         /** AutoComplete options */
         angular.extend( $scope, {
 
@@ -531,7 +529,7 @@ define( 'demo/dateutil/index',[ "util/dateutil" ], function() {
         morethan = $.dateutil( now ).day( -31 );
 
         $scope.init = function() {
-            $.anchor();
+            $.anchor( { offset: -10 } );
         };
 
         angular.extend( $scope, {
@@ -674,8 +672,8 @@ define( 'demo/calendar/index',[ "ui/calendar/calendar-ng", "util/dateutil" ], fu
 
             date: $.dateutil( now ).tomorrow().val(),
             isDisabled: false,
-            minDate: $.dateutil( now ).lastWeek().val(),
-            maxDate: $.dateutil( now ).nextWeek().val(),
+            minDate: $.dateutil( now ).month(-1).format( "%m/%d, %Y" ),
+            maxDate: $.dateutil( now ).month(1).format( "%m/%d, %Y" ),
             onSelected: function( value ) {
                 console.log( value );
             }
@@ -693,7 +691,7 @@ define( 'demo/dropdown/index',[ "ui/dropdown/dropdown-ng" ], function() {
     .controller( "dropdownController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $.anchor( { offset: -10 } );
+            $.anchor( { offset: -60 } );
         };
 
         $scope.data = [ {
@@ -740,7 +738,7 @@ define( 'demo/dropdown/index',[ "ui/dropdown/dropdown-ng" ], function() {
 			text: "Angola"
 		} ];
 
-        $( ".ui.dropdown.icon" ).each( function() {
+        $( ".md-dropdown.md-icon" ).each( function() {
             $( this ).dropdown( { data: $scope.data } );
         } );
 

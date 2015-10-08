@@ -17,15 +17,15 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		this.settings = settings;
 		this.$node = target;
 
-		this.$navs = target.find( "> div.nav > .item" );
-		this.$tabs = target.find( "> div.content > .item" );
+		this.$navs = target.find( "> .md-tab-nav > .md-tab-nav-item" );
+		this.$tabs = target.find( "> .md-tab-content > .md-tab-content-item" );
 
         /**
          * Set current tab
          * Priority:
          *  .selected > settings.selected > :first
          * */
-		currentNav = this.$navs.filter( ".selected:first" );
+		currentNav = this.$navs.filter( ".md-tab-selected:first" );
 		if ( currentNav.length ) {
 
 		    if ( settings.selected !== undefined ) {
@@ -33,37 +33,38 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		    } else {
                 currentNav = this.$navs.first();
 		    }
-		    currentNav.addClass( "selected" );
+		    currentNav.addClass( "md-tab-selected" );
 		}
 
-		currentTab = this.$tabs.filter( "[" + settings.rule + "=" + currentNav.attr( settings.rule ) + "]" ).addClass( "selected" );
+		currentTab = this.$tabs.filter( "[" + settings.rule + "=" + currentNav.attr( settings.rule ) + "]" ).addClass( "md-tab-selected" );
 
-		this.$navs.not( currentNav ).removeClass( "selected" );
-		this.$tabs.not( currentTab ).removeClass( "selected" );
+		this.$navs.not( currentNav ).removeClass( "md-tab-selected" );
+		this.$tabs.not( currentTab ).removeClass( "md-tab-selected" );
 
         /** After the tab has rendered */
         setTimeout( function() {
 
             var options = {
-                selector4item   : ".item",
-                indicator       : "<div class='indicator' />",
+                selector4item   : ".md-tab-nav-item",
+                selector4current: ".md-tab-selected",
+                indicator       : "<div class='md-tab-indicator' />",
                 holdByClick     : false,
                 animation       : settings.duration
             };
 
             if ( settings.lavalamp ) {
-                instance.lavalamp = target.find( "> div.nav" ).lavalamp( options );
+                instance.lavalamp = target.find( "> .md-tab-nav" ).lavalamp( options );
             }
         }, 300 );
 
         if ( settings.ripple ) {
             this.$navs.each( function() {
-                $( this ).addClass( "ui ripple" ).ripple( settings.ripple );
+                $( this ).addClass( "md-ripple" ).ripple( settings.ripple );
             } );
         }
 
         target
-        .delegate( ".menu.ui.dropdown.icon", "click", function( e ) {
+        .delegate( ".md-tab-menu.md-dropdown", "click", function( e ) {
 
             var
             dropdown = $( this ).dropdown( {
@@ -86,7 +87,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
                     disabled: self.is( "[disabled]" )
                 } );
 
-                if ( self.hasClass( "selected" ) ) {
+                if ( self.hasClass( "md-tab-selected" ) ) {
                     selected = list[ list.length - 1 ];
                 }
             } );
@@ -96,7 +97,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
             .val( selected )
             .open();
         } )
-		.delegate( ".nav > .item", "click", function( e ) {
+		.delegate( ".md-tab-nav-item", "click", function( e ) {
 
 			var
 			self = $( this ),
@@ -129,7 +130,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 					tabs.length
 						? tabs.last().after( tab )
-						: target.find( "> div.content" ).append( tab )
+						: target.find( "> .md-tab-content" ).append( tab )
 						;
 
 					instance.$tabs = tabs = tabs.add( tab );
@@ -151,14 +152,14 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 			tabs = instance.$tabs,
 			class4success = settings.class4success, class4error = settings.class4error, class4loading = settings.class4loading;
 
-            if ( self.is( "[disabled]" ) || self.hasClass( "selected" ) ) {
+            if ( self.is( "[disabled]" ) || self.hasClass( "md-tab-selected" ) ) {
 
                 e.stopImmediatePropagation();
                 e.preventDefault();
                 return;
             }
 
-			if ( !self.hasClass( "selected" ) && index !== undefined ) {
+			if ( !self.hasClass( "md-tab-selected" ) && index !== undefined ) {
 
 				tab = tabs.filter( "[" + settings.rule + "=" + index + "]:first" );
 
@@ -168,21 +169,21 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					/** Clear the queue */
 					startup = undefined;
 
-					currentNav && currentNav.removeClass( "selected" );
-					currentNav = self.removeClass( class4success ).addClass( "selected" );
+					currentNav && currentNav.removeClass( "md-tab-selected" );
+					currentNav = self.removeClass( class4success ).addClass( "md-tab-selected" );
 
 					if ( currentTab ) {
-						currentTab.removeClass( "selected" );
+						currentTab.removeClass( "md-tab-selected" );
 					}
 
                     /** Set animation direction */
 					if ( currentTab.nextAll().index( tab ) !== -1 ) {
-					    tab.removeClass( "right" ).addClass( "left" );
-					} else tab.removeClass( "left" ).addClass( "right" );
+					    tab.removeClass( "md-tab-right" ).addClass( "md-tab-left" );
+					} else tab.removeClass( "md-tab-left" ).addClass( "md-tab-right" );
 
                     focus();
 
-					currentTab = tab.addClass( "selected" );
+					currentTab = tab.addClass( "md-tab-selected" );
                     settings.lavalamp && instance.lavalamp && instance.lavalamp.hold( self );
 					dispatch( index, tab, settings );
 					return;
@@ -197,7 +198,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 					startup = index;
 					delete instance[ "render" ][ "index" ];
 
-					tab = $( "<div class='item' " + settings.rule + "='" + index + "'>" )
+					tab = $( "<div class='md-tab-content-item' " + settings.rule + "='" + index + "'>" )
 						.attr( settings.rule, index )
 						.html( typeof render === "string" ? render : render.call( self, settings ) );
 				}
@@ -215,13 +216,13 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						} )
 						.done( function( responseText ) {
 
-							tab = $( "<div class='item'>" ).attr( settings.rule, index ).html( responseText );
+							tab = $( "<div class='md-tab-content-item'>" ).attr( settings.rule, index ).html( responseText );
 							self.removeClass( class4loading ).addClass( class4success );
                             finish();
 						} )
 						.fail( function( xhr ) {
 							self.removeClass( [ class4loading, class4success ].join( " " ) ).addClass( class4error );
-							tab = $( "<div class='item error'>" ).attr( settings.rule, index ).html(
+							tab = $( "<div class='md-tab-content-item md-tab-fail'>" ).attr( settings.rule, index ).html(
 							        "<h5>Faild to load: </h5>'" + page + "'" +
 							        "<blockquote>" + xhr.statusText + "</blockquote>"
 							        );
@@ -262,7 +263,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 						/** Duplicate */
 						!navs.filter( "[" + settings.rule + "=" + item.index + "]" ).length ) {
 
-					var nav = $( [ "<div class='item' ", settings.rule, "='", item.index, "'>",
+					var nav = $( [ "<div class='md-tab-nav-item' ", settings.rule, "='", item.index, "'>",
 							item.name || item.index,
 							"</div>" ].join( "" ) );
 
@@ -278,11 +279,11 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 							html = typeof render === "string" ? render : render.call( nav, settings );
 
-							tab = $( "<div class='item' " + settings.rule + "='" + item.index + "'>" ).html( html );
+							tab = $( "<div class='md-tab-content-item' " + settings.rule + "='" + item.index + "'>" ).html( html );
 
 							tabs.length
 								? tabs.last().after( tab )
-								: this.$node.find( "> div.content" ).append( tab )
+								: this.$node.find( "> .md-tab-content" ).append( tab )
 								;
 
 							tabs = this.$tabs = tabs.add( tab );
@@ -302,7 +303,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 					/** Update index */
 					if ( !navs.length ) {
-						this.$node.find( "> div.nav" ).append( nav );
+						this.$node.find( "> .md-tab-nav" ).append( nav );
 					} else {
 						navs.last().after( nav );
 					}
@@ -362,7 +363,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
             if ( index ) {
                 return this.$tabs.filter( "[" + settings.rule + "=" + index + "]" );
             } else {
-                return this.$tabs.filter( "div.selected" );
+                return this.$tabs.filter( "div.md-tab-selected" );
             }
 		},
 
@@ -379,7 +380,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 		isActive: function( index ) {
 
 			var settings = this.settings;
-            return this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).is( ".selected" );
+            return this.$navs.filter( "[" + settings.rule + "=" + index + "]" ).is( ".md-tab-selected" );
 		},
 
 		disabled: function( indexes ) {
@@ -442,9 +443,9 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 	$.fn.tab.defaults = {
 
 		rule 		    : "data-index",
-		class4loading 	: "sync",
-		class4error 	: "error",
-		class4success 	: "success",
+		class4loading 	: "md-tab-sync",
+		class4error 	: "md-tab-error",
+		class4success 	: "md-tab-success",
 
 		selected        : 0,
 

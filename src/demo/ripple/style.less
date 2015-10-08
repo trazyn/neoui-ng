@@ -3,24 +3,25 @@
 @import (reference) "../common/css/mixins.less";
 
 #ripple {
-
-    margin-top: -31px;
+    padding-top: 100px;
+    font-family: HelveticaNeue-UltraLight,'Helvetica Neue UltraLight',Roboto,Arial,Sans-serif;
     .themes {
         #themes();
     }
-    .ui.button {
+    .md-btn {
         width: 100px;
+        font-weight: 800;
     }
 
     h1 {
         font-weight: 200;
-        font-size: 2.5rem;
+        font-size: 40px;
         text-align: center;
         margin-bottom: 40px;
     }
 
     h3 {
-        font-size: 1.2rem;
+        font-size: 20px;
         color: white;
         text-shadow: 0 0 40px #fff;
         font-weight: 600;
@@ -42,44 +43,40 @@
 
     xmp {
         display: block;
-        font-family: Georgia,"Times New Roman","Microsoft YaHei","微软雅黑",STXihei,"华文细黑",serif;
-        font-size: .9rem;
-        color: rgba(0,0,0,.55);
         margin: 30px 0 0 0;
+        font-family: Georgia,"Times New Roman","Microsoft YaHei","微软雅黑",STXihei,"华文细黑",serif;
+        font-size: 14px;
+        color: rgba(0,0,0,.55);
         background-color: #fff;
         box-shadow: 0 1px 24px rgba(0,0,0,.24);
     }
 
-    .action {
-        margin: 120px 0 60px;
-    }
+    .action { margin: 120px 0 60px; }
 
     .block {
-        text-align: center;
         padding: 50px 0 100px;
+        text-align: center;
         overflow: hidden;
 
         &.example {
             padding: 50px 0 100px;
 
             h1 {
-                color: @coral;
                 position: relative;
                 display: inline-block;
+                color: @coral;
                 cursor: pointer;
                 &:after {
-                    content: "";
                     position: absolute;
-                    transition: .2s;
                     left: 0;
-                    bottom: 0;
-                    height: 4px;
-                    background-color: @lightGray;
+                    bottom: -8px;;
                     width: 100%;
+                    height: 4px;
+                    content: "";
+                    background-color: @lightGray;
+                    transition: .2s;
                 }
-                &:hover:after {
-                    background-color: @coral;
-                }
+                &:hover:after { background-color: @coral; }
             }
 
             p {
@@ -155,17 +152,17 @@
         position: relative;
 
         > label {
-            transition: .2s;
             position: absolute;
-            display: block;
             right: 0;
-            background: @coral;
+            display: block;
+            width: 80px;
             padding: 4px 14px;
             font-size: 12px;
             color: white;
             text-align: center;
-            width: 80px;
             font-weight: 800;
+            background: @coral;
+            transition: .2s;
             &:hover {
                 box-shadow: 0 1px 24px rgba(0,0,0,.24);
             }
@@ -173,22 +170,21 @@
     }
 
     .prop {
-        font-size: 14px;
-        transition: .2s;
-        font-weight: 100;
+        position: relative;
         margin: 20px 0 55px;
-        color: rgba(0,0,0,.55);
-        font-family: Roboto,Sans-serif;
-        background-color: white;
         padding: 30px 40px;
         border-left: 8px solid @lavender;
-        position: relative;
+        font-family: Roboto,Sans-serif;
+        font-size: 14px;
+        font-weight: 100;
+        color: rgba(0,0,0,.55);
+        background-color: white;
+        transition: .2s;
 
-        &:hover {
-            border-left: 40px solid @dribbble;
-        }
+        &:hover { border-left: 40px solid @dribbble; }
 
-        > .name, > .desc {
+        > .name,
+        > .desc {
             display: inline-block;
             vertical-align: top;
         }
@@ -197,47 +193,46 @@
             width: 30%;
 
             &:after {
-                content: "";
-                width: .25rem;
-                height: 50%;
+                position: absolute;
                 left: 25%;
                 top: 30px;
-                position: absolute;
+                width: 4px;
+                height: 50%;
                 background-color: #f5f7fa;
+                content: "";
             }
         }
 
         p {
-            height: 2rem;
-            line-height: 2rem;
+            height: 32px;
+            line-height: 32px;
         }
     }
 
     .method {
         position: relative;
-        font-size: 14px;
-        transition: .2s;
-        font-weight: 100;
         margin: 20px 0 55px;
-        color: rgba(0,0,0,.55);
-        font-family: Roboto,Sans-serif;
-        background-color: white;
         padding: 36px 0 0 0px;
-        position: relative;
+        font-family: Roboto,Sans-serif;
+        font-size: 14px;
+        font-weight: 100;
+        color: rgba(0,0,0,.55);
+        background-color: white;
         box-shadow: 0 1px 24px rgba(0,0,0,.24);
+        transition: .2s;
 
         > .name {
-            height: 32px;
-            line-height: 32px;
-            text-indent: 40px;
             position: absolute;
-            display: block;
-            background-color: @dribbble;
-            color: white;
             top: 0;
             left: 0;
-            text-indent: 0;
+            display: block;
+            height: 32px;
             padding: 0 16px;
+            line-height: 32px;
+            text-indent: 40px;
+            color: white;
+            background-color: @dribbble;
+            text-indent: 0;
         }
 
         > .desc {
@@ -255,33 +250,20 @@
                 vertical-align: top;
             }
 
-            > p:first-child {
-                width: 30%;
-            }
+            > p:first-child { width: 30%; }
 
             &:after {
-                content: "";
-                transition: .2s;
-                width: 66%;
-                height: .1rem;
+                position: absolute;
                 bottom: 10px;
                 left: 32%;
-                position: absolute;
+                width: 66%;
+                height: 2px;
                 background-color: @lightGray;
+                content: "";
+                transition: .2s;
             }
 
-            &:hover:after {
-                background-color: @darkGray;
-            }
+            &:hover:after { background-color: @darkGray; }
         }
-    }
-
-    .example .wrap {
-        width: 900px;
-        height: 100px;
-        margin: 100px auto 0;
-        position: relative;
-        overflow: hidden;
-        padding: 0 30px;
     }
 }

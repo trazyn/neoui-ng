@@ -1,22 +1,22 @@
 
 <title>Tab - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
-    <li class="item">AngularJS
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active" data-forceAnchor="-260">Example</li>
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="markup" class="item">Markup</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sTabSet" class="item">Directive * s-tab-set</li>
-            <li data-anchor="sTab" class="item">Directive * s-tab</li>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sTabSet" class="md-anchor-item">Directive * s-tab-set</li>
+            <li data-anchor="sTab" class="md-anchor-item">Directive * s-tab</li>
         </ul>
     </li>
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="html" class="item">Html</li>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -35,32 +35,32 @@
             </s-tab-set>
         </div>
 
-        <button class="ui button primary"
+        <button class="md-btn md-btn-primary"
             ng-click="addTab()">Add new tab</button>
 
-        <label class="ui select">
-            <select ng-model="selected"
-                ng-options="tab.index as tab.header for tab in tabs">
-            </select>
-        </label>
-
-        <button class="ui button success"
+        <button class="md-btn md-btn-success"
             ng-click="toggleTabState()"
             ng-show="!!tabs[selected - 1]['disabled']">
                 Enable {{ tabs[ selected - 1 ][ 'header' ] }}
         </button>
 
-        <button class="ui button error"
+        <button class="md-btn md-btn-danger"
             ng-click="toggleTabState()"
             ng-show="!tabs[selected - 1]['disabled']">
                 Disable {{ tabs[ selected - 1 ][ 'header' ] }}
         </button>
 
-        <button class="ui button warn"
+        <button class="md-btn md-btn-warning"
                 ng-disabled="selected < 6"
             ng-click="removeTab()">
             Remove this tab
         </button>
+
+        <label class="md-select">
+            <select ng-model="selected"
+                ng-options="tab.index as tab.header for tab in tabs">
+            </select>
+        </label>
 
     </section>
 
@@ -71,54 +71,54 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="markup">
+            <div class="md-ribbon" data-anchor="markup">
                 <span>Markup</span>
             </div>
 
             <xmp>
-            <s-tab-set selected="selected" on-select="onSelected">
-                <s-tab ng-repeat="tab in tabs" index="tab.index" header="\{\{ tab.title \}\}">
-                <div ng-bind-html="\{\{ tab.content \}\}"></div>
-                </s-tab>
-            </ng-tab-set>
+    <s-tab-set selected="selected" on-select="onSelected">
+        <s-tab ng-repeat="tab in tabs" index="tab.index" header="\{\{ tab.title \}\}">
+        <div ng-bind-html="\{\{ tab.content \}\}"></div>
+        </s-tab>
+    </ng-tab-set>
             </xmp>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="javascript">
+            <div class="md-ribbon" data-anchor="javascript">
                 <span>Javascript</span>
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.tab" ] )
-            .controller( "tabController", [ "$scope", function( $scope ) {
+    angular
+    .module( "app", [ "$ui.tab" ] )
+    .controller( "tabController", [ "$scope", function( $scope ) {
 
-                /** Set the default selected */
-                $scope.selected = "1";
+        /** Set the default selected */
+        $scope.selected = "1";
 
-                $scope.tabs = [ {
-                    header: "Tab 1",
-                    content: "Content 1",
-                    index: "1",
-                    disabled: true
-                }, {
+        $scope.tabs = [ {
+            header: "Tab 1",
+            content: "Content 1",
+            index: "1",
+            disabled: true
+        }, {
 
-                    header: "Tab 2",
-                    content: "Content 2",
-                    index: "2"
-                } ];
+            header: "Tab 2",
+            content: "Content 2",
+            index: "2"
+        } ];
 
-                $scope.onSelect = function( scope ) {
-                    console.log( "Current selected: " + scope.index );
-                };
-            } ] );
+        $scope.onSelect = function( scope ) {
+            console.log( "Current selected: " + scope.index );
+        };
+    } ] );
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sTabSet">
+            <div class="md-ribbon" data-anchor="sTabSet">
                 <span>Directive * s-tab-set</span>
             </div>
 
@@ -150,7 +150,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sTab">
+            <div class="md-ribbon" data-anchor="sTab">
                 <span>Directive * s-tab</span>
             </div>
 
@@ -189,24 +189,24 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="html">
+            <div class="md-ribbon" data-anchor="html">
                 <span>HTML</span>
             </div>
 
             <xmp>
-            <div class="ui tab" style="min-height: 300px;">
-                <div class="nav">
-                    <div class="item selected" data-index="github">Github</div>
-                    <div class="item selected" data-index="dribbble">Dribbble</div>
-                    <div class="item selected" data-index="twitter">Twitter</div>
-                </div>
+    <div class="md-tab" style="min-height: 300px;">
+        <div class="md-tab-nav">
+            <div class="md-tab-nav-item selected" data-index="github">Github</div>
+            <div class="md-tab-nav-item selected" data-index="dribbble">Dribbble</div>
+            <div class="md-tab-nav-item selected" data-index="twitter">Twitter</div>
+        </div>
 
-                <div class="content">
-                    <div data-index="github"></div>
-                    <div data-index="dribbble"></div>
-                    <div data-index="twitter"></div>
-                </div>
-            </div>
+        <div class="md-tab-content">
+            <div class="md-tab-content-item" data-index="github"></div>
+            <div class="md-tab-content-item" data-index="dribbble"></div>
+            <div class="md-tab-content-item" data-index="twitter"></div>
+        </div>
+    </div>
             </xmp>
             <blockquote>
                 <p><code>Ajax</code>页面的加载, 添加<code>data-page="url"</code>属性</p>
@@ -214,7 +214,7 @@
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="constructor">
+            <div class="md-ribbon" data-anchor="constructor">
                 <span>Constructor</span>
             </div>
 
@@ -228,13 +228,13 @@
             </blockquote>
 
             <xmp>
-            $( ".ui.tab" ).tab( { duration: 500 } );
+    $( ".md-tab" ).tab( { duration: 500 } );
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="options">
+            <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
 
@@ -245,13 +245,13 @@
             <br>
 
             <blockquote>
-            <p><code>class4loading</code> - <code>"loading"</code></p>
+            <p><code>class4loading</code> - <code>"md-tab-sync"</code></p>
             </blockquote>
             <p><code>Ajax</code>加载内容时作用于页签样式</p>
             <br>
 
             <blockquote>
-                <p><code>class4error</code> - <code>"error"</code>
+                <p><code>class4error</code> - <code>"md-tab-error"</code>
                 </p>
             </blockquote>
             <p><code>Ajax</code>加载失败时作用于页签样式</p>
@@ -277,23 +277,23 @@
             </blockquote>
             <p>取值为<code>function</code>时, 页签选中后执行该方法, 取值为<code>Hash</code>对象时, 通过<code>data-index</code>执行对应回调</p>
             <xmp>
-            $( ".ui.tab" ).tab( {
-                onSelect: {
+    $( ".md-tab" ).tab( {
+        onSelect: {
 
-                    "github": function( tab, settings ) {
-                        console.log( "Github" );
-                    },
+            "github": function( tab, settings ) {
+                console.log( "Github" );
+            },
 
-                    "dribbble": function( tab, settings ) {
-                        console.log( "Dribbble" );
-                    }
-                }
-            } );
+            "dribbble": function( tab, settings ) {
+                console.log( "Dribbble" );
+            }
+        }
+    } );
             </xmp>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="method">
+            <div class="md-ribbon" data-anchor="method">
                 <span>Method</span>
             </div>
 
@@ -305,13 +305,13 @@
             </blockquote>
             <p>新增一个或多个<code>tab</code></p>
             <xmp>
-            {
-                name - 新增页签显示(HTML)
-                index - 页签索引值
-                render - 内容渲染, 返回内容
-                immediate - render不为空时, 是否立即加载内容, 默认 false
-                page - 通过指定URL加载内容
-            }
+    {
+        name - 新增页签显示(HTML)
+        index - 页签索引值
+        render - 内容渲染, 返回内容
+        immediate - render不为空时, 是否立即加载内容, 默认 false
+        page - 通过指定URL加载内容
+    }
             </xmp>
             <br>
             <br>

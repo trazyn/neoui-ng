@@ -60,10 +60,10 @@ angular.module( "$ui.tab", [] )
 
             transclude      : true,
             replace         : true,
-            template        : '<div class="ui tab" style="min-height: 300px;">' +
-                                '<div class="nav"></div>' +
-                                '<div class="content" ng-transclude></div>' +
-                                '<div class="menu ui dropdown icon left"><i class="icon more"></i><div class="content"/></div>' +
+            template        : '<div class="md-tab" style="min-height: 300px;">' +
+                                '<div class="md-tab-nav"></div>' +
+                                '<div class="md-tab-content" ng-transclude></div>' +
+                                '<div class="md-tab-menu md-dropdown md-icon md-dropdown-left"><i class="md-icon"></i><div class="md-dropdown-content"/></div>' +
                               '</div>',
 
             controller      : [ "$scope", "$element", "$attrs", controller ]

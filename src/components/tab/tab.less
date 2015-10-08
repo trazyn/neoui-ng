@@ -1,138 +1,134 @@
 
 @import (reference) "../../style/neoui.less";
 
-.ui.tab {
+.md-tab {
     position: relative;
     overflow: hidden;
-    >.nav {
-        width: 100%;
-        overflow: hidden;
-        height: 40px;
-        white-space: nowrap;
-        .item {
-            display: inline-block;
-            transition: all .3s linear;
-            padding: 5px 32px;
-            cursor: pointer;
-            border-bottom: 3px solid #ddd;
-            margin-left: -3px;
-            font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
-            font-size: 18px;
-            text-shadow: 0 0 40px #CCC;
-            overflow: hidden;
-            position: relative;
-            &[disabled] {
-                cursor: not-allowed;
-                border-bottom: 3px solid lighten( #ddd, 10% );
-                color: @dribbble;
-            }
+}
 
-            &.success:after, &.error:after, &.sync:after {
-                font-family: "icomoon";
-                position: absolute;
-                display: block;
-                left: 0;
-                top: 6px;
-            }
+.md-tab-nav {
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
-            &.success:after {
-                content: "\e636";
-                color: @success;
-            }
+.md-tab-nav-item {
+    position: relative;
+    display: inline-block;
+    padding: 5px 32px;
+    margin-left: -3px;
+    border-bottom: 3px solid #ddd;
+    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
+    font-size: 18px;
+    text-shadow: 0 0 40px #CCC;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .2s;
 
-            &.error:after {
-                content: "\e61e";
-                color: @error;
-            }
-
-            &.sync:after {
-                content: "\e615";
-                color: @google;
-            }
-        }
-
-        .indicator {
-            position: absolute;
-            border-bottom: 3px solid @dribbble;
-            display: inline-block;
-            z-index: 0;
-            margin-left: -3px;
-        }
+    &[disabled] {
+        border-bottom: 3px solid lighten( #ddd, 10% );
+        color: @dribbble;
+        cursor: not-allowed;
     }
 
-    >.content {
-        min-height: 0;
-        position: relative;
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        overflow: hidden;
-
-        .item {
-            border: 0;
-            margin-bottom: 0;
-            padding: 10px 8px 5px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: transform .5s cubic-bezier(.35,0,.25,1);
-            transform: translateX(-100%);
-
-            &.right {
-                transform: translateX(100%);
-            }
-
-            &.left {
-                transform: translateX(-100%);
-            }
-
-            &.selected {
-                opacity: 1;
-                position: relative;
-                visibility: visible;
-                transform: translateX(0);
-            }
-
-            &.error blockquote {
-                border-left: 4px solid #ddd;
-                padding: 0 15px;
-                color: #777;
-            }
-        }
-    }
-
-    >.menu {
-        height: 40px;
-        line-height: 40px;
-        display: block;
+    &.md-tab-success:after,
+    &.md-tab-error:after,
+    &.md-tab-sync:after {
         position: absolute;
-        border-radius: 0;
-        right: 0;
-        top: 0;
-        text-align: right;
-        background-color: white;
-        z-index: 1;
-        cursor: pointer;
+        left: 0;
+        top: 6px;
+        display: block;
+        font-family: "icomoon";
+    }
 
-        i.icon {
-            font-size: 24px;
-            &:before {
-                content: "\e6a2";
-            }
-        }
+    &.md-tab-success:after {
+        color: @success;
+        content: "\e636";
+    }
 
-        &:hover {
-            background-color: white;
-        }
+    &.md-tab-error:after {
+        color: @error;
+        content: "\e61e";
+    }
 
-        .content {
-            top: 4px;
-            right: 4px !important;
-            text-align: center;
-            max-height: 240px;
-        }
+    &.md-tab-sync:after {
+        color: @google;
+        content: "\e615";
+    }
+}
+
+.md-tab-indicator {
+    position: absolute;
+    display: inline-block;
+    border-bottom: 3px solid @dribbble;
+    margin-left: -3px;
+    z-index: 0;
+}
+
+.md-tab-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    height: 40px;
+    text-align: right;
+    line-height: 40px;
+    border-radius: 0;
+    background-color: white !important;
+    z-index: 1;
+    cursor: pointer;
+
+    i.md-icon {
+        font-size: 24px;
+        &:before { content: "\e6a2"; }
+    }
+
+    &:hover { background-color: white; }
+
+    .md-dropdown-content {
+        top: 4px;
+        right: 4px !important;
+        text-align: center;
+        max-height: 240px;
+    }
+}
+
+.md-tab-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.md-tab-content-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 0;
+    padding: 10px 8px 5px;
+    margin-bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform .5s cubic-bezier(.35,0,.25,1);
+    transform: translateX(-100%);
+
+    &.md-tab-right { transform: translateX(100%); }
+    &.md-tab-left { transform: translateX(-100%); }
+
+    &.md-tab-selected {
+        opacity: 1;
+        position: relative;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    &.md-tab-fail blockquote {
+        border-left: 4px solid #ddd;
+        padding: 0 15px;
+        color: #777;
     }
 }
