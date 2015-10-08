@@ -170,10 +170,10 @@ angular.module( "$ui.autoComplete", [] )
 
             transclude          : true,
             replace             : true,
-            template            : '<div class="ui autoComplete">' +
-                                    '<input class="ui text front" type="text" placeholder="Type for search..." />' +
-                                    '<input class="ui text hint" type="text" tabindex="-1" />' +
-                                    '<i class="icon"></i>' +
+            template            : '<div class="md-autoComplete">' +
+                                    '<input class="md-text md-autoComplete-front" type="text" placeholder="Type for search..." />' +
+                                    '<input class="md-text md-autoComplete-hint" type="text" tabindex="-1" />' +
+                                    '<i class="md-icon"></i>' +
                                   '</div>',
             link                : link
         };

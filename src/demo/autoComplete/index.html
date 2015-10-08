@@ -1,23 +1,23 @@
 
 <title>AutoComplete - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="example" class="item active">Example</li>
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active">Example</li>
 
-    <li class="item">AngularJS
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="markup" class="item">Markup</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sAutocomplete" class="item">Directive * s-autocomplete</li>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sAutocomplete" class="md-anchor-item">Directive * s-autocomplete</li>
         </ul>
     </li>
 
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="html" class="item">Html</li>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -28,13 +28,11 @@
 
     <section>
 
-        <p>
         <code>
-            <label>Value:</label>
             {{ address || [] }}
         </code>
-        </p>
 
+        <br>
         <br>
 
         <div class="wrap">
@@ -51,7 +49,7 @@
                  highlight="true"
                  placeholder="Type 'a' or 'b' or 'c'">
                  <div class="item">
-                     {{ $text }} - {{ $value }} - {{ name }}
+                     {{ $text }} - {{ $value }}
                  </div>
              </s-autocomplete>
 
@@ -60,53 +58,53 @@
              <ul class="options">
                  <li>
                      <label>是否禁用?</label>
-                     <div class="ui checkbox" s-ripple>
-                         <input type="checkbox" ng-click="isDisabled = !isDisabled" />
-                         <div></div>
+                     <div class="md-checkbox" s-ripple>
+                        <input type="checkbox" ng-click="isDisabled = !isDisabled" >
+                        <div></div>
                      </div>
                  </li>
                  <li>
                      <label>文本全文匹配</label>
-                     <div class="ui radio" s-ripple>
-                         <input name="radio" type="radio" ng-model="localMatch" value="*" />
+                     <div class="md-radio" s-ripple>
+                         <input type="radio" ng-model="localMatch" value="*">
                          <div></div>
                      </div>
                  </li>
                  <li>
                      <label>匹配文本开头</label>
-                     <div class="ui radio" s-ripple>
-                         <input name="radio" type="radio" ng-model="localMatch" value="^" />
+                     <div class="md-radio" s-ripple>
+                         <input type="radio" ng-model="localMatch" value="^">
                          <div></div>
                      </div>
                  </li>
                  <li>
                      <label>匹配文本结尾</label>
-                     <div class="ui radio" s-ripple>
-                         <input name="radio" type="radio" ng-model="localMatch" value="$" />
+                     <div class="md-radio" s-ripple>
+                         <input type="radio" ng-model="localMatch" value="$">
                          <div></div>
                      </div>
                  </li>
 
                  <li>
                      <label>高亮搜索结果</label>
-                     <div class="ui switch" s-ripple>
-                         <input type="checkbox" ng-model="highlight" checked />
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="highlight" checked>
                          <div></div>
                      </div>
                  </li>
 
                  <li>
                      <label>不区分大小写</label>
-                     <div class="ui switch" s-ripple>
-                         <input type="checkbox" ng-model="fuzzy" checked />
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="fuzzy" checked>
                          <div></div>
                      </div>
                  </li>
 
                  <li>
                      <label>Press <kbd>Tab</kbd> select the first result</label>
-                     <div class="ui switch" s-ripple>
-                         <input type="checkbox" ng-model="tabComplete" checked />
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="tabComplete" checked>
                          <div></div>
                      </div>
                  </li>
@@ -115,12 +113,11 @@
              <br>
              <br>
 
-             <p>
              <code>
-                 <label>Value:</label>
                  {{ reps || [] }}
              </code>
-             </p>
+
+             <br>
              <br>
 
              <s-autocomplete
@@ -133,18 +130,15 @@
                  show-hint="false"
                  placeholder="Search GitHub Repository">
                  <div class="rep">
-                     <p>
                      {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
-                     </p>
+                     <br>
+                     <code><i class="md-icon-github2"></i>  <a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
                      <p>
-                     <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
-                     </p>
-                     <p>
-                     <code>{{ watchers.toLocaleString() }} Watchers</code>
-                     <code>{{ forks.toLocaleString() }} Forks</code>
+                     <mark>{{ watchers.toLocaleString() }} Watchers</mark>
+                     <mark>{{ forks.toLocaleString() }} Forks</mark>
                      <code>{{ language }}</code>
-                     <code>Last update: {{ updated_at }}</code>
-                     <code class="issue"><i class="icon issue"></i>{{ open_issues_count }}</code>
+                     <mark>Last update: {{ updated_at }}</mark>
+                     <mark class="issue"><i class="md-icon-info-outline"></i> {{ open_issues_count }}</mark>
                      </p>
                  </div>
              </s-autocomplete>
@@ -154,7 +148,7 @@
     <header>AngularJS</header>
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="markup">
+            <div class="md-ribbon" data-anchor="markup">
                 <span>Markup</span>
             </div>
 
@@ -173,95 +167,124 @@
             <div class="wrap">
             <label>Custom template</label>
             <xmp>
-            <s-autocomplete
-                 data="data"
-                 value-key="value"
-                 text-key="text"
-                 placeholder="Type 'a' or 'b' or 'c'">
-                 <div class="item">
-                     <i class="icon star"></i>
-                     \{\{ $text \}\} - \{\{ $value \}\} - \{\{ name \}\}
+             <s-autocomplete
+                 ng-model="reps"
+                 ajax="ajax"
+                 highlight="true"
+                 value-key="full_name"
+                 text-key="name"
+                 local-match="'*'"
+                 show-hint="false"
+                 placeholder="Search GitHub Repository">
+                 <div class="rep">
+                     {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+                     <br>
+                     <code><i class="md-icon-github2"></i>  <a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+                     <p>
+                     <code>{{ watchers.toLocaleString() }} Watchers</code>
+                     <code>{{ forks.toLocaleString() }} Forks</code>
+                     <code>{{ language }}</code>
+                     <code>Last update: {{ updated_at }}</code>
+                     <code class="issue"><i class="md-icon-info-outline"></i>{{ open_issues_count }}</code>
+                     </p>
                  </div>
-            </s-autocomplete>
+             </s-autocomplete>
             </xmp>
-            <code>内层不为空时,作为结果格式化模板, '$text', '$value' 为当前结果值和显示名称, '$index' 为序号</code>
+            <p class="note">内容不为空时, 用作模板格式化结果, <mark>$text</mark>, <mark>$value</mark> 为当前结果值和显示名称</p>
             </div>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="javascript">
+            <div class="md-ribbon" data-anchor="javascript">
                 <span>Javascript</span>
             </div>
 
             <xmp>
-            angular
-            .module( "app", [ "$ui.autoComplete" ] )
-            .controller( "autoCompleteController", [ "$scope", function( $scope ) {
+    angular
+    .module( "demo.autoComplete", [ "$ui.autoComplete" ] )
+    .controller( "autoCompleteController", [ "$scope", function( $scope ) {
 
-                /** AutoComplete options */
-                angular.extend( $scope, {
+        /** AutoComplete options */
+        angular.extend( $scope, {
 
-                    highlight: true,
-                    data: [ {
-                        value: "AD",
-                        text: "Andorra"
-                    }, {
-                        value: "AZ",
-                        text: "Azerbaijan"
-                    }, {
-                        value: "AW",
-                        text: "Aruba"
-                    }, {
-                        value: "BI",
-                        text: "Bulgaria"
-                    }, {
-                        value: "BS",
-                        text: "Bahamas"
-                    }, {
-                        value: "CH",
-                        text: "Switzerland"
-                    }, {
-                        value: "CK",
-                        text: "Cook Island"
-                    }, {
-                        value: "CL",
-                        text: "Chile"
-                    }, {
-                        value: "CN",
-                        text: "China"
-                    }, {
-                        value: "CM",
-                        text: "Cambodia"
-                    }, {
-                        value: "AE",
-                        text: "United Arab Emirates"
-                    }, {
-                        value: "AF",
-                        text: "Afghanistan"
-                    }, {
-                        value: "AG",
-                        text: "Antigua and Barbuda"
-                    }, {
-                        value: "AO",
-                        text: "Angola"
-                    } ]
+            isDisabled: false,
+            localMatch: "^",
+            tabComplete: true,
+            highlight: true,
+            fuzzy: true
+        } );
+
+        $scope.data = [ {
+			value: "AD",
+			text: "Andorra"
+		}, {
+			value: "AZ",
+			text: "Azerbaijan"
+		}, {
+			value: "AW",
+			text: "Aruba"
+		}, {
+			value: "BI",
+			text: "Bulgaria"
+		}, {
+			value: "BS",
+			text: "Bahamas"
+		}, {
+			value: "CH",
+			text: "Switzerland"
+		}, {
+			value: "CK",
+			text: "Cook Island"
+		}, {
+			value: "CL",
+			text: "Chile"
+		}, {
+			value: "CN",
+			text: "China"
+		}, {
+			value: "CM",
+			text: "Cambodia"
+		}, {
+			value: "AE",
+			text: "United Arab Emirates"
+		}, {
+			value: "AF",
+			text: "Afghanistan"
+		}, {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+		$scope.address = [ {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+		/** Ajax example */
+		$scope.ajax = {
+		    dataProxy: function( key ) {
+                return $.ajax( {
+                    url: "https://api.github.com/search/repositories?q=" + key + "&sort=stars&order=desc"
                 } );
-
-                /** Apply the default value */
-                $scope.address = [ {
-                    value: "AG",
-                    text: "Antigua and Barbuda"
-                }, {
-                    value: "AO",
-                    text: "Angola"
-                } ];
-            } ] );
+		    },
+            enterforce: true,
+            dataFilter: function( data ) {
+                return data.items || [];
+            }
+		};
+    } ] );
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sAutocomplete">
+            <div class="md-ribbon" data-anchor="sAutocomplete">
                 <span>Directive * s-autocomplete</span>
             </div>
 
@@ -353,21 +376,21 @@
 
     <div class="markdown">
     <section>
-        <div class="ui ribbon" data-anchor="html">
+        <div class="md-ribbon" data-anchor="html">
             <span>HTML</span>
         </div>
 
         <xmp>
-        <div class="ui autoComplete">
-                <input class="ui text front" type="text" placeholder="Type 'a' or 'b' or 'c' or ','" />
-                <input class="ui text hint" type="text" tabindex="-1" />
-                <i class="icon"></i>
+        <div class="md-autoComplete">
+                <input class="md-text md-autoComplete-front" type="text" placeholder="Type 'a' or 'b' or 'c' or ','" />
+                <input class="md-text md-autoComplete-hint" type="text" tabindex="-1" />
+                <i class="md-icon"></i>
         </div>
         </xmp>
     </section>
 
     <section>
-        <div class="ui ribbon" data-anchor="constructor">
+        <div class="md-ribbon" data-anchor="constructor">
             <span>Constructor</span>
         </div>
 
@@ -390,12 +413,12 @@
             text: "Angola"
         } ];
 
-        $( ".ui.autoComplete" ).autoComplete( { lookup: lookup } );
+        $( ".md-autoComplete" ).autoComplete( { lookup: lookup } );
         </xmp>
     </section>
 
     <section>
-        <div class="ui ribbon" data-anchor="options">
+        <div class="md-ribbon" data-anchor="options">
             <span>Options</span>
         </div>
 
@@ -518,7 +541,7 @@
         <p>以<code>foo</code>作为<code>key</code>值缓存结果, 再次输入<code>foobar</code>时候, 回溯输入内容, 尝试以<code>'fooba'</code>, <code>'foob'</code>, <code>'foo'</code> 作为<code>key</code>值去匹配缓存</p>
         <p>缓存结果集数量小于该值时命中缓存, 避免过多的<code>Ajax</code>服务请求</p>
         <p>所以为了能最大效率的<code>Ajax</code>联想, 后台服务应该是模糊查询, 并且结果数接近该值</p>
-        <p><code>ajaxOptions.enterforce</code>设置为<code>true</code>, <kbd>回车</kbd>重新查询并以当前输入创建缓存</p>
+        <p><code>ajaxOptions.enterforce</code>设置为<code>true</code>, <kbd>enter</kbd>重新查询并以当前输入创建缓存</p>
         <br>
 
         <blockquote>
@@ -571,32 +594,24 @@
     </section>
 
     <section>
-        <div class="ui ribbon" data-anchor="method">
+        <div class="md-ribbon" data-anchor="method">
             <span>Method</span>
         </div>
 
-        <blockquote>
-        <p><code>autoComplete.disabled()</code></p>
-        </blockquote>
-        <p>禁用控件</p>
+        <h5><code>.disabled()</code> - 禁用控件</h5>
         <br>
 
-        <blockquote>
-        <p><code>autoComplete.enabled()</code></p>
-        </blockquote>
-        <p>启用控件</p>
+        <h5><code>.enabled()</code> - 启用控件</h5>
         <br>
 
-        <blockquote>
-        <p><code>autoComplete.stopSuggest()</code></p>
-        </blockquote>
-        <p>停止当前联想</p>
+        <h5><code>.stopSuggest()</code> - 停止联想</h5>
         <br>
 
+        <h5><code>.val( [value] )</code></h5>
         <blockquote>
-        <p><code>autoComplete.val( [value] )</code></p>
+        <p><code>value</code> - Array / Object</p>
+        <footer>参数为空时返回控件值, 不为空时设置控件值, <code>value</code>为数组</footer>
         </blockquote>
-        <p>参数为空时返回控件值, 不为空时设置控件值, <code>value</code>为数组</p>
     </section>
     </div>
 

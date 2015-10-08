@@ -635,14 +635,14 @@
 		minChars 		    : 1,
 		cacheKey 		    : "autoComplete-data",
 
-		class4loading 		: "sync",
-		class4error 		: "error",
-		class4selected 		: "selected",
-		class4highlight 	: "highlight",
-		class4list 		    : "list",
+		class4loading 		: "md-autoComplete-sync",
+		class4error 		: "md-autoComplete-error",
+		class4selected 		: "md-autoComplete-selected",
+		class4highlight 	: "md-autoComplete-highlight",
+		class4list 		    : "md-autoComplete-list",
 
-		selector4input 		: "input:first",
-		selector4indicator 	: ".icon:first",
+		selector4input 		: ".md-autoComplete-front",
+		selector4indicator 	: ".md-icon:first",
 
 		valueKey 		    : "value",
 		textKey 		    : "text",

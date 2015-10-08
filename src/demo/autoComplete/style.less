@@ -5,28 +5,26 @@
 #autoComplete {
     #markdown();
 
-    .ui.autoComplete {
-        width: 100%;
-    }
+    .md-autoComplete { width: 100%; }
 
-    .ui.radio, .ui.checkbox {
-        margin-left: 8px;
-    }
+    .ui-mdradio,
+    .ui-mdcheckbox { margin-left: 8px; }
 
     .options {
+        padding: 0;
         list-style: none;
 
         li {
             width: 100%;
-            border-left: 4px solid @lightGray2;
             height: 48px;
-            line-height: 48px;
             padding-left: 24px;
+            border-left: 4px solid @lightGray2;
+            line-height: 48px;
         }
 
         label:first-child {
-            width: 90%;
             display: inline-block;
+            width: 90%;
             text-align: left;
         }
     }

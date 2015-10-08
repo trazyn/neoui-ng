@@ -7,8 +7,6 @@ define( [ "ui/autoComplete/autoComplete-ng" ], function() {
     .module( "demo.autoComplete", [ "$ui.autoComplete" ] )
     .controller( "autoCompleteController", [ "$scope", function( $scope ) {
 
-        $scope.name = "Test";
-
         /** AutoComplete options */
         angular.extend( $scope, {
 

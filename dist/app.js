@@ -136,618 +136,7 @@
 define("ui/anchor/anchor", function(){});
 
 
-(function( $ ) {
-
-	"use strict";
-
-	var
-
-	namespace = "$ui.loading",
-
-	Loading = function( target, settings ) {
-
-		this.$node = target = $( target );
-		this.settings = settings;
-		target.parent().css( "position", "relative" );
-	};
-
-	Loading.prototype = {
-
-		show: function() {
-
-            this.$node.addClass( "show" );
-			return this;
-		},
-
-		hide: function( callback ) {
-
-            this.$node.removeClass( "show" );
-			return this;
-		}
-	};
-
-	$.fn.loading = function( options ) {
-
-		var instance = this.data( namespace );
-
-		if ( !instance ) {
-			instance = new Loading( this, options || {} );
-			this.data( namespace, instance );
-		}
-
-		return instance;
-	};
-
-})( window.jQuery );
-
-
-define("ui/loading/loading", function(){});
-
-
-(function( factory ) {
-
-	if ( "function" === typeof define && define.amd ) {
-		define( 'util/poll',factory );
-	} else {
-		
-		var exports = window || this;
-
-		exports.Poll = factory();
-	}
-})( function() {
-
-	"use strict";
-
-	var 
-	tasks = {},
-
-	config = {
-
-		interval: 5000,
-		delay: false
-
-		/** TODO: */
-	},
-
-	create = function( task ) {
-
-		var 
-		deferred = $.Deferred(),
-
-		wait = function() {
-
-			task.action( deferred );
-
-			return deferred.promise();
-		},
-		
-		runner = function() {
-		
-			return setTimeout( function() {
-
-				$.when( wait() )
-
-				.done( function() {
-
-					/** Already removed */
-					if ( void 0 === tasks[ task.name ] ) {
-
-						/** Force to clean the queue of tasks */
-						destory( task.name );
-
-						return;
-					}
-
-					delete task.delay;
-
-					/** Update the task */
-					create( task );
-				} )
-
-				.fail( function() {
-
-					destory( task.name );
-				} );
-
-			}, task.interval );
-		};
-
-		/** Apply the default configuration */
-		task = $.extend( {}, config, task );
-
-		task.name = task.name || "Task$" + Math.random().toString( 16 ).replace( /^0\./, "" );
-
-		tasks[ task.name ] = {
-
-			deferred: deferred,
-
-			value: true === task.delay ? runner : runner()
-		};
-
-		return task.name;
-	},
-
-	destory = function( id ) {
-
-		if ( id ) {
-
-			var instance = tasks[ id ];
-
-			if ( instance ) {
-			
-				clearTimeout( instance.value );
-
-				delete tasks[ id ];
-			}
-
-		} else tasks = {};
-	};
-
-	return {
-
-		/**
-		 * Add a task and return the task id
-		 *
-		 * @param task 	Array/Object
-		 * */
-		add: function( task ) {
-
-			var 
-			register = function( task ) {
-
-				return "function" === typeof task.action && create( task );
-			},
-
-			id, ids = [];
-
-			if ( $.isArray( task ) ) {
-
-				for ( var i = task.length; --i >= 0; ) {
-
-					id = register( task[ i ] );
-
-					id && ids.push( id );
-				}
-
-			} else (id = register( task )) && ids.push( id );
-
-			return ids;
-		},
-
-		/**
-		 * Start a task
-		 *
-		 * @param taskid 	String
-		 * */
-		start: function( taskid ) {
-		
-			var task = tasks[ taskid ];
-
-			if ( task && "function" === typeof task.value ) {
-				
-				return task.value = task.value();
-			}
-
-			return 0;
-		},
-
-		/**
-		 * Remove task
-		 *
-		 * @param [id] String, Without id will be remove all
-		 * */
-		remove: destory
-	};
-} );
-
-
-define( 'ui/progress/progress',[ "util/poll" ], function( poll ) {
-
-	"use strict";
-
-	var
-	namespace = "$ui.progress",
-
-	Progress = function( target, settings ) {
-
-		var self = this;
-
-		this.$node = target;
-		this.settings = settings;
-
-		if ( settings.template ) {
-			this.$node.html( settings.template );
-		}
-	};
-
-	Progress.prototype = {
-
-		start: function() {
-
-			var settings = this.settings;
-
-			this.set( 0 );
-			this.runner && poll.remove( this.runner );
-			this.runner = runner.call( this, settings );
-
-			/** Fadein */
-			this.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
-
-				"opacity": 1,
-				"visibility": "visible",
-				"display": ""
-			} );
-
-			poll.start( this.runner );
-			return this;
-		},
-
-		set: function( status ) {
-
-			this.status = status;
-			this.settings.render.call( this, status );
-
-			return this;
-		},
-
-		done: function() {
-
-			var self = this, settings = this.settings;
-
-			self.set( 1 );
-
-			setTimeout( function() {
-
-				self.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
-					"opacity": 0,
-					"visibility": "hidden"
-				} );
-
-				setTimeout( function() {
-					self.set( 0 );
-					self.$node.find( settings.selector4icon ).css( "display", "none" );
-				}, 800 );
-			}, 400 );
-
-			poll.remove( self.runner );
-
-			return this;
-		},
-
-		inc: function() {
-
-            var
-            status = this.status,
-            settings = this.settings;
-
-		    status += Math.random() * settings.seed;
-            status = status > settings.max ? settings.max : status;
-            this.status = status;
-            return this;
-		},
-
-		dec: function() {
-
-            var
-            status = this.status,
-            settings = this.settings,
-            value = Math.random() * settings.seed;
-
-		    status -= value;
-            status = status < 0.02 ? value : status;
-            this.status = status;
-            return this;
-		}
-	};
-
-	function runner( settings ) {
-
-		var self = this;
-
-		return poll.add( {
-
-			action: function( deferred ) {
-
-				var status = +self.status || 0;
-
-				status += Math.random() * settings.seed;
-				status = status > settings.max ? settings.max : status;
-				self.set( status );
-				deferred.resolve();
-			},
-
-            delay: true,
-            interval: settings.speed
-		} );
-	}
-
-	$.fn.progress = function( options ) {
-
-		var
-		settings,
-		instance = this.data( namespace );
-
-		if ( !instance ) {
-
-			settings = $.extend( {}, $.fn.progress.defaults, options || {} );
-			settings.max = settings.max > 1 ? 0.99123 : settings.max;
-			instance = new Progress( this, settings );
-			this.data( namespace, instance );
-		}
-
-		return instance;
-	};
-
-	$.fn.progress.defaults = {
-
-		seed 		    : 0.05,
-		speed 		    : 800,
-
-		max 		    : 0.99123,
-
-		template 	    : "<div class='md-progress-bar'><div></div></div><div class='md-progress-spinner'><div></div></div>",
-
-		selector4bar 	: ".md-progress-bar",
-		selector4icon 	: ".md-progress-spinner",
-
-		render          : function( status ) {
-
-            this
-            .$node
-            .find( this.settings.selector4bar )
-            .css( {
-                "width": status * 100 + "%",
-                "-webkit-transition": "all .2s ease-out",
-                "-moz-transition": "all .2s ease-out",
-                "-ms-transition": "all .2s ease-out",
-                "-o-transition": "all .2s ease-out",
-                "transition": "all .2s ease-out",
-            } );
-		}
-	};
-} );
-
-
-
-define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], function() {
-
-	$.fn.modal = function( options ) {
-
-		var
-
-        template = [ "<div class='md-modal'>",
-                    "<div style='height: 100%;'>",
-                        "<div class='md-modal-head'></div><div class='md-icon-clear md-modal-close'></div>",
-                        "<div class='md-loading'></div>",
-                        "<div class='md-progress'></div>",
-                        "<div class='md-modal-body'></div>",
-                    "</div>",
-
-                "</div>",
-                "<div class='md-modal-overlay'></div>" ].join( "" ),
-
-		modal = $( template ),
-
-		close = function() {
-			$( document ).off( "keyup", closeByESC ).off( "click", closeByDocument );
-
-			options.onClose();
-			modal.removeClass( "show" );
-			setTimeout( function() { modal.remove(); }, 300 );
-		},
-
-		closeByESC = function( e ) {
-			27 === e.keyCode && close();
-		},
-
-		closeByDocument = function( e ) {
-			$( e.target ).hasClass( "md-modal-overlay" ) && close();
-		},
-
-		loading = modal.find( ".md-loading:first" ).loading(),
-		progress = modal.find( ".md-progress:first" ).progress(),
-
-		deferred = $.Deferred(),
-
-		show = function() {
-
-			var
-			  head = modal.find( ".md-modal-head" ),
-			  body = modal.find( ".md-modal-body" ),
-			  overlay = modal.last();
-
-			/** ~Head~ */
-			options.showTitle ? head.html( options.title ) : head.hide().next().hide();
-
-			/** ~Body~ */
-			if ( options.content instanceof Function ) {
-				options.content.call( body, deferred, loading, close );
-			} else {
-				body.html( options.content );
-				deferred.resolve();
-			}
-
-			modal.first().addClass( [ "md-modal-animation-" + options.animation, options.class4modal || "" ].join( " " ) );
-
-			/** Show the overlay */
-			overlay.addClass( options.modal ? "show" : "blank" );
-
-			/** Close the modal */
-			if ( options.closeByESC || options.closeByDocument ) {
-
-				var trigger = $( document ).add( modal );
-
-				true === options.closeByDocument
-					&& modal.off( "click", closeByDocument ).on( "click", closeByDocument );
-
-				if ( "boolean" === typeof options.closeByESC ) {
-					trigger.off( "keyup", closeByESC ).on( "keyup", closeByESC );
-				}
-			}
-
-			modal.delegate( ".md-modal-close", "click", close );
-
-			setTimeout( function() {
-				modal.first().addClass( "show" );
-			}, 100 );
-
-			if ( options.draggable ) {
-
-                var handle = options.draggable;
-
-                head.css( "cursor", "move" );
-
-				modal.drag( function( ev, dd ) {
-
-					$( this ).css( {
-						top: dd.offsetY,
-						left: dd.offsetX,
-                        "width": modal.width(),
-                        "height": modal.height(),
-						"-webkit-transform": "none",
-						"-moz-transform": "none",
-						"-ms-transform": "none",
-						"transform": "none",
-					} );
-				}, { handle: handle === true ? ".md-modal-head" : handle } );
-			}
-
-			modal.appendTo( document.body );
-		};
-
-		options = $.extend( {}, $.fn.modal.defaults, options || {} );
-
-		if ( this === $ ) {
-			options.target ? $( options.target ).on( "click", show ) : (options.autoShow && show());
-		/** Use a dom as trigger */
-		} else this.on( "click", show );
-
-		return {
-			open: show,
-			close: close,
-			loading: loading,
-			progress: progress,
-			$node: modal
-		};
-	};
-
-	$.fn.modal.defaults = {
-
-		title 		    : "Modal",
-		showTitle 	    : true,
-		modal        	: true,
-		draggable       : true,
-
-		class4modal     : "",
-
-		closeByESC 	    : true,
-		closeByDocument : false,
-
-		animation 	    : "slide",
-		content 		: "",
-
-		autoShow 	    : true,
-		onClose 		: $.noop,
-	};
-
-	/** Export to $ */
-	$.modal = $.fn.modal;
-} );
-
-
-
-define( 'ui/dialog/dialog',[ "ui/modal/modal" ], function() {
-
-    $.dialog = function( options ) {
-
-        var
-        modal,
-        deferred,
-        settings,
-        events = {},
-        buttons = "",
-        body = "";
-
-        modal = $.modal( settings = $.extend( {
-            css: {
-                width: options.width || $.dialog.defaults.width,
-                height: options.height || $.dialog.defaults.height
-            }
-        },
-        $.dialog.defaults,
-        options, {
-            content: "<div class='dialog'>" +
-                    "<div class='dialog-content'><div></div></div>" +
-                    "<div class='dialog-action'></div>" +
-                    "</div>"
-        } ) );
-
-        if ( "string" === typeof options.content ) {
-            body = options.content;
-        } else if ( "function" === typeof options.content ) {
-
-            deferred = $.Deferred();
-            options.content().done( function( data ) {
-                body = data;
-                deferred.resolve();
-            } );
-        }
-
-        for ( var key in settings.buttons ) {
-
-            var button = settings.buttons[ key ];
-            buttons += "<button name='" + key + "'>" + button.label + "</button>";
-            events[ key ] = button.onClick;
-        }
-
-        $.when( deferred ).done( function() {
-            modal.$node.find( ".dialog-content > div" ).html( body );
-        } );
-
-        modal
-        .$node
-        .find( ".dialog-action" )
-        .html( buttons )
-        .delegate( "button", "click", function() {
-            (events[ this.getAttribute( name ) ] || $.noop).apply( this, arguments );
-        } );
-    };
-
-    $.dialog.defaults = {
-
-        width: 600,
-        height: 400,
-        title: "Dialog",
-
-        buttons: {
-            "cancel": {
-                label: "取消",
-                onClick: function( modal ) {
-                    modal.close();
-                }
-            },
-            "ok": {
-                label: "确定",
-                onClick: $.noop
-            }
-        }
-    };
-} );
-
-
-define( 'ui/dialog/dialog-ng',[ "ui/dialog/dialog" ], function() {
-
-    "use strict";
-
-    angular.module( "$ui.dialog", [] )
-
-    .factory( "$dialog", function() {
-        return $.dialog;
-    } );
-} );
-
-
-define( 'demo/modal/index',[ "ui/modal/modal-ng", "ui/dialog/dialog-ng" ], function() {
+define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
 
 	"use strict";
 
@@ -897,7 +286,7 @@ define( 'demo/message/index',[ "ui/message/message-ng" ], function() {
     .controller( "messageController", [ "$scope", "$message", function( $scope, $message ) {
 
         $scope.init = function() {
-            $.anchor( { offset: 20 } );
+            $.anchor( { offset: -15 } );
         };
 
         angular.extend( $scope, {
@@ -906,16 +295,16 @@ define( 'demo/message/index',[ "ui/message/message-ng" ], function() {
                 $message.success( "This is a message telling you that everything is a-okay" );
             },
 
-            showError: function() {
-                $message.error( "This is a notification that something is wrong..." );
+            showDanger: function() {
+                $message.danger( "This is a notification that something is wrong..." );
             },
 
             showInfo: function() {
                 $message.info( "This is an 'information message' div." );
             },
 
-            showWarn: function() {
-                $message.warn( "It warns the users that to expect some changes or limitations." );
+            showWarning: function() {
+                $message.warning( "It warns the users that to expect some changes or limitations." );
             },
 
             showConfirm: function() {
@@ -935,6 +324,7 @@ define( 'demo/message/index',[ "ui/message/message-ng" ], function() {
         } );
     } ] );
 } );
+
 
 
 define( 'demo/autoComplete/index',[ "ui/autoComplete/autoComplete-ng" ], function() {
@@ -1038,13 +428,13 @@ define( 'demo/toast/index',[ "ui/toast/toast-ng" ], function() {
     .controller( "toastController", [ "$scope", "$toast", function( $scope, $toast ) {
 
         $scope.init = function() {
-            $.anchor( { offset: 0 } );
+            $.anchor( { offset: -10 } );
         };
 
-        $scope.theme = "default";
+        $scope.theme = "md-toast-default";
 
         $scope.changeTheme = function( theme ) {
-            $scope.theme = theme;
+            $scope.theme = "md-toast-" + theme;
         };
 
         angular.extend( $scope, {
@@ -1137,8 +527,8 @@ define( 'demo/dateutil/index',[ "util/dateutil" ], function() {
         justAgo = new Date( now - 50 * 1000 ),
         minuteAgo = new Date( now  - 200 * 1000 ),
         hourAgo = new Date( now - 3600 * 1000 ),
-        yesterday = new Date( $.dateutil( now ).yesterday() ),
-        morethan = new Date( $.dateutil( now ).day( -31 ) );
+        yesterday = $.dateutil().val( now ).yesterday(),
+        morethan = $.dateutil( now ).day( -31 );
 
         $scope.init = function() {
             $.anchor();
@@ -1160,11 +550,11 @@ define( 'demo/dateutil/index',[ "util/dateutil" ], function() {
             hourAgo: hourAgo,
             hourAgo2: $.dateutil( hourAgo ).nice(),
 
-            yesterday: yesterday,
-            yesterday2: $.dateutil( yesterday ).nice(),
+            yesterday: yesterday.val(),
+            yesterday2: yesterday.nice(),
 
-            morethan: morethan,
-            morethan2: $.dateutil( morethan ).nice()
+            morethan: morethan.val(),
+            morethan2: morethan.nice()
         } );
     } ] );
 } );
@@ -1282,13 +672,11 @@ define( 'demo/calendar/index',[ "ui/calendar/calendar-ng", "util/dateutil" ], fu
 
         angular.extend( $scope, {
 
-            showTime: false,
-            double: true,
-            date: $.dateutil( now ).tomorrow(),
+            date: $.dateutil( now ).tomorrow().val(),
             isDisabled: false,
-            minDate: $.dateutil( now ).lastWeek(),
-            maxDate: $.dateutil( now ).nextWeek(),
-            onClick: function( value ) {
+            minDate: $.dateutil( now ).lastWeek().val(),
+            maxDate: $.dateutil( now ).nextWeek().val(),
+            onSelected: function( value ) {
                 console.log( value );
             }
         } );
@@ -1519,260 +907,6 @@ define( 'demo/pagination/index',[ "ui/pagination/pagination-ng" ], function() {
 
 
 
-define( 'ui/timepicker/timepicker',[], function() {
-
-    "use strict";
-
-    var
-    namespace = "$ui.timepicker",
-
-    Timepicker = function( target, settings ) {
-
-        var
-        instance = this,
-        hoursHtml = "",
-        mintuesHtml = "";
-
-        this.$node = target;
-        this.settings = settings;
-
-        for ( var i = 0; i <= 23; ++i ) {
-            hoursHtml += "<span>" + i + "</span>";
-        }
-
-        for ( var i = 0; i <= 11; mintuesHtml += "<span>" + (i++ * 5) + "</span>" );
-
-        target
-        .append( "<div tabindex=-1 class='hours'><p>请选择小时</p><div>" + hoursHtml + "</div></div>" )
-        .append( "<div tabindex=-1 class='mintues'><p>请选择分钟</p><div>" + mintuesHtml + "</div></div>" )
-
-        .delegate( "input", "click", function( e ) {
-
-            var self = $( this );
-
-            if ( target.is( "[disabled]" ) ) { return; }
-
-            target
-            .find( self.hasClass( "hour" ) ? ".hours" : ".mintues" )
-            .addClass( "show" )
-            .focus();
-        } )
-
-        .delegate( "input", "focusout", function() {
-
-            var
-            self = $( this ),
-            value = +self.val(),
-            isValid = true,
-            popover = target.find( ".hours" );
-
-            if ( isValid = !isNaN( value ), isValid ) {
-
-                if ( self.hasClass( "mintue" ) ) {
-                    popover = target.find( ".mintues" );
-
-                    if ( settings.strict ) {
-
-                        if ( self.val() !== "00" ) {
-                            popover.find( "span" ).filter( function() {
-                                if ( $( this ).text() == self.val() ) {
-                                    isValid = false;
-                                }
-                            } );
-                        }
-                    } else if ( value > 59 ) {
-                        isValid = false;
-                    }
-                } else {
-
-                    /** Check the hour */
-                    if ( value > 23 ) {
-                        isValid = false;
-                    }
-                }
-            }
-
-            if ( !isValid ) {
-                popover.find( "span" ).removeClass( "selected" );
-                self.click();
-            }
-        } )
-
-        .delegate( ".hours span", "click", function() {
-            target.find( settings.selector4hour ).val( this.innerHTML ).select();
-        } )
-
-        .delegate( ".mintues span", "click", function() {
-            target.find( settings.selector4mintue ).val( this.innerHTML ).select();
-        } )
-
-        .delegate( "span", "click", function() {
-
-            $( this ).addClass( "selected" ).parent().find( "span" ).not( this ).removeClass( "selected" );
-            settings.onApplied.call( instance, instance.val() );
-        } )
-
-        .delegate( ".hours, .mintues", "focusout", function() {
-            $( this ).removeClass( "show" );
-        } );
-    };
-
-    Timepicker.prototype = {
-
-        val: function( value ) {
-
-            var
-            settings = this.settings,
-            hour,
-            mintue;
-
-            if ( value ) {
-
-                value = value.split( ":" );
-                hour = value[0];
-                mintue = value[1];
-
-                hour = hour >= 0 && hour < 24 ? hour : "00";
-                mintue = mintue >= 0 && mintue < 60 ? mintue : "00";
-
-                this.$node.find( settings.selector4hour ).val( hour );
-                this.$node.find( settings.selector4mintue ).val( mintue );
-            } else {
-                return this.$node.find( settings.selector4hour ).val() + ":" + this.$node.find( settings.selector4mintue ).val();
-            }
-
-            return this;
-        },
-
-        disabled: function() {
-
-            var settings = this.settings;
-
-            this
-            .$node
-            .attr( "disabled", true )
-            .find( settings.selector4hour + "," + settings.selector4mintue )
-            .attr( "disabled", true );
-            return this;
-        },
-
-        enabled: function() {
-
-            var settings = this.settings;
-
-            this
-            .$node
-            .removeAttr( "disabled" )
-            .find( settings.selector4hour + "," + settings.selector4mintue )
-            .removeAttr( "disabled" );
-            return this;
-        }
-    };
-
-    $.fn.timepicker = function( options ) {
-
-        var instance = this.data( namespace );
-
-        if ( !instance ) {
-            instance = new Timepicker( this, $.extend( {}, $.fn.timepicker.defaults, options ) );
-            this.data( namespace, instance );
-        }
-
-        return instance;
-    };
-
-    $.fn.timepicker.defaults = {
-        defaultValue        : new Date(),
-        strict              : false,
-        selector4hour       : ".hour",
-        selector4mintue     : ".mintue",
-        onApplied           : $.noop
-    };
-} );
-
-
-
-define( 'ui/timepicker/timepicker-ng',[ "ui/timepicker/timepicker" ], function() {
-
-
-
-/**
- * example:
- *
-    <s-time-picker
-        ng-model="value"
-        ng-disabled="isDisabled">
-    </s-time-picker>
- * */
-
-angular.module( "$ui.timepicker", [] )
-    .directive( "sTimepicker", [ "$rootScope", function( $rootScope ) {
-
-        function link( $scope, $element, $attrs ) {
-
-            var
-            options = {
-                strict      : [ 1, "true" ].indexOf( $scope.strict ) > -1,
-                onApplied   : function( value ) {
-
-                    if ( !$rootScope.$$phase ) {
-
-                        $scope.value = timepicker.val();
-                        $scope.$apply();
-
-                        ($scope.onApplied() || $.noop).apply( this, arguments );
-                    }
-                }
-            },
-
-            timepicker = $( $element ).timepicker( options );
-
-            if ( $scope.value ) {
-                timepicker.val( $scope.value );
-            }
-
-            $scope.$watch( "value", function( value ) {
-
-                timepicker.val( value );
-            } );
-        }
-
-        return {
-            scope           : {
-                disabled    : "=ngDisabled",
-                value       : "=ngModel",
-                strict      : "@",
-                onApplied   : "&"
-            },
-
-            restric         : "EA",
-            transclude      : true,
-            replace         : true,
-            template        : "<div class='ui timepicker'>" +
-                                "<input class='hour' type='text' maxlength='2' value='00'>" +
-                                "<span>:</span>" +
-                                "<input class='mintue' type='text' maxlength='2' value='00'>" +
-                              "</div>",
-
-            link            : link
-        };
-    } ] );
-} );
-
-
-
-define( 'demo/timepicker/index',[ "ui/timepicker/timepicker-ng" ], function() {
-
-    "use strict";
-
-    angular
-    .module( "demo.timepicker", [ "$ui.timepicker" ] )
-    .controller( "timePickerController", [ "$scope", function( $scope ) {
-
-    } ] );
-} );
-
-
 define( 'demo/accordion/index',[ "ui/accordion/accordion-ng" ], function() {
 
     "use strict";
@@ -1881,7 +1015,6 @@ require( [
         "demo/radio/index",
         "demo/loading/index",
         "demo/pagination/index",
-        "demo/timepicker/index",
         "demo/accordion/index",
         "demo/validation/index" ], function() {
 
@@ -1911,7 +1044,6 @@ require( [
 	        "demo.loading",
 	        "demo.pagination",
 	        "demo.accordion",
-	        "demo.timepicker",
 	        "demo.progress",
 	        "demo.calendar" ] )
 
@@ -2016,9 +1148,6 @@ require( [
 		    } )
 		    .when( "/pagination", {
 		        templateUrl: "src/demo/pagination/index.html"
-		    } )
-		    .when( "/timepicker", {
-		        templateUrl: "src/demo/timepicker/index.html"
 		    } )
 			.otherwise( {
 				redirectTo: "/home"
