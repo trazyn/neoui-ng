@@ -1,194 +1,169 @@
 
 @import (reference) "../../style/neoui.less";
 
-.ui.dropdown {
+.md-dropdown {
     position: relative;
-    outline: 0;
     width: 240px;
+    height: 35px;
     border-bottom: 3px solid @lightGray2;
-    transition: .2s;
-    cursor: pointer;
     color: rgba(0,0,0,.8);
-    &:hover, &.sync {
-        border-bottom: 3px solid @mint;
-    }
+    cursor: pointer;
+    outline: 0;
+    transition: .2s;
+    &:hover,
+    &.md-dropdown-sync { border-bottom: 3px solid @mint; }
 
     &[disabled] {
         cursor: not-allowed;
         color: @lightGray2;
-        &:hover {
-            border-bottom: 3px solid @lightGray2;
-        }
+        &:hover { border-bottom: 3px solid @lightGray2; }
     }
 
-    &.ripple {
-        overflow: visible;
-    }
-
-    > .title {
-        transition: .2s;
-        position: relative;
-        display: block;
-        height: 32px;
-        line-height: 32px;
-        width: 90%;
-        font-size: 12px;
-        text-align: left;
-        letter-spacing: 1px;
-        outline: 0;
-        text-indent: 10px;
-        overflow: hidden;
-        white-space: nowrap;
-        margin-right: 30px;
-        text-overflow: ellipsis;
-    }
-
-    > i.icon.status {
-        transition: .2s;
-        position: absolute;
-        top: 0px;
-        right: 5px;
-        display: block;
-        text-align: center;
-        height: 24px;
-        width: 24px;
-        font-size: 20px;
-        opacity: 1;
-        transition: .2s;
-        &:after {
-            content: "\e68a";
-        }
-    }
-
-    &.sync > i.icon:after {
-        content: "\e615";
-        color: @mint;
-    }
-
-    &.error {
-        > i.icon:after {
-            content: "\e61e";
-            color: @error;
-        }
-        border-bottom: 3px solid @error;
-    }
-
-    .content {
-        transition: .2s;
-        padding: 10px 0;
-        opacity: 0;
-        visibility: hidden;
-        transform: scale(.2);
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: white;
-        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.24);
-        box-sizing: border-box;
-        z-index: -1;
-        min-width: 240px;
-        max-height: 320px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
+    .md-ripple-ink { overflow: visible; }
 
     ul {
+        padding: 0;
         list-style: none;
         li {
-            transition: .2s;
             line-height: 36px;
             height: 36px;
-            background: #fff;
+            font-size: 14px;
             text-indent: 18px;
+            background: #fff;
             cursor: pointer;
             overflow: hidden;
-
-            &:hover {
-                color: @mint;
-            }
-
-            &.selected {
-                color: @coral;
-            }
-
-        }
-    }
-
-    &.open {
-        > .title, > i.icon {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        .content {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-            z-index: 9;
-        }
-    }
-
-    &.icon {
-        display: inline-block;
-        height: 48px;
-        width: 48px;
-        line-height: 48px;
-        border-radius: 48px;
-        border: none;
-        text-align: center;
-        background-color: @lightGray;
-
-        &:hover {
-            background-color: @lightGray2;
-        }
-
-        .content {
-            min-width: 140px;
-        }
-
-        li {
-            text-indent: 0;
-        }
-
-        &.left {
-            .content {
-                left: auto;
-                right: 0;
-            }
-        }
-
-        &.right {
-            .content {
-                left: 0;
-                right: auto;
-            }
-        }
-
-        &.bottom-left {
-            .content {
-                top: auto;
-                bottom: 0;
-                left: auto;
-                right: 0;
-            }
-        }
-
-        &.bottom-right {
-            .content {
-                top: auto;
-                bottom: 0;
-                left: 0;
-                right: auto;
-            }
+            transition: .2s;
+            &:hover { color: @mint; }
         }
     }
 
     li[disabled] {
+        color: @darkGray;
         background-color: @lightGray;
         cursor: not-allowed;
-        color: @darkGray;
-        &:hover {
-            color: @darkGray;
-        }
+        &:hover { color: @darkGray; }
+    }
+
+    p { margin: 0; }
+}
+
+.md-dropdown-sync > i.md-icon:after {
+    color: @mint;
+    content: "\e615";
+}
+
+.md-dropdown-error {
+    > i.md-icon:after {
+        color: @error;
+        content: "\e61e";
+    }
+    border-bottom: 3px solid @error;
+}
+
+.md-dropdown-title {
+    position: relative;
+    display: block;
+    height: 32px;
+    width: 90%;
+    margin-right: 30px;
+    font-size: 12px;
+    text-align: left;
+    letter-spacing: 1px;
+    text-indent: 10px;
+    line-height: 32px;
+    outline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: .2s;
+}
+
+.md-dropdown-status {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    display: block;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    font-size: 20px;
+    opacity: 1;
+    transition: .2s;
+    &:after { content: "\e68a"; }
+}
+
+.md-dropdown-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    min-width: 240px;
+    max-height: 320px;
+    background: white;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.24);
+    box-sizing: border-box;
+    z-index: -1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s;
+    transform: scale(.2);
+}
+
+.md-dropdown-selected { color: @coral; }
+
+.md-dropdown-open {
+    > .md-dropdown-title,
+    > i.md-icon {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    > .md-dropdown-content {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        z-index: 9;
     }
 }
+
+/** Icon dropdown */
+.md-dropdown.md-icon {
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    line-height: 48px;
+    text-align: center;
+    border-radius: 48px;
+    border: none;
+    background-color: @lightGray;
+
+    li { text-indent: 0; }
+    &:hover { background-color: @lightGray2; }
+    .md-dropdown-content { min-width: 140px; }
+    &.md-dropdown-left .md-dropdown-content {
+        left: auto;
+        right: 0;
+    }
+
+    &.md-dropdown-right .md-dropdown-content {
+        left: 0;
+        right: auto;
+    }
+
+    &.md-dropdown-bottom-left .md-dropdown-content {
+        top: auto;
+        bottom: 0;
+        left: auto;
+        right: 0;
+    }
+
+    &.md-dropdown-bottom-right .md-dropdown-content {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: auto;
+    }
+}
+

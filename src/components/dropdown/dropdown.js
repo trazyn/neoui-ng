@@ -28,7 +28,7 @@ define( [ "ui/ripple/ripple" ], function() {
 			setTimeout( function() {
                 if ( immediate ||
                         (!target.is( ":focus" ) && !content.is( ":focus" )) ) {
-                    target.removeClass( "open" );
+                    target.removeClass( "md-dropdown-open" );
                 }
 			}, 300 );
 		} )
@@ -38,7 +38,7 @@ define( [ "ui/ripple/ripple" ], function() {
 
 			var
 			text = [],
-			lis = content.find( "li.selected" );
+			lis = content.find( "li.md-dropdown-selected" );
 
 			for ( var i = 0; i < lis.length; text.push( settings.data[ lis.eq( i++ ).attr( "data-index" ) ][ settings.textKey ] ) );
 
@@ -72,9 +72,9 @@ define( [ "ui/ripple/ripple" ], function() {
 
             if ( data instanceof Array ) {
 
-                if ( !target.hasClass( "open" ) ) {
+                if ( !target.hasClass( "md-dropdown-open" ) ) {
                     target
-                    .addClass( "open" )
+                    .addClass( "md-dropdown-open" )
                     .focus();
                 }
                 return;
@@ -97,11 +97,11 @@ define( [ "ui/ripple/ripple" ], function() {
 
                 settings.data = data;
                 renderList( target.find( settings.selector4content ), settings );
-                target.addClass( "open" );
+                target.addClass( "md-dropdown-open" );
             } )
 
             .fail( function() {
-                target.addClass( "error" );
+                target.addClass( "md-dropdown-error" );
             } )
 
             .always( function() {
@@ -115,10 +115,10 @@ define( [ "ui/ripple/ripple" ], function() {
 			var self = $( this );
 
 			if ( false === settings.multiple ) {
-				content.find( "li.selected" ).removeClass( "selected" );
+				content.find( "li.md-dropdown-selected" ).removeClass( "md-dropdown-selected" );
 			}
 
-			self.addClass( "selected" );
+			self.addClass( "md-dropdown-selected" );
 		} )
 
 		/** Deselect */
@@ -127,13 +127,13 @@ define( [ "ui/ripple/ripple" ], function() {
 			var self = $( this );
 
 			if ( true === settings.required
-				&& self.hasClass( "selected" )
-				&& content.find( "li.selected" ).length === 1 ) {
+				&& self.hasClass( "md-dropdown-selected" )
+				&& content.find( "li.md-dropdown-selected" ).length === 1 ) {
 
 				return;
 			}
 
-			self.removeClass( "selected" );
+			self.removeClass( "md-dropdown-selected" );
 		} )
 
 		/** Item toggle */
@@ -145,7 +145,7 @@ define( [ "ui/ripple/ripple" ], function() {
 
             if ( !item.is( "[disabled]" ) ) {
 
-                selected = item.hasClass( "selected" );
+                selected = item.hasClass( "md-dropdown-selected" );
 
                 if ( selected ) {
                     item.trigger( "deselect.dropdown" );
@@ -206,7 +206,7 @@ define( [ "ui/ripple/ripple" ], function() {
 				this.$node.trigger( "update.dropdown" );
 			} else {
 				this.$node
-					.find( "li.selected" )
+					.find( "li.md-dropdown-selected" )
 					.each( function() {
 						res.push( settings.valueKey ? this.getAttribute( "data-value" ) : settings.data[ this.getAttribute( "data-index" ) ] );
 					} );
@@ -235,16 +235,16 @@ define( [ "ui/ripple/ripple" ], function() {
             selected = $node.find( "ul li" );
 
             if ( settings.multiple ) {
-                selected.addClass( "selected" );
-            } else if ( !selected.filter( ".selected" ).length ) {
-                selected.first().addClass( "selected" );
+                selected.addClass( "md-dropdown-selected" );
+            } else if ( !selected.filter( ".md-dropdown-selected" ).length ) {
+                selected.first().addClass( "md-dropdown-selected" );
             }
             $node.trigger( "update.dropdown" );
             return this;
 		},
 
 		deselectAll: function() {
-			this.$node.find( "ul li" ).removeClass( "selected" );
+			this.$node.find( "ul li" ).removeClass( "md-dropdown-selected" );
 			this.$node.trigger( "update.dropdown" );
 			return this;
 		},
@@ -260,11 +260,11 @@ define( [ "ui/ripple/ripple" ], function() {
 		},
 
 		open: function() {
-		    this.$node.addClass( "open" );
+		    this.$node.addClass( "md-dropdown-open" );
 		},
 
 		close: function() {
-		    this.$node.removeClass( "open" );
+		    this.$node.removeClass( "md-dropdown-open" );
 		}
 	};
 
@@ -301,7 +301,7 @@ define( [ "ui/ripple/ripple" ], function() {
 		if ( settings.ripple ) {
 		    content
 		    .find( "> ul > li" ).
-		    addClass( "ui ripple" ).each( function() {
+		    addClass( "md-ripple" ).each( function() {
 		        $( this ).ripple();
 		    } ).ripple();
 		}
@@ -322,10 +322,10 @@ define( [ "ui/ripple/ripple" ], function() {
 	$.fn.dropdown.defaults = {
 
 		nothing 	    : "Please select",
-		selector4title 	: ".title:first",
-		selector4content: ".content:first",
+		selector4title 	: ".md-dropdown-title",
+		selector4content: ".md-dropdown-content",
 
-		class4loading   : "sync",
+		class4loading   : "md-dropdown-sync",
 
 		type 	        : "click",
 

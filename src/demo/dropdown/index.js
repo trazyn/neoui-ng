@@ -8,7 +8,7 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
     .controller( "dropdownController", [ "$scope", function( $scope ) {
 
         $scope.init = function() {
-            $.anchor( { offset: -10 } );
+            $.anchor( { offset: -60 } );
         };
 
         $scope.data = [ {
@@ -55,7 +55,7 @@ define( [ "ui/dropdown/dropdown-ng" ], function() {
 			text: "Angola"
 		} ];
 
-        $( ".ui.dropdown.icon" ).each( function() {
+        $( ".md-dropdown.md-icon" ).each( function() {
             $( this ).dropdown( { data: $scope.data } );
         } );
 

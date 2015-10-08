@@ -1,23 +1,23 @@
 
 <title>Dropdown - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="simple" class="item active">Simple</li>
-    <li data-anchor="iconMenu" class="item">Icon Menu</li>
-    <li data-anchor="advance" class="item">Advance</li>
-    <li class="item">AngularJS
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="simple" class="md-anchor-item active">Simple</li>
+    <li data-anchor="iconMenu" class="md-anchor-item">Icon Menu</li>
+    <li data-anchor="advance" class="md-anchor-item">Advance</li>
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="markup" class="item">Markup</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sDropdown" class="item">Directive * s-dropdown</li>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sDropdown" class="md-anchor-item">Directive * s-dropdown</li>
         </ul>
     </li>
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="html" class="item">Html</li>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -52,30 +52,30 @@
     <section class="simple">
 
         <div class="wrap">
-            <div class="ui dropdown icon right">
-                <i class="icon star"></i>
-                <div class="content"></div>
+            <div class="md-dropdown md-icon md-dropdown-right">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
             </div>
         </div>
 
         <div class="wrap">
-            <div class="ui dropdown icon left">
-                <i class="icon star"></i>
-                <div class="content"></div>
+            <div class="md-dropdown md-icon md-dropdown-left">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
             </div>
         </div>
 
         <div class="wrap">
-            <div class="ui dropdown icon bottom-right">
-                <i class="icon star"></i>
-                <div class="content"></div>
+            <div class="md-dropdown md-icon md-dropdown-bottom-right">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
             </div>
         </div>
 
         <div class="wrap">
-            <div class="ui dropdown icon bottom-left">
-                <i class="icon star"></i>
-                <div class="content"></div>
+            <div class="md-dropdown md-icon md-dropdown-bottom-left">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
             </div>
         </div>
     </section>
@@ -87,12 +87,10 @@
 
     <section class="advance">
 
-        <p>
         <code>
-            <label>Yours selected:</label>
             {{ reps || [] }}
         </code>
-        </p>
+        <br>
         <br>
 
         <div class="wrap">
@@ -107,18 +105,16 @@
                 multiple="multiple"
                 close-on-select="false"
                 nothing="Multiple and less one item">
+                {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
                 <p>
-                    {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+                <code><i class="md-icon-github2"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
                 </p>
                 <p>
-                    <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
-                </p>
-                <p>
-                    <code>{{ watchers.toLocaleString() }} Watchers</code>
-                    <code>{{ forks.toLocaleString() }} Forks</code>
+                    <mark>{{ watchers.toLocaleString() }} Watchers</mark>
+                    <mark>{{ forks.toLocaleString() }} Forks</mark>
                     <code>{{ language }}</code>
-                    <code>Last update: {{ updated_at }}</code>
-                    <code class="issue"><i class="icon issue"></i>{{ open_issues_count }}</code>
+                    <mark>Last update: {{ updated_at }}</mark>
+                    <code class="mark"><i class="md-icon-info-outline"></i> {{ open_issues_count }}</code>
                 </p>
             </s-dropdown>
 
@@ -127,14 +123,14 @@
              <ul class="options">
                  <li>
                      <label>是否禁用?</label>
-                     <div class="ui checkbox" s-ripple>
+                     <div class="md-checkbox" s-ripple>
                          <input type="checkbox" ng-click="isDisabled = !isDisabled" />
                          <div></div>
                      </div>
                  </li>
                  <li>
                      <label>允许多选?</label>
-                     <div class="ui switch" s-ripple>
+                     <div class="md-switch" s-ripple>
                          <input type="checkbox" ng-model="multiple" />
                          <div></div>
                      </div>
@@ -142,7 +138,7 @@
 
                  <li>
                      <label>是否必选?</label>
-                     <div class="ui switch" s-ripple>
+                     <div class="md-switch" s-ripple>
                          <input type="checkbox" ng-model="required" />
                          <div></div>
                      </div>
@@ -158,138 +154,136 @@
     <header>AngularJS</header>
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="markup">
+            <div class="md-ribbon" data-anchor="markup">
                 <span>Markup</span>
             </div>
 
             <div class="wrap">
                 <label>Simple</label>
                 <xmp>
-                <s-dropdown data="data"></s-dropdown>
+    <s-dropdown data="data"></s-dropdown>
                 </xmp>
             </div>
 
             <div class="wrap">
             <label>Custom template</label>
             <xmp>
-            <s-dropdown
-                data="ajax"
-                ng-disabled="isDisabled"
-                ng-model="reps"
-                required="required"
-                auto-width="true"
-                text-key="full_name"
-                value-key="false"
-                multiple="multiple"
-                close-on-select="false"
-                nothing="Multiple and less one item">
-                <p>
-                    \{\{ name }} - <a href="\{\{ owner.html_url }}" title="Author by \{\{ owner.login }}">\{\{ owner.login }}</a>
-                </p>
-                <p>
-                    <code><i class="icon github3"></i><a href="{{ html_url }}" title="{{ full_name }}">\{\{ html_url }}</a></code>
-                </p>
-                <p>
-                    <code>\{\{ watchers.toLocaleString() }} Watchers</code>
-                    <code>\{\{ forks.toLocaleString() }} Forks</code>
-                    <code>\{\{ language }}</code>
-                    <code>Last update: \{\{ updated_at }}</code>
-                    <code class="issue"><i class="icon issue"></i>\{\{ open_issues_count }}</code>
-                </p>
-            </s-dropdown>
-            </xmp>
-            <code>内层不为空时,作为模板格式化列表, 以<code>item</code>做为<code>scope</code></code>
+    <s-dropdown
+        data="ajax"
+        ng-disabled="isDisabled"
+        ng-model="reps"
+        required="required"
+        auto-width="true"
+        text-key="full_name"
+        value-key="false"
+        multiple="multiple"
+        close-on-select="false"
+        nothing="Multiple and less one item">
+        {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+        <p>
+        <code><i class="md-icon-github2"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+        </p>
+        <p>
+            <mark>{{ watchers.toLocaleString() }} Watchers</mark>
+            <mark>{{ forks.toLocaleString() }} Forks</mark>
+            <code>{{ language }}</code>
+            <mark>Last update: {{ updated_at }}</mark>
+            <code class="mark"><i class="md-icon-info-outline"></i> {{ open_issues_count }}</code>
+        </p>
+    </s-dropdown>
+    </xmp>
+            <p class="note">内容不为空时, 用作模板格式化列表, 以<mark>item</mark>做为<mark>scope</maek></code>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="javascript">
+            <div class="md-ribbon" data-anchor="javascript">
                 <span>Javascript</span>
             </div>
 
             <xmp>
-            angular
-            .module( "demo.dropdown", [ "$ui.dropdown" ] )
-            .controller( "dropdownController", [ "$scope", function( $scope ) {
+    angular
+    .module( "demo.dropdown", [ "$ui.dropdown" ] )
+    .controller( "dropdownController", [ "$scope", function( $scope ) {
 
-                $scope.init = function() {
-                    $( document.body ).anchor( { offset: -60 } );
-                };
+        $scope.data = [ {
+			value: "AD",
+			text: "Andorra"
+		}, {
+			value: "AZ",
+			text: "Azerbaijan"
+		}, {
+			value: "AW",
+			text: "Aruba"
+		}, {
+			value: "BI",
+			text: "Bulgaria"
+		}, {
+			value: "BS",
+			text: "Bahamas"
+		}, {
+			value: "CH",
+			text: "Switzerland"
+		}, {
+			value: "CK",
+			text: "Cook Island"
+		}, {
+			value: "CL",
+			text: "Chile"
+		}, {
+			value: "CN",
+			text: "China"
+		}, {
+			value: "CM",
+			text: "Cambodia"
+		}, {
+			value: "AE",
+			text: "United Arab Emirates"
+		}, {
+			value: "AF",
+			text: "Afghanistan"
+		}, {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
 
-                $scope.data = [ {
-                    value: "AD",
-                    text: "Andorra"
-                }, {
-                    value: "AZ",
-                    text: "Azerbaijan"
-                }, {
-                    value: "AW",
-                    text: "Aruba"
-                }, {
-                    value: "BI",
-                    text: "Bulgaria"
-                }, {
-                    value: "BS",
-                    text: "Bahamas"
-                }, {
-                    value: "CH",
-                    text: "Switzerland"
-                }, {
-                    value: "CK",
-                    text: "Cook Island"
-                }, {
-                    value: "CL",
-                    text: "Chile"
-                }, {
-                    value: "CN",
-                    text: "China"
-                }, {
-                    value: "CM",
-                    text: "Cambodia"
-                }, {
-                    value: "AE",
-                    text: "United Arab Emirates"
-                }, {
-                    value: "AF",
-                    text: "Afghanistan"
-                }, {
-                    value: "AG",
-                    text: "Antigua and Barbuda"
-                }, {
-                    value: "AO",
-                    text: "Angola"
-                } ];
+        $( ".md-dropdown.md-icon" ).each( function() {
+            $( this ).dropdown( { data: $scope.data } );
+        } );
 
-                angular.extend( $scope, {
+        angular.extend( $scope, {
 
-                    ajax: function() {
+            ajax: function() {
 
-                        var deferred = $.Deferred();
+                var deferred = $.Deferred();
 
-                        $.ajax( {
-                            url: "https://api.github.com/search/repositories?q=" + "an" + "&sort=stars&order=desc"
-                        } )
+                $.ajax( {
+                    url: "src/demo/dropdown/result.json",
+                    dataType: "json"
+                } )
 
-                        .done( function( data ) {
-                            data = data.items;
-                            deferred.resolveWith( data );
-                        } )
+                .done( function( data ) {
+                    data = data.items;
+                    deferred.resolveWith( data );
+                } )
 
-                        .fail( deferred.reject );
+                .fail( deferred.reject );
 
-                        return deferred;
-                    },
+                return deferred;
+            },
 
-                    required: true,
-                    multiple: true
-                } );
-
-            } ] );
+            required: true,
+            multiple: true
+        } );
+    } ] );
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sDropdown">
+            <div class="md-ribbon" data-anchor="sDropdown">
                 <span>Directive * s-dropdown</span>
             </div>
 
@@ -381,22 +375,22 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="html">
+            <div class="md-ribbon" data-anchor="html">
                 <span>HTML</span>
             </div>
 
             <xmp>
-                <div class="ui dropdown">
-                    <p class="title"></p>
-                    <i class="icon status"></i>
-                    <div class="content">
-                    </div>
-                </div>
+    <div class="md-dropdown">
+        <p class="md-dropdown-title"></p>
+        <i class="md-icon md-dropdown-status"></i>
+        <div class="md-dropdown-content">
+        </div>
+    </div>
             </xmp>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="constructor">
+            <div class="md-ribbon" data-anchor="constructor">
                 <span>Constructor</span>
             </div>
 
@@ -410,13 +404,13 @@
             </blockquote>
 
             <xmp>
-            $( ".ui.dropdown" ).dropdown();
+    $( ".md-dropdown" ).dropdown();
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="options">
+            <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
 
@@ -426,49 +420,49 @@
             </blockquote>
             <p>为数组时候为本地数据, function时返回$.Deferred</p>
             <xmp>
-            [ {
-                value: "AD",
-                text: "Andorra"
-            }, {
-                value: "AZ",
-                text: "Azerbaijan"
-            }, {
-                value: "AW",
-                text: "Aruba"
-            }, {
-                value: "BI",
-                text: "Bulgaria"
-            }, {
-                value: "BS",
-                text: "Bahamas"
-            }, {
-                value: "CH",
-                text: "Switzerland"
-            }, {
-                value: "CK",
-                text: "Cook Island"
-            }, {
-                value: "CL",
-                text: "Chile"
-            }, {
-                value: "CN",
-                text: "China"
-            }, {
-                value: "CM",
-                text: "Cambodia"
-            }, {
-                value: "AE",
-                text: "United Arab Emirates"
-            }, {
-                value: "AF",
-                text: "Afghanistan"
-            }, {
-                value: "AG",
-                text: "Antigua and Barbuda"
-            }, {
-                value: "AO",
-                text: "Angola"
-            } ];
+    [ {
+        value: "AD",
+        text: "Andorra"
+    }, {
+        value: "AZ",
+        text: "Azerbaijan"
+    }, {
+        value: "AW",
+        text: "Aruba"
+    }, {
+        value: "BI",
+        text: "Bulgaria"
+    }, {
+        value: "BS",
+        text: "Bahamas"
+    }, {
+        value: "CH",
+        text: "Switzerland"
+    }, {
+        value: "CK",
+        text: "Cook Island"
+    }, {
+        value: "CL",
+        text: "Chile"
+    }, {
+        value: "CN",
+        text: "China"
+    }, {
+        value: "CM",
+        text: "Cambodia"
+    }, {
+        value: "AE",
+        text: "United Arab Emirates"
+    }, {
+        value: "AF",
+        text: "Afghanistan"
+    }, {
+        value: "AG",
+        text: "Antigua and Barbuda"
+    }, {
+        value: "AO",
+        text: "Angola"
+    } ];
             </xmp>
             <br>
 
@@ -506,11 +500,11 @@
             </blockquote>
             <p>选中时触发</p>
             <xmp>
-            $( ".ui.dropdown" ).dropdown( {
-                onSelect: function( item, settings ) {
-                    console.log( "Current selected: " + item );
-                }
-            } );
+    $( ".md-dropdown" ).dropdown( {
+        onSelect: function( item, settings ) {
+            console.log( "Current selected: " + item );
+        }
+    } );
             </xmp>
             <br>
 
@@ -549,21 +543,21 @@
             <br>
 
             <blockquote>
-                <p><code>selector4title</code> - <code>".title:first"</code>
+                <p><code>selector4title</code> - <code>".md-dropdown-title"</code>
                 </p>
             </blockquote>
             <p>标题选择器</p>
             <br>
 
             <blockquote>
-                <p><code>selector4content</code> - <code>".content:first"</code>
+                <p><code>selector4content</code> - <code>".md-dropdown-content"</code>
                 </p>
             </blockquote>
             <p>内容选择器</p>
             <br>
 
             <blockquote>
-                <p><code>class4loading</code> - <code>"sync"</code>
+                <p><code>class4loading</code> - <code>"md-dropdown-sync"</code>
                 </p>
             </blockquote>
             <p><code>Ajax</code>请求时样式</p>
@@ -574,66 +568,57 @@
             </blockquote>
             <p>格式化下拉列表</p>
             <xmp>
-            $( ".ui.dropdown" ).dropdown( {
-                formatter: function( item, settings ) {
-                    return "<span>" + (item[ settings.textKey ] || item[ settings.valueKey ]) + "</span>";
-                }
-            } );
+    $( ".md-dropdown" ).dropdown( {
+        formatter: function( item, settings ) {
+            return "<span>" + (item[ settings.textKey ] || item[ settings.valueKey ]) + "</span>";
+        }
+    } );
             </xmp>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="method">
+            <div class="md-ribbon" data-anchor="method">
                 <span>Method</span>
             </div>
 
-            <p><code>dropdown.val( [value] )</code>
-            </p>
+            <h5><code>.val( [value] )</code></h5>
             <blockquote>
                 <p><code>value</code> - <code>Object</code></p>
+                <footer>
+                    参数为空时返回当前所选值, 不为空时选中指定项
+                </footer>
             </blockquote>
-            <p>参数为空时返回当前所选值, 不为空时选中指定项</p>
             <br>
             <br>
 
-            <p><code>dropdown.render( data )</code>
-            </p>
+            <h5><code>.render( data )</code></h5>
             <blockquote>
                 <p><code>data</code> - <code>Array/Function</code></p>
+                <footer>重新产生下拉列表</footer>
             </blockquote>
-            <p>重新产生下拉列表</p>
             <br>
             <br>
 
-            <p><code>dropdown.add( data )</code>
-            </p>
+            <h5><code>.add( data )</code></h5>
             <blockquote>
                 <p><code>data</code> - <code>Array</code></p>
+                <footer>新增下拉内容</footer>
             </blockquote>
-            <p>新增下拉内容</p>
             <br>
             <br>
 
-            <p><code>dropdown.selectAll()</code>
-            -
-            全选</p>
+            <h5><code>.selectAll()</code> - 全选</h5>
             <br>
             <br>
 
-            <p><code>dropdown.deselectAll()</code>
-            -
-            取消全选</p>
+            <h5><code>dropdown.deselectAll()</code> - 取消全选</h5>
             <br>
             <br>
 
-            <p><code>dropdown.disabled()</code>
-            -
-            禁用控件</p>
+            <h5><code>dropdown.disabled()</code> - 禁用控件</h5>
             <br>
 
-            <p><code>dropdown.enabled()</code>
-            -
-            启用控件</p>
+            <h5><code>dropdown.enabled()</code> - 启用控件</h5>
         </section>
     </div>
 </section>

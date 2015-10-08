@@ -9,34 +9,30 @@
         margin: 20px;
     }
 
-    .advance .ui.dropdown {
+    .advance .md-dropdown {
         width: 100%;
-
-        .content {
-            padding: 0px;
-        }
+        .md-dropdown-content { padding: 0; }
 
         ul li {
-            line-height: 28px;
             height: auto;
             padding: 10px 0;
-
-            &:hover {
-                background: @lightGray2;
-            }
-
-            &.selected {
+            font-size: 12px;
+            line-height: 28px;
+            &.md-dropdown-selected {
                 background: @coral;
                 color: white;
             }
+            &:hover { background: @lightGray2; }
         }
     }
 
-    .ui.radio, .ui.checkbox {
+    .md-radio,
+    .md-checkbox {
         margin-left: 8px;
     }
 
     .options {
+        padding: 0;
         list-style: none;
 
         li {

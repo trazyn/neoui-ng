@@ -128,10 +128,10 @@ angular.module( "$ui.dropdown", [] )
             restric             : "E",
             transclude          : true,
             replace             : true,
-            template            : "<div class='ui dropdown'>" +
-                                    "<i class='icon status'></i>" +
-                                    "<p class='title'></p>" +
-                                    "<div class='content'></div>" +
+            template            : "<div class='md-dropdown'>" +
+                                    "<i class='md-icon md-dropdown-status'></i>" +
+                                    "<p class='md-dropdown-title'></p>" +
+                                    "<div class='md-dropdown-content'></div>" +
                                   "</div>",
             link                : link
         };
