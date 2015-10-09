@@ -1,5 +1,6 @@
 
 require( [
+        "util/ng-afterRender",
         "ui/accordion/accordion-ng",
         "ui/autoComplete/autoComplete-ng",
         "ui/calendar/calendar-ng",

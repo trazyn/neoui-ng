@@ -136,6 +136,28 @@
 define("ui/anchor/anchor", function(){});
 
 
+define( 'util/ng-afterRender',[], function() {
+
+    "use strict";
+
+    angular
+    .module( "afterRender", [] )
+
+    .directive( "afterRender", [ "$timeout", function( $timeout ) {
+
+        return {
+            restric: "A",
+            terminal: true,
+            link: function( $scope, $element, $attrs ) {
+                $timeout( function() {
+                    $scope.$eval( $attrs.afterRender );
+                }, 0 );
+            }
+        };
+    } ] );
+} );
+
+
 define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
 
 	"use strict";
@@ -621,6 +643,7 @@ define( 'demo/tree/index',[ "ui/tree/tree-ng" ], function() {
 } );
 
 
+
 define( 'demo/rate/index',[ "ui/rate/rate-ng" ], function() {
 
     "use strict";
@@ -993,6 +1016,7 @@ require.config( {
 require( [
         "ui/anchor/anchor",
         "ui/sidenav/sidenav-ng",
+        "util/ng-afterRender",
         "demo/modal/index",
         "demo/tab/index",
         "demo/message/index",
@@ -1021,7 +1045,7 @@ require( [
 
 	var app = angular
 
-	.module( "neoui", [ "ngRoute", "$ui.sidenav",
+	.module( "neoui", [ "ngRoute", "afterRender", "$ui.sidenav",
 	        "demo.modal",
 	        "demo.tab",
 	        "demo.message",
@@ -1151,19 +1175,6 @@ require( [
 			.otherwise( {
 				redirectTo: "/home"
 			} );
-	} ] )
-
-	.directive( "afterRender", [ "$timeout", function( $timeout ) {
-
-	    return {
-	        restric: "A",
-	        terminal: true,
-	        link: function( $scope, $element, $attrs ) {
-                $timeout( function() {
-                    $scope.$eval( $attrs.afterRender );
-                }, 0 );
-	        }
-	    };
 	} ] )
 
     .controller( "mainController", [ "$scope", "$location", function( $scope, $location ) {

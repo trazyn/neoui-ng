@@ -60,3 +60,4 @@ define( [ "ui/tree/tree-ng" ], function() {
         };
     } ] );
 } );
+
