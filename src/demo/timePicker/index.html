@@ -1,0 +1,227 @@
+
+<title>TimePicker - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active">Example</li>
+
+    <li class="md-anchor-item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sTimepicker" class="md-anchor-item">Directive * s-timepicker</li>
+        </ul>
+
+    </li>
+
+    <li class="md-anchor-item">jQuery
+        <ul>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="timepicker" ng-controller="timePickerController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+
+        <div class="wrap">
+
+            <code> {{ time || "00:00" }} </code>
+            <br>
+            <br>
+
+            <s-timepicker
+                ng-model="time"
+                ng-disabled="isDisabled">
+            </s-timepicker>
+
+            <br>
+
+            <ul class="options">
+                <li>
+                    <label>是否禁用?</label>
+                    <div class="md-checkbox" s-ripple>
+                        <input type="checkbox" ng-click="isDisabled = !isDisabled" />
+                        <div></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <div class="markdown">
+
+        <header>AngularJS</header>
+        <div class="markdown">
+            <section>
+                <div class="md-ribbon" data-anchor="markup">
+                    <span>Markup</span>
+                </div>
+
+                <div class="wrap">
+                <xmp>
+                <s-timepicker
+                    ng-model="time"
+                    ng-disabled="isDisabled">
+                </s-timepicker>
+                </xmp>
+                </div>
+            </section>
+
+            <section>
+                <div class="md-ribbon" data-anchor="javascript">
+                    <span>Javascript</span>
+                </div>
+
+                <xmp>
+    angular
+    .module( "demo.timepicker", [ "$ui.timepicker" ] )
+    .controller( "timePickerController", [ "$scope", function( $scope ) {
+
+        $scope.time = "11:11";
+    } ] );
+                </xmp>
+
+            </section>
+
+            <section>
+                <div class="md-ribbon" data-anchor="sTimepicker">
+                    <span>Directive * s-timepicker</span>
+                </div>
+
+                <blockquote>
+                    <p><code>=ng-disabled</code> - <code>false</code></p>
+                </blockquote>
+                <p>禁用控件</p>
+                <br>
+
+                <blockquote>
+                    <p><code>=ng-model</code> - <code>null</code></p>
+                </blockquote>
+                <p>当前选择时间</p>
+                <br>
+
+                <blockquote>
+                    <p><code>&on-applied</code> - <code>null</code></p>
+                </blockquote>
+                <p>选中时执行</p>
+                <br>
+
+                <blockquote>
+                    <p><code>@strict</code> - <code>"false"</code></p>
+                </blockquote>
+                <p>所选时间必须存在于列表中</p>
+                <br>
+            </section>
+        </div>
+
+        <header data-anchor="api">API</header>
+
+        <section>
+            <div class="md-ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+            <div class="md-timepicker">
+                <input class="md-timepicker-hour" type="text" maxlength="2" value="00">
+                <span>:</span>
+                <input class="md-timepicker-mintue" type="text" maxlength="2" value="00">
+            </div>
+            </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="md-ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).timepicker( [options] )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+        <xmp>
+        $( ".md-timepicker" ).timepicker();
+        </xmp>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="md-ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>defaultTime</code> - <code>new Date()</code>
+                </p>
+            </blockquote>
+            <p>默认时间</p>
+            <br>
+
+            <blockquote>
+                <p><code>strict</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>为true时, 输入内容必须存在于列表中</p>
+            <br>
+
+            <blockquote>
+                <p><code>onApplied</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中时间后执行</p>
+            <br>
+        </section>
+
+        <br>
+        <br>
+
+        <section>
+            <div class="md-ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <blockquote>
+                <p><code>.val( [ value ] )</code>
+                </p>
+                <blockquote>
+                    <p><code>value</code> - String/Date</p>
+                </blockquote>
+            </blockquote>
+            <p>设置/取值</p>
+            <br>
+
+            <blockquote>
+                <p><code>.disabled()</code>
+                </p>
+            </blockquote>
+            <p>禁用控件</p>
+            <br>
+
+            <blockquote>
+                <p><code>.enabled()</code>
+                </p>
+            </blockquote>
+            <p>取消禁用</p>
+        </section>
+    </div>
+
+</section>
