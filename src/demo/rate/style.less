@@ -117,21 +117,21 @@
                 }
             }
 
-            i.icon.play {
-                transition: .2s;
+            .md-icon-play-arrow {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translateY(-50%) translateX(-50%);
                 display: block;
                 width: 64px;
                 height: 64px;
                 border-radius: 64px;
-                z-index: 1;
                 color: white;
                 font-size: 32px;
                 background-color: rgba(0,0,0,.4);
                 cursor: pointer;
+                z-index: 1;
+                transition: .2s;
+                transform: translateY(-50%) translateX(-50%);
                 &:hover {
                     background-color: rgba(0,0,0,.8);
                     color: @coral;

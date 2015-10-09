@@ -82,9 +82,10 @@ define( [ "util/dateutil" ], function() {
                     label.push( settings.months[ current[ 1 ] - 1 ] + " , " + current[ 0 ] );
 
                     html = calc( new Date( current.join( "/" ) ), defaultDate, settings );
+                    container.html( html ).css( "height", "auto" );
 
                     if ( step instanceof Date || steps[0] === void 0 ) {
-                        return container.html( html ).css( "height", "auto" );
+                        return;
                     }
 
                     inAnimate = true;
@@ -429,6 +430,19 @@ define( [ "util/dateutil" ], function() {
                     "</div>";
         }
 
+        if ( !settings.showAdjacent ) {
+
+            html = $( "<p>" )
+            .html( html )
+            .find( ".md-calendar-day.md-calendar-day-adjacent" )
+            .removeClass( "md-calendar-day-valid" )
+            .addClass( "md-calendar-day-invalid" )
+            .removeAttr( "data-date" )
+            .html( "&nbsp;" )
+            .end()
+            .html();
+        }
+
         return html;
     }
 
@@ -496,6 +510,7 @@ define( [ "util/dateutil" ], function() {
 
 		showTime        : false,
 		double          : false,
+		showAdjacent    : false,
 
 		minDate         : undefined,
 		maxDate         : undefined,

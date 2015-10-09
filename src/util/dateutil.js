@@ -277,7 +277,7 @@
             var
             date = this.value,
             current = [ date.getFullYear(), date.getMonth() ],
-            offset = [ Math.floor( value / 12 ), value % 12 ];
+            offset = [ Math.round( value / 12 ), value % 12 ];
 
             this.value = new Date( current[ 0 ] + offset[ 0 ], current[ 1 ] + offset[ 1 ]
                                 , date.getDay()

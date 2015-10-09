@@ -48,7 +48,7 @@ angular.module( "$ui.calendar", [] )
             } );
 
             $scope.$watch( "double", function( value ) {
-                settings.double = value;
+                settings.double = args.boolean( value );
             } );
 
             $scope.$watch( "defaultValue", function( value ) {
@@ -56,6 +56,10 @@ angular.module( "$ui.calendar", [] )
                 if ( !$rootScope.$$phase ) {
                     settings.defaultDate = value;
                 }
+            } );
+
+            $scope.$watch( "showAdjacent", function( value ) {
+                settings.showAdjacent = args.boolean( value );
             } );
 
             $scope.$watch( "disabled", function( value ) {
@@ -80,6 +84,7 @@ angular.module( "$ui.calendar", [] )
                 minDate     : "=",
                 maxDate     : "=",
                 onSelected  : "&",
+                showAdjacent: "=",
                 double      : "="
             },
 
