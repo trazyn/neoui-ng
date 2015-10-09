@@ -105,11 +105,13 @@
     <s-tree style="height: 480px; width: 320px;"
         data="test"
         ng-model="value"
-        controller="colorTree"
+        filter-value="szseFilter"
+        controller="szseTree"
+        root-ids="0"
         parent-key="parent"
         text-key="name"
         value-key="id"
-        after-render="afterInit( colorTree )">
+        after-render="afterInit( szseTree )">
     </s-tree>
             </xmp>
         </div>
@@ -153,7 +155,7 @@
         $scope.test = function() {
 
             $.ajax( {
-                url: "src/demo/tree/color.json",
+                url: "src/demo/tree/test.json",
                 dataType: "text"
             } )
             .done( function( data ) {
@@ -184,15 +186,15 @@
             tree.add( item );
         };
 
-        $scope.afterInit = function( tree ) {
+        $scope.afterInit = function( szseTree ) {
 
             $.when( deferred ).done( function() {
 
-                tree
-                .expand( "multicolor" )
-                .expand( "white" )
-                .expand("green" )
-                .disabled( "green" );
+                szseTree
+                .expand( "szse" )
+                .expand( "zhyjs" )
+                .disabled("zhyjs" )
+                .disabled( "szzqjysyyb" );
             } );
         };
     } ] );
