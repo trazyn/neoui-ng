@@ -1,0 +1,248 @@
+
+<title>Sidenav - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active" data-forceAnchor="-260">Example</li>
+    <li class="md-anchor-item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sSidenav" class="md-anchor-item">Directive * s-sidenav</li>
+        </ul>
+    </li>
+    <li class="md-anchor-item">jQuery
+        <ul>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="sidenav" ng-controller="sidenavController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+
+        <s-sidenav id="profile" controller="profile">
+            <ul>
+                <li class="avatar">
+                    <a href="//github.com/trazyn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
+                        <img src="images/5271843.jpg" alt="fs3kuu">
+                    </a>
+                </li>
+                <li>News</li>
+                <li>Feeds</li>
+                <li>Messages</li>
+                <li>Friends</li>
+                <li>Photos</li>
+                <li>Music</li>
+                <li class="exit">
+                    <i class="md-icon-exit-to-app"></i>
+                </li>
+            </ul>
+        </s-sidenav>
+
+        <p>
+        <button class="md-btn md-btn-coral" ng-click="showProfile( profile )">Show the left Sidenav</button>
+        <button class="md-btn md-btn-coral" ng-click="menu.right()">Right Sidenav</button>
+        </p>
+
+        <br>
+
+    </section>
+
+    <header>AngularJS</header>
+
+    <div class="markdown">
+        <section>
+            <div class="md-ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <xmp>
+    <s-sidenav id="profile" controller="profile">
+        <ul>
+            <li class="avatar">
+                <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
+                    <img src="/images/5271843.jpg" alt="fs3kuu">
+                </a>
+            </li>
+            <li>News</li>
+            <li>Feeds</li>
+            <li>Messages</li>
+            <li>Friends</li>
+            <li>Photos</li>
+            <li>Music</li>
+            <li class="exit">
+                <i class="md-icon-exit-to-app"></i>
+            </li>
+        </ul>
+    </s-sidenav>
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+    define( [ "ui/sidenav/sidenav-ng" ], function() {
+
+        "use strict";
+
+        angular
+        .module( "demo.sidenav", [ "$ui.sidenav" ] )
+        .controller( "sidenavController", [ "$scope", function( $scope ) {
+
+            $scope.showProfile = function( sidenav ) {
+                sidenav.left();
+            };
+        } ] );
+    } );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="sSidenav">
+                <span>Directive * s-sidenav</span>
+            </div>
+
+            <blockquote>
+                <p><code>=controller</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>绑定<code>jQuery Plugin</code>实例, <a href="" data-anchor="method">Method</a></p>
+            <br>
+
+            <blockquote>
+                <p><code>@templateUrl</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>加载指定<code>url</code>到内容</p>
+            <br>
+        </section>
+    </div>
+
+    <br>
+    <br>
+
+    <header>jQuery</header>
+
+    <div class="markdown">
+        <section>
+            <div class="md-ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <p class="subhead">profile.html</p>
+            <xmp>
+    <div id="profile">
+        <ul>
+            <li class="avatar">
+                <a href="//github.com/trayn" class="md-tooltip md-tooltip-right" data-tooltip="View On GitHub">
+                    <img src="/images/5271843.jpg" alt="fs3kuu">
+                </a>
+            </li>
+            <li>News</li>
+            <li>Feeds</li>
+            <li>Messages</li>
+            <li>Friends</li>
+            <li>Photos</li>
+            <li>Music</li>
+            <li class="exit">
+                <i class="md-icon-exit-to-app"></i>
+            </li>
+        </ul>
+    </div>
+            </xmp>
+
+            <p class="subhead">JS</p>
+            <xmp>
+    require( [ "ui/sidenav/sidenav" ], function() {
+
+        var container = $( "sidenav" );
+
+        container
+        .delegate( "button[name=showProfile]", "click", function() {
+
+            $.sidenav( {
+                content: function( ready, loading, close ) {
+
+                    var self = this;
+
+                    $.ajax( {
+                        url: "/src/demo/sidenav/profile.html",
+                        dataType: "html"
+                    } )
+
+                    .done( function( data ) {
+                        self.html( data );
+                        ready.resolve();
+                    } );
+
+                    this
+                    .delegate( ".exit", "click", close );
+                }
+            } );
+        } );
+    } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <h5><code>$.sidenav( options )</code></h5>
+            <blockquote>
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote>
+                <p><code>content</code> - <code>""</code></p>
+            </blockquote>
+            <p><code>function</code>或<code>string</code>, <code>Sidenav</code>中内容</p>
+            <br>
+
+            <blockquote>
+            <p><code>onClose</code> - <code>null</code></p>
+            </blockquote>
+            <p><code>Sidenav</code>关闭时回调</p>
+            <br>
+
+            <blockquote>
+                <p><code>class4nav</code> - <code>""</code>
+                </p>
+            </blockquote>
+            <p>指定样式, 多个样式逗号分隔</p>
+            <br>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <h5><code>.left()</code> - 左侧展开</h5>
+            <br>
+            <br>
+
+            <h5><code>.right()</code> - 右侧展开</h5>
+            <br>
+            <br>
+        </section>
+    </div>
+
+</section>

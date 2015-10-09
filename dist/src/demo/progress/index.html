@@ -1,0 +1,287 @@
+
+<title>Progress - Neoui-ng</title>
+
+<section id="progress" ng-controller="progressContorller">
+
+    <div class="block">
+
+        <svg>
+            <defs>
+            <style>
+            /** FIREFOX CAN'T USE EXTERNAL CSS FILE */
+            #progress svg {
+                width: 100%;
+                height: 200px;
+            }
+            #progress text {
+                font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
+                font-size: 40px;
+                fill: url(#mask);
+                text-shadow: 1px 1px 0 rgba(227, 218, 219, 1), 3px 3px 0 rgba(227, 218, 219, 0.9), 5px 5px 0 rgba(227, 218, 219, 0.8), 7px 7px 0 rgba(227, 218, 219, 0.7), 9px 9px 0 rgba(227, 218, 219, 0.6), 11px 11px 0 rgba(227, 218, 219, 0.5), 13px 13px 0 rgba(227, 218, 219, 0.4), 15px 15px 0 rgba(227, 218, 219, 0.3), 17px 17px 0 rgba(227, 218, 219, 0.2), 19px 19px 0 rgba(227, 218, 219, 0.1), 21px 21px 0 rgba(227, 218, 219, 0.08), 22px 22px 0 rgba(227, 218, 219, 0.07);
+            }
+            #progress .subtitle {
+                font-size: 16px;
+                text-shadow: none;
+            }
+            </style>
+                <pattern id="mask" patternUnits="userSpaceOnUse" height="600" width="600">
+                    <image xmlns:xlink="http://www.w3.org/1999/xlink" y="-100px" xlink:href="images/bgcolorful.jpg" width="600" height="600"></image>
+                </pattern>
+            </defs>
+            <text class="title" text-anchor="middle" x="50%" y="0" dy="100px">A jQuery Progress Plugin</text>
+            <a xlink:href="http://ricostacruz.com/nprogress/">
+            <text class="subtitle" text-anchor="middle" x="50%" y="0" dy="170px"> Inspired by NProgress.js </text>
+            </a>
+        </svg>
+
+        <div class="example">
+            <div class="wrap">
+                <s-progress class="md-progress-ios"
+                    auto-start="true"
+                    controller="progress">
+                </s-progress>
+            </div>
+
+            <div class="action">
+                <button class="md-btn md-btn-mint" ng-click="progress.start()">.start()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.dec()">.dec()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.inc()">.inc()</button>
+                <button class="md-btn md-btn-mint" ng-click="progress.done()">.done()</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="block green">
+        <h1>Looking for collaborators!</h1>
+
+        <p>If you interested in helping to build neoui-ng, <a href="https://github.com/trazyn/neoui-ng">check out this on GitHub</a></p>
+    </div>
+
+    <div class="block aqua">
+        <div class="content">
+            <h3>Here's how you use it in angularJS</h3>
+
+            <div class="code">
+                <label>Markup</label>
+                <xmp>
+    <s-progress class="ios"
+        auto-start="true"
+        controller="progress">
+    </s-progress>
+                </xmp>
+            </div>
+
+            <br>
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+    angular
+    .module( "demo.progress", [ "$ui.progress" ] )
+    .controller( "progressContorller", [ "$scope", function( $scope ) {
+        $scope.stop = function() {
+            $scope.progress.done();
+        }
+    } ] );
+                </xmp>
+            </div>
+
+            <br>
+            <br>
+            <h3>Attributes</h3>
+
+            <div class="prop">
+                <div class="name"><p>=controller</p></div>
+                <div class="desc">
+                    <p>null</p>
+                    <p>进度条控制器, <a href="" data-anchor="method">See the jQuery part</a></p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">@auto-show</div>
+                <div class="desc">
+                    <p>false</p>
+                    <p>自动开始进度条</p>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <h3>Classes</h3>
+            <div class="clazz">
+                <div class="name">.global</div>
+                <div class="desc">
+                    <p>进度条置顶</p>
+                </div>
+            </div>
+
+            <div class="clazz">
+                <div class="name">.ios</div>
+                <div class="desc">
+                    <p>IOS 风格进度条</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block gray">
+        <s-progress controller="normalProgress"></s-progress>
+
+        <div class="action">
+            <button class="md-btn md-btn-success" ng-click="normalProgress.start()">
+                <i class="md-icon-play-arrow"></i>
+            </button>
+            <button class="md-btn md-btn-danger" ng-click="normalProgress.done()">
+                <i class="md-icon-stop"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="block yellow">
+        <div class="content">
+            <h3>Use it in jQuery</h3>
+            <div class="code">
+                <label>Contructor</label>
+                <xmp>
+    $( selector ).progress( options )
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>HTML</label>
+                <xmp>
+    <div class="md-progress"></div>
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+    require( [ "ui/progress/progress" ], function() {
+        var progress = $( ".md-progress" ).progress().start();
+    } );
+                </xmp>
+            </div>
+            <br>
+
+            <h3>Options</h3>
+            <div class="prop">
+                <div class="name"><p>seed</p></div>
+                <div class="desc">
+                    <p>0.05</p>
+                    <p>随机值种子, 值越大, 增量越快</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">speed</div>
+                <div class="desc">
+                    <p>800</p>
+                    <p>速度值, 单位毫秒, 越小越快</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">max</div>
+                <div class="desc">
+                    <p>0.99123</p>
+                    <p>未完成时最大值</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">template</div>
+                <div class="desc">
+                    <p>&lt;div class='bar'&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class='spinner'&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;</p>
+                    <p>进度条模板</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">selector4bar</div>
+                <div class="desc">
+                    <p>".md-progress-bar"</p>
+                    <p>Selector of the progress bar</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">selector4icon</div>
+                <div class="desc">
+                    <p>".md-progress-spinner"</p>
+                    <p>Selector of the spinner icon</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">render</div>
+                <div class="desc">
+                    <p>function</p>
+                    <p>进度条状态更新时调用, 控制进度条展示</p>
+                </div>
+            </div>
+            <xmp>
+            $( ".md-progress" ).progress( {
+                render: function( status ) {
+
+                    this
+                    .$node
+                    .find( this.settings.selector4bar )
+                    .css( {
+                        "width": status * 100 + "%",
+                        "-webkit-transition": "all .2s ease-out",
+                        "-moz-transition": "all .2s ease-out",
+                        "-ms-transition": "all .2s ease-out",
+                        "-o-transition": "all .2s ease-out",
+                        "transition": "all .2s ease-out",
+                    } );
+                }
+            } );
+            </xmp>
+
+            <h3>Method</h3>
+            <div class="method">
+                <div class="name">.start()</div>
+                <div class="desc">
+                    开始进度条
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">.done()</div>
+                <div class="desc">
+                    更新进度条进度
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">.inc()</div>
+                <div class="desc">
+                    进度条快进
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">.dec()</div>
+                <div class="desc">
+                    进度条快退
+                </div>
+            </div>
+
+            <div class="method" data-anchor="method">
+                <div class="name">.set( status )</div>
+                <div class="param">
+                    <p>status</p>
+                    <p>Number, 小于等于1</p>
+                </div>
+                <div class="desc">
+                    更新进度条进度
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

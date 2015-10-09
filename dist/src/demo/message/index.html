@@ -1,0 +1,333 @@
+
+<title>Message - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="success" class="md-anchor-item active">Success</li>
+    <li data-anchor="info" class="md-anchor-item">Info</li>
+    <li data-anchor="danger" class="md-anchor-item">Danger</li>
+    <li data-anchor="warning" class="md-anchor-item">Warning</li>
+    <li data-anchor="confirm" class="md-anchor-item">Confirm</li>
+</ul>
+
+<section id="message" ng-controller="messageController" ng-init="init()">
+
+    <header data-anchor="success">Success</header>
+
+    <section>
+        <div class="wrap">
+            <div class="md-message md-message-success md-tooltip md-tooltip-top" data-tooltip="Click outside close the message">
+                <div class="md-message-flag">
+                    <i class="md-icon"></i>
+                </div>
+                <div class="md-message-content">
+                    <p>
+                    This is a message telling you that everything is a-okay!
+                    </p>
+                </div>
+            </div>
+
+            <button class="md-btn md-btn-success" ng-click="showSuccess()">
+                <i class="md-icon-play-arrow"></i>
+            </button>
+        </div>
+
+        <section>
+            <div class="md-ribbon">
+                <span>AngularJS</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.success( "This is a message telling you that everything is a-okay" );
+    } ] );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>jQuery</span>
+            </div>
+
+            <xmp>
+    require( [ "ui/message/message" ], function() {
+        $.message.success( "This is a message telling you that everything is a-okay" );
+    } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>API</span>
+            </div>
+
+            <h5> <code> .success( content, [ delay ] ) </code> </h5>
+            <blockquote>
+                <p><code>content</code> - String, 文本内容</p>
+                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            </blockquote>
+        </section>
+
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="info">Info</header>
+
+    <section>
+        <div class="wrap">
+            <div class="md-message md-message-info md-tooltip md-tooltip-top" data-tooltip="Click outside close the message">
+                <div class="md-message-flag">
+                    <i class="md-icon"></i>
+                </div>
+                <div class="md-message-content">
+                    <p>
+                    This is an 'information message' div.
+                    </p>
+                </div>
+            </div>
+
+            <button class="md-btn md-btn-info" ng-click="showInfo()">
+                <i class="md-icon-play-arrow"></i>
+            </button>
+        </div>
+
+        <section>
+            <div class="md-ribbon">
+                <span>AngularJS</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.info( "This is an 'information message' div." );
+    } ] );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>jQuery</span>
+            </div>
+
+            <xmp>
+    require( [ "ui/message/message" ], function() {
+        $.message.info( "This is an 'information message' div." );
+    } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>API</span>
+            </div>
+
+            <h5> <code> .info( content, [ delay ] ) </code> </h5>
+            <blockquote>
+                <p><code>content</code> - String, 文本内容</p>
+                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            </blockquote>
+        </section>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="danger">Danger</header>
+
+    <section>
+        <div class="wrap">
+            <div class="md-message md-message-danger md-tooltip md-tooltip-top" data-tooltip="Click outside close the message">
+                <div class="md-message-flag">
+                    <i class="md-icon"></i>
+                </div>
+                <div class="md-message-content">
+                    <p>
+                    This is a notification that something is wrong...
+                    </p>
+                </div>
+            </div>
+
+            <button class="md-btn md-btn-danger" ng-click="showDanger()">
+                <i class="md-icon-play-arrow"></i>
+            </button>
+        </div>
+
+        <section>
+            <div class="md-ribbon">
+                <span>AngularJS</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.danger( "This is a notification that something is wrong..." );
+    } ] );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>jQuery</span>
+            </div>
+
+            <xmp>
+    require( [ "ui/message/message" ], function() {
+        $.message.danger( "This is a notification that something is wrong..." );
+    } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>API</span>
+            </div>
+
+            <h5> <code> .danger( content, [ delay ] ) </code> </h5>
+            <blockquote>
+                <p><code>content</code> - String, 文本内容</p>
+                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            </blockquote>
+        </section>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="warning">Warning</header>
+
+    <section>
+        <div class="wrap">
+            <div class="md-message md-message-warning md-tooltip md-tooltip-top" data-tooltip="Click outside close the message">
+                <div class="md-message-flag">
+                    <i class="md-icon"></i>
+                </div>
+                <div class="md-message-content">
+                    <p>
+                    It warns the users that to expect some changes or limitations.
+                    </p>
+                </div>
+            </div>
+
+            <button class="md-btn md-btn-warning" ng-click="showWarning()">
+                <i class="md-icon-play-arrow"></i>
+            </button>
+        </div>
+
+        <section>
+            <div class="md-ribbon">
+                <span>AngularJS</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+        $message.warning( "It warns the users that to expect some changes or limitations." );
+    } ] );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>jQuery</span>
+            </div>
+
+            <xmp>
+    require( [ "ui/message/message" ], function() {
+        $.message.warning( "This is a notification that something is wrong..." );
+    } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>API</span>
+            </div>
+
+            <h5> <code> .warning( content, [ delay ] ) </code> </h5>
+            <blockquote>
+                <p><code>content</code> - String, 文本内容</p>
+                <p><code>delay</code> - Number, 自动关闭延时, 单位毫秒</p>
+            </blockquote>
+        </section>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="confirm">Confirm</header>
+
+    <section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>Example</span>
+            </div>
+
+            <p>
+            <button class="md-btn md-btn-outline md-btn-coral" name="confirm" ng-click="showConfirm()">
+                <i class="md-icon-star"></i> Show Confirm
+            </button>
+            </p>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>AngularJS</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "app", [ "$ui.message" ] )
+    .controller( "messageController", [ "$message", function( $message ) {
+
+        $message.confirm( {
+            title: "Please confirm",
+            message: "Exported successfully. Do you want to open the export query page?",
+            onOk: function() {
+                window.open( "//www.google.com", "_blank" );
+            }
+        } );
+    } ] );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon">
+                <span>jQuery</span>
+            </div>
+
+            <xmp>
+    require( "ui/message/message", function() {
+
+        $message.confirm( {
+            title: "Please confirm",
+            message: "Exported successfully. Do you want to open the export query page?",
+            onOk: function() {
+                window.open( "//www.google.com", "_blank" );
+            }
+        } );
+    } )
+            </xmp>
+        </section>
+        <section>
+            <div class="md-ribbon">
+                <span>API</span>
+            </div>
+
+            <h5> <code> .confirm( options ) </code> </h5>
+            <blockquote>
+                <p><code>title</code> - String, 对话框标题</p>
+                <p><code>message</code> - String, 对话框内容</p>
+                <p><code>onOk</code> - Function, 点击 <button s-ripple class="md-btn md-btn-flat md-btn-success">Ok</button> 执行回调</p>
+                <p><code>onClose</code> - Function, 点击 <button s-ripple class="md-btn md-btn-flat md-btn-default">Cancel</button> 执行回调</p>
+            </blockquote>
+        </section>
+
+    </section>
+</section>

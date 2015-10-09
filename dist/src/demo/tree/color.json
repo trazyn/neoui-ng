@@ -1,0 +1,90 @@
+
+[ {
+    id: "black",
+    name: "Black",
+    parent: ""
+}, {
+    id: "plagueRats",
+    name: "Plague Rats",
+    parent: "black"
+}, {
+    id: "sengirVampire",
+    name: "Sengir Vampire",
+    parent: "black"
+}, {
+    id: "blue",
+    name: "Blue",
+    parent: ""
+}, {
+    id: "manaLeak",
+    name: "Mana Leak",
+    parent: "blue"
+}, {
+    id: "timeWarp",
+    name: "Time Warp",
+    parent: "blue"
+}, {
+    id: "green",
+    name: "Green",
+    parent: ""
+}, {
+    id: "giantGrowth",
+    name: "Giant Growth",
+    parent: "green"
+}, {
+    id: "liegeOfTheTangle",
+    name: "Liege of the Tangle",
+    parent: "green"
+}, {
+    id: "red",
+    name: "Red",
+    parent: ""
+}, {
+    id: "wistfulSelkie",
+    name: "Wistful Selkie",
+    parent: "blueGreen"
+}, {
+    id: "borosSwiftblade",
+    name: "Boros Swiftblade",
+    parent: "redWhite"
+}, {
+    id: "lightningHelix",
+    name: "Lightning Helix",
+    parent: "redWhite"
+}, {
+    id: "moggFanatic",
+    name: "Mogg Fanatic",
+    parent: "red"
+}, {
+    id: "worldfire",
+    name: "Worldfire",
+    parent: "red"
+}, {
+    id: "white",
+    name: "White",
+    parent: ""
+}, {
+    id: "healingSalve",
+    name: "Healing Salve",
+    parent: "white"
+}, {
+    id: "serraAngel",
+    name: "Serra Angel",
+    parent: "white"
+}, {
+    id: "multicolor",
+    name: "Multicolor",
+    parent: ""
+}, {
+    id: "blueGreen",
+    name: "Blue + Green",
+    parent: "multicolor"
+}, {
+    id: "redWhite",
+    name: "Red + White",
+    parent: "multicolor"
+}, {
+    id: "simicAurora",
+    name: "Simic Aurora",
+    parent: "blueGreen"
+} ]

@@ -1,0 +1,624 @@
+
+<title>Dropdown - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="simple" class="md-anchor-item active">Simple</li>
+    <li data-anchor="iconMenu" class="md-anchor-item">Icon Menu</li>
+    <li data-anchor="advance" class="md-anchor-item">Advance</li>
+    <li class="md-anchor-item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sDropdown" class="md-anchor-item">Directive * s-dropdown</li>
+        </ul>
+    </li>
+    <li class="md-anchor-item">jQuery
+        <ul>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="dropdown" ng-controller="dropdownController" ng-init="init()">
+
+    <header data-anchor="simple">Simple</header>
+
+    <section class="simple">
+
+        <div class="wrap">
+            <s-dropdown data="data"></s-dropdown>
+        </div>
+
+        <div class="wrap">
+            <s-dropdown
+                data="data"
+                ng-model="value"
+                nothing="Hover me ^_^"
+                type="mouseover">
+            </s-dropdown>
+        </div>
+
+    </section>
+
+
+    <br>
+    <br>
+
+    <header data-anchor="iconMenu">Icon Menu</header>
+
+    <section class="simple">
+
+        <div class="wrap">
+            <div class="md-dropdown md-icon md-dropdown-right">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="md-dropdown md-icon md-dropdown-left">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="md-dropdown md-icon md-dropdown-bottom-right">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="md-dropdown md-icon md-dropdown-bottom-left">
+                <i class="md-icon-star"></i>
+                <div class="md-dropdown-content"></div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="advance">Advance</header>
+
+    <section class="advance">
+
+        <code>
+            {{ reps || [] }}
+        </code>
+        <br>
+        <br>
+
+        <div class="wrap">
+            <s-dropdown
+                data="ajax"
+                ng-disabled="isDisabled"
+                ng-model="reps"
+                required="required"
+                auto-width="true"
+                text-key="full_name"
+                value-key="false"
+                multiple="multiple"
+                close-on-select="false"
+                nothing="Multiple and less one item">
+                {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+                <p>
+                <code><i class="md-icon-github2"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+                </p>
+                <p>
+                    <mark>{{ watchers.toLocaleString() }} Watchers</mark>
+                    <mark>{{ forks.toLocaleString() }} Forks</mark>
+                    <code>{{ language }}</code>
+                    <mark>Last update: {{ updated_at }}</mark>
+                    <code class="mark"><i class="md-icon-info-outline"></i> {{ open_issues_count }}</code>
+                </p>
+            </s-dropdown>
+
+             <br>
+
+             <ul class="options">
+                 <li>
+                     <label>是否禁用?</label>
+                     <div class="md-checkbox" s-ripple>
+                         <input type="checkbox" ng-click="isDisabled = !isDisabled" />
+                         <div></div>
+                     </div>
+                 </li>
+                 <li>
+                     <label>允许多选?</label>
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="multiple" />
+                         <div></div>
+                     </div>
+                 </li>
+
+                 <li>
+                     <label>是否必选?</label>
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="required" />
+                         <div></div>
+                     </div>
+                 </li>
+             </ul>
+        </div>
+
+    </section>
+
+    <br>
+    <br>
+
+    <header>AngularJS</header>
+    <div class="markdown">
+        <section>
+            <div class="md-ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <div class="wrap">
+                <label>Simple</label>
+                <xmp>
+    <s-dropdown data="data"></s-dropdown>
+                </xmp>
+            </div>
+
+            <div class="wrap">
+            <label>Custom template</label>
+            <xmp>
+    <s-dropdown
+        data="ajax"
+        ng-disabled="isDisabled"
+        ng-model="reps"
+        required="required"
+        auto-width="true"
+        text-key="full_name"
+        value-key="false"
+        multiple="multiple"
+        close-on-select="false"
+        nothing="Multiple and less one item">
+        {{ name }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+        <p>
+        <code><i class="md-icon-github2"></i><a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+        </p>
+        <p>
+            <mark>{{ watchers.toLocaleString() }} Watchers</mark>
+            <mark>{{ forks.toLocaleString() }} Forks</mark>
+            <code>{{ language }}</code>
+            <mark>Last update: {{ updated_at }}</mark>
+            <code class="mark"><i class="md-icon-info-outline"></i> {{ open_issues_count }}</code>
+        </p>
+    </s-dropdown>
+    </xmp>
+            <p class="note">内容不为空时, 用作模板格式化列表, 以<mark>item</mark>做为<mark>scope</maek></code>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "demo.dropdown", [ "$ui.dropdown" ] )
+    .controller( "dropdownController", [ "$scope", function( $scope ) {
+
+        $scope.data = [ {
+			value: "AD",
+			text: "Andorra"
+		}, {
+			value: "AZ",
+			text: "Azerbaijan"
+		}, {
+			value: "AW",
+			text: "Aruba"
+		}, {
+			value: "BI",
+			text: "Bulgaria"
+		}, {
+			value: "BS",
+			text: "Bahamas"
+		}, {
+			value: "CH",
+			text: "Switzerland"
+		}, {
+			value: "CK",
+			text: "Cook Island"
+		}, {
+			value: "CL",
+			text: "Chile"
+		}, {
+			value: "CN",
+			text: "China"
+		}, {
+			value: "CM",
+			text: "Cambodia"
+		}, {
+			value: "AE",
+			text: "United Arab Emirates"
+		}, {
+			value: "AF",
+			text: "Afghanistan"
+		}, {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+        $( ".md-dropdown.md-icon" ).each( function() {
+            $( this ).dropdown( { data: $scope.data } );
+        } );
+
+        angular.extend( $scope, {
+
+            ajax: function() {
+
+                var deferred = $.Deferred();
+
+                $.ajax( {
+                    url: "src/demo/dropdown/result.json",
+                    dataType: "json"
+                } )
+
+                .done( function( data ) {
+                    data = data.items;
+                    deferred.resolveWith( data );
+                } )
+
+                .fail( deferred.reject );
+
+                return deferred;
+            },
+
+            required: true,
+            multiple: true
+        } );
+    } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="sDropdown">
+                <span>Directive * s-dropdown</span>
+            </div>
+
+            <blockquote>
+                <p><code>=ng-model</code> - <code>null</code></p>
+            </blockquote>
+            <p>下拉框值</p>
+            <br>
+
+            <blockquote>
+                <p><code>=ng-disabled</code> - <code>false</code></p>
+            </blockquote>
+            <p>禁用控件</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>=data</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>为数组时候为本地数据, function时返回$.Deferred</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>@text-key</code> - <code>"text"</code>
+                </p>
+            </blockquote>
+            <p><code>text</code>取值</p>
+            <br>
+
+            <blockquote>
+                <p><code>@value-key</code> - <code>"value"</code>
+                </p>
+            </blockquote>
+            <p><code>value</code>取值, 为<code>false</code>时候, 取值<code>json</code>对象</p>
+            <br>
+
+            <blockquote>
+                <p><code>@nothing</code> - <code>"Please Select"</code>
+                </p>
+            </blockquote>
+            <p>默认显示内容</p>
+            <br>
+
+            <blockquote>
+                <p><code>@close-on-select</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>选中后收起下拉列表</p>
+            <br>
+
+            <blockquote>
+                <p><code>@multiple</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>是否可多选</p>
+            <br>
+
+            <blockquote>
+                <p><code>@required</code> - <code>false</code>
+            </blockquote>
+            <p>设置为<code>true</code>后, 必须有一个选中项</p>
+            <br>
+
+            <blockquote>
+                <p><code>@auto-width</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>宽度对齐</p>
+            <br>
+
+            <blockquote>
+                <p><code>&on-select</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中时触发</p>
+            <br>
+
+            <blockquote>
+                <p><code>@type</code> - <code>"click"</code>
+                </p>
+            </blockquote>
+            <p><code>"click"</code>或<code>"mouseover"</code></p>
+            <br>
+
+        </section>
+    </div>
+
+    <header>jQuery</header>
+
+    <div class="markdown">
+        <section>
+            <div class="md-ribbon" data-anchor="html">
+                <span>HTML</span>
+            </div>
+
+            <xmp>
+    <div class="md-dropdown">
+        <p class="md-dropdown-title"></p>
+        <i class="md-icon md-dropdown-status"></i>
+        <div class="md-dropdown-content">
+        </div>
+    </div>
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="constructor">
+                <span>Constructor</span>
+            </div>
+
+            <p><code>$( selector ).dropdown( options )</code>
+            </p>
+
+            <blockquote>
+                <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+                <p><code>options</code> - 参数设置</p>
+            </blockquote>
+
+            <xmp>
+    $( ".md-dropdown" ).dropdown();
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="options">
+                <span>Options</span>
+            </div>
+
+            <blockquote class="required">
+                <p><code>data</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>为数组时候为本地数据, function时返回$.Deferred</p>
+            <xmp>
+    [ {
+        value: "AD",
+        text: "Andorra"
+    }, {
+        value: "AZ",
+        text: "Azerbaijan"
+    }, {
+        value: "AW",
+        text: "Aruba"
+    }, {
+        value: "BI",
+        text: "Bulgaria"
+    }, {
+        value: "BS",
+        text: "Bahamas"
+    }, {
+        value: "CH",
+        text: "Switzerland"
+    }, {
+        value: "CK",
+        text: "Cook Island"
+    }, {
+        value: "CL",
+        text: "Chile"
+    }, {
+        value: "CN",
+        text: "China"
+    }, {
+        value: "CM",
+        text: "Cambodia"
+    }, {
+        value: "AE",
+        text: "United Arab Emirates"
+    }, {
+        value: "AF",
+        text: "Afghanistan"
+    }, {
+        value: "AG",
+        text: "Antigua and Barbuda"
+    }, {
+        value: "AO",
+        text: "Angola"
+    } ];
+            </xmp>
+            <br>
+
+            <blockquote class="required">
+                <p><code>textKey</code> - <code>text</code>
+                </p>
+            </blockquote>
+            <p><code>text</code>取值</p>
+            <br>
+
+            <blockquote>
+                <p><code>valueKey</code> - <code>value</code>
+                </p>
+            </blockquote>
+            <p><code>value</code>取值, 为<code>false</code>时候, 取值<code>json</code>对象</p>
+            <br>
+
+            <blockquote>
+                <p><code>nothing</code> - <code>"Please Select"</code>
+                </p>
+            </blockquote>
+            <p>默认显示内容</p>
+            <br>
+
+            <blockquote>
+                <p><code>autoWidth</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>宽度对齐</p>
+            <br>
+
+            <blockquote>
+                <p><code>onSelect</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>选中时触发</p>
+            <xmp>
+    $( ".md-dropdown" ).dropdown( {
+        onSelect: function( item, settings ) {
+            console.log( "Current selected: " + item );
+        }
+    } );
+            </xmp>
+            <br>
+
+            <blockquote>
+                <p><code>type</code> - <code>"click"</code>
+                </p>
+            </blockquote>
+            <p><code>"click"</code>或<code>"mouseover"</code></p>
+            <br>
+
+            <blockquote>
+                <p><code>multiple</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>是否可多选</p>
+            <br>
+
+            <blockquote>
+                <p><code>required</code> - <code>false</code>
+            </blockquote>
+            <p>设置为<code>true</code>后, 必须有一个选中项</p>
+            <br>
+
+            <blockquote>
+                <p><code>closeOnSelect</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>选中后收起下拉列表</p>
+            <br>
+
+            <blockquote>
+                <p><code>ripple</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>Ink ripple effects</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4title</code> - <code>".md-dropdown-title"</code>
+                </p>
+            </blockquote>
+            <p>标题选择器</p>
+            <br>
+
+            <blockquote>
+                <p><code>selector4content</code> - <code>".md-dropdown-content"</code>
+                </p>
+            </blockquote>
+            <p>内容选择器</p>
+            <br>
+
+            <blockquote>
+                <p><code>class4loading</code> - <code>"md-dropdown-sync"</code>
+                </p>
+            </blockquote>
+            <p><code>Ajax</code>请求时样式</p>
+            <br>
+
+            <blockquote>
+                <p><code>formatter</code> - </p>
+            </blockquote>
+            <p>格式化下拉列表</p>
+            <xmp>
+    $( ".md-dropdown" ).dropdown( {
+        formatter: function( item, settings ) {
+            return "<span>" + (item[ settings.textKey ] || item[ settings.valueKey ]) + "</span>";
+        }
+    } );
+            </xmp>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="method">
+                <span>Method</span>
+            </div>
+
+            <h5><code>.val( [value] )</code></h5>
+            <blockquote>
+                <p><code>value</code> - <code>Object</code></p>
+                <footer>
+                    参数为空时返回当前所选值, 不为空时选中指定项
+                </footer>
+            </blockquote>
+            <br>
+            <br>
+
+            <h5><code>.render( data )</code></h5>
+            <blockquote>
+                <p><code>data</code> - <code>Array/Function</code></p>
+                <footer>重新产生下拉列表</footer>
+            </blockquote>
+            <br>
+            <br>
+
+            <h5><code>.add( data )</code></h5>
+            <blockquote>
+                <p><code>data</code> - <code>Array</code></p>
+                <footer>新增下拉内容</footer>
+            </blockquote>
+            <br>
+            <br>
+
+            <h5><code>.selectAll()</code> - 全选</h5>
+            <br>
+            <br>
+
+            <h5><code>dropdown.deselectAll()</code> - 取消全选</h5>
+            <br>
+            <br>
+
+            <h5><code>dropdown.disabled()</code> - 禁用控件</h5>
+            <br>
+
+            <h5><code>dropdown.enabled()</code> - 启用控件</h5>
+        </section>
+    </div>
+</section>

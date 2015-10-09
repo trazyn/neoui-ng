@@ -1,0 +1,258 @@
+
+<title>Modal - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active" data-forceAnchor="-260">Example</li>
+    <li class="md-anchor-item">AngularJS
+        <ul>
+            <li data-anchor="service" class="md-anchor-item">Service * $ui.modal</li>
+            <li data-anchor="ngMethods" class="md-anchor-item">Methods</li>
+        </ul>
+    </li>
+    <li class="md-anchor-item">jQuery
+        <ul>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="modal" ng-controller="modalController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section class="example">
+
+        <div class="row">
+            <div class="col-md-10">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'slide' )">SLIDE</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'slide' )">SLIDE</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'bottom' )">BOTTOM</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'scale' )">SCALE</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'fadein' )">FADEIN</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'flip' )">FLIP</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'vertical' )">VERTICAL</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="md-btn md-btn-coral" ng-click="open( 'sign' )">SIGN</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="open( 'scale' ).loading.show()">Show Loading</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="showProgress()">Show Progress</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header>AngularJS</header>
+
+    <section>
+        <div class="md-ribbon" data-anchor="service">
+            <span>Service * $ui.modal</span>
+        </div>
+
+        <xmp>
+    angular
+    .module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
+    .controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
+
+        $scope.name = "test";
+
+        $scope.open = function( animation ) {
+
+            return $modal.open( {
+                controller: "modalController",
+                animation: animation,
+                templateUrl: "src/demo/modal/page.html",
+                title: "Mango (Fruit)",
+                class4modal: "demo",
+                scope: $scope
+            } );
+        };
+
+        $scope.showProgress = function() {
+
+            $modal.open( {
+                controller: "modalController",
+                templateUrl: "src/demo/modal/page1.html",
+                title: "弹出框标题 18PX 加粗 #333",
+                class4modal: "demo",
+                scope: $scope
+            } )
+
+            .progress.start();
+        };
+    } ] );
+        </xmp>
+
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="ngMethods">
+            <span>Methods</span>
+        </div>
+
+        <h5><code>$modal.open( options )</code> - 打开弹出框</h5>
+        <blockquote>
+            <code>options</code> - Object
+
+            <blockquote>
+                <p><code>scope</code> - null</p>
+                <footer>指定<mark>scope</mark></footer>
+            </blockquote>
+            <br>
+
+            其他见<a href="" data-anchor="options">Options</a>
+        </blockquote>
+    </section>
+
+    <br>
+    <br>
+
+    <header>jQuery</header>
+
+    <section>
+        <div class="md-ribbon" data-anchor="constructor">
+            <span>Constructor</span>
+        </div>
+
+        <h5><code>$.modal( options )</code></h5>
+
+        <blockquote>
+            <code>options</code> - 参数设置
+        </blockquote>
+
+        <xmp>
+    $.modal( { animation: "slide" } );
+        </xmp>
+
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="options">
+            <span>Options</span>
+        </div>
+
+        <blockquote>
+            <p><code>title</code> - "Modal.JS"</p>
+            <footer> 指定<mark>title</mark> </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>showTitle</code> - true</p>
+            <footer> 显示标题头 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>mask</code> - true</p>
+            <footer> 是否显示遮罩层 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>render</code> - null</p>
+            <footer> 弹出框内容, 字符串或<mark>function</mark> </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>draggable</code> - true</p>
+            <footer>
+                <mark>true</mark>时, 通过标题栏拖拽, 做为字符串时作为选择器定位拖拽元素
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>class4modal</code> - null</p>
+            <footer> 指定弹出框样式 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>autoShow</code> - true</p>
+            <footer>
+                初始化后打开弹出框, 不通过实例<mark>open</mark>方法
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>closeByESC</code> - true</p>
+            <footer>
+                Press <kbd>Esc</kbd> close the modal
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>closeByDocument</code> - true</p>
+            <footer> 点击弹出框外面关闭弹出框 </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>animation</code> - "slide"</p>
+            <footer>
+                弹出框动画, <code>slide</code>, <code>stick</code>, <code>bottom</code>, <code>flip</code>, <code>vertical</code>, <code>sign</code>, <code>scale</code>, <code>fadein</code>
+            </footer>
+        </blockquote>
+        <br>
+
+        <blockquote>
+            <p><code>onClose</code> - null</p>
+            <footer>
+                弹出框卸载触发
+            </footer>
+        </blockquote>
+        <br>
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="method">
+            <span>Methods</span>
+        </div>
+
+        <h5><code>.open()</code> - Open the modal</h5>
+        <br>
+
+        <h5><code>.close()</code> - Close the modal</h5>
+        <br>
+
+        <h5><code>.progress</code> - <a class="mark" href="#/progress">See Progress.js</a></h5>
+        <br>
+
+        <h5><code>.loading</code> - <a class="mark" href="#/loading">See Loading.js</a></h5>
+        <br>
+    </section>
+</section>

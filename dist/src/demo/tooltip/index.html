@@ -1,0 +1,56 @@
+
+<title>Tooltip - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active">Example</li>
+    <li data-anchor="html" data-forceAnchor="700" class="md-anchor-item">HTML</li>
+</ul>
+
+<section id="tooltip" ng-controller="tooltipController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="wrap">
+            <p class="md-tooltip md-tooltip-top" data-tooltip="Top">There is something is over me</p>
+            <br>
+            <p class="md-tooltip md-tooltip-right" data-tooltip="Right">Always right</p>
+            <br>
+            <p class="md-tooltip md-tooltip-left" data-tooltip="Left">Left</p>
+            <br>
+            <p class="md-tooltip md-tooltip-bottom" data-tooltip="Bottom">I'm bottom</p>
+
+            <p class="avatar">
+            <a href="//github.com/trazyn" class="md-tooltip md-tooltip-top" data-tooltip="View On GitHub">
+                <img src="images/5271843.jpg" alt="fs3kuu">
+            </a>
+            </p>
+
+            <p class="social">
+                <a class="md-tooltip md-tooltip-top twitter" data-tooltip="Twitter"><i class="md-icon-twitter"></i></a>
+                <a class="md-tooltip md-tooltip-top dribbble" data-tooltip="Dribbble"><i class="md-icon-dribbble"></i></a>
+                <a class="md-tooltip md-tooltip-top github" data-tooltip="GitHub"><i class="md-icon-github2"></i></a>
+            </p>
+        </div>
+
+        <div class="wrap">
+            <span class="md-tooltip md-tooltip-top" data-tooltip="Ultima foto (di archivio) prima di partire per le vacanze (Eolie e nord-est sicilia, incluso Etna)....una barca che taglia il mare in un mare di nuvole.">
+                <img src="images/19768242656_0752948444_b.jpg" alt="">
+            </span>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="html">Html</header>
+
+    <section>
+        <xmp class="html">
+    <a class="md-tooltip md-tooltip-top">Top</a>
+    <a class="md-tooltip md-tooltip-right">Right</a>
+    <a class="md-tooltip md-tooltip-left">Left</a>
+    <a class="md-tooltip md-tooltip-bottom">Bottom</a>
+        </xmp>
+    </section>
+</section>

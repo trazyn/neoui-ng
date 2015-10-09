@@ -1,0 +1,618 @@
+
+<title>AutoComplete - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active">Example</li>
+
+    <li class="md-anchor-item">AngularJS
+        <ul>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sAutocomplete" class="md-anchor-item">Directive * s-autocomplete</li>
+        </ul>
+    </li>
+
+    <li class="md-anchor-item">jQuery
+        <ul>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
+        </ul>
+    </li>
+</ul>
+
+<section id="autoComplete" ng-controller="autoCompleteController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+
+        <code>
+            {{ address || [] }}
+        </code>
+
+        <br>
+        <br>
+
+        <div class="wrap">
+             <s-autocomplete
+                 ng-disabled="isDisabled"
+                 ng-model="address"
+                 local-match="localMatch"
+                 tab-complete="tabComplete"
+                 highlight="highlight"
+                 fuzzy="fuzzy"
+                 lookup="data"
+                 value-key="value"
+                 text-key="text"
+                 highlight="true"
+                 placeholder="Type 'a' or 'b' or 'c'">
+                 <div class="item">
+                     {{ $text }} - {{ $value }}
+                 </div>
+             </s-autocomplete>
+
+             <br>
+
+             <ul class="options">
+                 <li>
+                     <label>是否禁用?</label>
+                     <div class="md-checkbox" s-ripple>
+                        <input type="checkbox" ng-click="isDisabled = !isDisabled" >
+                        <div></div>
+                     </div>
+                 </li>
+                 <li>
+                     <label>文本全文匹配</label>
+                     <div class="md-radio" s-ripple>
+                         <input type="radio" ng-model="localMatch" value="*">
+                         <div></div>
+                     </div>
+                 </li>
+                 <li>
+                     <label>匹配文本开头</label>
+                     <div class="md-radio" s-ripple>
+                         <input type="radio" ng-model="localMatch" value="^">
+                         <div></div>
+                     </div>
+                 </li>
+                 <li>
+                     <label>匹配文本结尾</label>
+                     <div class="md-radio" s-ripple>
+                         <input type="radio" ng-model="localMatch" value="$">
+                         <div></div>
+                     </div>
+                 </li>
+
+                 <li>
+                     <label>高亮搜索结果</label>
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="highlight" checked>
+                         <div></div>
+                     </div>
+                 </li>
+
+                 <li>
+                     <label>不区分大小写</label>
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="fuzzy" checked>
+                         <div></div>
+                     </div>
+                 </li>
+
+                 <li>
+                     <label>Press <kbd>Tab</kbd> select the first result</label>
+                     <div class="md-switch" s-ripple>
+                         <input type="checkbox" ng-model="tabComplete" checked>
+                         <div></div>
+                     </div>
+                 </li>
+             </ul>
+
+             <br>
+             <br>
+
+             <code>
+                 {{ reps || [] }}
+             </code>
+
+             <br>
+             <br>
+
+             <s-autocomplete
+                 ng-model="reps"
+                 ajax="ajax"
+                 highlight="true"
+                 value-key="full_name"
+                 text-key="name"
+                 local-match="'*'"
+                 show-hint="false"
+                 placeholder="Search GitHub Repository">
+                 <div class="rep">
+                     {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+                     <br>
+                     <code><i class="md-icon-github2"></i>  <a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+                     <p>
+                     <mark>{{ watchers.toLocaleString() }} Watchers</mark>
+                     <mark>{{ forks.toLocaleString() }} Forks</mark>
+                     <code>{{ language }}</code>
+                     <mark>Last update: {{ updated_at }}</mark>
+                     <mark class="issue"><i class="md-icon-info-outline"></i> {{ open_issues_count }}</mark>
+                     </p>
+                 </div>
+             </s-autocomplete>
+        </div>
+    </section>
+
+    <header>AngularJS</header>
+    <div class="markdown">
+        <section>
+            <div class="md-ribbon" data-anchor="markup">
+                <span>Markup</span>
+            </div>
+
+            <div class="wrap">
+                <label>Simple</label>
+                <xmp>
+    <s-autocomplete
+     data="data"
+     value-key="value"
+     text-key="text"
+     placeholder="Type 'a' or 'b' or 'c'">
+    </s-autocomplete>
+                </xmp>
+            </div>
+
+            <div class="wrap">
+            <label>Custom template</label>
+            <xmp>
+    <s-autocomplete
+         ng-model="reps"
+         ajax="ajax"
+         highlight="true"
+         value-key="full_name"
+         text-key="name"
+         local-match="'*'"
+         show-hint="false"
+         placeholder="Search GitHub Repository">
+        <div class="rep">
+            {{ $text }} - <a href="{{ owner.html_url }}" title="Author by {{ owner.login }}">{{ owner.login }}</a>
+            <br>
+            <code><i class="md-icon-github2"></i>  <a href="{{ html_url }}" title="{{ full_name }}">{{ html_url }}</a></code>
+            <p>
+            <code>{{ watchers.toLocaleString() }} Watchers</code>
+            <code>{{ forks.toLocaleString() }} Forks</code>
+            <code>{{ language }}</code>
+            <code>Last update: {{ updated_at }}</code>
+            <code class="issue"><i class="md-icon-info-outline"></i>{{ open_issues_count }}</code>
+            </p>
+        </div>
+    </s-autocomplete>
+            </xmp>
+            <p class="note">内容不为空时, 用作模板格式化结果, <mark>$text</mark>, <mark>$value</mark> 为当前结果值和显示名称</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="javascript">
+                <span>Javascript</span>
+            </div>
+
+            <xmp>
+    angular
+    .module( "demo.autoComplete", [ "$ui.autoComplete" ] )
+    .controller( "autoCompleteController", [ "$scope", function( $scope ) {
+
+        /** AutoComplete options */
+        angular.extend( $scope, {
+
+            isDisabled: false,
+            localMatch: "^",
+            tabComplete: true,
+            highlight: true,
+            fuzzy: true
+        } );
+
+        $scope.data = [ {
+			value: "AD",
+			text: "Andorra"
+		}, {
+			value: "AZ",
+			text: "Azerbaijan"
+		}, {
+			value: "AW",
+			text: "Aruba"
+		}, {
+			value: "BI",
+			text: "Bulgaria"
+		}, {
+			value: "BS",
+			text: "Bahamas"
+		}, {
+			value: "CH",
+			text: "Switzerland"
+		}, {
+			value: "CK",
+			text: "Cook Island"
+		}, {
+			value: "CL",
+			text: "Chile"
+		}, {
+			value: "CN",
+			text: "China"
+		}, {
+			value: "CM",
+			text: "Cambodia"
+		}, {
+			value: "AE",
+			text: "United Arab Emirates"
+		}, {
+			value: "AF",
+			text: "Afghanistan"
+		}, {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+		$scope.address = [ {
+			value: "AG",
+			text: "Antigua and Barbuda"
+		}, {
+			value: "AO",
+			text: "Angola"
+		} ];
+
+		/** Ajax example */
+		$scope.ajax = {
+		    dataProxy: function( key ) {
+                return $.ajax( {
+                    url: "https://api.github.com/search/repositories?q=" + key + "&sort=stars&order=desc"
+                } );
+		    },
+            enterforce: true,
+            dataFilter: function( data ) {
+                return data.items || [];
+            }
+		};
+    } ] );
+            </xmp>
+
+        </section>
+
+        <section>
+            <div class="md-ribbon" data-anchor="sAutocomplete">
+                <span>Directive * s-autocomplete</span>
+            </div>
+
+            <blockquote class="required">
+                <p><code>@value-key</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p><code>value</code>取值键</p>
+            <br>
+
+            <blockquote class="required">
+                <p><code>@text-key</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p><code>text</code>取值键</p>
+            <br>
+
+            <blockquote>
+                <p><code>=lookup</code> - <code>[]</code></p>
+            </blockquote>
+            <p>本地数据</p>
+            <br>
+
+            <blockquote>
+            <p><code>@min-chars</code> - <code>1</code></p>
+            </blockquote>
+            <p>输入内容长度大于该值时候进行联想</p>
+            <br>
+
+            <blockquote>
+                <p><code>@placeholder</code> - <code>null</code>
+                </p>
+            </blockquote>
+            <p>The same to input placeholder</p>
+            <br>
+
+            <blockquote>
+                <p><code>@delimiter</code> - <code>","</code>
+                </p>
+            </blockquote>
+            <p>多值输入分隔符, 设置<code>false</code>单值输入</p>
+            <br>
+
+            <blockquote>
+                <p><code>@input-anything</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>限制输入内容, 为<code>false</code>时, 输入内容必须存在于联想结果中</p>
+            <br>
+
+            <blockquote>
+                <p><code>@show-hint</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>显示结果补全提示</p>
+            <br>
+
+            <blockquote>
+                <p><code>=fuzzy</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>模糊匹配, 不区分大小写</p>
+            <br>
+
+            <blockquote>
+                <p><code>=tab-complete</code> - <code>true</code>
+                </p>
+            </blockquote>
+            <p>Press <kbd>Tab</kbd> select the first result</p>
+            <br>
+
+            <blockquote>
+                <p><code>=highlight</code> - <code>false</code>
+                </p>
+            </blockquote>
+            <p>高亮匹配内容</p>
+            <br>
+
+            <blockquote>
+                <p><code>=local-match</code> - <code>"^"</code>
+                </p>
+            </blockquote>
+            <p>匹配模式, 取值范围<code>^</code>: 匹配开头, <code>$</code>: 匹配结尾, <code>*</code>: 全文匹配</p>
+
+        </section>
+    </div>
+
+    <header>jQuery</header>
+
+    <div class="markdown">
+    <section>
+        <div class="md-ribbon" data-anchor="html">
+            <span>HTML</span>
+        </div>
+
+        <xmp>
+    <div class="md-autoComplete">
+            <input class="md-text md-autoComplete-front" type="text" placeholder="Type 'a' or 'b' or 'c' or ','" />
+            <input class="md-text md-autoComplete-hint" type="text" tabindex="-1" />
+            <i class="md-icon"></i>
+    </div>
+        </xmp>
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="constructor">
+            <span>Constructor</span>
+        </div>
+
+        <p><code>$( selector ).autoComplete( options )</code></p>
+
+        <blockquote>
+        <p><code>selector</code> - 选择器或 DOM 元素</p>
+
+        <p><code>options</code> - 参数设置</p>
+        </blockquote>
+
+        <xmp>
+    var lookup = [ {
+        value: "AD",
+        text: "Andorra"
+    }, {
+    ...
+    }, {
+        value: "AO",
+        text: "Angola"
+    } ];
+
+    $( ".md-autoComplete" ).autoComplete( { lookup: lookup } );
+        </xmp>
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="options">
+            <span>Options</span>
+        </div>
+
+        <blockquote class="required">
+            <p><code>valueKey</code> - <code>null</code>
+            </p>
+        </blockquote>
+        <p><code>value</code>取值键</p>
+        <br>
+
+        <blockquote class="required">
+            <p><code>textKey</code> - <code>null</code>
+            </p>
+        </blockquote>
+        <p><code>text</code>取值键</p>
+        <br>
+
+        <blockquote>
+        <p><code>lookup</code> - <code>[]</code></p>
+        </blockquote>
+        <p>本地数据</p>
+        <br>
+
+        <blockquote>
+        <p><code>delimiter</code> - <code>","</code></p>
+        </blockquote>
+        <p>多值输入分隔符, 设置<code>false</code>单值输入</p>
+        <br>
+
+        <blockquote>
+        <p><code>minChars</code> - <code>1</code></p>
+        </blockquote>
+        <p>输入内容长度大于该值时候进行联想</p>
+        <br>
+
+        <blockquote>
+            <p><code>showHint</code> - <code>true</code>
+            </p>
+        </blockquote>
+        <p>显示结果补全提示</p>
+        <br>
+
+        <blockquote>
+        <p><code>highlight</code> - <code>false</code></p>
+        </blockquote>
+        <p>高亮匹配内容</p>
+        <br>
+
+        <blockquote>
+        <p><code>inputAnything</code> - <code>true</code></p>
+        </blockquote>
+        <p>限制输入内容, 为<code>false</code>时, 输入内容必须存在于联想结果中</p>
+        <br>
+
+        <blockquote>
+            <p><code>localMatch</code> - <code>"^"</code>
+            </p>
+        </blockquote>
+        <p>匹配模式, 取值范围<code>^</code>: 匹配开头, <code>$</code>: 匹配结尾, <code>*</code>: 全文匹配, 或为正则表达式自定义匹配</p>
+        <br>
+
+
+        <blockquote>
+        <p><code>fuzzy</code> - <code>true</code></p>
+        </blockquote>
+        <p>模糊匹配, 不区分大小写</p>
+        <br>
+
+        <blockquote>
+        <p><code>autoSelect</code> - <code>false</code></p>
+        </blockquote>
+        <p>联想结果仅一条时直接选中, 不展示列表</p>
+        <br>
+
+        <blockquote>
+            <p><code>tabComplete</code> - <code>true</code>
+            </p>
+        </blockquote>
+        <p>Press <kbd>Tab</kbd> select the first result</p>
+        <br>
+
+        <blockquote>
+        <p><code>ajaxOptions</code> - <code>null</code></p>
+        </blockquote>
+        <p><code>Ajax</code> 配置:</p>
+        <xmp>
+    {
+        dataProxy   - 返回 Promise
+        dataFilter  - 过滤 dataProxy 所产生的数据
+        enterforce  - 回车键强制查询
+    }
+        </xmp>
+        <br>
+
+        <blockquote>
+        <p><code>formatter</code> - </p>
+        </blockquote>
+        <p>格式化联想记录</p>
+        <xmp>
+    formatter: function( value, text, index, highlightText, query, settings ) {
+
+        return settings.highlight
+            ? "<li value='" + value + "' data-index='" + index + "'>" + highlightText + "</li>"
+            : "<li value='" + value + "' data-index='" + index + "'>" + text + "</li>"
+            ;
+    }
+        </xmp>
+        <br>
+
+        <blockquote>
+        <p><code>set</code> - <code>null</code></p>
+        </blockquote>
+        <p>选中内容时执行回调</p>
+        <br>
+
+        <blockquote>
+        <p><code>breaksize</code> - <code>10</code></p>
+        </blockquote>
+        <p>联想结果会被缓存用于快速联想, 例如<code>Ajax</code> 服务时候, 输入<code>foo</code>服务器端返回5条结果</p>
+        <p>以<code>foo</code>作为<code>key</code>值缓存结果, 再次输入<code>foobar</code>时候, 回溯输入内容, 尝试以<code>'fooba'</code>, <code>'foob'</code>, <code>'foo'</code> 作为<code>key</code>值去匹配缓存</p>
+        <p>缓存结果集数量小于该值时命中缓存, 避免过多的<code>Ajax</code>服务请求</p>
+        <p>所以为了能最大效率的<code>Ajax</code>联想, 后台服务应该是模糊查询, 并且结果数接近该值</p>
+        <p><code>ajaxOptions.enterforce</code>设置为<code>true</code>, <kbd>enter</kbd>重新查询并以当前输入创建缓存</p>
+        <br>
+
+        <blockquote>
+        <p><code>cacheKey</code> - <code>"autoComplete-data"</code></p>
+        </blockquote>
+        <p>缓存 Key, 用于 Debug</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4loading</code> - <code>"md-autoComplete-sync"</code></p>
+        </blockquote>
+        <p>Ajax 服务<code>Pending</code>时样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4error</code> - <code>"md-autoComplete-error"</code></p>
+        </blockquote>
+        <p>输入与联想结果不匹配时样式, <code>inputAnything</code>为<code>false</code>时有效</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4selected</code> - <code>"md-autoComplete-selected"</code></p>
+        </blockquote>
+        <p>联想列表内容, 选中样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4highlight</code> - <code>"md-autoComplete-highlight"</code></p>
+        </blockquote>
+        <p>文本匹配高亮样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>class4list</code> - <code>"md-autoComplete-list"</code></p>
+        </blockquote>
+        <p>下拉列表样式</p>
+        <br>
+
+        <blockquote>
+        <p><code>selector4input</code> - <code>".md-autoComplete-front"</code></p>
+        </blockquote>
+        <p>输入框选择器</p>
+        <br>
+
+        <blockquote>
+        <p><code>selector4indicator</code> - <code>".md-icon:first"</code></p>
+        </blockquote>
+        <p>状态提示选择器<p>
+
+    </section>
+
+    <section>
+        <div class="md-ribbon" data-anchor="method">
+            <span>Method</span>
+        </div>
+
+        <h5><code>.disabled()</code> - 禁用控件</h5>
+        <br>
+
+        <h5><code>.enabled()</code> - 启用控件</h5>
+        <br>
+
+        <h5><code>.stopSuggest()</code> - 停止联想</h5>
+        <br>
+
+        <h5><code>.val( [value] )</code></h5>
+        <blockquote>
+        <p><code>value</code> - Array / Object</p>
+        <footer>参数为空时返回控件值, 不为空时设置控件值, <code>value</code>为数组</footer>
+        </blockquote>
+    </section>
+    </div>
+
+</section>

@@ -1,0 +1,106 @@
+
+<title>Switcher - Neoui-ng</title>
+
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active">Example</li>
+    <li data-anchor="html" class="md-anchor-item">HTML</li>
+</ul>
+
+<section id="switcher" ng-controller="switcherController" ng-init="init()">
+
+    <header data-anchor="example">Example</header>
+
+    <section>
+        <div class="wrap">
+            <div class="subhead">Pure CSS Switcher UI</div>
+            <div class="row">
+                <div class="md-switch">
+                    <input type="checkbox">
+                    <div></div>
+                </div>
+                Normal
+            </div>
+
+            <div class="row">
+                <div class="md-switch">
+                    <input type="checkbox" checked>
+                    <div></div>
+                </div>
+                Checked
+            </div>
+
+            <div class="row">
+                <div class="md-switch error">
+                    <input type="checkbox">
+                    <div></div>
+                </div>
+                Error
+            </div>
+
+            <div class="row">
+                <div class="md-switch" s-ripple>
+                    <input type="checkbox">
+                    <div></div>
+                </div>
+                Ripple
+            </div>
+
+            <div class="row">
+                <div class="md-switch" s-ripple>
+                    <input type="checkbox" disabled>
+                    <div></div>
+                </div>
+                Disabled
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <header data-anchor="html">Html</header>
+
+    <section>
+        <xmp class="html">
+    <div class="row">
+        <div class="md-switch">
+            <input type="checkbox">
+            <div></div>
+        </div>
+        Normal
+    </div>
+
+    <div class="row">
+        <div class="md-switch">
+            <input type="checkbox" checked>
+            <div></div>
+        </div>
+        Checked
+    </div>
+
+    <div class="row">
+        <div class="md-switch error">
+            <input type="checkbox">
+            <div></div>
+        </div>
+        Error
+    </div>
+
+    <div class="row">
+        <div class="md-switch" s-ripple>
+            <input type="checkbox">
+            <div></div>
+        </div>
+        Ripple
+    </div>
+
+    <div class="row">
+        <div class="md-switch" s-ripple>
+            <input type="checkbox" disabled>
+            <div></div>
+        </div>
+        Disabled
+    </div>
+        </xmp>
+    </section>
+</section>

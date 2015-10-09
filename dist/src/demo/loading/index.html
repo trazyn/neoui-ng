@@ -1,0 +1,135 @@
+
+<title>Loading - Neoui-ng</title>
+
+<section id="loading" ng-controller="loadingController">
+
+    <s-loading class="md-loading-global" controller="loading" ng-click="loading.hide()"></s-loading>
+
+    <div class="block example">
+        <h1>A Simple Div Loading</h1>
+
+        <p>Loading animation with keyframe for LESS & HTML</p>
+
+        <div class="action">
+            <button class="md-btn md-btn-lavender"
+                s-ripple
+                ng-click="loading.show()">
+                <span>Global Loading with overlay</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="block aqua">
+        <div class="content">
+            <h3>Use it in angularJS</h3>
+
+            <div class="code">
+                <label>Markup</label>
+                <xmp>
+    <s-loading class="md-loading-global" controller="loading" ng-click="loading.hide()"></s-loading>
+                </xmp>
+            </div>
+
+            <br>
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+    angular
+    .module( "demo.loading", [ "$ui.loading" ] )
+    .controller( "loadingController", [ "$scope", function( $scope ) {
+        /** Not needed javascript */
+    } ] );
+                </xmp>
+            </div>
+
+            <br>
+            <br>
+            <h3>Attributes</h3>
+
+            <div class="prop">
+                <div class="name"><p>=controller</p></div>
+                <div class="desc">
+                    <p>null</p>
+                    <p>Controller of the 'loading', <a href="" data-anchor="method">See the jQuery method</a></p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">@auto-show</div>
+                <div class="desc">
+                    <p>false</p>
+                    <p>显示 loading 框</p>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <h3>Classes</h3>
+            <div class="clazz">
+                <div class="name">.md-loading-global</div>
+                <div class="desc">
+                    <p>全局显示</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="box">
+            <s-loading auto-show="true" controller="innerLoading"></s-loading>
+        </div>
+
+        <div>
+            <button class="md-btn md-btn-mint" style="margin-right: 20px;" ng-click="innerLoading.show()">.show()</button>
+            <button class="md-btn md-btn-mint" ng-click="innerLoading.hide()">.hide()</button>
+        </div>
+    </div>
+
+    <div class="block yellow">
+        <div class="content">
+            <h3>Use it in jQuery</h3>
+            <div class="code">
+                <label>Contructor</label>
+                <xmp>
+    $( selector ).loading();
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>HTML</label>
+                <xmp>
+    <div class="md-loading"></div>
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+    require( [ "ui/loading/loading" ], function() {
+        var loading = $( ".md-loading" ).loading();
+    } );
+                </xmp>
+            </div>
+            <br>
+
+            <h3>Method</h3>
+            <div class="method">
+                <div class="name">loading.show()</div>
+                <div class="desc">
+                    显示 loading 框
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">loading.hide()</div>
+                <div class="desc">
+                    隐藏 loading 框
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,253 @@
+
+<title>Ripple - Neoui-ng</title>
+
+<section id="ripple" ng-controller="rippleController">
+
+    <div class="block example"
+        s-ripple
+        duration="800"
+        speed="800"
+        random="true"
+        color="color"
+        controller="ripple"
+        auto-bind="false">
+        <h1>Andorid L ripple effect</h1>
+
+        <p>Supports both jQuery an angularjs</p>
+        <p>In the angularjs just add 's-ripple' attribute to any DOM element, lol :)</p>
+
+        <div class="action">
+            <button class="md-btn md-btn-mint" ng-click="ripple.show()">.show()</button>
+            <button class="md-btn md-btn-mint" ng-click="ripple.hide()">.hide()</button>
+        </div>
+
+        <p class="themes">
+        <span ng-repeat="color in [ 'grape', 'bittersweet', 'sunflower', 'grass', 'mint', 'aqua', 'blueJeans', 'lavender', 'pinkRose', 'lightGray', 'mediumGray', 'darkGray', 'success', 'error', 'info', 'warn' ]"
+              class="item {{ color }}"
+              ng-click="changeColor( color )"
+              ng-class="{ 'active': theme === color }"></span>
+        </p>
+
+    </div>
+
+    <div class="block aqua">
+        <div class="content">
+            <h3>Here's how you use it in angularJS, just add 's-ripple' attribute</h3>
+
+            <div class="code">
+                <label>Markup</label>
+                <xmp>
+    <div s-ripple duration="800" speed="800"></div>
+                </xmp>
+            </div>
+
+            <br>
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+    angular
+    .module( "demo.ripple", [ "$ui.ripple" ] )
+    .controller( "rippleController", [ "$scope", function( $scope ) {
+        /** Not needed javascript */
+    } ] );
+                </xmp>
+            </div>
+
+            <br>
+            <br>
+            <h3>Attributes</h3>
+
+            <div class="prop">
+                <div class="name"><p>=controller</p></div>
+                <div class="desc">
+                    <p>null</p>
+                    <p>Controller of the 'ripple', <a href="" data-anchor="method">See the jQuery method</a></p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">@speed</div>
+                <div class="desc">
+                    <p>0</p>
+                    <p>单位毫秒, 周期值, 大于0循环显示</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">@duration</div>
+                <div class="desc">
+                    <p>300</p>
+                    <p>Value of the 'animation-duration' property</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">=color</div>
+                <div class="desc">
+                    <p>null</p>
+                    <p>为空时候, 设置随机颜色</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">@auto-bind</div>
+                <div class="desc">
+                    <p>true</p>
+                    <p>默认绑定事件到点击事件</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">@random</div>
+                <div class="desc">
+                    <p>false</p>
+                    <p>循环时, 位置随机出现</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block various">
+
+        <div s-ripple class="box"></div>
+
+        <div class="box">
+            <a s-ripple>
+                <i class="md-icon-twitter"></i>
+            </a>
+        </div>
+
+        <button class="md-btn md-btn-pinkRose" s-ripple>Ripple with button</button>
+
+    </div>
+
+    <div class="block yellow">
+        <div class="content">
+            <h3>Use it in jQuery</h3>
+            <div class="code">
+                <label>Contructor</label>
+                <xmp>
+    $( selector ).ripple( options )
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>HTML</label>
+                <xmp>
+    <div class="md-ripple"></div>
+                </xmp>
+            </div>
+            <br>
+
+            <div class="code">
+                <label>Javascript</label>
+                <xmp>
+    require( [ "ui/ripple/ripple" ], function() {
+        var ripple = $( ".md-ripple" ).ripple();
+    } );
+                </xmp>
+            </div>
+            <br>
+
+            <h3>Options</h3>
+            <div class="prop">
+                <div class="name"><p>speed</p></div>
+                <div class="desc">
+                    <p>0</p>
+                    <p>单位毫秒, 周期值, 大于0循环显示</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">duration</div>
+                <div class="desc">
+                    <p>300</p>
+                    <p>Value of the 'animation-duration' property</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">color</div>
+                <div class="desc">
+                    <p>null</p>
+                    <p>为空时候, 设置随机颜色</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">autoBind</div>
+                <div class="desc">
+                    <p>true</p>
+                    <p>默认绑定事件到点击事件</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">random</div>
+                <div class="desc">
+                    <p>false</p>
+                    <p>循环播放时, 位置随机出现</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">class4progress</div>
+                <div class="desc">
+                    <p>"md-ripple-progress"</p>
+                    <p>循环时宿主元素样式</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">class4fail</div>
+                <div class="desc">
+                    <p>"md-ripple-fail"</p>
+                    <p>调用 hide( status ) 方法时, status 为 false 时添加样式</p>
+                </div>
+            </div>
+
+            <div class="prop">
+                <div class="name">class4done</div>
+                <div class="desc">
+                    <p>"md-ripple-done"</p>
+                    <p>调用 hide( status ) 方法时, status 不为 false 时添加样式</p>
+                </div>
+            </div>
+
+            <h3>Method</h3>
+            <div class="method">
+                <div class="name">.enabled()</div>
+                <div class="desc">
+                    If present, enabled ripple effect
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">.disabled()</div>
+                <div class="desc">
+                    Disable ripple effect
+                </div>
+            </div>
+
+            <div class="method">
+                <div class="name">.show()</div>
+                <div class="desc">
+                    Show the ink rippe effect
+                </div>
+            </div>
+
+            <div class="method" data-anchor="method">
+                <div class="name">.hide( [status] )</div>
+                <div class="param">
+                    <p>status</p>
+                    <p>Boolean, 默认 true</p>
+                </div>
+                <div class="desc">
+                    Work well with 'options.class4done' and 'options.class4fail'
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
