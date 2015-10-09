@@ -33,7 +33,6 @@ define( function() {
 		} )
 
 		.on( "mouseleave", function( e ) {
-
             setTimeout( function() {
                 if ( !target.is( ":hover" ) ) {
                     stars.removeClass( settings.class4highlight );
@@ -100,7 +99,7 @@ define( function() {
                 /** Reset recent state */
 				stars
                 .removeClass( settings.class4selected )
-                .find( ">i[style]" ).removeAttr( "style" );
+                .find( "> i[style]" ).removeAttr( "style" );
 
 				$( stars.splice( 0, index ) ).addClass( settings.class4selected );
 
@@ -109,7 +108,7 @@ define( function() {
 				    .first()
 				    .removeClass( settings.class4highlight )
 				    .addClass( settings.class4selected )
-				    .find( ">i" )
+				    .find( "> i" )
 				    .css( {
 				        width: ((value - index) * 100) + "%"
 				    } );
@@ -134,9 +133,9 @@ define( function() {
 
 	$.fn.rate.defaults = {
 	    onSelect        : $.noop,
-	    selector4star   : ">span",
-	    class4highlight : "highlight",
-	    class4selected  : "selected",
+	    selector4star   : "> span",
+	    class4highlight : "md-rate-highlight",
+	    class4selected  : "md-rate-selected",
 	    defaultValue    : 0
 	};
 } );

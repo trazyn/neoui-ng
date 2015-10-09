@@ -2,21 +2,21 @@
 
 <title>Rate - Neoui-ng</title>
 
-<ul id="anchors" class="ui anchor">
-    <li data-anchor="example" class="item active" data-forceAnchor="-260">Example</li>
-    <li class="item">AngularJS
+<ul id="anchors" class="md-anchor">
+    <li data-anchor="example" class="md-anchor-item active" data-forceAnchor="-260">Example</li>
+    <li class="md-anchor-item">AngularJS
         <ul>
-            <li data-anchor="markup" class="item">Markup</li>
-            <li data-anchor="javascript" class="item">Javascript</li>
-            <li data-anchor="sRate" class="item">Directive * s-rate</li>
+            <li data-anchor="markup" class="md-anchor-item">Markup</li>
+            <li data-anchor="javascript" class="md-anchor-item">Javascript</li>
+            <li data-anchor="sRate" class="md-anchor-item">Directive * s-rate</li>
         </ul>
     </li>
-    <li class="item">jQuery
+    <li class="md-anchor-item">jQuery
         <ul>
-            <li data-anchor="html" class="item">Html</li>
-            <li data-anchor="constructor" class="item">Constructor</li>
-            <li data-anchor="options" class="item">Options</li>
-            <li data-anchor="method" class="item">Method</li>
+            <li data-anchor="html" class="md-anchor-item">Html</li>
+            <li data-anchor="constructor" class="md-anchor-item">Constructor</li>
+            <li data-anchor="options" class="md-anchor-item">Options</li>
+            <li data-anchor="method" class="md-anchor-item">Method</li>
         </ul>
     </li>
 </ul>
@@ -38,7 +38,7 @@
                 <br>
 
                 <span>
-                    <s-rate class="heart" ng-model="heart"></s-rate>
+                    <s-rate class="md-rate-heart" ng-model="heart"></s-rate>
                 </span>
             </div>
 
@@ -59,7 +59,7 @@
                         </p>
                         <s-rate ng-model="rate" ng-init="rate = 4.5"></s-rate>
                         <span>
-                            <i class="icon favorite"></i>
+                            <i class="md-icon-favorite"></i>
                             1,475,098 likes
                         </span>
                     </div>
@@ -69,7 +69,7 @@
                 <div class="preview">
                     <div class="min">
                         <img src="images/MV5BMjMzMTM4MzM1OV5BMl5BanBnXkFtZTgwODAwMzE2NTE@._V1_SY317_CR91,0,214,317_AL_.jpg">
-                        <i class="icon play"></i>
+                        <i class="md-icon-play-arrow"></i>
                     </div>
                 </div>
 
@@ -80,12 +80,12 @@
                     <p class="stars"><b>Stars:</b> <a href="">Cara Delevingne</a>, <a href="">Margot Robbie</a>, <a href="">Scott Eastwood</a> | <a href="">See full cast and crew</a>
 
                     <div class="action">
-                        <button class="ui button mint">
-                            <i class="icon add"></i>
+                        <button class="md-btn md-btn-mint">
+                            <i class="md-icon-add"></i>
                             Watchlist
                         </button>
 
-                        <button class="ui button coral">
+                        <button class="md-btn md-btn-coral">
                             Watch Trailer
                         </button>
                     </div>
@@ -101,42 +101,42 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="markup">
+            <div class="md-ribbon" data-anchor="markup">
                 <span>Markup</span>
             </div>
 
             <div class="wrap">
                 <label><i class="icon star"></i></label>
                 <xmp>
-                <s-rate ng-model="star" ng-init="star = 4.6"></s-rate>
+    <s-rate ng-model="star" ng-init="star = 4.6"></s-rate>
                 </xmp>
             </div>
 
             <div class="wrap">
                 <label><i class="icon favorite"></i></label>
                 <xmp>
-                    <s-rate class="heart" ng-model="heart"></s-rate>
+    <s-rate class="md-rate-heart" ng-model="heart"></s-rate>
                 </xmp>
             </div>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="javascript">
+            <div class="md-ribbon" data-anchor="javascript">
                 <span>Javascript</span>
             </div>
 
             <xmp>
-            angular
-            .module( "demo.rate", [ "$ui.rate" ] )
-            .controller( "rateController", [ "$scope", function( $scope ) {
-                $scope.heart = 2.3;
-            } ] );
+    angular
+    .module( "demo.rate", [ "$ui.rate" ] )
+    .controller( "rateController", [ "$scope", function( $scope ) {
+        $scope.heart = 2.3;
+    } ] );
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="sRate">
+            <div class="md-ribbon" data-anchor="sRate">
                 <span>Directive * s-rate</span>
             </div>
 
@@ -168,19 +168,19 @@
 
     <div class="markdown">
         <section>
-            <div class="ui ribbon" data-anchor="html">
+            <div class="md-ribbon" data-anchor="html">
                 <span>HTML</span>
             </div>
 
             <xmp>
-            <div class="ui rate">
-                <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span>
-            </div>
+    <div class="md-rate">
+        <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span>
+    </div>
             </xmp>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="constructor">
+            <div class="md-ribbon" data-anchor="constructor">
                 <span>Constructor</span>
             </div>
 
@@ -194,13 +194,13 @@
             </blockquote>
 
             <xmp>
-            $( ".ui.rate" ).rate();
+    $( ".md-rate" ).rate();
             </xmp>
 
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="options">
+            <div class="md-ribbon" data-anchor="options">
                 <span>Options</span>
             </div>
 
@@ -218,14 +218,14 @@
             <br>
 
             <blockquote>
-                <p><code>class4highlight</code> - <code>"highlight"</code>
+                <p><code>class4highlight</code> - <code>"md-rate-highlight"</code>
                 </p>
             </blockquote>
             <p>鼠标悬浮高亮样式</p>
             <br>
 
             <blockquote>
-                <p><code>class4selected</code> - <code>"selected"</code>
+                <p><code>class4selected</code> - <code>"md-rate-selected"</code>
                 </p>
             </blockquote>
             <p>选中后样式</p>
@@ -236,16 +236,16 @@
             </blockquote>
             <p>选中后执行</p>
             <xmp>
-            $( ".ui.rate" ).rate( {
-                onSelect: function( value ) {
-                    console.log( value );
-                }
-            } );
+    $( ".md-rate" ).rate( {
+        onSelect: function( value ) {
+            console.log( value );
+        }
+    } );
             </xmp>
         </section>
 
         <section>
-            <div class="ui ribbon" data-anchor="method">
+            <div class="md-ribbon" data-anchor="method">
                 <span>Method</span>
             </div>
 

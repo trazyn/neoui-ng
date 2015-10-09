@@ -13,7 +13,7 @@ define( [ "ui/pagination/pagination-ng" ], function() {
 
         $scope.index = 7;
 
-        $( ".ui.pagination:last" ).pagination( {
+        $( ".md-pagination:last" ).pagination( {
             total: 20,
             index: 1
         } );

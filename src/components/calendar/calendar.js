@@ -142,7 +142,12 @@ define( [ "util/dateutil" ], function() {
 		} )
 		.on( "focusout", function() {
             defaultDate = new Date( this.value );
-            settings.onSelected( this.value );
+
+            if ( isNaN( +defaultDate ) ) {
+                defaultDate = new Date();
+            }
+
+            settings.onSelected( $.dateutil( defaultDate ).format( settings.format ) );
 		} );
 
 		if ( settings.showTime ) {
@@ -253,7 +258,7 @@ define( [ "util/dateutil" ], function() {
                                 (calendar.find( "input[name=second]" ).val() || 0) );
                         value = $.dateutil( date ).format( settings.format );
 
-                        input.val( value ).focus();
+                        input.val( value );
                         settings.onSelected( value );
 
                         input.trigger( "change" );

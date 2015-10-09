@@ -48,9 +48,9 @@ angular.module( "$ui.pagination", [] )
                 onPageChange: "&"
             },
 
-            template        : "<div class='ui pagination'>" +
-                                "<div class='content'></div>" +
-                                "<span class='normal'>跳转至</span>" +
+            template        : "<div class='md-pagination'>" +
+                                "<div class='md-pagination-nav'></div>" +
+                                "<span class='md-pagination-normal'>跳转至</span>" +
                                 "<input type='text' maxleng='4'>" +
                                 "<span name='go'>GO</span>" +
                               "</div>",

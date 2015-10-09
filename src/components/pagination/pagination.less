@@ -1,101 +1,102 @@
 
 @import (reference) "../../style/neoui.less";
 
-.ui.pagination {
+.md-pagination {
 
-	margin: 0 auto;
-	text-align: center;
-	display: block;
-	font-size: 1rem;
-	height: 32px;
-	line-height: 32px;
-	font-size: .8rem;
+    display: block;
+    height: 32px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+    line-height: 32px;
 
-	a, span, input {
-		text-decoration: none;
-		cursor: pointer;
-		display: inline-block;
-		line-height: 35px;
-		height: 35px;
-		border: 1px solid @lightGray2;
-		color: #3e3e3e;
-		width: 35px;
-		background-color: white;
-		margin: 5px;
-		transition: .2s;
-		font-size: 14px;
-		outline: 0;
+    a,
+    span,
+    input {
+        display: inline-block;
+        height: 35px;
+        width: 35px;
+        margin: 5px;
+        line-height: 35px;
+        border: 1px solid @lightGray2;
         vertical-align: middle;
-	}
+        background-color: white;
+        font-size: 14px;
+        color: #3e3e3e;
+        outline: 0;
+        text-decoration: none;
+        cursor: pointer;
+        transition: .2s;
+    }
 
-	a:hover, a:focus, input:focus, input:hover {
-		border: 1px solid @primary;
-		color: @primary;
-	}
+    a:hover,
+    a:focus,
+    input:focus,
+    input:hover {
+        border: 1px solid @primary;
+        color: @primary;
+    }
 
-	input, input + span {
-		text-align: center;
-		color: @darkGray2;
-	}
+    input,
+    input + span {
+        text-align: center;
+        color: @darkGray2;
+    }
 
-	span {
-		font-size: 14px;
-
-		&:hover {
-			border: 1px solid @primary;
-			color: @primary;
-		}
-
-		&.current {
-			background-color: @primary;
-			color: white;
-			font-weight: bold;
-			border-color: @primary;
-		}
-
-		&.normal {
-			width: initial;
-			background: inherit;
-			border: auto;
-			margin: 0 20px;
-			border: 1px solid transparent;
-			width: auto;
-			cursor: default;
-			color: @darkGray;
-
-			&:hover {
-				border: 1px solid transparent;
-			}
-		}
-	}
-
-	>.content {
-	    display: inline-block;
-	}
-
-	&.flat {
-	    a, span, input {
-	        border: none;
-	        border-bottom: 2px solid @primary;
-	        &:hover {
-	            background-color: @lightGray;
-	        }
-	    }
-
-	    .current {
-	        background-color: white;
-            border-color: @coral;
-	        font-weight: normal;
-	        color: @coral;
-	    }
-
-	    .normal {
-	        border: none;
-	        &:hover {
-	            border: none;
-	            background-color: inherit;
-	        }
+    span:not(.md-pagination-current):not(.md-pagination-normal) {
+        font-size: 14px;
+        &:hover {
+            border: 1px solid @primary;
+            color: @primary;
         }
-	}
+    }
+
+
+    .md-pagination-current {
+        color: white;
+        font-weight: bold;
+        border-color: @primary;
+        background-color: @primary;
+    }
+
+    .md-pagination-normal {
+        width: auto;
+        margin: 0 20px;
+        border: 1px solid transparent;
+        color: @darkGray;
+        background: inherit;
+        cursor: default;
+    }
+
+    .md-pagination-nav { display: inline-block; }
+
+    .md-icon-next,
+    .md-icon-prev {
+        &:after { vertical-align: top; }
+    }
 }
 
+.md-pagination.md-pagination-flat {
+    a,
+    span,
+    input {
+        border: none;
+        border-bottom: 2px solid @primary;
+        &:hover { background-color: @lightGray; }
+    }
+
+    .md-pagination-current {
+        background-color: white;
+        border-color: @coral;
+        font-weight: normal;
+        color: @coral;
+    }
+
+    .md-pagination-normal {
+        border: none;
+        &:hover {
+            border: none;
+            background-color: inherit;
+        }
+    }
+}

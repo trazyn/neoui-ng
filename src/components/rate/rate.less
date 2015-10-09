@@ -1,80 +1,73 @@
 
 @import (reference) "../../style/neoui.less";
 
-.ui.rate {
+.md-rate {
     display: inline-block;
     height: 32px;
     line-height: 32px;
     box-sizing: content-box;
-    >span {
-
+    > span {
+        position: relative;
+        display: inline-block;
         width: 18px;
         height: 18px;
-        line-height: 18px;
         font-size: 18px;
-        display: inline-block;
-        position: relative;
+        margin-left: 10px;
+        line-height: 18px;
         color: rgba(0, 135, 211, .4);
         cursor: pointer;
-        margin-left: 10px;
 
-        >i:before, &:after {
-            transition: .2s;
+        > i:before,
+        &:after {
             content: "★";
+            transition: .2s;
         }
 
-        >i, &:after {
+        > i,
+        &:after {
             position: absolute;
             top: 0;
             left: 0;
         }
 
-        >i {
-            z-index: 9;
+        > i {
             font-style: normal;
-            overflow: hidden;
             width: 0;
+            overflow: hidden;
+            z-index: 9;
             cursor: pointer;
-
-            &:before {
-                overflow: hidden;
-            }
+            &:before { overflow: hidden; }
         }
 
-        &:hover:after, &.highlight {
-            color: rgba(0, 135, 211, .6);
-        }
+        &:hover:after,
+        &.md-rate-highlight { color: rgba(0,135,211,.6); }
 
-        &.selected {
-            >i {
+        &.md-rate-selected {
+            > i {
                 width: 100%;
-                &:before {
-                    color: rgb(0, 135, 211);
-                }
+                &:before { color: rgb(0, 135, 211); }
             }
         }
     }
+}
 
-    &.heart {
-        >span {
-            >i:before, &:after {
-                font-family: "icomoon";
-                content: "\e649";
-            }
+.md-rate.md-rate-heart {
+    > span {
+        color: rgba(233, 54, 40, .4);
 
-            color: rgba(233, 54, 40, .4);
+        > i:before,
+        &:after {
+            font-family: "icomoon";
+            content: "\e649";
+        }
 
-            &:hover:after, &.highlight {
-                color: rgba(233, 54, 40, .6);
-            }
+        &:hover:after,
+        &.md-rate-highlight { color: rgba(233,54,40,.6); }
 
-            &.selected {
-                >i {
-                    width: 100%;
-                    &:before {
-                        color: rgb(233, 54, 40);
-                    }
-                }
+        &.md-rate-selected {
+            > i {
+                width: 100%;
+                &:before { color: rgb(233,54,40); }
             }
         }
     }

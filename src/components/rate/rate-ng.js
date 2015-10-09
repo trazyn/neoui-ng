@@ -49,7 +49,7 @@ angular.module( "$ui.rate", [] )
             restric         : "E",
 
             replace         : true,
-            template        : "<div class='ui rate'>" +
+            template        : "<div class='md-rate'>" +
                                 "<span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span> <span> <i></i> </span>" +
                               "</div>",
 

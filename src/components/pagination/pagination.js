@@ -25,7 +25,7 @@ define( function() {
         render( target, settings );
 
         target
-        .delegate( "[data-index]:not(.current)", "click", function( e ) {
+        .delegate( "[data-index]:not(.md-pagination-current)", "click", function( e ) {
 
             e.stopPropagation();
             e.preventDefault();
@@ -35,7 +35,7 @@ define( function() {
             render( target, settings );
         } )
 
-        .delegate( settings.selector4input, "keydown", function( e ) {
+        .delegate( settings.selector4index, "keydown", function( e ) {
 
             if ( e.keyCode === 13 ) {
                 $( this ).next().trigger( "click" );
@@ -66,7 +66,11 @@ define( function() {
 		head = "",
 		tail = "",
         page = [],
-        content = target.find( settings.selector4content );
+        content = target.find( settings.selector4nav );
+
+        if ( !content.length ) {
+            content = target;
+        }
 
         if ( total <= 7 ) {
             for ( var i = 1; i <= total; page += " " + i++ );
@@ -101,21 +105,21 @@ define( function() {
 
                 page[i] = page[i] == index
 
-                        ? "<span class=current>" + index + "</span>"
+                        ? "<span class='md-pagination-current'>" + index + "</span>"
                         : "<a data-index='" + page[i] + "'>" + page[i] + "</a>"
                         ;
             } else
-                page[i] = "<span class='normal'>...</span>";
+                page[i] = "<span class='md-pagination-normal'>...</span>";
         }
 
         /** Show PREV */
-        index > 1 && page.unshift( $( "<a class='icon prev' data-index='" + (index - 1) + "'></a>" ) );
+        index > 1 && page.unshift( $( "<a class='md-icon-prev' data-index='" + (index - 1) + "'></a>" ) );
 
         /** Show NEXT */
-        index < total && page.push( $( "<a class='icon next' data-index='" + (index + 1) + "'></a>" ) );
+        index < total && page.push( $( "<a class='md-icon-next' data-index='" + (index + 1) + "'></a>" ) );
 
         content.html( page );
-        target.find( settings.selector4input ).val( index );
+        target.find( settings.selector4index ).val( index );
     }
 
     Pagination.prototype = {
@@ -149,8 +153,8 @@ define( function() {
         total               : 1,
         onPageChange        : $.noop,
 
-        selector4content    : ".content",
-        selector4input      : "input:text",
+        selector4nav        : ".md-pagination-nav",
+        selector4index      : "input:text",
         selector4jump       : "[name=go]"
     };
 } );
