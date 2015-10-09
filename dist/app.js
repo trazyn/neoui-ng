@@ -670,7 +670,8 @@ define( 'demo/calendar/index',[ "ui/calendar/calendar-ng", "util/dateutil" ], fu
 
         angular.extend( $scope, {
 
-            date: $.dateutil( now ).tomorrow().val(),
+            date: $.dateutil( now ).tomorrow().format(),
+            double: true,
             isDisabled: false,
             minDate: $.dateutil( now ).month(-1).format( "%m/%d, %Y" ),
             maxDate: $.dateutil( now ).month(1).format( "%m/%d, %Y" ),
@@ -896,7 +897,7 @@ define( 'demo/pagination/index',[ "ui/pagination/pagination-ng" ], function() {
 
         $scope.index = 7;
 
-        $( ".ui.pagination:last" ).pagination( {
+        $( ".md-pagination:last" ).pagination( {
             total: 20,
             index: 1
         } );
