@@ -40,7 +40,7 @@ define( [ "ui/modal/modal" ], function() {
     $.sidenav.defaults = {
 
         /** Same to the modal component */
-        content     : "",
+        render      : "",
         class4nav   : " ",
         onClose     : $.noop
     };

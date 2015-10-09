@@ -50,17 +50,17 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			options.showTitle ? head.html( options.title ) : head.hide().next().hide();
 
 			/** ~Body~ */
-			if ( options.content instanceof Function ) {
-				options.content.call( body, deferred, loading, close );
+			if ( options.render instanceof Function ) {
+				options.render.call( body, deferred, loading, close );
 			} else {
-				body.html( options.content );
+				body.html( options.render );
 				deferred.resolve();
 			}
 
 			modal.first().addClass( [ "md-modal-animation-" + options.animation, options.class4modal || "" ].join( " " ) );
 
 			/** Show the overlay */
-			overlay.addClass( options.modal ? "show" : "blank" );
+			overlay.addClass( options.mask ? "show" : "blank" );
 
 			/** Close the modal */
 			if ( options.closeByESC || options.closeByDocument ) {
@@ -125,7 +125,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 		title 		    : "Modal",
 		showTitle 	    : true,
-		modal        	: true,
+		mask        	: true,
 		draggable       : true,
 
 		class4modal     : "",
@@ -134,7 +134,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		closeByDocument : false,
 
 		animation 	    : "slide",
-		content 		: "",
+		render 		    : "",
 
 		autoShow 	    : true,
 		onClose 		: $.noop,

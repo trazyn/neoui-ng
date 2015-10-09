@@ -19,7 +19,7 @@ define( [ "ui/modal/modal" ], function() {
 
 			var options = {
 
-                content: function( ready, loading, close ) {
+                render: function( ready, loading, close ) {
 
 					var template = [ "<div class='md-message ", type," md-tooltip md-tooltip-top' data-tooltip='Close outside close the message'>",
 								"<div class='md-message-flag'><i class='md-icon'></i></div>",
@@ -75,7 +75,7 @@ define( [ "ui/modal/modal" ], function() {
 				class4modal     : "md-confirm",
                 closeByDocument : false,
 
-				content: function( ready, loading, close ) {
+				render: function( ready, loading, close ) {
 
 					this
 					.html( "<div class='md-modal-content'>" +

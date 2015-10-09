@@ -33,7 +33,7 @@ angular.module( "$ui.sidenav", [] )
 
             var
             sidenav,
-            content = function( deferred, loading, close ) {
+            render = function( deferred, loading, close ) {
 
                 this.html( $element );
                 $compile( this.find( ".sidenav >*" ) )( $scope );
@@ -42,7 +42,7 @@ angular.module( "$ui.sidenav", [] )
 
             if ( $scope.templateUrl ) {
 
-                content = function( deferred, loading, close ) {
+                render = function( deferred, loading, close ) {
 
                     var self = this;
 
@@ -65,7 +65,7 @@ angular.module( "$ui.sidenav", [] )
             }
 
             sidenav = $.sidenav( {
-                content  : content,
+                render   : render,
                 onClose  : $scope.onClose
             } );
 

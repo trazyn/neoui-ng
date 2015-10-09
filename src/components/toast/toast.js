@@ -16,12 +16,12 @@ define( [ "ui/modal/modal" ], function() {
 
         modal = $.modal( {
             showTitle       : false,
-            modal           : false,
+            mask            : false,
             animation       : "scale",
             css             : { "min-width": "" },
             class4modal     : "md-toast " + [ position, class4toast || "" ].join( " " ),
 
-            content         : function( ready, loading, close ) {
+            render          : function( ready, loading, close ) {
 
                 var template = "<p class='md-toast-message'>" + message + "</p>" +
                                 "<p class='md-toast-close text-uppercase'>undo</p>";
