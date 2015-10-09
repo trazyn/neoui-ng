@@ -17,7 +17,7 @@
     li {
         position: relative;
         margin: 0;
-        &.selected > p {
+        &.md-tree-selected > p {
             & > .md-icon,
             & > span { color: #e9573f !important; }
         }
@@ -29,6 +29,10 @@
                 > span { color: #999 !important; }
             }
             p:hover { background-color: inherit; }
+        }
+
+        &:last-child {
+            &:after{ display: none }
         }
     }
 

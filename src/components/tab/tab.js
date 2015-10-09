@@ -142,7 +142,7 @@ define( [ "ui/lavalamp/lavalamp", "ui/ripple/ripple" ], function() {
 
 			    var
 			    scroller = self.parent(),
-			    offset = self.offset().left - scroller.width();
+			    offset = self.offset().left - scroller.offset().left + self.width();
 
                 scroller.scrollLeft( offset );
 			},

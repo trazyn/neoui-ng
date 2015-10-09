@@ -45,8 +45,8 @@
 
                 if ( !self.hasClass( "md-tree-node" ) || $( e.target ).is( "span" ) ) {
 
-                    selected && selected.removeClass( "selected" );
-                    selected = self.addClass( "selected" );
+                    selected && selected.removeClass( "md-tree-selected" );
+                    selected = self.addClass( "md-tree-selected" );
 
                     settings.onSelect( {
                         item: hash[ self.attr( "data-key" ) ],

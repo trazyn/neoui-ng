@@ -16,7 +16,7 @@ define( [ "ui/tree/tree-ng" ], function() {
         $scope.test = function() {
 
             $.ajax( {
-                url: "src/demo/tree/test.json",
+                url: "src/demo/tree/color.json",
                 dataType: "text"
             } )
             .done( function( data ) {
@@ -47,15 +47,15 @@ define( [ "ui/tree/tree-ng" ], function() {
             tree.add( item );
         };
 
-        $scope.afterInit = function( szseTree ) {
+        $scope.afterInit = function( tree ) {
 
             $.when( deferred ).done( function() {
 
-                szseTree
-                .expand( "szse" )
-                .expand( "zhyjs" )
-                .disabled("zhyjs" )
-                .disabled( "szzqjysyyb" );
+                tree
+                .expand( "multicolor" )
+                .expand( "white" )
+                .expand("green" )
+                .disabled( "green" );
             } );
         };
     } ] );
