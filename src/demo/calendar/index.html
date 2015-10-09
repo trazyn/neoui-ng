@@ -39,7 +39,6 @@
             <s-calendar
                 ng-disabled="isDisabled"
                 double="double"
-                show-adjacent="adjacent"
                 ng-model="date"
                 placeholder="Year-Month-Day"
                 min-date="minDate"
@@ -62,13 +61,6 @@
                     <label>显示双月</label>
                     <div class="md-switch" s-ripple>
                         <input type="checkbox" ng-model="double" />
-                        <div></div>
-                    </div>
-                </li>
-                <li>
-                    <label>显示邻近日期</label>
-                    <div class="md-switch" s-ripple>
-                        <input type="checkbox" ng-model="adjacent" />
                         <div></div>
                     </div>
                 </li>
@@ -204,13 +196,6 @@
                 </blockquote>
                 <p>最大可选日期</p>
                 <br>
-
-                <blockquote>
-                    <p><code>=show-adjacent</code> - <code>false</code>
-                    </p>
-                </blockquote>
-                <p>显示邻近日期</p>
-                <br>
             </section>
         </div>
 
@@ -291,13 +276,6 @@
                 </p>
             </blockquote>
             <p>双月显示</p>
-            <br>
-
-            <blockquote>
-                <p><code>showAdjacent</code> - <code>false</code>
-                </p>
-            </blockquote>
-            <p>显示邻近日期</p>
             <br>
 
             <blockquote>
