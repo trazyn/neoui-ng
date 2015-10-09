@@ -16,6 +16,7 @@ define( [ "ui/calendar/calendar-ng", "util/dateutil" ], function() {
         angular.extend( $scope, {
 
             date: $.dateutil( now ).tomorrow().format(),
+            double: true,
             isDisabled: false,
             minDate: $.dateutil( now ).month(-1).format( "%m/%d, %Y" ),
             maxDate: $.dateutil( now ).month(1).format( "%m/%d, %Y" ),
