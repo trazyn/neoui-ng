@@ -21,7 +21,7 @@ define( [ "ui/ripple/ripple" ], function() {
 		this.settings = settings;
 
 		title = target.find( settings.selector4title ).html( settings.nothing );
-		content = target.find( settings.selector4content );
+		content = target.find( settings.selector4list );
 
 		target
 		.on( "focusout", function( e, immediate ) {
@@ -96,7 +96,7 @@ define( [ "ui/ripple/ripple" ], function() {
                 }
 
                 settings.data = data;
-                renderList( target.find( settings.selector4content ), settings );
+                renderList( target.find( settings.selector4list ), settings );
                 target.addClass( "md-dropdown-open" );
             } )
 
@@ -177,7 +177,7 @@ define( [ "ui/ripple/ripple" ], function() {
 
             settings.data = data;
             if ( settings.data instanceof Array ) {
-                renderList( this.$node.find( settings.selector4content ), settings );
+                renderList( this.$node.find( settings.selector4list ), settings );
             }
             return this;
         },
@@ -223,7 +223,7 @@ define( [ "ui/ripple/ripple" ], function() {
             data = settings.data.concat( data );
 
 			this.settings.data = data;
-			renderList( this.$node.find( settings.selector4content ), this.settings );
+			renderList( this.$node.find( settings.selector4list ), this.settings );
 			return this;
 		},
 
@@ -323,7 +323,7 @@ define( [ "ui/ripple/ripple" ], function() {
 
 		nothing 	    : "Please select",
 		selector4title 	: ".md-dropdown-title",
-		selector4content: ".md-dropdown-content",
+		selector4list   : ".md-dropdown-list",
 
 		class4loading   : "md-dropdown-sync",
 

@@ -131,7 +131,7 @@ angular.module( "$ui.dropdown", [] )
             template            : "<div class='md-dropdown'>" +
                                     "<i class='md-icon md-dropdown-status'></i>" +
                                     "<p class='md-dropdown-title'></p>" +
-                                    "<div class='md-dropdown-content'></div>" +
+                                    "<div class='md-dropdown-list'></div>" +
                                   "</div>",
             link                : link
         };
