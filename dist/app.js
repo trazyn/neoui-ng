@@ -182,15 +182,18 @@ define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
 
 		$scope.showProgress = function() {
 
-			$modal.open( {
+			var modal = $modal.open( {
 				controller: "modalController",
 				templateUrl: "src/demo/modal/page1.html",
 				title: "弹出框标题 18PX 加粗 #333",
 				class4modal: "demo",
+				closeByDocument: true,
 				scope: $scope
-			} )
+			} );
 
-			.progress.start();
+			modal.progress.start();
+
+			return modal;
 		};
 
 	    $scope.init = function() {

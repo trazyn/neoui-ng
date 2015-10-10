@@ -1633,7 +1633,7 @@ ui_dropdown_dropdown = function () {
       this.$node = target;
       this.settings = settings;
       title = target.find(settings.selector4title).html(settings.nothing);
-      content = target.find(settings.selector4content);
+      content = target.find(settings.selector4list);
       target.on('focusout', function (e, immediate) {
         setTimeout(function () {
           if (immediate || !target.is(':focus') && !content.is(':focus')) {
@@ -1676,7 +1676,7 @@ ui_dropdown_dropdown = function () {
             throw new Error('Invalid data');
           }
           settings.data = data;
-          renderList(target.find(settings.selector4content), settings);
+          renderList(target.find(settings.selector4list), settings);
           target.addClass('md-dropdown-open');
         }).fail(function () {
           target.addClass('md-dropdown-error');
@@ -1720,7 +1720,7 @@ ui_dropdown_dropdown = function () {
       var settings = this.settings;
       settings.data = data;
       if (settings.data instanceof Array) {
-        renderList(this.$node.find(settings.selector4content), settings);
+        renderList(this.$node.find(settings.selector4list), settings);
       }
       return this;
     },
@@ -1747,7 +1747,7 @@ ui_dropdown_dropdown = function () {
     add: function (data) {
       var settings = this.settings, data = settings.data.concat(data);
       this.settings.data = data;
-      renderList(this.$node.find(settings.selector4content), this.settings);
+      renderList(this.$node.find(settings.selector4list), this.settings);
       return this;
     },
     selectAll: function () {
@@ -1807,7 +1807,7 @@ ui_dropdown_dropdown = function () {
   $.fn.dropdown.defaults = {
     nothing: 'Please select',
     selector4title: '.md-dropdown-title',
-    selector4content: '.md-dropdown-content',
+    selector4list: '.md-dropdown-list',
     class4loading: 'md-dropdown-sync',
     type: 'click',
     multiple: false,
@@ -1923,7 +1923,7 @@ ui_dropdown_dropdown_ng = function (args) {
         restric: 'E',
         transclude: true,
         replace: true,
-        template: '<div class=\'md-dropdown\'>' + '<i class=\'md-icon md-dropdown-status\'></i>' + '<p class=\'md-dropdown-title\'></p>' + '<div class=\'md-dropdown-content\'></div>' + '</div>',
+        template: '<div class=\'md-dropdown\'>' + '<i class=\'md-icon md-dropdown-status\'></i>' + '<p class=\'md-dropdown-title\'></p>' + '<div class=\'md-dropdown-list\'></div>' + '</div>',
         link: link
       };
     }

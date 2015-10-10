@@ -62,7 +62,7 @@
                         <button style="width: auto;" class="md-btn md-btn-primary" ng-click="open( 'scale' ).loading.show()">Show Loading</button>
                     </div>
                     <div class="col-md-3">
-                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="showProgress()">Show Progress</button>
+                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="modal = showProgress()">Show Progress</button>
                     </div>
                 </div>
             </div>
@@ -80,38 +80,86 @@
         </div>
 
         <xmp>
-    angular
-    .module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
-    .controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
+	angular
+	.module( "demo.modal", [ "$ui.modal", "$ui.message" ] )
+	.controller( "modalController", [ "$scope", "$modal", function( $scope, $modal ) {
 
         $scope.name = "test";
 
-        $scope.open = function( animation ) {
+		$scope.open = function( animation ) {
 
-            return $modal.open( {
-                controller: "modalController",
-                animation: animation,
-                templateUrl: "src/demo/modal/page.html",
-                title: "Mango (Fruit)",
-                class4modal: "demo",
-                scope: $scope
-            } );
-        };
+			return $modal.open( {
+				controller: "modalController",
+				animation: animation,
+				templateUrl: "src/demo/modal/page.html",
+				title: "Mango (Fruit)",
+				class4modal: "demo",
+				scope: $scope
+			} );
+		};
 
-        $scope.showProgress = function() {
+		$scope.showProgress = function() {
 
-            $modal.open( {
-                controller: "modalController",
-                templateUrl: "src/demo/modal/page1.html",
-                title: "弹出框标题 18PX 加粗 #333",
-                class4modal: "demo",
-                scope: $scope
-            } )
+			var modal = $modal.open( {
+				controller: "modalController",
+				templateUrl: "src/demo/modal/page1.html",
+				title: "弹出框标题 18PX 加粗 #333",
+				class4modal: "demo",
+				closeByDocument: true,
+				scope: $scope
+			} );
 
-            .progress.start();
-        };
-    } ] );
+			modal.progress.start();
+
+			return modal;
+		};
+
+	    $scope.init = function() {
+            $.anchor( { offset: -60 } );
+	    };
+	} ] );
         </xmp>
+
+        <div class="wrap">
+        <label>page.html</label>
+        <xmp>
+    <div class="md-modal-content">
+        <div>
+            <p>
+            The mango is a juicy stone fruit belonging to the genus Mangifera, consisting of numerous tropical fruiting trees, cultivated mostly for edible fruit. The majority of these species are found in nature as wild mangoes. They all belong to the flowering plant family Anacardiaceae. The mango is native to South and Southeast Asia, from where it has been distributed worldwide to become one of the most cultivated fruits in the tropics.
+            </p>
+
+            <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" src="images/mangues.jpg">
+
+            <p style="margin-top: 10px;">
+            The highest concentration of Mangifera genus is in the western part of Malesia (Sumatra, Java and Borneo) and in Burma and India. While other Mangifera species (e.g. horse mango, M. foetida) are also grown on a more localized basis, Mangifera indica—the "common mango" or "Indian mango"—is the only mango tree commonly cultivated in many tropical and subtropical regions.
+            </p>
+            <p>
+            It originated in Indian subcontinent (present day India and Pakistan) and Burma. It is the national fruit of India, Pakistan, and the Philippines, and the national tree of Bangladesh. In several cultures, its fruit and leaves are ritually used as floral decorations at weddings, public celebrations, and religious ceremonies.
+            </p>
+        </div>
+    </div>
+
+    <div class="md-modal-action text-right">
+        <button s-ripple class="btn btn-link text-uppercase">Not Useful</button>
+        <button s-ripple class="btn btn-link text-uppercase">Useful</button>
+    </div>
+        </xmp>
+        </div>
+
+        <div class="wrap">
+        <label>page1.html</label>
+        <xmp>
+    <div class="md-modal-content">
+        <div style="height: 320px; width: 640px; background: #eaeaea;"></div>
+    </div>
+
+    <div class="md-modal-action text-right">
+        <button s-ripple ng-click="modal.close()" class="md-btn md-btn-flat md-btn-default text-uppercase">Not Useful</button>
+        <button s-ripple class="md-btn md-btn-flat md-btn-primary text-uppercase">Useful</button>
+    </div>
+        </xmp>
+        </div>
 
     </section>
 
