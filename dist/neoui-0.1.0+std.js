@@ -3248,7 +3248,7 @@ ui_tab_tab_ng = function (args) {
         restric: 'EA',
         transclude: true,
         replace: true,
-        template: '<div class="md-tab" style="min-height: 300px;">' + '<div class="md-tab-nav"></div>' + '<div class="md-tab-content" ng-transclude></div>' + '<div class="md-tab-menu md-dropdown md-icon md-dropdown-left"><i class="md-icon"></i><div class="md-dropdown-content"/></div>' + '</div>',
+        template: '<div class="md-tab" style="min-height: 300px;">' + '<div class="md-tab-nav"></div>' + '<div class="md-tab-content" ng-transclude></div>' + '<div class="md-tab-menu md-dropdown md-icon md-dropdown-left"><i class="md-icon"></i><div class="md-dropdown-list"/></div>' + '</div>',
         controller: [
           '$scope',
           '$element',
