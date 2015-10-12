@@ -1,7 +1,7 @@
 
 var
 
-NAME = "neoui-0.1.1",
+NAME = "neoui-0.1.0",
 
 /** Plugin list */
 rename = require( "gulp-rename" ),
