@@ -1,5 +1,5 @@
 
-define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
+define( [], function() {
 
 	$.fn.modal = function( options ) {
 
@@ -8,8 +8,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
         template = [ "<div class='md-modal'>",
                     "<div style='height: 100%;'>",
                         "<div class='md-modal-head'></div><div class='md-icon-clear md-modal-close'></div>",
-                        "<div class='md-loading'></div>",
-                        "<div class='md-progress'></div>",
                         "<div class='md-modal-body'></div>",
                     "</div>",
 
@@ -34,9 +32,6 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 			$( e.target ).hasClass( "md-modal-overlay" ) && close();
 		},
 
-		loading = modal.find( ".md-loading:first" ).loading(),
-		progress = modal.find( ".md-progress:first" ).progress(),
-
 		deferred = $.Deferred(),
 
 		show = function() {
@@ -51,7 +46,7 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 
 			/** ~Body~ */
 			if ( options.render instanceof Function ) {
-				options.render.call( body, deferred, loading, close );
+				options.render.call( body, deferred, close );
 			} else {
 				body.html( options.render );
 				deferred.resolve();
@@ -115,9 +110,8 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 		return {
 			open: show,
 			close: close,
-			loading: loading,
-			progress: progress,
-			$node: modal
+			$node: modal,
+			$promise: deferred.promise()
 		};
 	};
 
@@ -143,4 +137,3 @@ define( [ "ui/loading/loading", "ui/progress/progress" ], function() {
 	/** Export to $ */
 	$.modal = $.fn.modal;
 } );
-

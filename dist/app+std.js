@@ -121,7 +121,7 @@ demo_modal_index = function () {
           closeByDocument: true,
           scope: $scope
         });
-        modal.progress.start();
+        modal.$node.find('.md-progress').progress().start();
         return modal;
       };
       $scope.init = function () {

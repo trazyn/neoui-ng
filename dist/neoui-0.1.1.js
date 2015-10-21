@@ -2954,332 +2954,7 @@ angular.module( "$ui.loading", [] )
 } );
 
 
-(function( factory ) {
-
-	if ( "function" === typeof define && define.amd ) {
-		define( 'util/poll',factory );
-	} else {
-		
-		var exports = window || this;
-
-		exports.Poll = factory();
-	}
-})( function() {
-
-	"use strict";
-
-	var 
-	tasks = {},
-
-	config = {
-
-		interval: 5000,
-		delay: false
-
-		/** TODO: */
-	},
-
-	create = function( task ) {
-
-		var 
-		deferred = $.Deferred(),
-
-		wait = function() {
-
-			task.action( deferred );
-
-			return deferred.promise();
-		},
-		
-		runner = function() {
-		
-			return setTimeout( function() {
-
-				$.when( wait() )
-
-				.done( function() {
-
-					/** Already removed */
-					if ( void 0 === tasks[ task.name ] ) {
-
-						/** Force to clean the queue of tasks */
-						destory( task.name );
-
-						return;
-					}
-
-					delete task.delay;
-
-					/** Update the task */
-					create( task );
-				} )
-
-				.fail( function() {
-
-					destory( task.name );
-				} );
-
-			}, task.interval );
-		};
-
-		/** Apply the default configuration */
-		task = $.extend( {}, config, task );
-
-		task.name = task.name || "Task$" + Math.random().toString( 16 ).replace( /^0\./, "" );
-
-		tasks[ task.name ] = {
-
-			deferred: deferred,
-
-			value: true === task.delay ? runner : runner()
-		};
-
-		return task.name;
-	},
-
-	destory = function( id ) {
-
-		if ( id ) {
-
-			var instance = tasks[ id ];
-
-			if ( instance ) {
-			
-				clearTimeout( instance.value );
-
-				delete tasks[ id ];
-			}
-
-		} else tasks = {};
-	};
-
-	return {
-
-		/**
-		 * Add a task and return the task id
-		 *
-		 * @param task 	Array/Object
-		 * */
-		add: function( task ) {
-
-			var 
-			register = function( task ) {
-
-				return "function" === typeof task.action && create( task );
-			},
-
-			id, ids = [];
-
-			if ( $.isArray( task ) ) {
-
-				for ( var i = task.length; --i >= 0; ) {
-
-					id = register( task[ i ] );
-
-					id && ids.push( id );
-				}
-
-			} else (id = register( task )) && ids.push( id );
-
-			return ids;
-		},
-
-		/**
-		 * Start a task
-		 *
-		 * @param taskid 	String
-		 * */
-		start: function( taskid ) {
-		
-			var task = tasks[ taskid ];
-
-			if ( task && "function" === typeof task.value ) {
-				
-				return task.value = task.value();
-			}
-
-			return 0;
-		},
-
-		/**
-		 * Remove task
-		 *
-		 * @param [id] String, Without id will be remove all
-		 * */
-		remove: destory
-	};
-} );
-
-
-define( 'ui/progress/progress',[ "util/poll" ], function( poll ) {
-
-	"use strict";
-
-	var
-	namespace = "$ui.progress",
-
-	Progress = function( target, settings ) {
-
-		var self = this;
-
-		this.$node = target;
-		this.settings = settings;
-
-		if ( settings.template ) {
-			this.$node.html( settings.template );
-		}
-	};
-
-	Progress.prototype = {
-
-		start: function() {
-
-			var settings = this.settings;
-
-			this.set( 0 );
-			this.runner && poll.remove( this.runner );
-			this.runner = runner.call( this, settings );
-
-			/** Fadein */
-			this.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
-
-				"opacity": 1,
-				"visibility": "visible",
-				"display": ""
-			} );
-
-			poll.start( this.runner );
-			return this;
-		},
-
-		set: function( status ) {
-
-			this.status = status;
-			this.settings.render.call( this, status );
-
-			return this;
-		},
-
-		done: function() {
-
-			var self = this, settings = this.settings;
-
-			self.set( 1 );
-
-			setTimeout( function() {
-
-				self.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
-					"opacity": 0,
-					"visibility": "hidden"
-				} );
-
-				setTimeout( function() {
-					self.set( 0 );
-					self.$node.find( settings.selector4icon ).css( "display", "none" );
-				}, 800 );
-			}, 400 );
-
-			poll.remove( self.runner );
-
-			return this;
-		},
-
-		inc: function() {
-
-            var
-            status = this.status,
-            settings = this.settings;
-
-		    status += Math.random() * settings.seed;
-            status = status > settings.max ? settings.max : status;
-            this.status = status;
-            return this;
-		},
-
-		dec: function() {
-
-            var
-            status = this.status,
-            settings = this.settings,
-            value = Math.random() * settings.seed;
-
-		    status -= value;
-            status = status < 0.02 ? value : status;
-            this.status = status;
-            return this;
-		}
-	};
-
-	function runner( settings ) {
-
-		var self = this;
-
-		return poll.add( {
-
-			action: function( deferred ) {
-
-				var status = +self.status || 0;
-
-				status += Math.random() * settings.seed;
-				status = status > settings.max ? settings.max : status;
-				self.set( status );
-				deferred.resolve();
-			},
-
-            delay: true,
-            interval: settings.speed
-		} );
-	}
-
-	$.fn.progress = function( options ) {
-
-		var
-		settings,
-		instance = this.data( namespace );
-
-		if ( !instance ) {
-
-			settings = $.extend( {}, $.fn.progress.defaults, options || {} );
-			settings.max = settings.max > 1 ? 0.99123 : settings.max;
-			instance = new Progress( this, settings );
-			this.data( namespace, instance );
-		}
-
-		return instance;
-	};
-
-	$.fn.progress.defaults = {
-
-		seed 		    : 0.05,
-		speed 		    : 800,
-
-		max 		    : 0.99123,
-
-		template 	    : "<div class='md-progress-bar'><div></div></div><div class='md-progress-spinner'><div></div></div>",
-
-		selector4bar 	: ".md-progress-bar",
-		selector4icon 	: ".md-progress-spinner",
-
-		render          : function( status ) {
-
-            this
-            .$node
-            .find( this.settings.selector4bar )
-            .css( {
-                "width": status * 100 + "%",
-                "-webkit-transition": "all .2s ease-out",
-                "-moz-transition": "all .2s ease-out",
-                "-ms-transition": "all .2s ease-out",
-                "-o-transition": "all .2s ease-out",
-                "transition": "all .2s ease-out",
-            } );
-		}
-	};
-} );
-
-
-
-define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], function() {
+define( 'ui/modal/modal',[], function() {
 
 	$.fn.modal = function( options ) {
 
@@ -3288,8 +2963,6 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
         template = [ "<div class='md-modal'>",
                     "<div style='height: 100%;'>",
                         "<div class='md-modal-head'></div><div class='md-icon-clear md-modal-close'></div>",
-                        "<div class='md-loading'></div>",
-                        "<div class='md-progress'></div>",
                         "<div class='md-modal-body'></div>",
                     "</div>",
 
@@ -3314,9 +2987,6 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 			$( e.target ).hasClass( "md-modal-overlay" ) && close();
 		},
 
-		loading = modal.find( ".md-loading:first" ).loading(),
-		progress = modal.find( ".md-progress:first" ).progress(),
-
 		deferred = $.Deferred(),
 
 		show = function() {
@@ -3331,7 +3001,7 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 
 			/** ~Body~ */
 			if ( options.render instanceof Function ) {
-				options.render.call( body, deferred, loading, close );
+				options.render.call( body, deferred, close );
 			} else {
 				body.html( options.render );
 				deferred.resolve();
@@ -3395,8 +3065,6 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 		return {
 			open: show,
 			close: close,
-			loading: loading,
-			progress: progress,
 			$node: modal
 		};
 	};
@@ -3423,7 +3091,6 @@ define( 'ui/modal/modal',[ "ui/loading/loading", "ui/progress/progress" ], funct
 	/** Export to $ */
 	$.modal = $.fn.modal;
 } );
-
 
 
 define( 'ui/message/message',[ "ui/modal/modal" ], function() {
@@ -3855,6 +3522,331 @@ angular.module( "$ui.pagination", [] )
         };
     } ] );
 } );
+
+
+(function( factory ) {
+
+	if ( "function" === typeof define && define.amd ) {
+		define( 'util/poll',factory );
+	} else {
+		
+		var exports = window || this;
+
+		exports.Poll = factory();
+	}
+})( function() {
+
+	"use strict";
+
+	var 
+	tasks = {},
+
+	config = {
+
+		interval: 5000,
+		delay: false
+
+		/** TODO: */
+	},
+
+	create = function( task ) {
+
+		var 
+		deferred = $.Deferred(),
+
+		wait = function() {
+
+			task.action( deferred );
+
+			return deferred.promise();
+		},
+		
+		runner = function() {
+		
+			return setTimeout( function() {
+
+				$.when( wait() )
+
+				.done( function() {
+
+					/** Already removed */
+					if ( void 0 === tasks[ task.name ] ) {
+
+						/** Force to clean the queue of tasks */
+						destory( task.name );
+
+						return;
+					}
+
+					delete task.delay;
+
+					/** Update the task */
+					create( task );
+				} )
+
+				.fail( function() {
+
+					destory( task.name );
+				} );
+
+			}, task.interval );
+		};
+
+		/** Apply the default configuration */
+		task = $.extend( {}, config, task );
+
+		task.name = task.name || "Task$" + Math.random().toString( 16 ).replace( /^0\./, "" );
+
+		tasks[ task.name ] = {
+
+			deferred: deferred,
+
+			value: true === task.delay ? runner : runner()
+		};
+
+		return task.name;
+	},
+
+	destory = function( id ) {
+
+		if ( id ) {
+
+			var instance = tasks[ id ];
+
+			if ( instance ) {
+			
+				clearTimeout( instance.value );
+
+				delete tasks[ id ];
+			}
+
+		} else tasks = {};
+	};
+
+	return {
+
+		/**
+		 * Add a task and return the task id
+		 *
+		 * @param task 	Array/Object
+		 * */
+		add: function( task ) {
+
+			var 
+			register = function( task ) {
+
+				return "function" === typeof task.action && create( task );
+			},
+
+			id, ids = [];
+
+			if ( $.isArray( task ) ) {
+
+				for ( var i = task.length; --i >= 0; ) {
+
+					id = register( task[ i ] );
+
+					id && ids.push( id );
+				}
+
+			} else (id = register( task )) && ids.push( id );
+
+			return ids;
+		},
+
+		/**
+		 * Start a task
+		 *
+		 * @param taskid 	String
+		 * */
+		start: function( taskid ) {
+		
+			var task = tasks[ taskid ];
+
+			if ( task && "function" === typeof task.value ) {
+				
+				return task.value = task.value();
+			}
+
+			return 0;
+		},
+
+		/**
+		 * Remove task
+		 *
+		 * @param [id] String, Without id will be remove all
+		 * */
+		remove: destory
+	};
+} );
+
+
+define( 'ui/progress/progress',[ "util/poll" ], function( poll ) {
+
+	"use strict";
+
+	var
+	namespace = "$ui.progress",
+
+	Progress = function( target, settings ) {
+
+		var self = this;
+
+		this.$node = target;
+		this.settings = settings;
+
+		if ( settings.template ) {
+			this.$node.html( settings.template );
+		}
+	};
+
+	Progress.prototype = {
+
+		start: function() {
+
+			var settings = this.settings;
+
+			this.set( 0 );
+			this.runner && poll.remove( this.runner );
+			this.runner = runner.call( this, settings );
+
+			/** Fadein */
+			this.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
+
+				"opacity": 1,
+				"visibility": "visible",
+				"display": ""
+			} );
+
+			poll.start( this.runner );
+			return this;
+		},
+
+		set: function( status ) {
+
+			this.status = status;
+			this.settings.render.call( this, status );
+
+			return this;
+		},
+
+		done: function() {
+
+			var self = this, settings = this.settings;
+
+			self.set( 1 );
+
+			setTimeout( function() {
+
+				self.$node.find( settings.selector4bar + "," + settings.selector4icon ).css( {
+					"opacity": 0,
+					"visibility": "hidden"
+				} );
+
+				setTimeout( function() {
+					self.set( 0 );
+					self.$node.find( settings.selector4icon ).css( "display", "none" );
+				}, 800 );
+			}, 400 );
+
+			poll.remove( self.runner );
+
+			return this;
+		},
+
+		inc: function() {
+
+            var
+            status = this.status,
+            settings = this.settings;
+
+		    status += Math.random() * settings.seed;
+            status = status > settings.max ? settings.max : status;
+            this.status = status;
+            return this;
+		},
+
+		dec: function() {
+
+            var
+            status = this.status,
+            settings = this.settings,
+            value = Math.random() * settings.seed;
+
+		    status -= value;
+            status = status < 0.02 ? value : status;
+            this.status = status;
+            return this;
+		}
+	};
+
+	function runner( settings ) {
+
+		var self = this;
+
+		return poll.add( {
+
+			action: function( deferred ) {
+
+				var status = +self.status || 0;
+
+				status += Math.random() * settings.seed;
+				status = status > settings.max ? settings.max : status;
+				self.set( status );
+				deferred.resolve();
+			},
+
+            delay: true,
+            interval: settings.speed
+		} );
+	}
+
+	$.fn.progress = function( options ) {
+
+		var
+		settings,
+		instance = this.data( namespace );
+
+		if ( !instance ) {
+
+			settings = $.extend( {}, $.fn.progress.defaults, options || {} );
+			settings.max = settings.max > 1 ? 0.99123 : settings.max;
+			instance = new Progress( this, settings );
+			this.data( namespace, instance );
+		}
+
+		return instance;
+	};
+
+	$.fn.progress.defaults = {
+
+		seed 		    : 0.05,
+		speed 		    : 800,
+
+		max 		    : 0.99123,
+
+		template 	    : "<div class='md-progress-bar'><div></div></div><div class='md-progress-spinner'><div></div></div>",
+
+		selector4bar 	: ".md-progress-bar",
+		selector4icon 	: ".md-progress-spinner",
+
+		render          : function( status ) {
+
+            this
+            .$node
+            .find( this.settings.selector4bar )
+            .css( {
+                "width": status * 100 + "%",
+                "-webkit-transition": "all .2s ease-out",
+                "-moz-transition": "all .2s ease-out",
+                "-ms-transition": "all .2s ease-out",
+                "-o-transition": "all .2s ease-out",
+                "transition": "all .2s ease-out",
+            } );
+		}
+	};
+} );
+
 
 
 define( 'ui/progress/progress-ng',[ "ui/progress/progress" ], function() {

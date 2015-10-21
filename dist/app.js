@@ -191,7 +191,7 @@ define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
 				scope: $scope
 			} );
 
-			modal.progress.start();
+			modal.$node.find( ".md-progress" ).progress().start();
 
 			return modal;
 		};
@@ -201,7 +201,6 @@ define( 'demo/modal/index',[ "ui/modal/modal-ng" ], function() {
 	    };
 	} ] );
 } );
-
 
 
 define( 'demo/tab/index',[ "ui/tab/tab-ng" ], function() {

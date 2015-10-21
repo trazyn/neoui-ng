@@ -59,7 +59,7 @@
 
                 <div class="row">
                     <div class="col-md-3">
-                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="open( 'scale' ).loading.show()">Show Loading</button>
+                        <button style="width: auto;" class="md-btn md-btn-primary" ng-click="modal = showLoading()">Show Loading</button>
                     </div>
                     <div class="col-md-3">
                         <button style="width: auto;" class="md-btn md-btn-primary" ng-click="modal = showProgress()">Show Progress</button>
@@ -109,7 +109,31 @@
 				scope: $scope
 			} );
 
-			modal.progress.start();
+			modal
+			.$promise
+			.done( function() {
+				modal.$node.find( ".md-progress" ).progress().start();
+			} );
+
+			return modal;
+		};
+
+		$scope.showLoading = function() {
+
+			var modal = $modal.open( {
+				controller: "modalController",
+				templateUrl: "src/demo/modal/page1.html",
+				title: "弹出框标题 18PX 加粗 #333",
+				class4modal: "demo",
+				closeByDocument: true,
+				scope: $scope
+			} );
+
+			modal
+			.$promise
+			.done( function() {
+				modal.$node.find( ".md-loading" ).loading().show();
+			} );
 
 			return modal;
 		};
@@ -291,12 +315,6 @@
         <br>
 
         <h5><code>.close()</code> - Close the modal</h5>
-        <br>
-
-        <h5><code>.progress</code> - <a class="mark" href="#/progress">See Progress.js</a></h5>
-        <br>
-
-        <h5><code>.loading</code> - <a class="mark" href="#/loading">See Loading.js</a></h5>
         <br>
     </section>
 </section>
