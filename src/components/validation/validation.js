@@ -21,34 +21,34 @@
 
         var
         self = $( this ),
+        container = e.data.container,
         message = e.data.message,
         offset = self.offset(),
+        containerOffset = container.offset(),
         tooltip;
 
-        if ( self.is( ".tooltiped" ) ) { return; }
+        if ( self.hasClass( "md-validation-tooltiped" ) ) { return; }
 
-        tooltip = $( "<div class='ui validation message'><p>" + message + "</p></div>" )
+        tooltip = $( "<div class='md-validation-message'><p>" + message + "</p></div>" )
             .css( {
                 "position": "absolute",
-                "top": offset.top - 30,
-                "left": offset.left
+                "top": offset.top - 30 - containerOffset.top,
+                "left": offset.left - containerOffset.left
             } )
-            .appendTo( document.body );
+            .appendTo( container );
 
-        self.addClass( "tooltiped" ).data( "tooltip", tooltip );
-
+        self.addClass( "md-validation-tooltiped" ).data( "tooltip", tooltip );
         self.off( "mouseleave", mouseleave ).on( "mouseleave", { target: self, tooltip: tooltip }, mouseleave );
-
-        setTimeout( function() { tooltip.addClass( "show" ); } );
+        setTimeout( function() { tooltip.addClass( "md-error-show" ); } );
     }
 
     function mouseleave( e ) {
 
         var tooltip = e.data.tooltip;
 
-        tooltip.removeClass( "show" );
+        tooltip.removeClass( "md-error-show" );
         setTimeout( function() { tooltip.remove(); }, 300 );
-        e.data.target.removeClass( "tooltiped" );
+        e.data.target.removeClass( "md-validation-tooltiped" );
     }
 
     function clean( target, settings ) {
@@ -58,7 +58,7 @@
         .removeClass( settings.class4error )
         .off( "mouseenter", mouseenter )
         .off( "mouseleave", mouseleave )
-        .removeClass( "tooltiped" )
+        .removeClass( "md-validation-tooltiped" )
         .removeData( "tooltip" );
     }
 
@@ -151,7 +151,7 @@
                         target
                         .addClass( settings.class4error )
                         .off( "mouseenter", mouseenter )
-                        .on( "mouseenter", { message: message }, mouseenter );
+                        .on( "mouseenter", { message: message, container: self.$node }, mouseenter );
                     } )
                     .done( function() {
                         target
@@ -208,7 +208,7 @@
             .$node
             .find( settings.selector )
             .each( function() {
-                clean( settings.parseElement( $( this ) ), settings );
+                clean( settings.parseElement( $( this ).val( "" ) ), settings );
             } );
 
             return this;
@@ -231,18 +231,19 @@
 
     $.fn.validation.defaults = {
 
-        class4error     : "error",
+        class4error     : "md-error",
         selector        : ":input[validators]:visible:not(button)",
 
         custom          : {},
         message         : "Invalid input",
         breakOnError    : true,
 
+        /** TODO: bootstrap form-control */
         parseElement    : function( target ) {
 
             var parent = target.parent();
 
-            if ( target.is( "select, :checkbox, :radio" ) && parent.is( ".ui.select, .ui.switch, .ui.radio" ) ) {
+            if ( target.is( "select, :checkbox, :radio" ) && parent.is( ".md-select, .md-switch, .md-radio" ) ) {
 
                 if ( target.is( ":radio" ) && parent.parent().is( ".ui.radioes" ) ) {
                     return parent.parent();
@@ -378,5 +379,4 @@
             return validators;
         })() )
     };
-
 })( window.jQuery );
