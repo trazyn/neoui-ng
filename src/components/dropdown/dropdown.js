@@ -1,6 +1,6 @@
 
 
-define( [ "ui/ripple" ], function() {
+define( [ "ui/ripple/ripple" ], function() {
 
 	"use strict";
 
@@ -31,7 +31,7 @@ define( [ "ui/ripple" ], function() {
                         (!target.is( ":focus" ) && !content.is( ":focus" )) ) {
                     target.removeClass( "md-dropdown-open" );
                 }
-			}, 300 );
+			}, 400 );
 		} )
 
 		/** Update the text */
@@ -188,8 +188,7 @@ define( [ "ui/ripple" ], function() {
 				for ( var i = value.length; --i >= 0; ) {
 
 					var
-					index = settings.data.indexOf( value[i] ),
-					item = this.$node.find( "ul li[data-index='" + index + "']" );
+					item = this.$node.find( "ul li[data-value='" + value[i][settings.valueKey] + "']" );
 
 					if ( item.length ) {
 						item.trigger( "select.dropdown" );
@@ -286,8 +285,7 @@ define( [ "ui/ripple" ], function() {
 			return res;
 		}();
 
-		content
-        .css( "display", "none" )
+		content.css( "display", "none" )
 		.html( "<ul>" + lis + "</ul>" )
 		.trigger( "update.dropdown" );
 
@@ -295,7 +293,7 @@ define( [ "ui/ripple" ], function() {
             content
             .find( "> ul > li" ).
             addClass( "md-ripple" ).each( function() {
-                $( this ).ripple();
+                $( this ).ripple( { duration: 400 } );
             } ).ripple();
 		}
 	}
