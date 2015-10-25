@@ -16,12 +16,7 @@
 		this.settings = settings;
 
 		if ( !ripple.length ) {
-            var max = Math.max( target.innerHeight(), target.innerWidth() );
 			ripple = $( "<span class='md-ripple-ink'>" )
-				.css( {
-					width: max,
-					height: max
-				} )
 				.appendTo( target );
 		}
 
@@ -64,8 +59,9 @@
 			X = e ? e.pageX : (offset.left + this.$node.outerWidth() / 2),
 			Y = e ? e.pageY : (offset.top + this.$node.outerHeight() / 2),
 			rect = this.$node[ 0 ].getBoundingClientRect(),
-			ripple = this.$node.find( "span.md-ripple-ink" ),
 			doc = $( document ),
+            max = Math.max( this.$node.outerHeight(), this.$node.outerWidth() ),
+			ripple = this.$node.find( "span.md-ripple-ink" ).css( { width: max, height: max } ),
 			position = {
 				top: Y - rect.top - ripple[0].offsetHeight / 2 - doc.scrollTop(),
 				left: X - rect.left - ripple[0].offsetWidth / 2 - doc.scrollLeft(),
@@ -155,7 +151,7 @@
 	$.fn.ripple.defaults = {
 
 		speed 		    : 0,
-		duration        : 400,
+		duration        : 800,
 
 		random 		    : false,
 		color           : false,

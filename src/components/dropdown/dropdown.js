@@ -1,5 +1,6 @@
 
-define( [ "ui/ripple/ripple" ], function() {
+
+define( [ "ui/ripple" ], function() {
 
 	"use strict";
 
@@ -48,15 +49,7 @@ define( [ "ui/ripple/ripple" ], function() {
 			.html( text )
 			.attr( "title", text );
 
-            if ( settings.autoWidth ) {
-                content
-                .css( {
-                    "width": target.width(),
-                    "display": "block"
-                } );
-            } else {
-                content.css( "display", "" );
-            }
+            content.css( "display", "" );
 		} )
 
 		/** Show the content */
@@ -299,11 +292,11 @@ define( [ "ui/ripple/ripple" ], function() {
 		.trigger( "update.dropdown" );
 
 		if ( settings.ripple ) {
-		    content
-		    .find( "> ul > li" ).
-		    addClass( "md-ripple" ).each( function() {
-		        $( this ).ripple();
-		    } ).ripple();
+            content
+            .find( "> ul > li" ).
+            addClass( "md-ripple" ).each( function() {
+                $( this ).ripple();
+            } ).ripple();
 		}
 	}
 
@@ -337,7 +330,6 @@ define( [ "ui/ripple/ripple" ], function() {
 		valueKey 	    : "value",
 
         ripple          : true,
-		autoWidth       : false,
 		closeOnSelect 	: true,
 		onSelect        : $.noop,
 
@@ -346,4 +338,3 @@ define( [ "ui/ripple/ripple" ], function() {
 		}
 	};
 } );
-
