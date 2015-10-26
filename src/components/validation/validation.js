@@ -288,7 +288,7 @@
                         target
                         .addClass( settings.class4error )
                         .off( "mouseenter", mouseenter )
-                        .on( "mouseenter", { message: message, container: self.$node, tooltipOffset: settings.tooltipOffset }, mouseenter );
+                        .on( "mouseenter", { message: message, container: self.$node, tooltipOffset: settings.tooltipOffset || {} }, mouseenter );
                     } )
                     .done( function() {
                         target
