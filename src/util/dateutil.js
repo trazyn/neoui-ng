@@ -49,8 +49,28 @@
         }
 
         this.value = defaultValue = isNaN( value ) ? new Date() : value;
-        this.settings = $.extend( {}, Dateutil.defaults, options || {} );
+        this.settings = extend( {}, Dateutil.defaults, options || {} );
     };
+
+    function extend() {
+
+        var
+        target = arguments[0],
+        objs = Array.prototype.slice.call( arguments, 1 );
+
+        for ( var i = 0, length = target ? objs.length : 0; i < length; ++i ) {
+
+            var obj = objs[i];
+
+            for ( var key in obj ) {
+                if ( obj.hasOwnProperty( key ) ) {
+                    target[key] = obj[key];
+                }
+            }
+        }
+
+        return target;
+    }
 
     Dateutil.defaults = {
     	format: "%Y-%m-%d",
@@ -312,7 +332,7 @@
 
         var instance = {};
         Dateutil.apply( instance, arguments );
-        return $.extend( instance, Dateutil.prototype );
+        return extend( instance, Dateutil.prototype );
     };
 
-})( window.jQuery );
+})();
