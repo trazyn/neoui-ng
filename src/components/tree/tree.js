@@ -47,7 +47,7 @@ define( [], function() {
                     selected && selected.removeClass( "md-tree-selected" );
                     selected = self.addClass( "md-tree-selected" );
 
-                    settings.onSelect( {
+                    settings.onSelected( {
                         item: hash[ self.attr( "data-key" ) ],
                         level: level
                     } );
