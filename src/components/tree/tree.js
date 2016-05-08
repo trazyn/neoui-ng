@@ -1,5 +1,4 @@
-
-(function( $ ) {
+define( [], function() {
 
     "use strict";
 
@@ -390,5 +389,4 @@
 			return "<p style='padding-left: " + ((level - 1) * 2) + "em;'><i class='md-icon'></i><span>" + item[ settings.textKey ] + "</span></p>";
 		}
 	};
-} )( window.jQuery );
-
+} );
