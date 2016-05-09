@@ -113,10 +113,10 @@ define( function() {
         }
 
         /** Show PREV */
-        index > 1 && page.unshift( $( "<a class='md-icon-prev' data-index='" + (index - 1) + "'></a>" ) );
+        index > 1 && page.unshift( $( "<a class='md-icon-prev icon-keyboard-arrow-left' data-index='" + (index - 1) + "'></a>" ) );
 
         /** Show NEXT */
-        index < total && page.push( $( "<a class='md-icon-next' data-index='" + (index + 1) + "'></a>" ) );
+        index < total && page.push( $( "<a class='md-icon-next icon-keyboard-arrow-right' data-index='" + (index + 1) + "'></a>" ) );
 
         content.html( page );
         target.find( settings.selector4index ).val( index );
@@ -134,6 +134,10 @@ define( function() {
                 render( this.$node, settings );
             }
             return this;
+        },
+
+        detach: function() {
+            this.$node.removeData( namespace );
         }
     };
 
